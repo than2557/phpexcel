@@ -153,8 +153,8 @@ function JSalert(){
   let timerInterval
   
 Swal.fire({
-  title: 'Auto close alert!',
-  html: 'I will close in <b></b> milliseconds.',
+  title: 'กำลังเพิ่มข้อมูล',
+  html: 'กรุณารอสักครู่ <b></b> ',
   timer: 5000,
   timerProgressBar: true,
   onBeforeOpen: () => {
