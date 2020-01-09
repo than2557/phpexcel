@@ -5,7 +5,8 @@
          include 'phpexcel-1.8\Classes\PHPExcel\IOFactory.php';
 
  if(!empty($_FILES["excel_file"]))  
- {  
+ {   
+         set_time_limit(120);
  	//print_r( $_FILES["excel_file"]);
 
       $file_array = explode(".", $_FILES["excel_file"]["name"]);  
