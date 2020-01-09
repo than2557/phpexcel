@@ -37,9 +37,9 @@ $groublinename=$_POST['groublinename'];
 // echo '<br>'.$dateaert;
 // echo '<br>'.$groublinename;
 
-// $sql = "INSERT INTO `alert`( `tokenname`, `nametb`, `dateaert`, `groublinename`, `namefile`) VALUES ('$tokenname','$nametb','$dateaert','$groublinename','$namefile')";
-// $Query =$conn->query($sql);
-// 	echo $sql;
+$sql = "INSERT INTO `alert`( `tokenname`, `nametb`, `dateaert`, `groublinename`, `namefile`) VALUES ('$tokenname','$nametb','$dateaert','$groublinename','$namefile')";
+$Query =$conn->query($sql);
+	//echo $sql;
 
 
 
