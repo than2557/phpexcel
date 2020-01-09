@@ -51,7 +51,7 @@
 					<span class="input-group-addon col-sm-3" style="width:30px;"><span class="glyphicon glyphicon-th"></span></span>
                 </div>
         <input type="hidden" id="dtp_input1" value="" />
-        <button type="submit" class="btn btn-primary" onclick="JSalert()">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="setTimeout(JSalert,3000)">Submit</button>
         
         <br/>
             </div>
@@ -91,6 +91,20 @@
       <td>asasf</td>
       <td>asfasfas</td>
     </tr>
+
+
+    <tr>
+      <td>13210</td>
+      <td>polop</td>
+      <td>werwer</td>
+      <td>asdas/td>
+      <td>asdasd</td>
+        <td>asdaas</td>
+      <td>fasfas</td>
+      <td>asasf</td>
+      <td>asfasfas</td>
+    </tr>
+    
   </tbody>
 </table>
 </div>
@@ -148,40 +162,16 @@
 		forceParse: 0
     });
 </script>
-
-<script type="text/javascript">
-
-
-function JSalert(){setTimeout(function(){  let timerInterval
-  
-Swal.fire({
-  title: 'กำลังเพิ่มข้อมูล',
-  html: 'กรุณารอสักครู่ <b></b> ',
-  timer: 5000,
-  timerProgressBar: true,
-  onBeforeOpen: () => {
-    Swal.showLoading()
-    timerInterval = setInterval(() => {
-      Swal.getContent().querySelector('b')
-        .textContent = Swal.getTimerLeft()
-    }, 5000)
-  },
-  onClose: () => {
-    clearInterval(timerInterval)
-  }
-}).then((result) => {
-  if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.timer
-  ) {
-    console.log('I was closed by the timer') // eslint-disable-line
-  }
+<script>
+function JSalert(){
+  Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 3000
 })
- }, 3000);
 
- 
 }
-</script>
-
-</body>
+</script></body>
 </html>
