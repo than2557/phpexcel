@@ -148,9 +148,10 @@
     });
 </script>
 
-  <script type="text/javascript">
-function JSalert(){
-  let timerInterval
+<script type="text/javascript">
+
+
+function JSalert(){setTimeout(function(){  let timerInterval
   
 Swal.fire({
   title: 'กำลังเพิ่มข้อมูล',
@@ -175,7 +176,9 @@ Swal.fire({
     console.log('I was closed by the timer') // eslint-disable-line
   }
 })
+ }, 3000);
 
+ 
 }
 </script>
 
