@@ -5,8 +5,8 @@
     <title></title>
     
 
-    <link href="/test_excel/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/test_excel/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link href="/phpexcel/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/phpexcel/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 </head>
 
 <body>
@@ -110,10 +110,10 @@
 </div>
 </div>
 
-<script type="text/javascript" src="/test_excel/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/test_excel/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/test_excel/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/test_excel/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/phpexcel/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/phpexcel/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/phpexcel/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/phpexcel/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
