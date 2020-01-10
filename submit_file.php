@@ -2,11 +2,25 @@
 <html>
 <head>
 
+  <?php  
+  include_once "connectDB.php"; // ใช้ class connectDB
+
+  $con_obj = new connectDB;
+?>
+ 
+
     <title></title>
     
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="/phpexcel/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
 
-    <link href="/phpexcel/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/phpexcel/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+  
+    
+    
 </head>
 
 <body>
@@ -32,10 +46,17 @@
         </div>
         <div class="form-group">
         <div class="col-sm-12">
+   
             <label class="control-label col-sm-2">ชื่อตาราง :</label>
-            <input type="text"  class=" form-control control-label col-sm-1" style="width: 200px;" id="nametb" name="nametb">
-            <label class="control-label col-sm-2">เลือกไฟล์ :</label>
-            <input  type="file"  class=" form-control control-label col-sm-1" style="width: 200px;" id="namefile" name="namefile">
+                 <?php $conn = $con_obj->conntect_database();
+                                $sql = "SHOW TABLES";
+                                $result = mysqli_query($conn,$sql);
+                            ?>  
+                            <select class="form-control col-md-1" name="query" id="query" style="width:200px;">
+                                <?php while($row = mysqli_fetch_array($result)){ 
+                                   echo '<option value="'.$row[0].'">'.$row[0].'</option>'; 
+                                } ?> 
+                            </select>          
         </div>
 
         </div>
@@ -60,75 +81,115 @@
     </form>
 </div>
 <br>
+
 <div class="form-group">
-<div class="col-sm-12">
+  <center>
+<div class="col-sm-12" style="width: 50%;" align="center" id="result">
   <center> <label class="control-label">ตัวอย่างข้อมูล</label></center>
- <table class="table table-bordered table-striped" id="myTable" style="width: 500px;height:400px ;border-radius: 100%;">
+ <!-- <table class="display" id="myTable" style="width: 500px;height:400px ;"> -->
   <thead>
     <tr>
-      <th>รหัสสินค้า</th>
-      <th>ชื่อสินค้า</th>
-      <th>ชนิทสินค้า</th>
-      <th>แบรนด์สินค้า</th>
-      <th>จำนวนสินค้า</th>
-      <th>ราคา</th>
-      <th>รูป</th>
-      <th>แก้ไข</th>
-      <th>ลบ</th>
+     
     </tr>
   </thead>
   <tbody>
 
 
     <tr>
-      <td>13210</td>
-      <td>polop</td>
-      <td>werwer</td>
-      <td>asdas/td>
-      <td>asdasd</td>
-        <td>asdaas</td>
-      <td>fasfas</td>
-      <td>asasf</td>
-      <td>asfasfas</td>
+   
     </tr>
 
 
-    <tr>
-      <td>13210</td>
-      <td>polop</td>
-      <td>werwer</td>
-      <td>asdas/td>
-      <td>asdasd</td>
-        <td>asdaas</td>
-      <td>fasfas</td>
-      <td>asasf</td>
-      <td>asfasfas</td>
-    </tr>
+
     
   </tbody>
 </table>
+</div></center>
 </div>
-</div>
-
-<script type="text/javascript" src="/phpexcel/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/phpexcel/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/phpexcel/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/phpexcel/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" type="text/css" href="datatables.css"/>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script type="text/javascript" src="datatables.js"></script>
+  <link href="/phpexcel/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/phpexcel/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+<style>
+        .loading_page{
+            position: absolute;  
+            top: 0px;   
+            left: 0px;  
+            background: #ccc;   
+            width: 100%;   
+            height: 100%;   
+            opacity: .75;   
+            filter: alpha(opacity=75);   
+            -moz-opacity: .75;  
+            z-index: 999;  
+            background: #fff url(loading_page.gif) 50% 50% no-repeat;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $(".loading_page").hide();
+            $('#query').change( function(){   
+                if($("#query").val() == ""){
+                    alert('กรุณากรอกข้อมูลที่ต้องการ (query)');
+                }
+                else{
+                    $(".loading_page").show();
+                    $(".root_page").css({
+                        "position": "absolute", 
+                        "top": "0px",  
+                        "left": "0px",  
+                        "width": "100%",   
+                        "height": "100%",   
+                        "overflow": "hidden"
+                    });
+                    var sql = 'SELECT * FROM' +' '+$(this).val();
+                    $.ajax({  
+                        url:"select_tb.php",  
+                        method:"POST",  
+                        data:{ query:sql},  
+                        success:function(data){  
+                            if(data === "error"){
+                                $('#query').val(''); 
+                                $('#result').empty(); 
+                                $('.loading_page').hide();
+                                $('.root_page').removeAttr('style');
+                                alert("ไม่สามารถเรียกข้อมูลได้");
+                            } 
+                            else{
+                                $('#result').html(data);    
+                                $('.loading_page').hide();
+                                $('.root_page').removeAttr('style');
+                            }  
+                        }
+                    });  
+                }   
+            });  
+        });
+
+
+        // function load_table(){
+            
+        // }
+    </script>
+
+
+
+
 
 
 
 <script type="text/javascript">
 	$(document).ready( function () {
     $('#myTable').DataTable();
+
 } );
 </script>
+
 <script type="text/javascript">
     $('.form_datetime').datetimepicker({
         //language:  'fr',
