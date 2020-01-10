@@ -14,7 +14,10 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="/phpexcel/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
@@ -24,7 +27,10 @@
 </head>
 
 <body>
-<div class="container" style="width: 1140px;background-color:   #66a3ff;">
+
+
+
+<div class="container" style="width: 1200px;background-color:   #66a3ff;">
   <div class="container" style="width: 100%;">
             <h2>เพิ่มข้อมูลการแจ้งเตือน</h2>
        
@@ -33,7 +39,7 @@
 
 <div class="container">
     <form action="insertline.php" class="form-horizontal"  role="form" method="POST">
-        <div class="container" style="width: 100%;background-color: #D5A9CC;">
+        <div class="container" style="width: 2000px;background-color: #D5A9CC;">
         <div class="form-group">
             <div class="col-sm-12">
                 <br>
