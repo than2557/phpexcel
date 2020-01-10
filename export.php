@@ -11,7 +11,7 @@
          $tmpfname = $_FILES["excel_file"]["tmp_name"]; 
          $inputFileType = PHPExcel_IOFactory::identify($tmpfname);  
          $objReader = PHPExcel_IOFactory::createReader($inputFileType);  
-         ///$objReader->setReadDataOnly(true);  
+         //$objReader->setReadDataOnly(true);  
 
          $objPHPExcel = $objReader->load($tmpfname);  // โหลดไฟล์
          $objWorksheet = $objPHPExcel->setActiveSheetIndex(0); // เรียกใช้เฉพาะ sheet ที่เปิด
@@ -30,6 +30,8 @@
                foreach ($cellIterator as $cell) { // วนลูปคอร์ลัมภ์
                   $output.='<th>'.$cell->getValue().'</th>';
                   array_push($col_name,$cell->getValue()); //นำค่าแต่ละเซลล์ เก็บไว้ใน array
+                  //print_r($col_name);
+                  //print_r($cell);
                }
                $output.= '</tr></thead>';
                $con_obj->insert_table($col_name, "tb_".$_POST['tb_name']); //ใช้ method insert_table 
@@ -44,6 +46,7 @@
                   $celll = (string)$cell->getValue();
 
                   array_push($array_data,$celll); //นำค่าแต่ละเซลล์ เก็บไว้ใน array
+                  //print_r($array_data);
                }
                // echo '<pre>';
                // var_dump($array_data);
@@ -51,10 +54,10 @@
                $output.= '</tr></tbody>';
                $num_row++;
                $con_obj->insert_data($array_data,"tb_".$_POST['tb_name']); // insert data 
- 
+               //print_R($num_row);
             }
          }
-         echo $output;  
+         //echo $output;  
       }
       else{
          echo "error";
