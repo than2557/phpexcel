@@ -11,8 +11,8 @@
     $num_field = mysqli_field_count($conn);
     
     while ($fieldinfo = mysqli_fetch_field($result)) { 
-        print_r($fieldinfo);
-        $output.='<option>'.$fieldinfo->name.'</optio>';
+        //print_r($fieldinfo);
+        $output.='<option>'.$fieldinfo->name.'</option>';
     }
     $output.= '<option></option>';
     echo $output;
