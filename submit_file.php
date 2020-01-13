@@ -29,16 +29,17 @@
 
 
 
-<div class="container" style="width: 1200px;background-color:   #66a3ff;">
+
+
+<div class="container">
+    <form action="insertline.php" class="form-horizontal"  role="form" method="POST">
+    <div class="container" style="width: 1290px;background-color:   #cc9900;">
   <div class="container" style="width: 100%;">
             <h2>เพิ่มข้อมูลการแจ้งเตือน</h2>
        
         </div>  
       </div>
-
-<div class="container">
-    <form action="insertline.php" class="form-horizontal"  role="form" method="POST">
-        <div class="container" style="width: 2000px;background-color: #D5A9CC;">
+        <div class="container" style="width: 1290px;background-color: #d24dff;">
         <div class="form-group">
             <div class="col-sm-12">
                 <br>
@@ -64,9 +65,10 @@
                             </select>         
 
 
-            <label class="control-label col-sm-2">คอลัม</label>         
-            <select class="form-control col-md-1" name="select" id="select" style="width:200px;">      
-            </select>  
+            <label class="control-label col-sm-2">คอลัม:</label>        
+            <div name="select" id="select"> </div> 
+            <!-- <labe class="form-control col-md-1"  >       -->
+            </labe>  
         </div>
 
         </div>
