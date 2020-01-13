@@ -3,8 +3,7 @@
 <head>
 
   <?php  
-  include_once "connectDB.php"; // ใช้ class connectDB
-
+  include_once "connectDB.php"; 
   $con_obj = new connectDB;
 ?>
  
