@@ -21,14 +21,16 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
   
-    
+    <style>
+    label {
+
+        color : #ffffff;
+        }
+    </style>
     
 </head>
 
 <body>
-
-
-
 
 
 <div class="container">
@@ -39,13 +41,13 @@
        
         </div>  
       </div>
-        <div class="container" style="width: 1290px;background-color: #d24dff;">
+        <div class="container" style="width: 1290px;background-color: #993399;">
         <div class="form-group">
             <div class="col-sm-12">
                 <br>
                 <br>
             <label class="control-label col-sm-2"> tokenname:</label>
-            <input type="text"  class=" form-control control-label col-sm-1" id="tokenname" name="tokenname" style="width: 200px;">
+            <input type="text"  class=" form-control control-label col-sm-1 text" id="tokenname" name="tokenname" style="width: 200px;">
             <label class="control-label col-sm-2"> กลุ่มไลน์:</label>
             <input type="text" id="groublinename" name="groublinename" class=" form-control control-label col-sm-1" style="width: 200px;">
             </div>
