@@ -18,6 +18,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
   
@@ -41,7 +44,7 @@
        
         </div>  
       </div>
-        <div class="container" style="width: 1290px;background-color: #993399;">
+        <div class="container" style="width: 1290px;background-color: #673ab7;">
         <div class="form-group">
             <div class="col-sm-12">
                 <br>
@@ -68,7 +71,7 @@
 
 
             <label class="control-label col-sm-2">คอลัม:</label>        
-            <div name="select" id="select"> </div> 
+            <select name="select" class="form-control col-md-1" id="select" style="width:200px;" multiple="multiple"> </select> 
             <!-- <labe class="form-control col-md-1"  >       -->
             </labe>  
         </div>
@@ -198,10 +201,15 @@
 
     $(function() {
         
-
+        $(document).ready(function() {
+           // alert('test01');
+        $('#select').multiselect({
+          includeSelectAllOption: true,
+        });
+    });
 
     $('#query').change(function() {
-    alert('test');
+    //alert('test');
         var sql = 'SELECT * FROM' +' '+$(this).val();
                         $.ajax({ 
                             url: 'select_colum.php',
