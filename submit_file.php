@@ -99,7 +99,7 @@
 </div>
 <div class="form-group">
   <center>
-<div class="col-sm-12" style="width: 100%;height:1000px;background-color:#fffcf5;" align="center" id="result" >
+<div class="col-sm-12" style="width: 1000px;height:1000px;background-color:#fffcf5;" align="center" id="result" >
   <center> <h4 class="control-label" style="color:#000000;">ตัวอย่างข้อมูล</h4></center>
  <!-- <table class="display" id="myTable" style="width: 500px;height:400px ;"> -->
   <thead>
