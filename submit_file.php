@@ -27,7 +27,7 @@
     <style>
     label {
 
-        color : #ffffff;
+        color : #000000;
         }
     </style>
     
@@ -38,13 +38,13 @@
 
 <div class="container">
     <form action="insertline.php" class="form-horizontal"  role="form" method="POST">
-    <div class="container" style="width: 1290px;background-color:   #cc9900;">
+    <div class="container" style="width: 1290px;background-color:   #ffa891;">
   <div class="container" style="width: 100%;">
             <h2>เพิ่มข้อมูลการแจ้งเตือน</h2>
        
         </div>  
       </div>
-        <div class="container" style="width: 1290px;background-color: #673ab7;">
+        <div class="container" style="width: 1290px;background-color: #c5e9e7;">
         <div class="form-group">
             <div class="col-sm-12">
                 <br>
@@ -97,12 +97,10 @@
         </div>
     </form>
 </div>
-<br>
-
 <div class="form-group">
   <center>
-<div class="col-sm-12" style="width: 50%;" align="center" id="result">
-  <center> <label class="control-label">ตัวอย่างข้อมูล</label></center>
+<div class="col-sm-12" style="width: 100%;height:1000px;background-color:#fffcf5;" align="center" id="result" >
+  <center> <h4 class="control-label" style="color:#000000;">ตัวอย่างข้อมูล</h4></center>
  <!-- <table class="display" id="myTable" style="width: 500px;height:400px ;"> -->
   <thead>
     <tr>

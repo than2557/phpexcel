@@ -1,464 +1,924 @@
-<html>
-    <head>
-        <title>
-        </title>
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<style>
-@import "https://fonts.googleapis.com/css?family=Ubuntu:400,700italic";
-@import "https://fonts.googleapis.com/css?family=Cabin:400";
-* {
-  box-sizing: border-box;
-}
-
-html {
-  background: #000;
-  background-size: cover;
-  font-size: 10px;
-  height: 100%;
-  overflow: hidden;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-}
-
-/* =========================================
-Stark Industries Logo
-========================================= */
-#logo {
-  animation: logo-entry 4s ease-in;
-  width: 500px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 40;
-}
-
-h1 {
-  animation: text-glow 2s ease-out infinite alternate;
-  font-family: 'Ubuntu', sans-serif;
-  color: #00a4a2;
-  font-size: 48px;
-  font-size: 4.8rem;
-  font-weight: bold;
-  position: absolute;
-  text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 50px #000, 0 0 60px #000, 0 0 70px #000;
-  top: 50px;
-}
-h1:before {
-  animation: before-glow 2s ease-out infinite alternate;
-  border-left: 535px solid transparent;
-  border-bottom: 10px solid #00a4a2;
-  content: ' ';
-  height: 0;
-  position: absolute;
-  right: -74px;
-  top: -10px;
-  width: 0;
-}
-h1:after {
-  animation: after-glow 2s ease-out infinite alternate;
-  border-left: 100px solid transparent;
-  border-top: 16px solid #00a4a2;
-  content: ' ';
-  height: 0;
-  position: absolute;
-  right: -85px;
-  top: 24px;
-  transform: rotate(-47deg);
-  width: 0;
-}
-
-/* =========================================
-Log in form
-========================================= */
-#fade-box {
-  animation: input-entry 3s ease-in;
-  z-index: 4;
-}
-
-.stark-login form {
-  animation: form-entry 3s ease-in-out;
-  background: #111;
-  background: linear-gradient(#004746, #111111);
-  border: 6px solid #00a4a2;
-  box-shadow: 0 0 15px #00fffd;
-  border-radius: 5px;
-  display: inline-block;
-  height: 220px;
-  margin: 200px auto 0;
-  position: relative;
-  z-index: 4;
-  width: 500px;
-  transition: 1s all;
-}
-.stark-login form:hover {
-  border: 6px solid #00fffd;
-  box-shadow: 0 0 25px #00fffd;
-  transition: 1s all;
-}
-.stark-login input {
-  background: #222;
-  background: linear-gradient(#333333, #222222);
-  border: 1px solid #444;
-  border-radius: 5px;
-  box-shadow: 0 2px 0 #000;
-  color: #888;
-  display: block;
-  font-family: 'Cabin', helvetica, arial, sans-serif;
-  font-size: 13px;
-  font-size: 1.3rem;
-  height: 40px;
-  margin: 20px auto 10px;
-  padding: 0 10px;
-  text-shadow: 0 -1px 0 #000;
-  width: 400px;
-}
-.stark-login input:focus {
-  animation: box-glow 1s ease-out infinite alternate;
-  background: #0B4252;
-  background: linear-gradient(#333933, #222922);
-  border-color: #00fffc;
-  box-shadow: 0 0 5px rgba(0, 255, 253, 0.2), inset 0 0 5px rgba(0, 255, 253, 0.1), 0 2px 0 #000;
-  color: #efe;
-  outline: none;
-}
-.stark-login input:invalid {
-  border: 2px solid red;
-  box-shadow: 0 0 5px rgba(255, 0, 0, 0.2), inset 0 0 5px rgba(255, 0, 0, 0.1), 0 2px 0 #000;
-}
-.stark-login button {
-  animation: input-entry 3s ease-in;
-  background: #222;
-  background: linear-gradient(#333333, #222222);
-  box-sizing: content-box;
-  border: 1px solid #444;
-  border-left-color: #000;
-  border-radius: 5px;
-  box-shadow: 0 2px 0 #000;
-  color: #fff;
-  display: block;
-  font-family: 'Cabin', helvetica, arial, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  height: 40px;
-  line-height: 40px;
-  margin: 20px auto;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+/* Variables */
+/* Reset */
+*, *::after, *::before {
+  margin: 0;
   padding: 0;
-  position: relative;
-  text-shadow: 0 -1px 0 #000;
-  width: 400px;
-  transition: 1s all;
-}
-.stark-login button:hover,
-.stark-login button:focus {
-  background: #0C6125;
-  background: linear-gradient(#393939, #292929);
-  color: #00fffc;
-  outline: none;
-  transition: 1s all;
-}
-.stark-login button:active {
-  background: #292929;
-  background: linear-gradient(#393939, #292929);
-  box-shadow: 0 1px 0 #000, inset 1px 0 1px #222;
-  top: 1px;
+  box-sizing: border-box;
+  transform-style: preserve-3d;
 }
 
-/* =========================================
-Spinner
-========================================= */
-#circle1 {
-  animation: circle1 4s linear infinite, circle-entry 6s ease-in-out;
-  background: #000;
-  border-radius: 50%;
-  border: 10px solid #00a4a2;
-  box-shadow: 0 0 0 2px black, 0 0 0 6px #00fffc;
-  height: 500px;
-  width: 500px;
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  margin-left: -250px;
-  overflow: hidden;
-  opacity: 0.4;
-  z-index: -3;
-}
-
-#inner-cirlce1 {
-  background: #000;
-  border-radius: 50%;
-  border: 36px solid #00fffc;
-  height: 460px;
-  width: 460px;
-  margin: 10px;
-}
-#inner-cirlce1:before {
-  content: ' ';
-  width: 240px;
-  height: 480px;
-  background: #000;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-#inner-cirlce1:after {
-  content: ' ';
-  width: 480px;
-  height: 240px;
-  background: #000;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* =========================================
-Hexagon Mesh
-========================================= */
-.hexagons {
-  animation: logo-entry 4s ease-in;
-  color: #000;
-  font-size: 52px;
-  font-size: 5.1rem;
-  letter-spacing: -0.2em;
-  line-height: 0.7;
-  position: absolute;
-  text-shadow: 0 0 6px #00fffc;
-  top: 310px;
+/* Generic */
+body {
   width: 100%;
-  transform: perspective(600px) rotateX(60deg) scale(1.4);
-  z-index: -3;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1919;
+  overflow: hidden;
+  font-family: sans-serif;
+  font-weight: bolder;
+  color: rgba(255, 255, 251, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-/* =========================================
-Animation Keyframes
-========================================= */
-@keyframes logo-entry {
-  0% {
-    opacity: 0;
-  }
-  80% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.main {
+  width: 800px;
+  height: 600px;
+  position: relative;
+  cursor: pointer;
+  margin-top: 200px;
 }
-@keyframes circle-entry {
-  0% {
-    opacity: 0;
-  }
-  20% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.4;
-  }
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-@keyframes input-entry {
-  0% {
-    opacity: 0;
-  }
-  90% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+
+.face {
+  position: absolute;
 }
-@keyframes form-entry {
-  0% {
-    height: 0;
-    width: 0;
-    opacity: 0;
-    padding: 0;
-  }
-  20% {
-    height: 0;
-    border: 1px solid #00a4a2;
-    width: 0;
-    opacity: 0;
-    padding: 0;
-  }
-  40% {
-    width: 0;
-    height: 220px;
-    border: 6px solid #00a4a2;
-    opacity: 1;
-    padding: 0;
-  }
-  100% {
-    height: 220px;
-    width: 500px;
-  }
+
+/*Base*/
+/*=================================*/
+/*=================================*/
+.screen {
+  width: 303.0303030303px;
+  height: 240px;
+  transform: translateZ(100px) translateY(-200px) translateZ(50px) rotateX(270deg);
+  background-color: #A9DFFD;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(169, 223, 253, 0.8), 0 0 10px rgba(169, 223, 253, 0.7), 0 0 15px rgba(169, 223, 253, 0.6), 0 0 20px rgba(169, 223, 253, 0.5), 0 0 40px rgba(169, 223, 253, 0.4), 0 0 60px rgba(169, 223, 253, 0.3);
+  animation: screen 1s ease-in alternate infinite;
 }
-@keyframes box-glow {
-  0% {
-    border-color: #00b8b6;
-    box-shadow: 0 0 5px rgba(0, 255, 253, 0.2), inset 0 0 5px rgba(0, 255, 253, 0.1), 0 2px 0 #000;
-  }
-  100% {
-    border-color: #00fffc;
-    box-shadow: 0 0 20px rgba(0, 255, 253, 0.6), inset 0 0 10px rgba(0, 255, 253, 0.4), 0 2px 0 #000;
-  }
+
+.keyboard {
+  width: 500px;
+  height: 160px;
+  transform: perspective(10000px) rotateX(50deg) rotateZ(-25deg);
 }
-@keyframes text-glow {
-  0% {
-    color: #00a4a2;
-    text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 50px #000, 0 0 60px #000, 0 0 70px #000;
-  }
-  100% {
-    color: #00fffc;
-    text-shadow: 0 0 20px rgba(0, 255, 253, 0.6), 0 0 10px rgba(0, 255, 253, 0.4), 0 2px 0 #000;
-  }
+.keyboard__front {
+  width: 500px;
+  height: 25px;
+  transform: rotateX(-90deg) translateZ(80px);
+  background-color: #9C9C9C;
 }
-@keyframes before-glow {
-  0% {
-    border-bottom: 10px solid #00a4a2;
-  }
-  100% {
-    border-bottom: 10px solid #00fffc;
-  }
+.keyboard__back {
+  width: 500px;
+  height: 25px;
+  transform: rotateX(90deg) translateZ(80px);
+  background-color: #FFFFFB;
 }
-@keyframes after-glow {
-  0% {
-    border-top: 16px solid #00a4a2;
-  }
-  100% {
-    border-top: 16px solid #00fffc;
-  }
+.keyboard__top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 500px;
+  height: 160px;
+  transform: rotateY(0deg) translateZ(12.5px);
+  background-image: linear-gradient(to bottom, #dbf2fe, #343232);
 }
-@keyframes circle1 {
-  0% {
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+.keyboard__bottom {
+  width: 500px;
+  height: 160px;
+  transform: rotateY(180deg) translateZ(12.5px);
+  background-color: #EAE7E5;
+  box-shadow: -20px 40px 0 #0d0c0c, 0px 40px 0 #0d0c0c, 5px 0px 0 #0d0c0c, 5px 40px 0 #0d0c0c;
+}
+.keyboard__right {
+  width: 25px;
+  height: 160px;
+  transform: rotateY(90deg) translateZ(250px);
+  background-color: #FFFFFB;
+}
+.keyboard__left {
+  width: 25px;
+  height: 160px;
+  transform: rotateY(90deg) translateZ(-250px);
+  background-color: #EAE7E5;
+}
+
+/*=================================*/
+/*=================================*/
+.keys {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  transform: translateZ(7.5px);
+  padding: 0 2px;
+}
+
+.key {
+  width: 30px;
+  height: 27px;
+  transition: .05s ease;
+}
+.key--w2 {
+  width: 60px;
+}
+.key--w3 {
+  width: 90px;
+}
+.key--w6 {
+  width: 195px;
+}
+.key__front {
+  width: 30px;
+  height: 15px;
+  transform: rotateX(-90deg) translateZ(13.5px);
+  background-color: #838383;
+}
+.key__front--w2 {
+  width: 60px;
+}
+.key__front--w3 {
+  width: 90px;
+}
+.key__front--w6 {
+  width: 195px;
+}
+.key__back {
+  width: 30px;
+  height: 15px;
+  transform: rotateX(90deg) translateZ(13.5px);
+  background-color: #FFFFFB;
+}
+.key__back--w2 {
+  width: 60px;
+}
+.key__back--w3 {
+  width: 90px;
+}
+.key__back--w6 {
+  width: 195px;
+}
+.key__top {
+  width: 30px;
+  height: 27px;
+  transform: rotateY(0deg) translateZ(7.5px);
+  background-color: #FFFFFB;
+  background-image: linear-gradient(to bottom, #f4fbff, #FFFFFB);
+}
+.key__top--w2 {
+  width: 60px;
+}
+.key__top--w3 {
+  width: 90px;
+}
+.key__top--w6 {
+  width: 195px;
+}
+.key__bottom {
+  width: 30px;
+  height: 27px;
+  transform: rotateY(180deg) translateZ(7.5px);
+  background-color: #838383;
+}
+.key__bottom--w2 {
+  width: 60px;
+}
+.key__bottom--w3 {
+  width: 90px;
+}
+.key__bottom--w6 {
+  width: 195px;
+}
+.key__right {
+  width: 15px;
+  height: 27px;
+  transform: rotateY(90deg) translateZ(15px);
+  background-color: #838383;
+}
+.key__right--w2 {
+  transform: rotateY(90deg) translateZ(30px);
+}
+.key__right--w3 {
+  transform: rotateY(90deg) translateZ(45px);
+}
+.key__right--w6 {
+  transform: rotateY(90deg) translateZ(97.5px);
+}
+.key__left {
+  width: 15px;
+  height: 27px;
+  transform: rotateY(90deg) translateZ(-15px);
+  background-image: linear-gradient(to bottom, #c5c5c5, #b8b8b8);
+}
+.key__left--w2 {
+  transform: rotateY(90deg) translateZ(-30px);
+}
+.key__left--w3 {
+  transform: rotateY(90deg) translateZ(-45px);
+}
+.key__left--w6 {
+  transform: rotateY(90deg) translateZ(-97.5px);
+}
+
+/*=================================*/
+/*=================================*/
+.face--key-b1 {
+  background: #A9DFFD;
+}
+
+.face--key-b2 {
+  background-image: linear-gradient(to bottom, #a7dcfa, #8FD2F8);
+}
+
+.face--key-b3 {
+  background-color: #426585;
+}
+
+.face--key-o1 {
+  background: #FFA28E;
+}
+
+.face--key-o2 {
+  background-image: linear-gradient(to bottom, #bc7377, #B46266);
+}
+
+.face--key-o3 {
+  background-color: #8E3E43;
+}
+
+.key--down {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateZ(-5px);
+  transition: .05s ease;
+}
+.key--down > .key__top {
+  background: #ffccc1;
+}
+
+/*=================================*/
+/*=================================*/
+@keyframes screen {
+  0%, 90%, 96% {
+    background-color: #A9DFFD;
   }
-  100% {
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+  93%, 100% {
+    background-color: rgba(143, 210, 248, 0.8);
   }
 }
 
-</style>
+  </style>
+  <script>
 
-  
+/*
+Designed by: Miguel E.
+Original image: https://dribbble.com/shots/6276517-Hello
+*/
 
-    </head>
+const m = document.querySelector("#m");
+const k = document.querySelector("#k");
+const s = document.querySelector("#s");
 
+const kd = document.querySelectorAll(".key")
+let con = 0;
+
+let base = (e) => {
+    let  x = e.pageX / window.innerWidth - 0.5;
+    let  y = e.pageY / window.innerHeight - 0.5;
+    k.style.transform = `
+        perspective(10000px)
+        rotateX(${ y * 10  + 60}deg)
+        rotateZ(-${ x * 40  + 35}deg)
+    `;
+}
+
+let addKey = (e) => {
+    let kc = event.keyCode;
+
+    if ( (kc >= 65 && kc <= 90) || kc == 32) {
+        if (kc == 81) { kd[15].classList.add("key--down"); }
+        else if (kc == 87) { kd[16].classList.add("key--down"); }
+        else if (kc == 69) { kd[17].classList.add("key--down"); }
+        else if (kc == 82) { kd[18].classList.add("key--down"); }
+        else if (kc == 84) { kd[19].classList.add("key--down"); }
+        else if (kc == 89) { kd[20].classList.add("key--down"); }
+        else if (kc == 85) { kd[21].classList.add("key--down"); }
+        else if (kc == 73) { kd[22].classList.add("key--down"); }
+        else if (kc == 79) { kd[23].classList.add("key--down"); }
+        else if (kc == 80) { kd[24].classList.add("key--down"); }
+        else if (kc == 65) { kd[29].classList.add("key--down"); }
+        else if (kc == 83) { kd[30].classList.add("key--down"); }
+        else if (kc == 68) { kd[31].classList.add("key--down"); }
+        else if (kc == 70) { kd[32].classList.add("key--down"); }
+        else if (kc == 71) { kd[33].classList.add("key--down"); }
+        else if (kc == 72) { kd[34].classList.add("key--down"); }
+        else if (kc == 74) { kd[35].classList.add("key--down"); }
+        else if (kc == 75) { kd[36].classList.add("key--down"); }
+        else if (kc == 76) { kd[37].classList.add("key--down"); }
+        else if (kc == 192) { kd[38].classList.add("key--down"); }
+        else if (kc == 90) { kd[41].classList.add("key--down"); }
+        else if (kc == 88) { kd[42].classList.add("key--down"); }
+        else if (kc == 67) { kd[43].classList.add("key--down"); }
+        else if (kc == 86) { kd[44].classList.add("key--down"); }
+        else if (kc == 66) { kd[45].classList.add("key--down"); }
+        else if (kc == 78) { kd[46].classList.add("key--down"); }
+        else if (kc == 77) { kd[47].classList.add("key--down"); }
+        else if (kc == 13) { kd[39].classList.add("key--down"); }
+        else if (kc == 32) {
+            kd[56].classList.add("key--down");
+            s.innerHTML += "&nbsp;";
+        }
+        s.innerHTML += String.fromCharCode(kc);
+        con++;
+        if (con > 10) { s.innerHTML = ""; con = 0; }
+    }
+    if (kc == 8) {
+        s.innerHTML = "";
+        kd[27].classList.add("key--down");
+			  con = 0;
+    }
+
+}
+let removeKey = (e) => {
+    let kc = event.keyCode;
+    if (kc == 81) { kd[15].classList.remove("key--down"); }
+    else if (kc == 87) { kd[16].classList.remove("key--down"); }
+    else if (kc == 69) { kd[17].classList.remove("key--down"); }
+    else if (kc == 82) { kd[18].classList.remove("key--down"); }
+    else if (kc == 84) { kd[19].classList.remove("key--down"); }
+    else if (kc == 89) { kd[20].classList.remove("key--down"); }
+    else if (kc == 85) { kd[21].classList.remove("key--down"); }
+    else if (kc == 73) { kd[22].classList.remove("key--down"); }
+    else if (kc == 79) { kd[23].classList.remove("key--down"); }
+    else if (kc == 80) { kd[24].classList.remove("key--down"); }
+    else if (kc == 65) { kd[29].classList.remove("key--down"); }
+    else if (kc == 83) { kd[30].classList.remove("key--down"); }
+    else if (kc == 68) { kd[31].classList.remove("key--down"); }
+    else if (kc == 70) { kd[32].classList.remove("key--down"); }
+    else if (kc == 71) { kd[33].classList.remove("key--down"); }
+    else if (kc == 72) { kd[34].classList.remove("key--down"); }
+    else if (kc == 74) { kd[35].classList.remove("key--down"); }
+    else if (kc == 75) { kd[36].classList.remove("key--down"); }
+    else if (kc == 76) { kd[37].classList.remove("key--down"); }
+    else if (kc == 192) { kd[38].classList.remove("key--down"); }
+    else if (kc == 90) { kd[41].classList.remove("key--down"); }
+    else if (kc == 88) { kd[42].classList.remove("key--down"); }
+    else if (kc == 67) { kd[43].classList.remove("key--down"); }
+    else if (kc == 86) { kd[44].classList.remove("key--down"); }
+    else if (kc == 66) { kd[45].classList.remove("key--down"); }
+    else if (kc == 78) { kd[46].classList.remove("key--down"); }
+    else if (kc == 77) { kd[47].classList.remove("key--down"); }
+    else if (kc == 32) { kd[56].classList.remove("key--down"); }
+    else if (kc == 13) { kd[39].classList.remove("key--down"); }
+    else if (kc == 8) { kd[27].classList.remove("key--down"); }
+}
+
+m.addEventListener("mousemove", base);
+window.addEventListener("keydown", addKey);
+window.addEventListener("keyup", removeKey);
+
+
+
+</script> 
+</head>
 <body>
-<body>
-<div id="logo"> 
-  <h1><i> Login Submongkon INDUSTRIES</i></h1>
-</div> 
-<section class="stark-login">
-  
-  <form action="" method="">	
-    <div id="fade-box">
-      <input type="text" name="username" id="username" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
-          
-          <button>Log In</button> 
+
+
+<div class="main flex" id="m">
+  <div class="keyboard flex" id="k">
+    <div class="screen flex" id="s"></div>
+    <div class="keyboard__front face"></div>
+    <div class="keyboard__back face"></div>
+    <div class="keyboard__right face"></div>
+    <div class="keyboard__left face"></div>
+    <div class="keyboard__top face">
+      <div class="keys">
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
         </div>
-      </form>
-      <div class="hexagons">
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <span>&#x2B22;</span>
-        <br>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <span>&#x2B22;</span>
-          <br>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span> 
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            <span>&#x2B22;</span>
-            
-            <br>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <span>&#x2B22;</span>
-              <br>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-                <span>&#x2B22;</span>
-              </div>      
-            </section> 
-            
-            <div id="circle1">
-              <div id="inner-cirlce1">
-                <h2> </h2>
-              </div>
-            </div>
-            
-            
-            
-            <ul>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-            
-            
-            
-            
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key key--w2 flex">
+          <div class="key__front key__front--w2 face face--key-b3"></div>
+          <div class="key__back key__back--w2 face face--key-b1"></div>
+          <div class="key__right key__right--w2 face face--key-b1"></div>
+          <div class="key__left key__left--w2 face face--key-b2"></div>
+          <div class="key__top key__top--w2 face face--key-b1"></div>
+          <div class="key__bottom key__bottom--w2 face face--key-b2"></div>
+        </div>
+      </div>
+      <div class="keys">
+        <div class="key key--w2 flex">
+          <div class="key__front key__front--w2 face face--key-b3"></div>
+          <div class="key__back key__back--w2 face face--key-b1"></div>
+          <div class="key__right key__right--w2 face face--key-b1"></div>
+          <div class="key__left key__left--w2 face face--key-b2"></div>
+          <div class="key__top key__top--w2 face face--key-b1"></div>
+          <div class="key__bottom key__bottom--w2 face face--key-b2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
+        </div>
+      </div>
+      <div class="keys">
+        <div class="key key--w3 flex">
+          <div class="key__front key__front--w3 face face--key-b3"></div>
+          <div class="key__back key__back--w3 face face--key-b1"></div>
+          <div class="key__right key__right--w3 face face--key-b1"></div>
+          <div class="key__left key__left--w3 face face--key-b2"></div>
+          <div class="key__top key__top--w3 face face--key-b1"></div>
+          <div class="key__bottom key__bottom--w3 face face--key-b2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key key--w2 flex">
+          <div class="key__front key__front--w2 face face--key-o3"></div>
+          <div class="key__back key__back--w2 face face--key-o1"></div>
+          <div class="key__right key__right--w2 face face--key-o1"></div>
+          <div class="key__left key__left--w2 face face--key-o2"></div>
+          <div class="key__top key__top--w2 face face--key-o1"></div>
+          <div class="key__bottom key__bottom--w2 face face--key-o2"></div>
+        </div>
+      </div>
+      <div class="keys">
+        <div class="key key--w2 flex">
+          <div class="key__front key__front--w2 face face--key-b3"></div>
+          <div class="key__back key__back--w2 face face--key-b1"></div>
+          <div class="key__right key__right--w2 face face--key-b1"></div>
+          <div class="key__left key__left--w2 face face--key-b2"></div>
+          <div class="key__top key__top--w2 face face--key-b1"></div>
+          <div class="key__bottom key__bottom--w2 face face--key-b2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face"></div>
+          <div class="key__back face"></div>
+          <div class="key__right face"></div>
+          <div class="key__left face"></div>
+          <div class="key__top face"></div>
+          <div class="key__bottom face"></div>
+        </div>
+        <div class="key key--w3 flex">
+          <div class="key__front key__front--w3 face face--key-b3"></div>
+          <div class="key__back key__back--w3 face face--key-b1"></div>
+          <div class="key__right key__right--w3 face face--key-b1"></div>
+          <div class="key__left key__left--w3 face face--key-b2"></div>
+          <div class="key__top key__top--w3 face face--key-b1"></div>
+          <div class="key__bottom key__bottom--w3 face face--key-b2"></div>
+        </div>
+      </div>
+      <div class="keys">
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face face--key-o3"></div>
+          <div class="key__back face face--key-o1"></div>
+          <div class="key__right face face--key-o1"></div>
+          <div class="key__left face face--key-o2"></div>
+          <div class="key__top face face--key-o1"></div>
+          <div class="key__bottom face face--key-o2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
+        </div>
+        <div class="key key--w6 flex">
+          <div class="key__front key__front--w6 face"></div>
+          <div class="key__back key__back--w6 face"></div>
+          <div class="key__right key__right--w6 face"></div>
+          <div class="key__left key__left--w6 face"></div>
+          <div class="key__top key__top--w6 face"></div>
+          <div class="key__bottom key__bottom--w6 face">       </div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
+        </div>
+        <div class="key flex">
+          <div class="key__front face face--key-b3"></div>
+          <div class="key__back face face--key-b1"></div>
+          <div class="key__right face face--key-b1"></div>
+          <div class="key__left face face--key-b2"></div>
+          <div class="key__top face face--key-b1"></div>
+          <div class="key__bottom face face--key-b2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="keyboard__bottom face"></div>
+  </div>
+</div>
 
-</body>
+
+<script src="https://threejs.org/build/three.min.js"></script>
+<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
+<script src="https://threejs.org/examples/js/controls/PointerLockControls.js"></script>
+
+
 
 </body>
 </html>
