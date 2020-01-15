@@ -16,7 +16,8 @@
     color: #f5f6f7;
   }
   p {font-size: 16px;}
-  .margin {margin-bottom: 45px;}
+  .margin {margin-bottom: 45px;
+  }
   .bg-1 { 
     background-color: #1abc9c; /* Green */
     color: #ffffff;
@@ -49,6 +50,9 @@
   .navbar-nav  li a:hover {
     color: #1abc9c !important;
   }
+ h3{  
+  font-style:maaja Regular;
+ }
   </style>
 </head>
 <body bgcolor="#1abc9c">
