@@ -73,7 +73,7 @@
             <label class="control-label col-sm-2">คอลัม:</label>        
             <select name="select" class="form-control col-md-1" id="select" style="width:200px;" multiple="multiple"> </select> 
             <!-- <labe class="form-control col-md-1"  >       -->
-            </labe>  
+       
         </div>
 
         </div>

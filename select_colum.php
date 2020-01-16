@@ -4,6 +4,7 @@
    $conn = $con_obj->conntect_database(); //เรียกใช้ method conntect_database
    
    $output = ''; 
+  
     //echo $_POST['query'];
    $result = mysqli_query($conn, $_POST['query']);
    if($result){
@@ -12,10 +13,12 @@
     
     while ($fieldinfo = mysqli_fetch_field($result)) { 
         //print_r($fieldinfo);
-        $output.='<option>'.$fieldinfo->name.'</option>';
+        $output.='<option>'.$fieldinfo->name.'</option>'.'<input type="checkbox">';
+        
         //echo $output;
     }
-    $output.= '<option></option>';
+    $output.= '<option></option>'.'<input type="checkbox">';
+   
     echo $output;
    } 
   
