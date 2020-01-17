@@ -13,11 +13,11 @@
     
     while ($fieldinfo = mysqli_fetch_field($result)) { 
         //print_r($fieldinfo);
-        $output.='<option>'.$fieldinfo->name.'</option>'.'<input type="checkbox">';
+        $output.='<option>'.$fieldinfo->name.'</option>';
         
         //echo $output;
     }
-    $output.= '<option></option>'.'<input type="checkbox">';
+    $output.= '<option></option>';
    
     echo $output;
    } 

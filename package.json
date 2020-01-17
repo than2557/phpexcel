@@ -1,0 +1,26 @@
+{
+  "name": "phpexcel",
+  "version": "1.0.0",
+  "description": "phpexcel",
+  "main": "checkmuti.js",
+  "dependencies": {
+    "mdbootstrap": "^4.11.0",
+    "package.json": "^2.0.1",
+    "pkg.json": "^2.0.7",
+    "sweetalert2": "^9.5.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/than2557/phpexcel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/than2557/phpexcel/issues"
+  },
+  "homepage": "https://github.com/than2557/phpexcel#readme"
+}
