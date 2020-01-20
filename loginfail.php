@@ -20,7 +20,7 @@
 }
 body .footer {
   z-index: 1;
-  --footer-background:#3964F1; /*พื้นหลัง footer*/
+  --footer-background:#F4615F; /*พื้นหลัง footer*/
   display: grid;
   position: relative;
   grid-area: footer;
