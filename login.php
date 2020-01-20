@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="icon" type="img/png" href="iconpea.png"/>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -59,7 +60,7 @@
 			<p>
 
 			<?php	echo "Login fail."; ?>
-				<!--<meta http-equiv="refresh" content= "0; url=index.php">-->
+				<meta http-equiv="refresh" content= "0; url=loginfail.php">
 				<!--<meta http-equiv="refresh" content= "2; url=index_real.php">-->
 
 		<?php } ?>

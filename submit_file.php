@@ -120,7 +120,7 @@ card {
                                 $sql = "SHOW TABLES";
                                 $result = mysqli_query($conn,$sql);
                             ?>  
-                            <select class="form-control col-md-2" name="query" id="query" style="width:300px;margin-left:30px;">
+                            <select class="form-control col-md-2" name="nametb" id="query" style="width:300px;margin-left:30px;">
                                 <?php while($row = mysqli_fetch_array($result)){ 
                                    echo '<option value="'.$row[0].'">'.$row[0].'</option>'; 
                                 } ?> 
@@ -162,7 +162,7 @@ card {
 
 <div class="form-group">
   <center>
-<div class="col-sm-12" style="width: 1000px;height:1000px;background-color:#fffcf5;margin-top:30px;"" align="center" id="result" >
+<div class="col-sm-12" style="width:1000px;height:1000px;background-color:#A6BBFF;margin-top:30px;"" align="center" id="result" >
   <center> <h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;">ตัวอย่างข้อมูล</h4></center>
   <table class="display" id="myTable" style="width: 500px;height:400px ;">
   <thead>
