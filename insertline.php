@@ -10,13 +10,17 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="icon" type="img/png" href="iconpea.png"/>
 <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" ></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
  <style>
 
-label {
+* {
 
 color : #000000;
 font-family: 'Sriracha', cursive;
@@ -24,13 +28,9 @@ font-family: 'Sriracha', cursive;
 }
 body {
 
-background-color: #aee0ee;
+background-color: #F1FBA8;
 }
-h2{
 
-
-color:#000000;
-}
 
 .neumorphic {
 border-radius: 1rem;
@@ -125,8 +125,31 @@ function JSalert(){
   <a href="index_test.php" onclick="w3_close()" class="w3-bar-item w3-button">กลับหน้าส่งข้อมูล</a>
   <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
 </nav>
+<header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
+  <span class="w3-left w3-padding">PEA</span>
+  <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+</header>
     <?php
+<<<<<<< Updated upstream
 		include_once("configDB.php");
+=======
+require_once("connect.php");
+$tokenname=$_POST['tokenname'];
+$nametb=$_POST['nametb'];
+$dateaert=$_POST['dateaert'];
+$groublinename=$_POST['groublinename'];
+//print_r($_POST);
+
+// echo '<br>'.$nametb;
+// echo '<br>'.$tokenname;
+// echo '<br>'.$namefile;
+// echo '<br>'.$dateaert;
+// echo '<br>'.$groublinename;
+
+$sql = "INSERT INTO `alert`( `tokenname`, `nametb`, `dateaert`, `groublinename`) VALUES ('$tokenname','$nametb','$dateaert','$groublinename')";
+$Query =$conn->query($sql);
+	//echo $sql;
+>>>>>>> Stashed changes
 
 		$conn = $DBconnect;
 
@@ -134,12 +157,12 @@ function JSalert(){
 
     ?>
    <div class="container">
-   <card class="neumorphic" style="margin-top:-250px;height:100px;">
+   <card class="neumorphic" style="margin-top:-200px;height:100px;">
 <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
 
 </card>
           
-  <table class="table table-striped" style="margin-left:330px;width:500px;margin-top:200px; ">
+  <table class="table table-striped" style="margin-left:330px;width:500px;margin-top:200px;color: #FBA9DD; ">
     <thead>
       <tr>
         <th>ชื่อตาราง</th>
