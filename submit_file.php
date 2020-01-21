@@ -3,30 +3,33 @@
 <head>
 
   <?php  
-  include_once "connectDB.php"; 
-  $con_obj = new connectDB;
-?>
- 
+		include_once("configDB.php");
 
+		$conn = $DBconnect;
+?>
     <title></title>
-    
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="/phpexcel/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <script type="text/javascript" src="/phpexcel/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script> -->
+
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" ></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script> -->
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>   -->
-  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/phpexcel/lib/Bootstrap_4/bootstrap.min.css">
+<script src="/phpexcel/lib/Jquery/jquery.js"></script>
+<script src="/phpexcel/lib/Bootstrap_4/bootstrap.min.js"></script>
+
+
     <style>
     label {
 
@@ -107,7 +110,7 @@ card {
 </card>
 
 <card class="neumorphic" style="width: 700px;">
-<form action="insertline.php" class="form-horizontal"  role="form" method="POST">
+<form autocomplete="off" class="form-horizontal">
     <div class="col-md-12">
     <div class="row">
         <label for="tokename" style="margin-left:20px">ชื่อโทเคน :</label>
@@ -116,13 +119,15 @@ card {
             <input type="text" id="groublinename" name="groublinename" class=" form-control control-label col-md-2" style="width: 200px;">
 
             <label class="control-label" style="margin-left:30px;">ชื่อตาราง :</label>
-                 <?php $conn = $con_obj->conntect_database();
+                 <?php 
                                 $sql = "SHOW TABLES";
                                 $result = mysqli_query($conn,$sql);
                             ?>  
-                            <select class="form-control col-md-2" name="nametb" id="query" style="width:300px;margin-left:30px;">
+                            <select class="form-control col-md-2" name="query" id="query" style="width:300px;margin-left:30px;">
                                 <?php while($row = mysqli_fetch_array($result)){ 
-                                   echo '<option value="'.$row[0].'">'.$row[0].'</option>'; 
+                                    if($row[0] != "data_dic_ref" && $row[0] != "empolyee"){
+                                      echo '<option value="'.$row[0].'">'.$row[0].'</option>'; 
+                                   } 
                                 } ?> 
                             </select>    
                                  
@@ -134,11 +139,9 @@ card {
 
         <div class="row">
      
-    <label class="control-label " style="margin-left:30px;">คอลัม:</label>        
-            <select name="select" class="form-control " id="select" style="width:200px;margin-left:40px" multiple="multiple">
-                           
-        </select>
-            <label for="dtp_input1" class="col-md-3 control-label">วันเวลาในการแจ้งเตือน:</label>
+     
+            
+            <label style="margin-left:3%;" for="dtp_input1" class="col-md-3 control-label">วันเวลาในการแจ้งเตือน:</label>
                 <div class="input-group date form_datetime col-sm-2"  data-date-format="yyyy-mm-dd HH:ii " data-link-field="dtp_input1">
                     <input class="form-control" type="text" value="" style="width:150px;" id="dateaert" name="dateaert">
                     <span class="input-group-addon col-sm-2" style="width:30px;"><span class="glyphicon glyphicon-remove"></span></span>
@@ -152,36 +155,153 @@ card {
 <br>
 <br>
 <br>
-
-       <center> <button type="submit" class="btn btn-success" style="width: 100px;margin-top:18px;">Success</button></center>
 </form>
  
 </card>
 
 </div>
-
+<br>
 <div class="form-group">
   <center>
 <div class="col-sm-12" style="width:1000px;height:1000px;background-color:#A6BBFF;margin-top:30px;"" align="center" id="result" >
   <center> <h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;">ตัวอย่างข้อมูล</h4></center>
-  <table class="display" id="myTable" style="width: 500px;height:400px ;">
-  <thead>
-    <tr>
+  <div id="webdatarocks_command">
+  <button class="btn btn-success" onclick="onlick_btn();">บันทึกข้อมูลและไฟล์</button>    
+  <button onclick="expandAlldata()" class="btn btn-warning">ขยายเซลล์ทังหมด</button>  
+  <button onclick="collapseAllData()" class="btn btn-warning">ยุบเซลล์ทั้งหมด</button>                  
+  </div><br>
+  <div id="webdatarocks">
+  
+  </div>
+
+   <!--                             Webdatarocks                             -->
+   <link href="/import_excel/lib/Webdatarocks/webdatarocks.min.css"  rel="stylesheet"/>
+   <script src="/import_excel/lib/Webdatarocks/webdatarocks.toolbar.min.js" ></script>
+   <script src="/import_excel/lib/Webdatarocks/webdatarocks.js" ></script>
+  
+
+  <script type="text/javascript">
+    var pivot = new WebDataRocks({
+         container: "#webdatarocks",
+         beforetoolbarcreated: customizeToolbar,
+         toolbar: true,
+         height: "100vh",
+         width: "100vw",
+         report: {
+            dataSource: {
+               dataSourceType: "json",
+               data: getJSONData("tb_test23123")
+            }
+         },
+         global: { // แสดงเมนูภาษาไทยจากไฟล์ lang_th.json
+            localization: "lib/lang_th.json"
+         }
+    });
+
+    function expandAlldata(){
+         webdatarocks.expandAllData();
+      }
+
+      function collapseAllData(){
+         webdatarocks.collapseAllData();
+      }
+
+      function customizeToolbar(toolbar) {  // แก้ไข toolbar ของไลบรารี่ 
+         var tabs = toolbar.getTabs(); // get all tabs from the toolbar
+         toolbar.getTabs = function() {
+            delete tabs[0];  
+            delete tabs[1];
+            delete tabs[2];
+            delete tabs[3];
+            return tabs;
+         }
+      }
      
-    </tr>
-  </thead>
-  <tbody>
+      function onlick_btn(){
+         var getttt = getDataWebdatarock();
+       
+         webdatarocks.exportTo( "html",
+         {
+            header:"รายงาน "+$("#query").val()+"<br>",
+            filename: "export_"+$("#query").val(),
+            destinationType: "server",
+            url: "select_ajax/get_export_data.php"
+         },
+         function (fileData) {
 
+            $.ajax({
+               url:"select_ajax/get_export_data.php",
+               method:"POST",
+               async:false,
+               dataType: "JSON",
+               data:{
+                  data:fileData.data,
+                  file_name:Date.now()+"_export_"+$("#query").val(),
+                  count_data:getttt,
+                  token_name:$("#tokenname").val(),
+                  group_name:$("#groublinename").val(),
+                  table_name:$("#query").val(),
+                  time_stamp:$("#dateaert").val()
+               }
+            })
+            .done(function(response){
+               if(!response.error){
+                  window.open(response.javascript_file_path, '_blank');
+                  window.open('insertline.php', '_self');
+                  //alert("จำนวนรายการทั้งหมด "+response.count+" รายการ");
+               }
+               else{
+                  alert(response.message);
+               }
+            });
+         });
+      }
 
-    <tr>
-   
-    </tr>
+      function getDataWebdatarock(){
+         var result ;
 
+         webdatarocks.getData({}, 
+         function(data) {        
 
+            var web_data = data.data;
 
-    
-  </tbody>
-</table>
+            //console.log(web_data);
+
+            var obj_cel = web_data[0];
+            var json_obg = JSON.stringify(obj_cel);
+            var json_aray  = JSON.parse(json_obg);
+            result = json_aray.v0;
+         });
+         return result;
+      }
+
+      function getJSONData(table_name) { // เรียกข้อมูลจากฐานข้อมูล
+         var response;
+
+         $.ajax({
+            url:"select_ajax/select_json_encode.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+            method:"POST",
+            async:false,
+            dataType: "JSON",
+            data:{table_name:table_name},
+            error: function(jqXHR, text, error){
+                // Displaying if there are any errors
+                    $('#results').html(error);           
+            }
+         })
+         .done(function(data){
+            response = data;
+         });
+         return response
+      }
+
+      function updateData(table_name) { // อัพเดทข้อมูล
+         webdatarocks.updateData({
+            data: getJSONData(table_name)
+         });
+      }
+
+  </script>
 </div></center> 
 </div>
 
@@ -194,7 +314,7 @@ card {
   <!-- <link href="/phpexcel/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
     <link href="/phpexcel/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
-<style>
+<style >
         .loading_page{
             position: absolute;  
             top: 0px;   
@@ -209,46 +329,16 @@ card {
             background: #fff url(loading_page.gif) 50% 50% no-repeat;
         }/*ฟิกหน้า page*/
     </style>
-    <script>
+    <script type="text/javascript">
         $(document).ready(function(){
-           
-            $(".loading_page").hide();
+            if($("#query").val() == null){
+              alert("ไม่สามารถเรียกข้อมูลได้");
+          }
+          else{
+              updateData($("#query").val());
+          }
             $('#query').change( function(){   
-                if($("#query").val() == ""){
-                    alert('กรุณากรอกข้อมูลที่ต้องการ (query)');
-                }
-                else{
-                    $(".loading_page").show();
-                    $(".root_page").css({
-                        "position": "absolute", 
-                        "top": "0px",  
-                        "left": "0px",  
-                        "width": "100%",   
-                        "height": "100%",   
-                        "overflow": "hidden"
-                    });
-                    var sql = 'SELECT * FROM' +' '+$(this).val();  /*ส่งค่า select */
-                    $.ajax({  
-                        url:"select_tb.php",  
-                        method:"POST",  
-                        data:{ query:sql},  
-                        success:function(data){  
-                            if(data === "error"){
-                                $('#query').val(''); 
-                                $('#result').empty(); 
-                                $('.loading_page').hide();
-                                $('.root_page').removeAttr('style');
-                                alert("ไม่สามารถเรียกข้อมูลได้");
-                            } 
-                            else{
-                                $('#result').html(data);    
-                                $('.loading_page').hide();
-                                $('.root_page').removeAttr('style');
-                            }  
-                        }
-                    });
-                        
-                }       
+                updateData($(this).val());    
             });  
         });
 
@@ -257,44 +347,6 @@ card {
             
         // }
     </script>
-<script type="text/javascript">
-    // $(document).ready(function() {
-    //     $('#select').multiselect();
-    // });
-</script>
-
-    <script type="text/javascript">
-
-    $(function() {
-        
-     
-
-    $('#query').change(function() {
-    alert('test');
-        var sql = 'SELECT * FROM' +' '+$(this).val();
-                        $.ajax({ 
-                            url: 'select_colum.php',
-                            method: 'POST',
-                            data: {query: sql},
-                            success: function(data) {
-                            //alert("data : ",data);
-                        $('#select').html(data);     
-                        
-                            },
-                error: function(jqXHR, text, error){
-                // Displaying if there are any errors
-                    $('#results').html(error);           
-            }
-                        });
-                        return false;
-                    }); 
-            
-    
-    });
-    </script>
-
- 
-
 <script>
     const color = document.getElementById('color');
 
@@ -302,15 +354,6 @@ function changeColor() {
   console.log(color.value);
   document.body.style.setProperty('--color', color.value);
 }
-    </script>
-
-
-
-<script type="text/javascript">
-	$(document).ready( function () {
-    $('#myTable').DataTable();
-
-} );
 </script>
 
 <script type="text/javascript">

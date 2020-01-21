@@ -121,27 +121,14 @@ function JSalert(){
   <img src="<?php echo $_SESSION['img_em']; ?>"  style="width:45%;height:15%;" class="w3-round"  alt="picture"/>
   <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">username : <?php echo $_SESSION['username'];?></a> 
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a> 
+  <a href="#upload_file" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
   <a href="index_test.php" onclick="w3_close()" class="w3-bar-item w3-button">กลับหน้าส่งข้อมูล</a>
   <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
 </nav>
     <?php
-require_once("connect.php");
-$tokenname=$_POST['tokenname'];
-$nametb=$_POST['nametb'];
-$dateaert=$_POST['dateaert'];
-$groublinename=$_POST['groublinename'];
+		include_once("configDB.php");
 
-
-// echo '<br>'.$nametb;
-// echo '<br>'.$tokenname;
-// echo '<br>'.$namefile;
-// echo '<br>'.$dateaert;
-// echo '<br>'.$groublinename;
-
-$sql = "INSERT INTO `alert`( `tokenname`, `nametb`, `dateaert`, `groublinename`) VALUES ('$tokenname','$nametb','$dateaert','$groublinename')";
-$Query =$conn->query($sql);
-	//echo $sql;
-
+		$conn = $DBconnect;
 
 
 
@@ -163,10 +150,7 @@ $Query =$conn->query($sql);
     </thead>
     <tbody>
       <tr>
-        <td><?php echo$nametb; ?></td>
-        <td><?php echo$tokenname; ?></td>
-        <td><?php echo$dateaert; ?></td>
-        <td><?php echo$groublinename; ?></td>
+       
       </tr>
       
     </tbody>

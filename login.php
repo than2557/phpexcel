@@ -18,13 +18,17 @@
 </head>
 <body>
 	<?php
-		include_once("connect.php");
+		include_once("configDB.php");
+
+		$conn = $DBconnect;
+
 		include("session_check.php"); 
+
 		//require_once("inc/db_connect.php"); 
 		$username=$_POST["username"];
 		$password=md5($_POST["password"]);
 		$sql="select * from empolyee where username='$username' and password='$password'";
-		$Query=$conn->query($sql);
+		$Query= mysqli_query($conn,$sql);
 		//echo $sql;
 		$rows = mysqli_num_rows($Query);
 		//echo $rows;
