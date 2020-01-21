@@ -175,9 +175,9 @@ card {
   </div>
 
    <!--                             Webdatarocks                             -->
-   <link href="/import_excel/lib/Webdatarocks/webdatarocks.min.css"  rel="stylesheet"/>
-   <script src="/import_excel/lib/Webdatarocks/webdatarocks.toolbar.min.js" ></script>
-   <script src="/import_excel/lib/Webdatarocks/webdatarocks.js" ></script>
+   <link href="/phpexcel/lib/Webdatarocks/webdatarocks.min.css"  rel="stylesheet"/>
+   <script src="/phpexcel/lib/Webdatarocks/webdatarocks.toolbar.min.js" ></script>
+   <script src="/phpexcel/lib/Webdatarocks/webdatarocks.js" ></script>
   
 
   <script type="text/javascript">

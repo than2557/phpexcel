@@ -28,7 +28,7 @@ font-family: 'Sriracha', cursive;
 }
 body {
 
-background-color: #F1FBA8;
+background-color: #aee0ee;
 }
 
 
