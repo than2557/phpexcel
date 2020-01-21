@@ -103,13 +103,12 @@ function onClick(element) {
 </script>
         <script>
 function JSalert(){
-  Swal.fire({
-  position: 'top-end',
-  icon: 'success',
-  title: 'Your work has been saved',
-  showConfirmButton: false,
-  timer: 3000
-})
+  
+  Swal.fire(
+  'บันทึกสำเร็จ!',
+  'กด OK!',
+  'success'
+)
 
 }
   </script>
