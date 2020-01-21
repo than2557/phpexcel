@@ -110,11 +110,7 @@ card {
 </card>
 
 <card class="neumorphic" style="width: 700px;">
-<<<<<<< Updated upstream
 <form autocomplete="off" class="form-horizontal">
-=======
-<form  class="form-horizontal" id="from"  role="form" method="POST">
->>>>>>> Stashed changes
     <div class="col-md-12">
     <div class="row">
         <label for="tokename" style="margin-left:20px">ชื่อโทเคน :</label>
@@ -147,7 +143,7 @@ card {
             
             <label style="margin-left:3%;" for="dtp_input1" class="col-md-3 control-label">วันเวลาในการแจ้งเตือน:</label>
                 <div class="input-group date form_datetime col-sm-2"  data-date-format="yyyy-mm-dd HH:ii " data-link-field="dtp_input1">
-                    <input class="form-control" type="text" value="" style="width:150px;" id="dateaert" name="dateaert" onchange="testfuction()">
+                    <input class="form-control" type="text" value="" style="width:150px;" id="dateaert" name="dateaert">
                     <span class="input-group-addon col-sm-2" style="width:30px;"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon col-sm-3" style="width:30px;"><span class="glyphicon glyphicon-th"></span></span> 
   </div>
@@ -159,11 +155,6 @@ card {
 <br>
 <br>
 <br>
-<<<<<<< Updated upstream
-=======
-
-       <center> <button  class="btn btn-success" style="width: 100px;margin-top:18px;">Success</button></center>
->>>>>>> Stashed changes
 </form>
  
 </card>
@@ -338,38 +329,7 @@ card {
             background: #fff url(loading_page.gif) 50% 50% no-repeat;
         }/*ฟิกหน้า page*/
     </style>
-<<<<<<< Updated upstream
     <script type="text/javascript">
-=======
-
-
-    <script>
-  $(document).ready(function(){
-   
-  $("button").click(function(){ 
-  var test =  $("#test").text($("form").serialize());
-    console.log(test)
-    $.ajax({
-      url:"insertline.php",
-      method:"POST",
-      data:test,
-      success:function(data){
-        alert(data);
-
-
-      }
-
-
-
-    });
-  });
-});
-         
-        
-   
-    </script>
-    <script>
->>>>>>> Stashed changes
         $(document).ready(function(){
             if($("#query").val() == null){
               alert("ไม่สามารถเรียกข้อมูลได้");

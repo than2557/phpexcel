@@ -130,26 +130,7 @@ function JSalert(){
   <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
 </header>
     <?php
-<<<<<<< Updated upstream
 		include_once("configDB.php");
-=======
-require_once("connect.php");
-$tokenname=$_POST['tokenname'];
-$nametb=$_POST['nametb'];
-$dateaert=$_POST['dateaert'];
-$groublinename=$_POST['groublinename'];
-//print_r($_POST);
-
-// echo '<br>'.$nametb;
-// echo '<br>'.$tokenname;
-// echo '<br>'.$namefile;
-// echo '<br>'.$dateaert;
-// echo '<br>'.$groublinename;
-
-$sql = "INSERT INTO `alert`( `tokenname`, `nametb`, `dateaert`, `groublinename`) VALUES ('$tokenname','$nametb','$dateaert','$groublinename')";
-$Query =$conn->query($sql);
-	//echo $sql;
->>>>>>> Stashed changes
 
 		$conn = $DBconnect;
 
