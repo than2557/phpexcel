@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="icon" type="img/png" href="iconpea.png"/>
 <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
 
    <title>Import excel page</title>
 
@@ -134,7 +135,14 @@ card {
                         $('#result').empty(); 
                         $('.loading_page').hide();
                         $('.root_page').removeAttr('style');
-                        alert("ไม่สามารถเรียกข้อมูลได้!!!");
+                        //alert("ไม่สามารถเรียกข้อมูลได้!!!");
+                        Swal.fire({
+      icon: 'error',
+            title: 'เกิดข้อผิดพลาด...',
+         text: 'ไม่สามารถเรียกข้อมูลได้!!!',
+      text:'สกุลไฟล์ต้องเป็น xsl,xlsx',
+          footer: '<a href>กรุณาตรวจสอบไฟล์</a>'
+})
                      } 
                      else{
 
@@ -143,8 +151,13 @@ card {
                         $('#excel_file').val('');  
                         $('.loading_page').hide();
                         $('.root_page').removeAttr('style');
-                        alert("อัพโหลดไฟล์สำเร็จ");
-                        window.open("index_test.php","_self");
+                        //alert("อัพโหลดไฟล์สำเร็จ");
+                        Swal.fire(
+                     'บันทึกสำเร็จ!',
+                        'กด OK!',
+                           'success'
+                                )
+                        //window.open("index_test.php","_self");s
                      } 
                   }  
                });  
@@ -162,7 +175,7 @@ card {
   <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">username : <?php echo $_SESSION['username'];?></a> 
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a> 
   <a href="#upload_file" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
-  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+  <a href="index_test.php" onclick="w3_close()" class="w3-bar-item w3-button">กลับหน้าส่งข้อมูล</a>
   <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
 </nav>
 
@@ -219,7 +232,25 @@ card {
          </div>
       </div>
    </div>
+<script>
+   function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
 
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
 
 </body>
 </html>
