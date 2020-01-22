@@ -137,11 +137,11 @@ card {
                         $('.root_page').removeAttr('style');
                         //alert("ไม่สามารถเรียกข้อมูลได้!!!");
                         Swal.fire({
-                     icon: 'error',
-                           title: 'เกิดข้อผิดพลาด...',
-                        text: 'ไม่สามารถเรียกข้อมูลได้!!!',
-                     text:'สกุลไฟล์ต้องเป็น xsl,xlsx',
-                        footer: '<a href>กรุณาตรวจสอบไฟล์</a>'
+      icon: 'error',
+            title: 'เกิดข้อผิดพลาด...',
+         text: 'ไม่สามารถเรียกข้อมูลได้!!!',
+      te:'สกุลไฟล์ต้องเป็น xsl,xlsx',
+          footer: '<a href>กรุณาตรวจสอบไฟล์</a>'
 })
                      } 
                      else{
