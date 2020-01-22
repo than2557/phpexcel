@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT']."/import_excel/lib/PHPExcel-1.8/Classes/PHPExcel.php"; //เรียกใช้ไลบรารี่ PHPExcel
+    require_once $_SERVER['DOCUMENT_ROOT']."/phpexcel/lib/PHPExcel-1.8/Classes/PHPExcel.php"; //เรียกใช้ไลบรารี่ PHPExcel
     include_once "../DB_helper.php"; // ใช้ class DB_helper
 
     $con_obj = new DB_helper; // ประกาศตัวแปร object เก็บ Instance จาก class DB_helper

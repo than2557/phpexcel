@@ -137,11 +137,14 @@ card {
                         alert("ไม่สามารถเรียกข้อมูลได้!!!");
                      } 
                      else{
-                        $('#result').html(data);  
+
+                        //$('#result').html(data); 
+
                         $('#excel_file').val('');  
                         $('.loading_page').hide();
                         $('.root_page').removeAttr('style');
-                        alert("สำเร็จ!!!");
+                        alert("อัพโหลดไฟล์สำเร็จ");
+                        window.open("index_test.php","_self");
                      } 
                   }  
                });  
