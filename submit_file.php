@@ -181,6 +181,8 @@ card {
   
 
   <script type="text/javascript">
+    var arr = [];
+
     var pivot = new WebDataRocks({
          container: "#webdatarocks",
          beforetoolbarcreated: customizeToolbar,
@@ -198,6 +200,17 @@ card {
          }
     });
 
+    webdatarocks.on('celldoubleclick', function(cell) {
+          if(arr.length < 2){
+            arr.push(cell.value);
+            console.log(arr);
+          }
+          else{
+            alert("array full");
+          }
+          
+      });
+
     function expandAlldata(){
          webdatarocks.expandAllData();
       }
@@ -210,13 +223,38 @@ card {
          var tabs = toolbar.getTabs(); // get all tabs from the toolbar
          toolbar.getTabs = function() {
             delete tabs[0];  
-            delete tabs[1];
-            delete tabs[2];
+            //delete tabs[1];
             delete tabs[3];
+
+            tabs.unshift(
+              {
+                id: "wdr-tab-lightblue",
+                title: "คำนวณ",
+                handler: newtabHandlerBlue,
+                icon: this.icons.format
+              }, 
+              {
+                id: "wdr-tab-default",
+                title: "Default",
+                handler: newtabHandlerDefault,
+                icon: this.icons.format
+              });
+
             return tabs;
          }
+          var newtabHandlerBlue = function() {
+            foo1();
+          };
+          var newtabHandlerDefault = function() {
+            foo2();
+          };
       }
-     
+      function foo1(){
+        alert("foo1");
+      }
+      function foo2(){
+        alert("foo2");
+      }
       function onlick_btn(){
          var getttt = getDataWebdatarock();
        
