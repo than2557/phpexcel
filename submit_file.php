@@ -201,14 +201,22 @@ card {
     });
 
     webdatarocks.on('celldoubleclick', function(cell) {
-          if(arr.length < 2){
-            arr.push(cell.value);
-            console.log(arr);
+
+          console.log(cell);
+
+          if(cell.type == "value"){
+
+            if(arr.length < 2){
+              arr.push(cell.value);
+            }
+            else{
+             
+              //alert("array full");
+            }
           }
           else{
-            alert("array full");
+            alert("กรุณาเลือกเซลล์");
           }
-          
       });
 
     function expandAlldata(){
@@ -230,7 +238,7 @@ card {
               {
                 id: "wdr-tab-lightblue",
                 title: "คำนวณ",
-                handler: newtabHandlerBlue,
+                handler: calculate,
                 icon: this.icons.format
               }, 
               {
@@ -242,7 +250,7 @@ card {
 
             return tabs;
          }
-          var newtabHandlerBlue = function() {
+          var calculate = function() {
             foo1();
           };
           var newtabHandlerDefault = function() {
@@ -250,7 +258,13 @@ card {
           };
       }
       function foo1(){
-        alert("foo1");
+        if(arr.length <2){
+          alert("array lees than 2");
+        }
+        else{
+          var count_diff = arr[0] - arr[1];
+          alert("ผลต่าง "+count_diff);
+        }
       }
       function foo2(){
         alert("foo2");
