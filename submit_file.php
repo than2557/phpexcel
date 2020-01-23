@@ -203,7 +203,8 @@ card {
     webdatarocks.on('celldoubleclick', function(cell) {
 
           console.log(cell);
-
+          // webdatarocks_saves
+          
           if(cell.type == "value"){
 
             if(arr.length < 2){
@@ -337,8 +338,7 @@ card {
             dataType: "JSON",
             data:{table_name:table_name},
             error: function(jqXHR, text, error){
-                // Displaying if there are any errors
-                    $('#results').html(error);           
+              alert(error)         
             }
          })
          .done(function(data){

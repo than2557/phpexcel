@@ -150,7 +150,11 @@
 
       foreach($tb_header as $col_name){ // วนลูปตามจำนวนหัวตารางของตัวแปร  $tb_header
 
-        $sql = "INSERT INTO `data_dic_ref`(`field_name`, `column_order`, `tb_ref_name`) VALUES ('$col_name','$col_order','$tb_name2')";
+        $cell_col = trim($col_name); // ตัดช่องว่างหน้าและหลัง 
+        $col_name = str_replace('-', '_', $cell_col); // แทนที่ - ด้วย _ (Under score)
+        $col_name2 = str_replace(' ', '_', $col_name); // แทนที่ช่องว่าง (Space) ด้วย _ (Under score)
+
+        $sql = "INSERT INTO `data_dic_ref`(`field_name`, `column_order`, `tb_ref_name`) VALUES ('$col_name2','$col_order','$tb_name2')";
         
         mysqli_query($this->conn, $sql); 
         //echo $sql."<br>";
@@ -158,6 +162,38 @@
       }
       //echo $sql;
       //echo count($tb_header);
+    }
+    function create_table($var_type,$table_name){
+
+      $i = 0; // array_count
+      $j = 1; // col_counter
+      $len = count($var_type); //นับจำนวน array
+
+      $sql = "CREATE TABLE ".$table_name." (
+        table_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,";
+      
+      $this->insert_sql = "INSERT INTO ".$table_name."(";
+
+      foreach($var_type as $cell){
+
+        if ($i == $len - 1) {  // ตรวจสอบถ้าเป็นข้อมูลรายการสุดท้าย   ///  column แรก fixed เป็นลำดับที่  ///
+          //$sql.="h".$j."  VARCHAR(255) NOT NULL,"; 
+          $this->insert_sql .= "h".$j;
+          $sql.= "h".$j." ".$this->return_sql_attr_type($var_type[$i],$cell)." NOT NULL";
+        }
+        else{
+          $this->insert_sql .= "h".$j.",";
+          $sql.= "h".$j." ".$this->return_sql_attr_type($var_type[$i],$cell)." NOT NULL,";
+        }
+        $i++;
+        $j++;
+      }
+      $sql.=")";
+      $this->insert_sql.=")";
+
+      mysqli_query($this->conn,$sql);
+      //echo $sql;
+      //echo $this->insert_sql;
     }
 
     function validateDate($date, $format = 'd/m/Y'){
@@ -174,6 +210,35 @@
         echo "<br>";
         
       }
+
+    }
+    function upload_data($row_array,$var_type){
+      
+      foreach($row_array as $row){
+        $sql = $this->insert_sql." VALUES (";
+        $i = 0;
+
+        $len = count($row); //นับจำนวน array ข้อมูลแต่ละรายการ (Row)
+        
+        foreach($row as $cell){
+          
+          if ($i == $len - 1) {  // ตรวจสอบถ้าเป็นข้อมูลรายการสุดท้าย   ///  column แรก fixed เป็นลำดับที่  ///
+            
+            $sql .= "'".$this->parse_var($var_type[$i],$cell)."'";
+          }
+          else{
+            $sql .= "'".$this->parse_var($var_type[$i],$cell)."',";
+          
+          }
+          $i++;
+        }
+        $sql .= ")";
+        //echo $sql."<br>";
+      mysqli_query($this->conn,$sql);
+      }
+
+      
+
 
     }
     function parse_var($var_type,$data){
