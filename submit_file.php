@@ -114,7 +114,7 @@ card {
     <div class="col-md-12">
     <div class="row">
         <label for="tokename" style="margin-left:20px">ชื่อโทเคน :</label>
-        <input type="text"  class=" form-control control-label  text col-md-2" id="tokenname" name="tokenname" style="width:200px;margin-left:20px" >
+        <input type="text"  class=" form-control control-label  text col-md-4" id="tokenname" name="tokenname" style="width:400px;margin-left:20px" >
         <label class="control-label col-sm-2"> กลุ่มไลน์:</label>
             <input type="text" id="groublinename" name="groublinename" class=" form-control control-label col-md-2" style="width: 200px;margin-left:-80px">
 
@@ -278,11 +278,11 @@ card {
             url: "select_ajax/get_export_data.php"
          },
          function (fileData) {
-     Swal.fire(
-                     'บันทึกสำเร็จ!',
-                        'กด OK!',
-                           'success'
-                                )
+    //  Swal.fire(
+    //                  'บันทึกสำเร็จ!',
+    //                     'กด OK!',
+    //                        'success'
+    //                             )
             $.ajax({
               
                url:"select_ajax/get_export_data.php",
@@ -304,7 +304,8 @@ card {
                if(!response.error){
 
                   window.open(response.javascript_file_path, '_blank');
-                  window.open('insertline.php', '_self');
+                  window.open('insertline.php?alert_id='+response.alert_id, '_self');
+                  
                   //alert("จำนวนรายการทั้งหมด "+response.count+" รายการ");
                }
                else{

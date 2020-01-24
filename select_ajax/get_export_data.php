@@ -51,10 +51,14 @@
          $query =  mysqli_query($conn,$sql);
          //$query = 1;
          if($query){
+            $alert_id =mysqli_insert_id($conn);
+            
+            //echo $alert_id;
             $response['error'] = false;
             $response['message'] = "สร้างไฟล์ " . basename($newFileName) . " แล้ว";
             $response['javascript_file_path'] = $javascript_file_path;
             $response['count'] = $_POST['count_data'];
+            $response['alert_id'] =$alert_id;
          }
          else{
             $response['error'] = true;

@@ -130,11 +130,14 @@ function JSalert(){
 </header>
     <?php
 		include_once("configDB.php");
-
-		$conn = $DBconnect;
-
-
-
+  
+    $conn = $DBconnect;
+    
+    $alert_id=$_GET['alert_id'];
+    // $alert_id  = $_SESSION['alert_id'];
+     $sql ="SELECT * FROM `alert` WHERE alert_id  = '$alert_id'";
+     //echo $sql;
+     $result=$conn->query($sql);
     ?>
    <div class="container">
    <card class="neumorphic" style="margin-top:-200px;height:100px;">
@@ -145,6 +148,7 @@ function JSalert(){
   <table class="table table-striped" style="margin-left:330px;width:500px;margin-top:200px;color: #FBA9DD; ">
     <thead>
       <tr>
+    
         <th>ชื่อตาราง</th>
         <th>โทเคน</th>
         <th>วันเวลาแจ้งเตือน</th>
@@ -152,9 +156,23 @@ function JSalert(){
       </tr>
     </thead>
     <tbody>
-      <tr>
-       
-      </tr>
+    <?php
+  while($row = $result->fetch_assoc()){
+    ?>
+
+    <tr>
+      <td><?=$row['table_name'];?></td>
+      <td><?=$row['token_name'];?></td>
+      <td><?=$row['alert_date'];?></td>
+      <td><?=$row['line_group_name'];?></td>
+
+    </tr>
+
+    <?php }?>  
+  </tbody>
+</table>
+
+
       
     </tbody>
   </table>
