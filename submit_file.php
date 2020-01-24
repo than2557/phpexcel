@@ -148,9 +148,7 @@ card {
 					<span class="input-group-addon col-sm-3" style="width:30px;"><span class="glyphicon glyphicon-th"></span></span> 
   </div>
 
-        </div>
-        
-
+        </div>     
 <br>
 <br>
 <br>
@@ -203,8 +201,7 @@ card {
     webdatarocks.on('celldoubleclick', function(cell) {
 
           console.log(cell);
-          // webdatarocks_saves
-          
+
           if(cell.type == "value"){
 
             if(arr.length < 2){
@@ -303,7 +300,7 @@ card {
                }
             })
             .done(function(response){
-
+              alert(response)
                if(!response.error){
 
                   window.open(response.javascript_file_path, '_blank');
@@ -400,17 +397,12 @@ card {
                 updateData($(this).val());    
             });  
         });
-
-
-        // function load_table(){
-            
-        // }
     </script>
 <script>
     const color = document.getElementById('color');
 
 function changeColor() {
-  console.log(color.value);
+  //console.log(color.value);
   document.body.style.setProperty('--color', color.value);
 }
 </script>
