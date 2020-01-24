@@ -303,14 +303,10 @@ card {
                }
             })
             .done(function(response){
-<<<<<<< Updated upstream
               //console.log(response);
-=======
-
->>>>>>> Stashed changes
                if(!response.error){
 
-                  window.open(response.javascript_file_path, '_blank');
+                  window.open(response.javascrip  _file_path, '_blank');
                   window.open('insertline.php', '_self');
                   //alert("จำนวนรายการทั้งหมด "+response.count+" รายการ");
                }
