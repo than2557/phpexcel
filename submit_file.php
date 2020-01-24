@@ -125,7 +125,7 @@ card {
                             ?>  
                             <select class="form-control col-md-2" name="query" id="query" style="width:300px;margin-left:30px;">
                                 <?php while($row = mysqli_fetch_array($result)){ 
-                                    if($row[0] != "data_dic_ref" && $row[0] != "empolyee" && $row[0] != "alert"){
+                                    if($row[0] != "data_dic_ref" && $row[0] != "empolyee"){
                                       echo '<option value="'.$row[0].'">'.$row[0].'</option>'; 
                                    } 
                                 } ?> 
@@ -278,7 +278,7 @@ card {
             header:"รายงาน "+$("#query").val()+"<br>",
             filename: "export_"+$("#query").val(),
             destinationType: "server",
-            url: "select_ajax/blank_post_ajax.php"
+            url: "select_ajax/get_export_data.php"
          },
          function (fileData) {
      Swal.fire(
@@ -303,10 +303,10 @@ card {
                }
             })
             .done(function(response){
-              //console.log(response);
+
                if(!response.error){
 
-                  window.open(response.javascrip  _file_path, '_blank');
+                  window.open(response.javascript_file_path, '_blank');
                   window.open('insertline.php', '_self');
                   //alert("จำนวนรายการทั้งหมด "+response.count+" รายการ");
                }
