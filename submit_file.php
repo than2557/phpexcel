@@ -281,8 +281,13 @@ card {
             url: "select_ajax/blank_post_ajax.php"
          },
          function (fileData) {
-
+     Swal.fire(
+                     'บันทึกสำเร็จ!',
+                        'กด OK!',
+                           'success'
+                                )
             $.ajax({
+              
                url:"select_ajax/get_export_data.php",
                method:"POST",
                async:false,
@@ -298,8 +303,13 @@ card {
                }
             })
             .done(function(response){
+<<<<<<< Updated upstream
               //console.log(response);
+=======
+
+>>>>>>> Stashed changes
                if(!response.error){
+
                   window.open(response.javascript_file_path, '_blank');
                   window.open('insertline.php', '_self');
                   //alert("จำนวนรายการทั้งหมด "+response.count+" รายการ");
