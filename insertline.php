@@ -166,7 +166,7 @@ function JSalert(){
     <tr>
       <td><?=$row['table_name'];?></td>
       <td><?=$row['token_name'];?></td>
-      <td><?=$row['alert_date'];?></td>
+      <td><?=$row['alert_date']."  ".$row['alert_time'];?></td>
       <td><?=$row['line_group_name'];?></td>
 
     </tr>
