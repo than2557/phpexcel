@@ -72,6 +72,55 @@
   </style> 
 </head>
 <body>
+<style>
+      .modal_dialog_account_detail {max-height:100vh;max-width:80vw;}  
+      .modal_body_account_detail{height:70vh;width:100%;align:center;}  
+      .modal_container_account_detail{background-color:white;}    
+   </style>
+
+   <!-- Modal -->
+   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+   <div class="modal-dialog modal_dialog_account_detail" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLongTitle">คำนวณ</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+         </button>
+         </div>
+         <div class="modal-body modal_body_account_detail">
+            <div class="container modal_container_account_detail">
+               <div class="row">
+                  <div class="col-md-2">
+                     <label for="select_test">ฟีลด์</label>
+                  </div>
+                  <div class="col-md-5">
+                     <select class="form-control" name="select_test" id="select_test"></select>
+                  </div>
+               </div><br>
+               <div class="row">
+                  <div class="col-md-3">DRAG</div>
+                  <div class="col-md-6 dragzone">
+                     <label id="testdrag" draggable="true" ondragstart="dragStart(event)">5555555test</label>
+                  </div>
+               </div><br>
+               <div class="row">
+                  <div class="col-md-3">DROP</div>
+                  <div class="col-md-6 dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
+                  
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+
+
+
+
+
+
   <div class="container" >
     <card class="neumorphic" style="margin-top:-250px;height:100px;margin-left:10%;">
       <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
@@ -138,7 +187,7 @@
         <link href="/phpexcel/lib/Webdatarocks/webdatarocks.min.css"  rel="stylesheet"/>
         <script src="/phpexcel/lib/Webdatarocks/webdatarocks.toolbar.min.js" ></script>
         <script src="/phpexcel/lib/Webdatarocks/webdatarocks.js" ></script>
-        
+         <script type="text/javascript" src="select_ajax/webdatarocks_setting.js"></script>
       </div>
     </center> 
   </div>
@@ -148,8 +197,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <link href="/phpexcel/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
   <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
-  
-  <script type="text/javascript" src="select_ajax/webdatarocks_setting.js"></script>
+
   
   <style >
     .loading_page{

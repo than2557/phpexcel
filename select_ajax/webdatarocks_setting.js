@@ -69,14 +69,26 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
     };
 }
 
+<<<<<<< Updated upstream
 function foo1() {
     $("#select_test").empty();
 
     let json_data = getJSONData($("#query").val());
+=======
+function foo1(){
+   
+   $("#select_test").empty();
+>>>>>>> Stashed changes
 
     $('#exampleModalCenter').modal('show')
 
+<<<<<<< Updated upstream
     let key_obj = Object.keys(json_data[0])
+=======
+   $('#exampleModalLong').modal('show')
+   
+   let key_obj = Object.keys(json_data[0])
+>>>>>>> Stashed changes
 
     for (var i = 0; i <= key_obj.length - 1; i++) {
         $("#select_test").append("<option value='" + key_obj[i] + "'>" + key_obj[i] + "</option>");
