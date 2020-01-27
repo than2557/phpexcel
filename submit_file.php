@@ -76,7 +76,7 @@
     <card class="neumorphic" style="margin-top:-250px;height:100px;margin-left:10%;">
       <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
     </card>
-    <card class="neumorphic" style="width: 1000px;margin-left:10%;" >
+    <card class="neumorphic" style="width:1000px;margin-left:10%;height:200px;margin-top:-70px;" >
       <form autocomplete="off" class="form-horizontal">
         <div class="col-md-12">
           <div class="row">
@@ -125,7 +125,7 @@
   <br>
   <div class="form-group">
     <center>
-      <div class="col-sm-12" style="width:1000px;height:1000px;background-color:#A6BBFF;margin-top:100px;"" align="center" id="result" >
+      <div class="col-sm-12" style="width:1000px;height:1000px;background-color:#A6BBFF;margin-top:-20px;"" align="center" id="result" >
         <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;">ตัวอย่างข้อมูล</h4></center>
         <div id="webdatarocks_command">
           <button class="btn btn-success" onclick="onlick_btn();">บันทึกข้อมูลและไฟล์</button>    
