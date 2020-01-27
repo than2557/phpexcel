@@ -265,12 +265,12 @@
     function JSalert(){
       Swal.fire({
         position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
+        icon: 'error',
+        title: 'บันทึกข้อมูลไม่สำเร็จ',
         showConfirmButton: false,
         timer: 3000
       })
-    }
+    } 
 
   </script>
 

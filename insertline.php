@@ -156,6 +156,7 @@ function JSalert(){
         <th>โทเคน</th>
         <th>วันเวลาแจ้งเตือน</th>
         <th>ชื่อกลุ่มไลน์</th>
+        <th>จำนวนคอลัม</th>
       </tr>
     </thead>
     <tbody>
@@ -168,6 +169,7 @@ function JSalert(){
       <td><?=$row['token_name'];?></td>
       <td><?=$row['alert_date']."  ".$row['alert_time'];?></td>
       <td><?=$row['line_group_name'];?></td>
+      <td><?=$row['record_count'];?></td>
 
     </tr>
 
