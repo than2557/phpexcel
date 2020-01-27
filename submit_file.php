@@ -110,6 +110,10 @@
                   
                   </div>
                </div>
+               <div class="row">
+                <div class="col-md-6" id="test_append">
+                </div>
+               </div>
             </div>
          </div>
       </div>
@@ -130,10 +134,10 @@
         <div class="col-md-12">
           <div class="row">
             <label for="tokename" style="margin-left:20px">ชื่อโทเคน :</label>
-            <input type="text"  class=" form-control control-label  text col-md-4" id="tokenname" name="tokenname" style="width:400px;margin-left:20px" >
+            <input type="text"  class=" form-control control-label  text col-md-4" id="tokenname" name="tokenname" style="width:400px;margin-left:20px" require>
             
             <label class="control-label col-sm-2"> กลุ่มไลน์:</label>
-            <input type="text" id="groublinename" name="groublinename" class=" form-control control-label col-md-2" style="width: 200px;margin-left:-80px">
+            <input type="text" id="groublinename" name="groublinename" class=" form-control control-label col-md-2" style="width: 200px;margin-left:-80px" require>
 
             <label class="control-label" style="margin-left:30px;">ชื่อตาราง :</label>
                  <?php 
@@ -158,7 +162,7 @@
       <div class="row">      
         <label style="margin-left:2%;" for="dtp_input1" class="col-md-3 control-label">วันเวลาในการแจ้งเตือน:</label>
         <div class="input-group date form_datetime col-sm-2"  data-date-format="yyyy-mm-dd HH:ii " data-link-field="dtp_input1">
-          <input class="form-control" type="text" value="" style="width:150px;margin-left:-90px;" id="dateaert" name="dateaert">
+          <input class="form-control" type="text" value="" style="width:150px;margin-left:-90px;" id="dateaert" name="dateaert" require>
           <span class="input-group-addon col-sm-2" style="width:30px;"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon col-sm-3" style="width:30px;"><span class="glyphicon glyphicon-th"></span></span> 
         </div>
