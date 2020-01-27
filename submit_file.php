@@ -85,7 +85,6 @@
             
             <label class="control-label col-sm-2"> กลุ่มไลน์:</label>
             <input type="text" id="groublinename" name="groublinename" class=" form-control control-label col-md-2" style="width: 200px;margin-left:-80px">
-<<<<<<< Updated upstream
 
             <label class="control-label" style="margin-left:30px;">ชื่อตาราง :</label>
                  <?php 
@@ -104,27 +103,6 @@
     </div>
     <div>
     <br>
-        
-
-        <div class="row">
-     
-     
-=======
->>>>>>> Stashed changes
-            
-            <label class="control-label" style="margin-left:30px;">ชื่อตาราง :</label>
-              <?php 
-                $sql = "SHOW TABLES";
-                $result = mysqli_query($conn,$sql);
-              ?>  
-            <select class="form-control col-md-2" name="query" id="query" style="width:300px;margin-left:30px;">
-              <?php while($row = mysqli_fetch_array($result)){ 
-                if($row[0] != "data_dic_ref" && $row[0] != "alert" && $row[0] != "empolyee"){
-                  echo '<option value="'.$row[0].'">'.$row[0].'</option>'; 
-                } 
-              } ?> 
-            </select>                                  
-        </div>
       </div>
       <div>
       <br>
