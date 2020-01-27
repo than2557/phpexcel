@@ -49,11 +49,15 @@
          $sql = "INSERT INTO `alert`(`user_id`, `token_name`, `table_name`, `alert_date`, `alert_time`, `line_group_name`, `file_alert_path`) VALUES ('$user_id','$tokenname','$nametb','$date','$time','$groublinename','$database_file_path')";
    
          $query =  mysqli_query($conn,$sql);
+
+        
+
          //$query = 1;
          if($query){
             $alert_id =mysqli_insert_id($conn);
-            
-            //echo $alert_id;
+            $tbz = "INSERT INTO `ref_tb_user`(`id_user`,`tb_ref_name`)VALUES('$user_id','$nametb')";
+             mysqli_query($conn,$tbz);
+            //echo $tbz;
             $response['error'] = false;
             $response['message'] = "สร้างไฟล์ " . basename($newFileName) . " แล้ว";
             $response['javascript_file_path'] = $javascript_file_path;

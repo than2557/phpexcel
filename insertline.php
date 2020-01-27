@@ -28,7 +28,7 @@ font-family: 'Sriracha', cursive;
 }
 body {
 
-background-color: #aee0ee;
+background-color:#edfcfa;
 }
 
 
@@ -144,8 +144,11 @@ function JSalert(){
 <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
 
 </card>
-          
-  <table class="table table-striped" style="margin-left:330px;width:500px;margin-top:200px;color: #FBA9DD; ">
+
+<card  class="neumorphic" style="margin-top:50;width:800px;">    
+
+  <table class="table table-striped" style="margin-left:-10px;width:800px;margin-top:-10px;color: #FBA9DD; ">
+  
     <thead>
       <tr>
     
@@ -170,16 +173,18 @@ function JSalert(){
 
     <?php }?>  
   </tbody>
+  </card>
 </table>
-
+ 
 
       
     </tbody>
+    <center> <button type="submit" class="btn btn-primary" onclick="JSalert()" style="margin-top:157px;width:200px;height:50px;">Submit</button></center>
   </table>
-</div>
+
 
     <br>
-   <center> <button type="submit" class="btn btn-primary" onclick="JSalert()">Submit</button></center>
+   
     </body>
-
+   
 </html>

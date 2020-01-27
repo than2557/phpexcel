@@ -125,7 +125,7 @@ card {
                             ?>  
                             <select class="form-control col-md-2" name="query" id="query" style="width:300px;margin-left:30px;">
                                 <?php while($row = mysqli_fetch_array($result)){ 
-                                    if($row[0] != "data_dic_ref" && $row[0] != "alert" && $row[0] != "empolyee"){
+                                    if($row[0] != "data_dic_ref" && $row[0] != "alert" && $row[0] != "empolyee" && $row[0] != "ref_tb_user"){
                                       echo '<option value="'.$row[0].'">'.$row[0].'</option>'; 
                                    } 
                                 } ?> 
