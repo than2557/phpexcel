@@ -2,9 +2,9 @@
 $token = $_POST["token"];
 
 $message = $_POST["record"];
- echo $token."<br>";
- echo $message;
- $line_api = "https://notify-api.line.me/api/notify0";
+
+header('Content-Type: text/html; charset=utf-8');
+ $line_api = "https://notify-api.line.me/api/notify";
 
  $queryData = array('message' => $message);
  $queryData = http_build_query($queryData,'','&');
@@ -20,7 +20,5 @@ $message = $_POST["record"];
  $context = stream_context_create($headerOptions);
  $result = file_get_contents($line_api,FALSE,$context);
  $res = json_decode($result);
-//  return $res;
-
 
 ?>
