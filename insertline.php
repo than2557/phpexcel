@@ -153,6 +153,7 @@ function onClick(element) {
         <th>วันเวลาแจ้งเตือน</th>
         <th>ชื่อกลุ่มไลน์</th>
         <th>จำนวนคอลัม</th>
+        <th>ตัวอย่างรายการ</th>
       </tr>
     </thead>
     <tbody>
@@ -164,11 +165,10 @@ function onClick(element) {
       <td><span id="tbname" value="<?=$row['table_name'];?>"><?=$row['table_name'];?><label></td>
       <td><label id="tkname"><?=$row['token_name'];?></label></td>
      
-     
       <td><span id="datetimeart"><?=$row['alert_date']."  ".$row['alert_time'];?></span></td>
       <td><span id="linegroup"><?=$row['line_group_name'];?></span></td>
       <td><label id="record_count"><?=$row['record_count'];?></label></td>
-
+      <td><a id="file_path" data_file_path="<?php echo "export/".$row['file_alert_path'] ?>" href="<?php echo "export/".$row['file_alert_path'] ?>" target="_blank">คลิกเพื่อแสดงตัวอย่าง</a></td>
     </tr>
 
     <?php }?>  
@@ -188,18 +188,18 @@ function JSalert(){
   var tkname = document.getElementById('tkname').innerHTML;
   var record_count = document.getElementById('record_count').innerHTML;
 
-  console.log(typeof tkname);
-  console.log(record_count);
-
+  var tag_a_data = document.getElementById('file_path');
+  var file_path = tag_a_data.getAttribute('data_file_path');
 
 
  $.ajax({
       type: "POST",
       url: "line.php",
       // dataType:"JSON",
-      data: {token: tkname,
-        record:record_count
-      
+      data: {
+        token: tkname,
+        record:record_count,
+        file_path:file_path
       },
       success: function (result) {
         alert('success');

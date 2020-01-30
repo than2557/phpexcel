@@ -38,8 +38,10 @@
          
          chmod($newFileName,0755); // แก้ไข permission
    
-         $database_file_path = $ip.'/'.$root_folder.'/export/'. $file_name.'.html';
-   
+         //$database_file_path = $ip.'/'.$root_folder.'/export/'. $file_name.'.html';
+         
+         $database_file_path = $file_name.'.html';
+         
          $tokenname = $_POST['token_name'];
    
          $nametb = $_POST['table_name'];
