@@ -2,8 +2,13 @@
 $token = $_POST["token"];
 
 $message = $_POST["record"];
+<<<<<<< Updated upstream
 
 header('Content-Type: text/html; charset=utf-8');
+=======
+//  echo $token."<br>";
+//  echo $message;
+>>>>>>> Stashed changes
  $line_api = "https://notify-api.line.me/api/notify";
 
  $queryData = array('message' => $message);
