@@ -52,14 +52,16 @@
 
          $query =  mysqli_query($conn,$sql);
 
-        
-
-         //$query = 1;
          if($query){
+
+            //notify_message("รายการทั้งหมด : "+$count_record+" รายการ55512345",$tokenname);
+
             $alert_id =mysqli_insert_id($conn);
+
             $tbz = "INSERT INTO `ref_tb_user`(`id_user`,`tb_ref_name`)VALUES('$user_id','$nametb')";
-             mysqli_query($conn,$tbz);
-            //echo $tbz;
+            
+            mysqli_query($conn,$tbz);
+
             $response['error'] = false;
             $response['message'] = "สร้างไฟล์ " . basename($newFileName) . " แล้ว";
             $response['javascript_file_path'] = $javascript_file_path;
@@ -82,4 +84,30 @@
       $response['error'] = true;
       $response['message'] = "ไม่พบข้อมูล";
    }
+
   echo json_encode($response);
+
+
+
+
+
+  function notify_message($message,$token){
+
+   $line_api = "https://notify-api.line.me/api/notify0";
+
+   $queryData = array('message' => $message);
+   $queryData = http_build_query($queryData,'','&');
+   $headerOptions = array( 
+           'http'=>array(
+               'method'=>'POST',
+               'header'=> "Content-Type: application/x-www-form-urlencoded\r\n"
+                       ."Authorization: Bearer ".$token."\r\n"
+                       ."Content-Length: ".strlen($queryData)."\r\n",
+               'content' => $queryData
+           ),
+   );
+   $context = stream_context_create($headerOptions);
+   $result = file_get_contents($line_api,FALSE,$context);
+   $res = json_decode($result);
+   return $res;
+ }

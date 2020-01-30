@@ -52,21 +52,29 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
 
     toolbar.getTabs = function() {
         delete tabs[0];
-        //delete tabs[1];
+        delete tabs[1];
         delete tabs[3];
-        tabs.unshift({
-
+        tabs.unshift(
+           {
             id: "wdr-tab-lightblue",
             title: "คำนวณ",
             handler: calculate,
             icon: this.icons.format
 
-        }, {
+         }, 
+         {
             id: "wdr-tab-default",
             title: "Default",
             handler: newtabHandlerDefault,
             icon: this.icons.format
-        });
+        }, 
+        {
+           id: "wdr-tab-default2",
+           title: "Default",
+           handler: newtabHandlerDefault,
+           icon: this.icons.format
+       }
+      );
         return tabs;
     }
     var calculate = function() {
@@ -91,8 +99,6 @@ function foo1() {
         $("#select_test").append("<option value='" + key_obj[i] + "'>" + key_obj[i] + "</option>");
     }
 
-
-    //console.log(arr);
 }
 
 function foo2() {
@@ -138,8 +144,7 @@ function onlick_btn() {
                     } else {
 
                         // alert(response.message);
-
-
+                        
                         Swal.fire({
                             icon: 'error',
                             title: 'ผิดพลาด!!!',
@@ -149,8 +154,6 @@ function onlick_btn() {
                     }
                 });
         });
-
-
 }
 
 function getDataWebdatarock() {
