@@ -101,19 +101,15 @@ function onClick(element) {
 }
 
 </script>
-        <script>
-function JSalert(){
-  
-  Swal.fire(
-  'บันทึกสำเร็จ!',
-  'กด OK!',
-  'success'
-)
+ 
 
-}
-  </script>
     </head>
     <body>
+      <label id="test">test</label>
+      <script>
+    var tester = document.getElementById('test').innerHTML;
+    console.log(tester);
+    </script>
     <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:240px;font-weight:bold" id="mySidebar"><br>
 <a  style="width:45%;" class="w3-round"></a><br><br>
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
@@ -165,11 +161,13 @@ function JSalert(){
     ?>
 
     <tr>
-      <td><?=$row['table_name'];?></td>
-      <td><?=$row['token_name'];?></td>
-      <td><?=$row['alert_date']."  ".$row['alert_time'];?></td>
-      <td><?=$row['line_group_name'];?></td>
-      <td><?=$row['record_count'];?></td>
+      <td><span id="tbname" value="<?=$row['table_name'];?>"><?=$row['table_name'];?><label></td>
+      <td><label id="tkname"><?=$row['token_name'];?></label></td>
+     
+     
+      <td><span id="datetimeart"><?=$row['alert_date']."  ".$row['alert_time'];?></span></td>
+      <td><span id="linegroup"><?=$row['line_group_name'];?></span></td>
+      <td><label id="record_count"><?=$row['record_count'];?></label></td>
 
     </tr>
 
@@ -184,7 +182,35 @@ function JSalert(){
     <center> <button type="submit" class="btn btn-primary" onclick="JSalert()" style="margin-top:157px;width:200px;height:50px;">Submit</button></center>
   </table>
 
+  <script>
+function JSalert(){
 
+  var tkname = document.getElementById('tkname').innerHTML;
+  var record_count = document.getElementById('record_count').innerHTML;
+
+  console.log(typeof tkname);
+  console.log(record_count);
+
+
+
+ $.ajax({
+      type: "POST",
+      url: "line.php",
+      // dataType:"JSON",
+      data: {token: tkname,
+        record:record_count
+      
+      },
+      success: function (result) {
+        alert('success');
+      }
+ });
+
+
+};
+
+
+  </script>   
     <br>
    
     </body>
