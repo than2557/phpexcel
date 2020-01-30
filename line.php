@@ -12,17 +12,7 @@ $ip = '127.0.0.1/';
 $line_file_path = $ip.$root_folder.$file_path;
 
 header('Content-Type: text/html; charset=utf-8');
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
-//  echo $token."<br>";
-//  echo $message;
->>>>>>> Stashed changes
-=======
 
->>>>>>> Stashed changes
->>>>>>> master
  $line_api = "https://notify-api.line.me/api/notify";
 
  $queryData = array('message' => $message."\n".$line_file_path);
