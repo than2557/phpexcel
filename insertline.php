@@ -140,12 +140,12 @@ function onClick(element) {
 <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
 
 </card>
-
+<div class="container">
 <card  class="neumorphic" style="margin-top:50;width:800px;">    
 
   <table class="table table-striped" style="margin-left:-10px;width:800px;margin-top:-10px;color: #FBA9DD; ">
   
-    <thead>
+    <thead class="table-info"> 
       <tr>
     
         <th>ชื่อตาราง</th>
@@ -180,7 +180,7 @@ function onClick(element) {
       
     </tbody>
     <center> <button type="submit" class="btn btn-primary" onclick="JSalert()" style="margin-top:157px;width:200px;height:50px;">Submit</button></center>
-  </table>
+    </div>
 
   <script>
 function JSalert(){
