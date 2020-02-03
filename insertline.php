@@ -179,7 +179,7 @@ function onClick(element) {
 
       
     </tbody>
-    <center> <button type="submit" class="btn btn-primary" onclick="JSalert()" style="margin-top:157px;width:200px;height:50px;">Submit</button></center>
+    <center> <button type="submit" class="btn btn-primary" onclick="JSalert()" style="margin-top:10%  ;width:200px;height:50px;">Submit</button></center>
     </div>
 
   <script>
