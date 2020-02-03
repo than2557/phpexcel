@@ -925,10 +925,9 @@ button {
 
     <card class="neumorphic" style="margin-top:-250px;height:100px;margin-left:10%;">
     <h3>รหัสพนักงาน</h3>
-<form>
+
     <input type="search" placeholder="กรอกรหัสพนักงาน" id="idem">
-   <button  class="submit" onclick="insertuser()">ค้นหาข้อมูล</button>
-</form>
+   <button onclick="insertuser()">ค้นหาข้อมูล</button>
     </card>
 
 
@@ -957,7 +956,7 @@ button {
 </tbody>
 </table>
   
-<center><button class="btn-8" href="#">กำหนดการเข้าใช้</></center>
+<center><button class="btn-8">กำหนดการเข้าใช้</></center>
       </table>
   </card>
  
@@ -1059,7 +1058,19 @@ button {
 //         alert("test");
 //       }
 //  });
-
+  $.ajax({
+    url: "select_ajax/selectuserset.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+    method: "POST",
+    async: false,
+    dataType: "JSON",
+    data: { username: id.value },
+    error: function(jqXHR, text, error) {
+        alert(error)
+    }
+  })
+  .done(function(data) {
+    //response = data;
+  });
 }
   </script>
 

@@ -212,7 +212,7 @@ function getJSONData(table_name) { // เรียกข้อมูลจาก
         })
         .done(function(data) {
             response = data;
-        });,
+        });
     return response
 }
 
