@@ -49,30 +49,32 @@ function collapseAllData() {
 function customizeToolbar(toolbar) { // แก้ไข toolbar ของไลบรารี่ 
 
     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
-
+ 
     toolbar.getTabs = function() {
         delete tabs[0];
         delete tabs[1];
+        delete tabs[2];
         delete tabs[3];
+       
         tabs.unshift(
            {
             id: "wdr-tab-lightblue",
             title: "คำนวณ",
             handler: calculate,
-            icon: this.icons.format
+            icon: this.icons.fields
 
          }, 
          {
             id: "wdr-tab-default",
-            title: "Default",
-            handler: newtabHandlerDefault,
-            icon: this.icons.format
+            title: "เปิด",
+            handler: open_file,
+            icon: this.icons.open_local
         }, 
         {
            id: "wdr-tab-default2",
-           title: "Default",
-           handler: newtabHandlerDefault,
-           icon: this.icons.format
+           title: "บันทึก",
+           handler: save_file,
+           icon: this.icons.save
        }
       );
         return tabs;
@@ -80,11 +82,17 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
     var calculate = function() {
         foo1();
     };
-    var newtabHandlerDefault = function() {
-        foo2();
+    var open_file = function() {
+        open_file_tag();
     };
+    var save_file = function(){
+        foo2();
+    }
 }
 
+function open_file_tag(){
+    alert("hello")
+}
 function foo1() {
 
     $("#select_test").empty();
