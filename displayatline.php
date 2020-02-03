@@ -135,7 +135,7 @@ function onClick(element) {
     
     $user_id=$_SESSION['id_user'];
     
-     $sql ="SELECT * FROM `alert` WHERE user_id  = '$user_id'";
+     $sql ="SELECT * FROM `alert` WHERE user_id  = '$user_id' order by alert_id";
      
      //echo $sql;
      $result=$conn->query($sql);
