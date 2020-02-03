@@ -56,7 +56,7 @@
 			$_SESSION['name']=$result['name'];
 			//echo "ADMIN";
 		?>
-				<meta http-equiv="refresh" content= "0; url=index.php">
+				<meta http-equiv="refresh" content= "0; url=index_admin.php">
 			<?php
 		}
 		else
