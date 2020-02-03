@@ -91,7 +91,7 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
 }
 
 function open_file_tag(){
-    alert("hello")
+    $("#open_file").click();
 }
 function foo1() {
 
@@ -237,4 +237,10 @@ $(document).ready(function() {
     $('#query').change(function() {
         updateData($(this).val());
     });
+
+
+    $("#open_file").change(function(e){
+        var file_name = e.target.files[0].name;
+        
+    })
 })

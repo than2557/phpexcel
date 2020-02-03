@@ -139,6 +139,8 @@
             <label class="control-label col-sm-2"> กลุ่มไลน์:</label>
             <input type="text" id="groublinename" name="groublinename" class=" form-control control-label col-md-2" style="width: 200px;margin-left:-80px" require>
 
+              <input type="file" id="open_file" style="display:none;">
+
             <label class="control-label" style="margin-left:30px;">ชื่อตาราง :</label>
                  <?php 
                                 $sql = "SHOW TABLES";
