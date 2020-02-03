@@ -146,7 +146,7 @@ function onClick(element) {
 
 </card>
 <div class="container">
-<card  class="neumorphic" style="margin-top:10%;width:860px;margin-left:10%;height:100%">    
+<div style="margin-top:10%;width:860px;margin-left:20%;height:100%">    
 
   <table class="table table-striped" id="myTable" style="margin-left:10px;width:800px;margin-top:-10px;color: #FBA9DD; ">
   
@@ -178,7 +178,7 @@ function onClick(element) {
 
     <?php }?>  
   </tbody>
-  </card>
+  </div>
 </table>
  
 
@@ -221,8 +221,7 @@ function JSalert(){
 };
 $(document).ready(function() {
     $('#myTable').DataTable( {
-        "lengthMenu": [[3,10, 25, 50, -1], [3,10, 25, 50, "All"]],
-        "sEmptyTable":     "ไม่มีข้อมูลในตาราง",
+        "lengthMenu": [[3,10, 25, 50, -1], [3,10, 25, 50, "All"]],"sEmptyTable":     "ไม่มีข้อมูลในตาราง",
     "sInfo":           "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
     "sInfoEmpty":      "แสดง 0 ถึง 0 จาก 0 แถว",
     "sInfoFiltered":   "(กรองข้อมูล _MAX_ ทุกแถว)",
@@ -233,7 +232,7 @@ $(document).ready(function() {
     "sProcessing":     "กำลังดำเนินการ...",
     "sSearch":         "ค้นหา: ",
     "sZeroRecords":    "ไม่พบข้อมูล",
-    "oPaginate": {  
+    "oPaginate": {
         "sFirst":    "หน้าแรก",
     "sPrevious": "ก่อนหน้า",
         "sNext":     "ถัดไป",
