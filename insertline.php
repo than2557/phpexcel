@@ -205,7 +205,7 @@ function JSalert(){
         Swal.fire({
   position: 'top-end',
   icon: 'success',
-  title: 'Your work has been saved',
+  title: 'ส่งข้อความเสร็จสิ้น',
   showConfirmButton: false,
   timer: 1500
 })
