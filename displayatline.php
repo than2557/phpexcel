@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="icon" type="img/png" href="iconpea.png"/>
 <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="datatables.css">
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
@@ -18,6 +19,8 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" ></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+   <script type="text/javascript" charset="utf8" src="datatables.js"></script>
+
  <style>
 
 * {
@@ -100,6 +103,7 @@ function onClick(element) {
   captionText.innerHTML = element.alt;
 }
 
+
 </script>
  
 
@@ -129,21 +133,22 @@ function onClick(element) {
   
     $conn = $DBconnect;
     
-    $alert_id=$_GET['alert_id'];
-    // $alert_id  = $_SESSION['alert_id'];
-     $sql ="SELECT * FROM `alert` WHERE alert_id  = '$alert_id'";
+    $user_id=$_SESSION['id_user'];
+    
+     $sql ="SELECT * FROM `alert` WHERE user_id  = '$user_id'";
+     
      //echo $sql;
      $result=$conn->query($sql);
     ?>
    <div class="container">
-   <card class="neumorphic" style="margin-top:-200px;height:100px;">
+   <card class="neumorphic" style="margin-top:-250px;height:100px;margin-left:5%">
 <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
 
 </card>
 <div class="container">
-<card  class="neumorphic" style="margin-top:50;width:800px;">    
+<card  class="neumorphic" style="margin-top:10%;width:860px;margin-left:10%;height:100%">    
 
-  <table class="table table-striped" style="margin-left:-10px;width:800px;margin-top:-10px;color: #FBA9DD; ">
+  <table class="table table-striped" id="myTable" style="margin-left:10px;width:800px;margin-top:-10px;color: #FBA9DD; ">
   
     <thead class="table-info"> 
       <tr>
@@ -179,7 +184,7 @@ function onClick(element) {
 
       
     </tbody>
-    <center> <button type="submit" class="btn btn-primary" onclick="JSalert()" style="margin-top:157px;width:200px;height:50px;">Submit</button></center>
+   
     </div>
 
   <script>
@@ -214,7 +219,11 @@ function JSalert(){
 
 
 };
-
+$(document).ready(function() {
+    $('#myTable').DataTable( {
+        "lengthMenu": [[3,10, 25, 50, -1], [3,10, 25, 50, "All"]]
+    } );
+} );
 
   </script>   
     <br>

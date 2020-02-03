@@ -26,7 +26,7 @@ body,h1,h2,h3,h4,h5,a {font-family: 'Sriracha', cursive;}
   <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">username : <?php echo $_SESSION['username'];?></a> 
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a> 
   <a href="import_excel_page.php" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
-  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+  <a href="displayatline.php" onclick="w3_close()" class="w3-bar-item w3-button">ข้อมูลการส่งไลน์</a>
   <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
 </nav>
 
