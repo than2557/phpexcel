@@ -86,12 +86,25 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
         open_file_tag();
     };
     var save_file = function(){
-        foo2();
+        save_file_foo();
     }
 }
 
 function open_file_tag(){
     $("#open_file").click();
+}
+
+function save_file_foo(){
+
+    if(confirm("ยืนยันการบันทึก")){
+        webdatarocks.save({
+            filename: $("#query").val()+'.json',
+            destination: "server",
+            url: "select_ajax/blank_post_ajax.php"
+        });
+    }
+
+   
 }
 function foo1() {
 
@@ -238,9 +251,14 @@ $(document).ready(function() {
         updateData($(this).val());
     });
 
-
     $("#open_file").change(function(e){
+
         var file_name = e.target.files[0].name;
-        
+        var file_path = "/phpexcel/webdatarocks_saves/"+file_name;
+
+        webdatarocks.load(file_path);
+
+        var selected_table = file_name.split(".")[1];
+        $("#query").val(selected_table);
     })
 })

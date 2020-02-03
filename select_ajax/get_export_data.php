@@ -89,10 +89,6 @@
 
   echo json_encode($response);
 
-
-
-
-
   function notify_message($message,$token){
 
    $line_api = "https://notify-api.line.me/api/notify0";
