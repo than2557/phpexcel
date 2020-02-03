@@ -227,8 +227,7 @@ class DB_helper{
           $sql .= "'".$this->parse_var($var_type[$i],$cell)."'";
         }
         else{
-          $sql .= "'".$this->parse_var($var_type[$i],$cell)."',";
-        
+          $sql .= "'".$this->parse_var($var_type[$i],$cell)."',"; 
         }
         $i++;
       }
@@ -236,10 +235,6 @@ class DB_helper{
       //echo $sql."<br>";
     mysqli_query($this->conn,$sql);
     }
-
-    
-
-
   }
   function parse_var($var_type,$data){
     $result;
