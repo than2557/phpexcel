@@ -171,7 +171,7 @@ input::-webkit-input-placeholder {
 div.table-title {
    display: block;
   margin: auto;
-  max-width: 600px;
+  max-width: 1000px;
   padding:5px;
   width: 100%;
  
@@ -196,7 +196,7 @@ div.table-title {
   border-collapse: collapse;
   height: 200px;
   margin: auto;
-  max-width: 600px;
+  max-width: 1000px;
   padding:5px;
   width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -208,8 +208,8 @@ th {
   background:#1b1e24;
   border-bottom:4px solid #9ea7af;
   border-right: 1px solid #343a45;
-  font-size:23px;
-  font-weight: 100;
+  font-size:16px;
+  font-weight:50px;
   padding:24px;
   text-align:left;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -940,19 +940,22 @@ button {
 <table class="table-fill">
 <thead>
 <tr>
-<th class="text-left">ชื่อ-นามสกุล</th>
+<th class="text-left">ชื่อ</th>
+<th class="text-left">นามสกุล</th>
 <th class="text-left">แผนก</th>
 <th class="text-left">ตำแหน่ง</th>
 <th class="text-left">ระดับ</th>
 
 </tr>
 </thead>
-<tbody class="table-hover">
+<tbody class="table-hover" >
 <tr>
-<td class="text-left"></td>
-<td class="text-left"></td>
-<td class="text-left"></td>
-<td class="text-left"></td>
+<td class="text-left" id="username" hidden></td>
+<td class="text-left" id="name"></td>
+<td class="text-left" id="lastname"></td>
+<td class="text-left" id="Department"></td>
+<td class="text-left" id="Position"></td>
+<td class="text-left" id="level"></td>
 
 </tr>
 
@@ -960,7 +963,7 @@ button {
 </tbody>
 </table>
   
-<center><button class="btn-8">กำหนดการเข้าใช้</></center>
+<center><button class="btn-8" onclick="test()">กำหนดการเข้าใช้</></center>
       </table>
   </card>
  
@@ -1046,22 +1049,9 @@ button {
     } 
 
  function insertuser() {
-    alert("test");
+    // alert("test");
   var id = document.getElementById("idem");
-  //console.log(id.value);
-  
-//  $.ajax({
-//       type: "POST",
-//       url: "select_ajax/selectuserset.php",
-//       // dataType:"JSON",
-//       data: {
-//         username: id,
-      
-//       },
-//       success: function (result) {
-//         alert("test");
-//       }
-//  });
+ 
   $.ajax({
     url: "select_ajax/selectuserset.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
     method: "POST",
@@ -1074,10 +1064,74 @@ button {
   })
   .done(function(data) {
     //response = data;
+    console.log(data);
+    $("#username").text(data[1]);
+    $("#name").text(data[2]);
+    $("#lastname").text(data[3]);
+    $("#Department").text(data[6]);
+    $("#Position").text(data[4]);
+    $("#level").text(data[5]);
   });
 }
+
+
+
   </script>
 
+<script>
 
+function test(){
+
+var username = document.getElementById("username").innerHTML;
+var name = document.getElementById("name").innerHTML;
+var lastname = document.getElementById("lastname").innerHTML;
+var Department = document.getElementById("Department").innerHTML;
+var Position = document.getElementById("Position").innerHTML;
+var level = document.getElementById("level").innerHTML;
+
+console.log(username);
+console.log(name);
+console.log(lastname);
+console.log(Department);
+console.log(Position);
+console.log(level);
+
+$.ajax({
+  url: "select_ajax/insertpeauser.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+  method: "POST",
+  async: false,
+  dataType: "JSON",
+  data: {
+    username: username,
+    name: name,
+    lastname: lastname,
+    Department: Department,
+    Position: Position,
+    levelpea: level,
+   },
+  error: function(jqXHR, text, error) {
+    Swal.fire({
+title: 'ยืนยันการกำหนดสิทธิ?',
+text: "กดปุ่มยืนยันเพื่อยืนยันการกำหนดสิทธิ!",
+icon: 'question',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+confirmButtonText: 'ยืนยัน'
+}).then((result) => {
+if (result.value) {
+  Swal.fire(
+    'ยืนยันการกำหนดสิทธิเสร็จสิ้น',
+    'ผู้ใช้ได้ทำการกำหนดสิทธิเสร็จสิ้น.',
+    'success'
+  )
+}
+})
+  }
+})
+.done(function(data) {
+  
+});
+}</script>
 </body>
 </html>
