@@ -941,12 +941,16 @@ button {
 <thead>
 <tr>
 <th class="text-left">ชื่อ-นามสกุล</th>
-<th class="text-left">รหัสพนักงาน</th>
+<th class="text-left">แผนก</th>
+<th class="text-left">ตำแหน่ง</th>
+<th class="text-left">ระดับ</th>
 
 </tr>
 </thead>
 <tbody class="table-hover">
 <tr>
+<td class="text-left"></td>
+<td class="text-left"></td>
 <td class="text-left"></td>
 <td class="text-left"></td>
 
