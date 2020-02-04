@@ -4,8 +4,8 @@
 	//Success : Call web service uccess
 	//Function_Error : Can't connect to web service
 	//Service_Error : Error from web service
-	$userName = $_POST['txtUserName'];
-	$password = $_POST['txtPassword'];
+	// $userName = $_POST['txtUserName'];
+	//$password = $_POST['txtPassword'];
 	function isValidSessionId($authenKey){
 
 		$sessionId = $_REQUEST['sessionId'];
