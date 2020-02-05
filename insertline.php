@@ -115,9 +115,11 @@ function onClick(element) {
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
   <img src="<?php echo $_SESSION['img_em']; ?>"  style="width:45%;height:15%;" class="w3-round"  alt="picture"/>
   <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">username : <?php echo $_SESSION['username'];?></a> 
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a> 
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a>
   <a href="import_excel_page.php" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
   <a href="index_test.php" onclick="w3_close()" class="w3-bar-item w3-button">กลับหน้าส่งข้อมูล</a>
+  <input   id="level"   value="<?php echo $_SESSION['leveltest'];?>" hidden>
+  <button onclick="link_page()">back</button>
   <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
 </nav>
 <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
@@ -214,7 +216,31 @@ function JSalert(){
 
 
 };
+function link_page(){
 
+  var level = document.getElementById('level');
+
+  $.ajax({
+      type: "POST",
+      url: "link_page.php",
+      // dataType:"JSON",
+      data: {
+        level: level.value
+      },
+      success: function (result) {
+        Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'ส่งข้อความเสร็จสิ้น',
+  showConfirmButton: false,
+  timer: 1500
+})
+      }
+ });
+
+
+
+}
 
   </script>   
     <br>

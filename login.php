@@ -38,7 +38,7 @@
 			$_SESSION['username']=$username;
 			$_SESSION['id_user']=$result['id_user'];
             $_SESSION['name']=$result['name'];
-            
+            $_SESSION['leveltest']= $result['leveltest'];
             $filename  = $result["img_em"];
             $destination = "upload/" . $result["img_em"]; 
             // move_uploaded_file($filename, $destination); 
@@ -51,6 +51,7 @@
 		}
 		else if($rows>0 && $result['leveltest']==1)
 		{
+			$_SESSION['leveltest']= $result['leveltest'];
 			$_SESSION['username']=$username;
 			$_SESSION['id_user']=$result['id_user'];
 			$_SESSION['name']=$result['name'];
