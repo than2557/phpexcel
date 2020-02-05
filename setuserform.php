@@ -1051,7 +1051,7 @@ button {
  function insertuser() {
     // alert("test");
   var id = document.getElementById("idem");
- 
+  //console.log(id);
   $.ajax({
     url: "select_ajax/selectuserset.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
     method: "POST",
