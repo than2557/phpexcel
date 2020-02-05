@@ -3,7 +3,6 @@
 	$service = new IDMService();
 $username = $_POST["username"];
 
-<<<<<<< Updated upstream
 // echo $username;
 
 $results1 = $service->getEmployeeInfoByUsername("93567815-dfbb-4727-b4da-ce42c046bfca",$username);
@@ -28,18 +27,8 @@ $arr = array('1'=>$results1["GetEmployeeInfoByUsernameResult"]["ResultObject"]["
 );
 
 
-echo json_encode($arr);
-=======
-//echo $username;
+// echo json_encode($arr);
 
-$results1 = $service->getEmployeeInfoByUsername("93567815-dfbb-4727-b4da-ce42c046bfca",$username);
-// $_SESSION['FirstName']= $results1['GetEmployeeInfoByUserName']['ResultObject']['FirstName'];
-// $_SESSION['LastName']= $results1['GetEmployeeInfoByUserName']['ResultObject']['LastName'] ;
-
-// echo $_SESSION['FirstName'];
-// echo $_SESSION['LastName'];
->>>>>>> Stashed changes
-
-print_r($results1);
+// print_r($results1);
 
 ?>	
