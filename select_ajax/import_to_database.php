@@ -8,7 +8,7 @@
       
       $file_array = explode(".", $_FILES["excel_file"]["name"]);  // ตัดข้อมูลโดยใช้ตัวอักษร . (Dot) //เก็บนามสกุลไฟล์
 
-      if($file_array[1] == "xls" || $file_array[1] == "xlsx"){  //ตรวจสอบนามสกุลไฟล์
+      if($file_array[1] == "xls" || $file_array[1] == "xlsx" || $file_array[1] == "XLSX"){  //ตรวจสอบนามสกุลไฟล์
 
          $tmpfname = $_FILES["excel_file"]["tmp_name"]; 
 
