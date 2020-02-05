@@ -131,7 +131,7 @@
             for($col_data = 0 ; $col_data <= $highestColumnIndex ; $col_data++){
 
                $data = $objWorksheet->getCellByColumnAndRow($col_data, $row_data);   
-
+               
                $cell_data = $data->getValue();
 
                if($cell_data != NULL || $cell_data != ''){
