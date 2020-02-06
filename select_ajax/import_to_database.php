@@ -1,6 +1,6 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT']."/phpexcel/lib/PHPExcel-1.8/Classes/PHPExcel.php"; //เรียกใช้ไลบรารี่ PHPExcel
-    include_once "../DB_helper_fix.php"; // ใช้ class DB_helper
+    include_once "../DB_helper.php"; // ใช้ class DB_helper
 
     $con_obj = new DB_helper; // ประกาศตัวแปร object เก็บ Instance จาก class DB_helper
 
@@ -58,7 +58,7 @@
                
                //echo "<pre>".var_dump($array_col_name)."</pre>";
 
-          //     $con_obj->insert_tb_header($array_col_name,$table_name);
+               $con_obj->insert_tb_header($array_col_name,$table_name);
             }
             else if($row == 2){
 
@@ -101,22 +101,8 @@
                  
                }
 
-<<<<<<< Updated upstream
-              //$con_obj->create_table($arr_type,$table_name);
-
-
-
-               //echo "<pre>".var_dump($arr_type)."</pre>";
-
-               //$con_obj->test_read_data($arr_type);
-
-               // $con_obj->insert_table($array_col_name, $table_name,$array_data);
-               // // method insert_table คือ สร้างตาราง ตามชื่อตารางที่กรอกในช่อง tb_name
-               // $con_obj->insert_data($array_data,$table_name); // insert data            
-=======
                $con_obj->create_table($arr_type,$table_name);
           
->>>>>>> Stashed changes
             }
             else{ break; }
          }
@@ -175,127 +161,9 @@
             //echo "<br>";
          }
          //echo json_encode($row_array);
-<<<<<<< Updated upstream
-         //$con_obj->test_read_data($row_array,$arr_type);
-         
-
-         //$con_obj->upload_data($row_array,$arr_type);
-
-        echo  substr($row_array[2][1],0,20);
-
-         // for ($row = 1; $row <= $highestRow; $row++) { //วนลูปตามจำนวนรายการ (Row)   
-
-         //    $output .='<tr>';
-
-         //    if($row == 1){ // หัวตาราง
-         //       for ($col = 0; $col <= $highestColumnIndex; $col++) { // วนลูปคอร์ลัมภ์
-
-         //          $data = $objWorksheet->getCellByColumnAndRow($col, $row)->getValue();  // เก็บค่าในเซลล์
-
-         //          if($data != NULL || $data != ''){ //ตรวจสอบเมื่อค่าในตัวแปร data ไม่ว่าง
-         //             $output .='<th>' .$data . '</th>';
-         //             array_push($array_col_name,$data); //นำค่าแต่ละเซลล์ เก็บไว้ใน array
-         //          }  
-                  
-         //       }
-
-         //       // เรียกใช้ method insert_tb_header
-         //       // method insert_tb_header จะ insert ข้อมูลหัวตาราง
-         //       $con_obj->insert_tb_header($array_col_name,"tb_".$table_name);
-         //    }
-         //    else if($row == 2){ // ข้อมูลในตาราง
-         //       $array_data = array(); // array เก็บข้อมูลแต่ละแถว
-
-         //       for ($col = 0; $col <= $highestColumnIndex; $col++) { // วนลูปคอร์ลัมภ์
-
-         //          $data = $objWorksheet->getCellByColumnAndRow($col, $row);   
-
-         //          $InvDate = $data->getValue();
-  
-         //          if($InvDate != NULL || $InvDate != ''){
-
-         //             if(PHPExcel_Shared_Date::isDateTime($data)) { // ตรวจสอบค่าของเซลล์ เป็นชนิดวันที่หรือไม่
-                        
-         //                // แปลงค่าวันที่ ที่เกิดจาก excel เก็บค่าวันที่อยู่ในรูปแบบ excel serial date
-         //                $InvDate = date($format = "d/m/Y", PHPExcel_Shared_Date::ExcelToPHP($InvDate));
-
-         //                $output .='<td>'.$InvDate.'</td>';  
-
-         //                array_push($array_data,$InvDate);
-         //             }
-         //             else{
-
-         //                $output .='<td>'.$InvDate.'</td>';
-
-         //                array_push($array_data,$InvDate);
-         //             }
-         //          }
-         //          else{
-
-         //             if(strval($InvDate) == '0'){
-
-         //                $output .='<td>0</td>'; 
-
-         //                array_push($array_data,'0');
-
-         //             }
-         //             else{
-
-         //                $output .='<td>'.strval($InvDate).'</td>'; 
-
-         //                array_push($array_data,strval($InvDate));
-                        
-         //             }
-                    
-         //          }
-                 
-         //       }
-         //       $con_obj->insert_table($array_col_name, "tb_".$table_name,$array_data);
-         //       // method insert_table คือ สร้างตาราง ตามชื่อตารางที่กรอกในช่อง tb_name
-         //       $con_obj->insert_data($array_data,"tb_".$table_name); // insert data            
-         //    }
-         //    else{ // ข้อมูลในตาราง
-         //       $array_data = array(); // array เก็บข้อมูลแต่ละแถว
-         //       for ($col = 0; $col <= $highestColumnIndex; $col++) { // วนลูปคอร์ลัมภ์
-         //          $data = $objWorksheet->getCellByColumnAndRow($col, $row);   
-         //          $InvDate = $data->getValue();
-         //          if($InvDate != NULL || $InvDate != ''){
-         //             if(PHPExcel_Shared_Date::isDateTime($data)) {
-         //                $InvDate = date($format = "d/m/Y", PHPExcel_Shared_Date::ExcelToPHP($InvDate)); 
-         //                $output .='<td>'.$InvDate.'</td>';       
-         //                array_push($array_data,$InvDate);
-         //             }
-         //             else{
-         //                $output .='<td>'.$InvDate.'</td>';   
-         //                array_push($array_data,$InvDate);
-         //             }
-         //          }
-         //          else{
-         //             if(strval($InvDate) == '0'){
-         //                $output .='<td>0</td>'; 
-         //                array_push($array_data,0);
-         //             }
-         //             else{
-         //                $output .='<td>'.strval($InvDate).'</td>'; 
-         //                array_push($array_data,strval($InvDate));
-         //             }
-         //          }
-                 
-         //       }
-         //       $con_obj->insert_data($array_data,"tb_".$table_name); // insert data 
-         //    }
-           
-         //    $output .='</tr>';
-         // }
-
-
-
-
-=======
  
          $con_obj->upload_data($row_array,$arr_type);
 
->>>>>>> Stashed changes
          $output .='</table>';
          //echo $output;
 

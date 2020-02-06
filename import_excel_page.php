@@ -130,16 +130,15 @@ card {
                   data:new FormData(this),  
                   contentType:false,  
                   processData:false, 
-                  async: false,
                   dataType: "JSON", 
                   success:function(data){ 
-                     console.log(data)
+ 
                      if(data.error){
                         $('#excel_file').val(''); 
                         $('#result').empty(); 
                         $('.loading_page').hide();
                         $('.root_page').removeAttr('style');
-                        //alert("ไม่สามารถเรียกข้อมูลได้!!!");
+ 
                         Swal.fire({
                            icon: 'error',
                                  title: 'เกิดข้อผิดพลาด...',
@@ -150,18 +149,18 @@ card {
                      } 
                      else{
 
-                        //$('#result').html(data); 
+      
 
                         $('#excel_file').val('');  
                         $('.loading_page').hide();
                         $('.root_page').removeAttr('style');
-                        //alert("อัพโหลดไฟล์สำเร็จ");
+ 
                         Swal.fire(
                      'บันทึกสำเร็จ!',
                         'กด OK!',
                            'success'
                                 )
-                        //window.open("index_test.php","_self");s
+ 
                      } 
                   }  
                });  
@@ -210,7 +209,7 @@ card {
                </div>   
 
                <div  style="margin-left:20px;">
-                  <input autofocus class="form-control" type="text" name="tb_name" id="tb_name" style="width:200px;" >
+                  <input autofocus class="form-control" type="text" name="tb_name" id="tb_name" placeholder="กรอกชื่องาน" style="width:200px;" >
                </div>
                <div class="col-md-2"  style="margin-left:50px;">
                   <label>เลือกไฟล์:</label>                
