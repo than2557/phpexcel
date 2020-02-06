@@ -58,7 +58,7 @@
                
                //echo "<pre>".var_dump($array_col_name)."</pre>";
 
-               $con_obj->insert_tb_header($array_col_name,$table_name);
+          //     $con_obj->insert_tb_header($array_col_name,$table_name);
             }
             else if($row == 2){
 
@@ -106,7 +106,7 @@
                  
                }
 
-               $con_obj->create_table($arr_type,$table_name);
+              //$con_obj->create_table($arr_type,$table_name);
 
 
 
@@ -176,9 +176,11 @@
          }
          //echo json_encode($row_array);
          //$con_obj->test_read_data($row_array,$arr_type);
-         $con_obj->upload_data($row_array,$arr_type);
+         
 
+         //$con_obj->upload_data($row_array,$arr_type);
 
+        echo  substr($row_array[2][1],0,20);
 
          // for ($row = 1; $row <= $highestRow; $row++) { //วนลูปตามจำนวนรายการ (Row)   
 
