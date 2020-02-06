@@ -1,5 +1,5 @@
 var arr = [];
-
+var raw_data;
 var pivot = new WebDataRocks({
     container: "#webdatarocks",
     beforetoolbarcreated: customizeToolbar,
@@ -37,14 +37,7 @@ webdatarocks.on('celldoubleclick', function(cell) {
     }
 
 });
-
-function expandAlldata() {
-    webdatarocks.expandAllData();
-}
-
-function collapseAllData() {
-    webdatarocks.collapseAllData();
-}
+ 
 
 function customizeToolbar(toolbar) { // แก้ไข toolbar ของไลบรารี่ 
 
@@ -57,6 +50,19 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
         delete tabs[3];
        
         tabs.unshift(
+            {
+               id: "wdr-tab-default2",
+               title: "ขยายเซลล์",
+               handler: expand_cell,
+               icon: this.icons.options
+           }
+           , 
+            {
+               id: "wdr-tab-default2",
+               title: "ยุบเซลล์",
+               handler: collapse_cell,
+               icon: this.icons.options
+           },
            {
             id: "wdr-tab-lightblue",
             title: "คำนวณ",
@@ -76,6 +82,7 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
            handler: save_file,
            icon: this.icons.save
        }
+      
       );
         return tabs;
     }
@@ -88,8 +95,19 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
     var save_file = function(){
         save_file_foo();
     }
+    var expand_cell = function(){
+        func_expand_cell();
+    }
+    var collapse_cell = function(){
+        func_collpase_cell();
+    }
 }
-
+function func_expand_cell(){
+    webdatarocks.expandAllData();
+}
+function func_collpase_cell(){
+    webdatarocks.collapseAllData();
+}
 function open_file_tag(){
     $("#open_file").click();
 }
@@ -201,7 +219,8 @@ function getJSONData(table_name) { // เรียกข้อมูลจาก
     var response;
 
     $.ajax({
-            url: "select_ajax/select_json_encode.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+            url: "select_ajax/select_json_fx_field.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+            //url: "select_ajax/select_json_encode.php", // select dynamic field
             method: "POST",
             async: false,
             dataType: "JSON",
@@ -211,7 +230,8 @@ function getJSONData(table_name) { // เรียกข้อมูลจาก
             }
         })
         .done(function(data) {
-            response = data;
+            response = data.data;
+            raw_data = data.raw_data;
         });
     return response
 }

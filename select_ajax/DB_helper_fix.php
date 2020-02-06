@@ -11,7 +11,11 @@
          // ตัวแปร $DBconnect เก็บผลลัพธ์การเชื่อมต่อฐานข้อมูลจากไฟล์ configDB.php
 
       }
-
+      function insert_task_user($user_id,$table_name){
+         $sql = "INSERT INTO task_user (table_name,user_id) VALUES('".$table_name."','".$user_id."')";
+ 
+         mysqli_query($this->conn,$sql);
+      }
       function create_table($table_name,$task_name){
 
          $sql_create_table = "CREATE TABLE `test_import_excel`.`$table_name` ( 
@@ -71,7 +75,7 @@
               if ($i == $len - 1) {  // ตรวจสอบถ้าเป็นข้อมูลรายการสุดท้าย   ///  column แรก fixed เป็นลำดับที่  ///
                 
                 $sql_insert_data .= "'".$cell."'";
-                
+
               }
               else{
 

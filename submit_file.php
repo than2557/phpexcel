@@ -143,14 +143,12 @@
 
             <label class="control-label" style="margin-left:30px;">ชื่อตาราง :</label>
                  <?php 
-                                $sql = "SHOW TABLES";
+                                $sql = "SELECT * FROM task_user WHERE user_id = '".$_SESSION["id_user"]."'";
                                 $result = mysqli_query($conn,$sql);
                             ?>  
                             <select class="form-control col-md-2" name="query" id="query" style="width:300px;margin-left:30px;">
                                 <?php while($row = mysqli_fetch_array($result)){ 
-                                    if($row[0] != "data_dic_ref" && $row[0] != "alert" && $row[0] != "empolyee" && $row[0] != "ref_tb_user" && $row[0] != "userpea"){
-                                      echo '<option value="'.$row[0].'">'.$row[0].'</option>'; 
-                                   } 
+                                    echo '<option value="'.$row[1].'">'.$row[1].'</option>'; 
                                 } ?> 
                             </select>    
                                  
@@ -178,14 +176,13 @@
   <div id="test"></div>
   </div>
   <br>
-  <div class="form-group">
+  <div class="form-group" >
     <center>
-      <div class="col-sm-12" style="width:1000px;height:1000px;background-color:#A6BBFF;margin-top:-20px;"" align="center" id="result" >
+      <div id="webdatarocks_div" class="col-sm-12" style="width:1000px;height:1000px;background-color:#A6BBFF;margin-top:-20px;"" align="center" id="result" >
         <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;">ตัวอย่างข้อมูล</h4></center>
         <div id="webdatarocks_command">
           <button class="btn btn-success" onclick="onlick_btn();">บันทึกข้อมูลและไฟล์</button>    
-          <button onclick="expandAlldata()" class="btn btn-warning">ขยายเซลล์ทังหมด</button>  
-          <button onclick="collapseAllData()" class="btn btn-warning">ยุบเซลล์ทั้งหมด</button>                  
+                  
         </div>
         <br>
         <div id="webdatarocks"></div>

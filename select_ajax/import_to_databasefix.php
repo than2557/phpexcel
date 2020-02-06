@@ -72,6 +72,9 @@
                         }
       
                      }
+                     else if($j == 2){
+                        array_push($col_array,strval($data));
+                     }
                      else if($j == 24){
                         array_push($col_array,strval($data));
                      }
@@ -105,6 +108,7 @@
                      }
                   }
                   else{
+
                      if(strval($data) == '0'){
                         array_push($col_array,'0');
                      }
@@ -117,10 +121,13 @@
                array_push($row_array,$col_array);
    
             }
+            $id_user = $_POST['user_id'];
+
+            $con_obj->insert_task_user($id_user,"tb_".$table_name);
 
             $con_obj->insert_data("tb_".$table_name,$row_array);
+            
             $response['error'] = false;
-
          }
          else{
             $response['message'] = "ไม่สามารถเพิ่มตารางในฐานข้อมูลได้";

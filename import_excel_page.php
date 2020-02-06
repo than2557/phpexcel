@@ -125,7 +125,8 @@ card {
                });
 
                $.ajax({  
-                  url:"select_ajax/import_to_databasefix.php",  
+                  url:"select_ajax/import_to_databasefix.php",  // => fix field import excel
+                  //url:"select_ajax/import_to_databasefix.php",  // => dynamic field import excel 
                   method:"POST",  
                   data:new FormData(this),  
                   contentType:false,  
@@ -215,6 +216,7 @@ card {
                   <label>เลือกไฟล์:</label>                
                </div>
                <div class="col-md-3">
+                  <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['id_user'];?>">
                   <input class="form-control" type="file" name="excel_file" id="excel_file"  style="margin-left:-20px;width:200px;" />  
                </div>
             </div>            
