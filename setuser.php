@@ -28,6 +28,8 @@ body,h1,h2,h3,h4,h5,a {font-family: 'Sriracha', cursive;}
   <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">กำหนดสิทธิผู้ใช้</a>
   <a href="import_excel_page.php" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
   <a href="displayatline.php" onclick="w3_close()" class="w3-bar-item w3-button">ข้อมูลการส่งไลน์</a>
+  <button class="w3-bar-item w3-button" onclick="link_page('<?php echo $_SESSION['leveltest'] ?>')">back</button>
+
   <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
 </nav>
 
@@ -71,7 +73,16 @@ function onClick(element) {
   var captionText = document.getElementById("caption");
   captionText.innerHTML = element.alt;
 }
+function link_page(level){
 
+//var level = document.getElementById('level');
+if(level == 1){
+  window.open("index_admin.php",'_self')
+}
+else{
+  window.open("index_test.php",'_self')
+}
+}
 </script>
 
 

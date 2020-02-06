@@ -176,7 +176,7 @@ card {
   <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">username : <?php echo $_SESSION['username'];?></a> 
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a> 
   <a href="#upload_file" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
-  <a href="index_test.php" onclick="w3_close()" class="w3-bar-item w3-button">กลับหน้าส่งข้อมูล</a>
+  <button class="w3-bar-item w3-button" onclick="link_page('<?php echo $_SESSION['leveltest'] ?>')">back</button>
   <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
 </nav>
 
@@ -250,6 +250,16 @@ function onClick(element) {
   document.getElementById("modal01").style.display = "block";
   var captionText = document.getElementById("caption");
   captionText.innerHTML = element.alt;
+}
+function link_page(level){
+
+//var level = document.getElementById('level');
+if(level == 1){
+  window.open("index_admin.php",'_self')
+}
+else{
+  window.open("index_test.php",'_self')
+}
 }
 </script>
 

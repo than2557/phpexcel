@@ -121,7 +121,7 @@ function onClick(element) {
   <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">username : <?php echo $_SESSION['username'];?></a> 
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a> 
   <a href="import_excel_page.php" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
-  <a href="index_test.php" onclick="w3_close()" class="w3-bar-item w3-button">กลับหน้าส่งข้อมูล</a>
+  <button class="w3-bar-item w3-button" onclick="link_page('<?php echo $_SESSION['leveltest'] ?>')">back</button>
   <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
 </nav>
 <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
@@ -247,8 +247,21 @@ $(document).ready(function() {
     
 } );
 
+
+
   </script>   
-    <br>
+  <script>
+  function link_page(level){
+
+  //var level = document.getElementById('level');
+  if(level == 1){
+    window.open("index_admin.php",'_self')
+  }
+  else{
+    window.open("index_test.php",'_self')
+  }
+  }
+  </script>
    
     </body>
    
