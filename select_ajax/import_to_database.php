@@ -1,6 +1,6 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT']."/phpexcel/lib/PHPExcel-1.8/Classes/PHPExcel.php"; //เรียกใช้ไลบรารี่ PHPExcel
-    include_once "../DB_helper.php"; // ใช้ class DB_helper
+    include_once "../DB_helper_fix.php"; // ใช้ class DB_helper
 
     $con_obj = new DB_helper; // ประกาศตัวแปร object เก็บ Instance จาก class DB_helper
 
@@ -76,12 +76,7 @@
                      else{
 
                         if(PHPExcel_Shared_Date::isDateTime($data)) { // ตรวจสอบค่าของเซลล์ เป็นชนิดวันที่หรือไม่
-                        
-                           // แปลงค่าวันที่ ที่เกิดจาก excel เก็บค่าวันที่อยู่ในรูปแบบ excel serial date
-                           //$InvDate = date($format = "d/m/Y", PHPExcel_Shared_Date::ExcelToPHP($InvDate));
-   
-                           //$output .='<td>'.$InvDate.'</td>';  
-   
+                       
                            array_push($arr_type,"date");
                         }
                         else{
@@ -106,6 +101,7 @@
                  
                }
 
+<<<<<<< Updated upstream
               //$con_obj->create_table($arr_type,$table_name);
 
 
@@ -117,6 +113,10 @@
                // $con_obj->insert_table($array_col_name, $table_name,$array_data);
                // // method insert_table คือ สร้างตาราง ตามชื่อตารางที่กรอกในช่อง tb_name
                // $con_obj->insert_data($array_data,$table_name); // insert data            
+=======
+               $con_obj->create_table($arr_type,$table_name);
+          
+>>>>>>> Stashed changes
             }
             else{ break; }
          }
@@ -175,6 +175,7 @@
             //echo "<br>";
          }
          //echo json_encode($row_array);
+<<<<<<< Updated upstream
          //$con_obj->test_read_data($row_array,$arr_type);
          
 
@@ -290,6 +291,11 @@
 
 
 
+=======
+ 
+         $con_obj->upload_data($row_array,$arr_type);
+
+>>>>>>> Stashed changes
          $output .='</table>';
          //echo $output;
 

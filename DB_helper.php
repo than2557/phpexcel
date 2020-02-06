@@ -210,7 +210,6 @@ class DB_helper{
       echo "<br>";
       
     }
-
   }
   function upload_data($row_array,$var_type){
     

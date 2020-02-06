@@ -125,25 +125,28 @@ card {
                });
 
                $.ajax({  
-                  url:"select_ajax/import_to_database.php",  
+                  url:"select_ajax/import_to_databasefix.php",  
                   method:"POST",  
                   data:new FormData(this),  
                   contentType:false,  
-                  processData:false,  
+                  processData:false, 
+                  async: false,
+                  dataType: "JSON", 
                   success:function(data){ 
-                     if(data.trim() == "error"){
+                     console.log(data)
+                     if(data.error){
                         $('#excel_file').val(''); 
                         $('#result').empty(); 
                         $('.loading_page').hide();
                         $('.root_page').removeAttr('style');
                         //alert("ไม่สามารถเรียกข้อมูลได้!!!");
                         Swal.fire({
-      icon: 'error',
-            title: 'เกิดข้อผิดพลาด...',
-         text: 'ไม่สามารถเรียกข้อมูลได้!!!',
-      text:'สกุลไฟล์ต้องเป็น xsl,xlsx',
-          footer: '<a href>กรุณาตรวจสอบไฟล์</a>'
-})
+                           icon: 'error',
+                                 title: 'เกิดข้อผิดพลาด...',
+                              text: 'ไม่สามารถเรียกข้อมูลได้!!!',
+                           text:'สกุลไฟล์ต้องเป็น xsl,xlsx',
+                              footer: '<a href>กรุณาตรวจสอบไฟล์</a>'
+                     })
                      } 
                      else{
 
@@ -209,22 +212,13 @@ card {
                <div  style="margin-left:20px;">
                   <input autofocus class="form-control" type="text" name="tb_name" id="tb_name" style="width:200px;" >
                </div>
-               
-           
-
                <div class="col-md-2"  style="margin-left:50px;">
                   <label>เลือกไฟล์:</label>                
                </div>
                <div class="col-md-3">
                   <input class="form-control" type="file" name="excel_file" id="excel_file"  style="margin-left:-20px;width:200px;" />  
                </div>
-            </div>
-            
-
-
-
-
-            
+            </div>            
          </form>
    </card>
          <div class="row">
