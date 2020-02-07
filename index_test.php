@@ -42,7 +42,8 @@ body,h1,h2,h3,h4,h5,a {font-family: 'Sriracha', cursive;}
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:200px">
 <?php
-require('submit_file.php');
+  //require('submit_file.php');  // old
+  require('submit_file_new.php'); // new 
 ?>
  
   

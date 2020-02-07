@@ -1,5 +1,7 @@
 var arr = [];
+
 var raw_data;
+
 var pivot = new WebDataRocks({
     container: "#webdatarocks",
     beforetoolbarcreated: customizeToolbar,
@@ -63,13 +65,13 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
                handler: collapse_cell,
                icon: this.icons.options
            },
-           {
-            id: "wdr-tab-lightblue",
-            title: "คำนวณ",
-            handler: calculate,
-            icon: this.icons.fields
+        //    {
+        //     id: "wdr-tab-lightblue",
+        //     title: "คำนวณ",
+        //     handler: calculate,
+        //     icon: this.icons.fields
 
-         }, 
+        //  }, 
          {
             id: "wdr-tab-default",
             title: "เปิด",
@@ -114,7 +116,7 @@ function open_file_tag(){
 
 function save_file_foo(){
 
-    if(confirm("ยืนยันการบันทึก")){
+    if(confirm("ยืนยันการบันทึกรูปแบบรายงาน")){
         webdatarocks.save({
             filename: $("#query").val()+'.json',
             destination: "server",
