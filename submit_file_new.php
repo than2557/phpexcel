@@ -201,14 +201,26 @@
         <div class="condition_builder" style="background-color:#E4F5FF;padding-bottom:5px;">
             <form method="post" name="get_query" id="get_query" >
                <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;padding-top:1%;">จัดการข้อมูล</h4></center>
-               <div class="row" style="margin-left:1%;">     
+               <div class="row" style="margin-left:1%;margin-right:1%;">     
                   <div class="col-md-12 text-left">
-                     <input type="button" value="เพิ่มเงื่อนไข" class="btn btn-warning" id="add_condition">
-                               
+                    
+                      <table class="table table-bordered text-center">
+                        <thead>
+                           <tr>
+                              <th width="5%"> <input type="button" value="เพิ่มเงื่อนไข" class="btn btn-warning" id="add_condition"></th>
+                              <th width="5%">AND/OR</th>
+                              <th width="15%">ฟีลด์</th>
+                              <th width="10%">เงื่อนไข</th>
+                              <th width="15%">ค่า/ฟีลด์</th>
+                           </tr>
+                        </thead>
+                        <tbody id="append_condition">
+                        </tbody>
+                      </table>         
                   </div>
                </div>
-                <div class="append_condition">
-                </div>                
+                <!-- <div class="append_condition">
+                </div>                 -->
 
              
             </form>
