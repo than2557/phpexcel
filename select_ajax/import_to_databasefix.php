@@ -5,7 +5,7 @@
    $con_obj = new DB_helper_fix; // ประกาศตัวแปร object เก็บ Instance จาก class DB_helper
 
    $response  = array();
-
+///** */
    if(!empty($_FILES['excel_file'])){
 
       $file_array = explode(".", $_FILES["excel_file"]["name"]);  // ตัดข้อมูลโดยใช้ตัวอักษร . (Dot) //เก็บนามสกุลไฟล์
