@@ -21,7 +21,7 @@
          $sql_create_table = "CREATE TABLE `test_import_excel`.`$table_name` ( 
             `table_name_id` INT NOT NULL AUTO_INCREMENT COMMENT 'primary_key' , 
             `h1` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'ลำดับที่' , 
-            `h2_1` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'เลขที่รายการ' , 
+            `h2_1` DOUBLE CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'เลขที่รายการ' , 
             `h2_2` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'ชื่อรายการ' , 
             `h3` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'WBS' , 
             `h4` DOUBLE NOT NULL COMMENT 'วงเงินงบประมาณปัจจุบัน' , 

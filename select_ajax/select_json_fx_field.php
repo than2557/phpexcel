@@ -30,13 +30,21 @@
 
       // data
       $result = mysqli_query($conn,$sql);
-      
+         
       if($result){
          while($row = mysqli_fetch_row($result)){  // push ข้อมูล
            
             $data = array();
+
             $data['ลำดับที่'] = $row[1];
-            $data['รายการ'] = $row[2]."".$row[3];
+
+            if($row[2] != 0){
+               $data['รายการ'] = "0".$row[2]."".$row[3];
+            }
+            else{
+               $data['รายการ'] = $row[3];
+            }
+           
             $data['WBS'] = $row[4];
             $data['วงเงินงบประมาณปัจจุบัน'] = $row[5];
             $data['รวมจ่ายจริงถึงสิ้นปีก่อนหน้า'] = $row[6];

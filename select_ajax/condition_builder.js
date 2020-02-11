@@ -54,14 +54,25 @@ $(document).ready(function() {
 
     $('#add_condition').click(function() {
         var html = '';
-
-        html +='<tr name="row' + i + '" id="row' + i + '">';
-        html +='<td><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
-        html +='<td><select class="form-control oplist" name="oplist[]" > <option value="and">AND</option> <option value="or">OR</option></select></td>';
-        html += '<td><select class="form-control fieldlist" name="fieldlist[]" >' + html_table_fields + '</select></td>';
-        html += '<td><input class="form-control condition_opv" type="text" name="condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
-        html += '<td id="selector_field4"><select class="form-control valuelist" name="valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
-        html +='</tr>';
+        if(i == 1){
+            html +='<tr name="row' + i + '" id="row' + i + '">';
+            html +='<td><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
+            html +='<td><input class="form-control oplist" type="text" name="oplist[]" readonly value=" "></td>';
+            html += '<td><select class="form-control fieldlist" name="fieldlist[]" >' + html_table_fields + '</select></td>';
+            html += '<td><input class="form-control condition_opv" type="text" name="condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
+            html += '<td id="selector_field4"><select class="form-control valuelist" name="valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
+            html +='</tr>';
+        }
+        else{
+            html +='<tr name="row' + i + '" id="row' + i + '">';
+            html +='<td><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
+            html +='<td><select class="form-control oplist" name="oplist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
+            html += '<td><select class="form-control fieldlist" name="fieldlist[]" >' + html_table_fields + '</select></td>';
+            html += '<td><input class="form-control condition_opv" type="text" name="condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
+            html += '<td id="selector_field4"><select class="form-control valuelist" name="valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
+            html +='</tr>';
+        }
+        
         $('#append_condition').append(html);
 
         i++;
@@ -81,18 +92,23 @@ $(document).ready(function() {
          else if(selected_value == 'con_value'){
             let html = '';
             html += "<input class='form-control condition_value_input' type='text' name='condition_value_input[]'  placeholder='กรอกค่า'/>";
+            html += "<input class='form-control condition_value_type' type='hidden' name='condition_value_type[]'  value='con_value'/>";
             $("tr[id='"+row_id+"'] td[id='selector_field4']").empty();
             $("tr[id='"+row_id+"'] td[id='selector_field4']").html(html);
          }
          else if(selected_value == 'con_fields'){
             let html = '';
             html += '<select class="form-control condition_value_input" name="condition_value_input[]" >' + html_table_fields + '</select>';
+            html += "<input class='form-control condition_value_type' type='hidden' name='condition_value_type[]'  value='con_fields'/>";
             $("tr[id='"+row_id+"'] td[id='selector_field4']").empty();
             $("tr[id='"+row_id+"'] td[id='selector_field4']").html(html);
-         }
+         }  
        
     });
-
+    $("#reset_condition").click(function(){
+        i = 1 ;
+        $("#append_condition").empty();
+    });
     $("#queryyyyy").click(function() {
 
         $.ajax({
