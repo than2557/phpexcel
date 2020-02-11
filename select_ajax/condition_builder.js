@@ -86,7 +86,7 @@ $(document).ready(function() {
          }
          else if(selected_value == 'con_fields'){
             let html = '';
-            html += '<select class="form-control condition_fields_list" name="condition_fields_list[]" >' + html_table_fields + '</select>';
+            html += '<select class="form-control condition_value_input" name="condition_value_input[]" >' + html_table_fields + '</select>';
             $("tr[id='"+row_id+"'] td[id='selector_field4']").empty();
             $("tr[id='"+row_id+"'] td[id='selector_field4']").html(html);
          }
