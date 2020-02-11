@@ -89,13 +89,13 @@ $(document).ready(function() {
             alert("กรุณาเลือกเงื่อนไข")
         } else if (selected_value == 'con_value') {
             let html = '';
-            html += "<input class='form-control condition_value_input' type='text' name='condition_value_input[]'  placeholder='กรอกค่า'/>";
+            html += "<input class='form-control condition_value_input'  type='text' name='condition_value_input[]'   placeholder='กรอกค่า'/>";
             html += "<input class='form-control condition_value_type' type='hidden' name='condition_value_type[]'  value='con_value'/>";
             $("tr[id='" + row_id + "'] td[id='selector_field4']").empty();
             $("tr[id='" + row_id + "'] td[id='selector_field4']").html(html);
         } else if (selected_value == 'con_fields') {
             let html = '';
-            html += '<select class="form-control condition_value_input" name="condition_value_input[]" >' + html_table_fields + '</select>';
+            html += '<select class="form-control condition_value_input"  name="condition_value_input[]" >' + html_table_fields + '</select>';
             html += "<input class='form-control condition_value_type' type='hidden' name='condition_value_type[]'  value='con_fields'/>";
             $("tr[id='" + row_id + "'] td[id='selector_field4']").empty();
             $("tr[id='" + row_id + "'] td[id='selector_field4']").html(html);

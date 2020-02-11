@@ -570,11 +570,11 @@
                    </center>
                               <input type="hidden" id="table_nameeeeeeeee" name="table_nameeeeeeeee">
                               <br>
-                      <table class="table table-bordered text-center">
+                      <table class="table table-sm table-bordered text-center">
                         <thead>
                            <tr>
-                              <th width="5%"> <input type="button" value="เพิ่ม" class="btn btn-warning" id="add_condition"></th>
-                              <th width="5%">AND/OR</th>
+                              <th width="5%"> <input type="button" value="+" class="btn btn-success" id="add_condition"></th>
+                              <th width="5%">ประเภท</th>
                               <th width="15%">ฟีลด์</th>
                               <th width="10%">เงื่อนไข</th>
                               <th width="15%">ค่า/ฟีลด์</th>
