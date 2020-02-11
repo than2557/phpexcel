@@ -501,7 +501,7 @@
                                 $sql = "SELECT * FROM task_user WHERE user_id = '".$_SESSION["id_user"]."'";
                                 $result = mysqli_query($conn,$sql);
                             ?>  
-                            <select class="form-control col-md-2"  multiple data-placeholder="ชื่อตาราง" name="query" id="query" style="width:300px;margin-left:30px;">
+                            <select class="form-control col-md-2"   data-placeholder="ชื่อตาราง" name="query" id="query" style="width:300px;margin-left:30px;">
                                 <?php while($row = mysqli_fetch_array($result)){ 
                                     echo '<option value="'.$row[1].'">'.$row[1].'</option>'; 
                                 } ?> 
@@ -558,7 +558,7 @@
                <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;padding-top:1%;">จัดการข้อมูล</h4></center>
                <div class="row" style="margin-left:1%;margin-right:1%;">     
                   <div class="col-md-12 text-left">
-                    
+                              <input type="hidden" id="table_nameeeeeeeee" name="table_nameeeeeeeee">
                       <table class="table table-bordered text-center">
                         <thead>
                            <tr>

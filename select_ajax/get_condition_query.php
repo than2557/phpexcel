@@ -1,6 +1,6 @@
 <?php
-$arraasdasd = array();
 
-echo json_encode(count($_POST['oplist']));
-
-var_dump($_POST);
+echo $_POST['table_nameeeeeeeee'];
+// foreach($_POST as $post){
+//    var_dump($post);
+// }
