@@ -14,10 +14,14 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
+  <link rel="stylesheet" href="/phpexcel/node_modules/bootstrap-select/dist/css/bootstrap-select.css">
+  
   <link rel="stylesheet" href="/phpexcel/lib/Bootstrap_4/bootstrap.min.css">
   <script src="/phpexcel/lib/Jquery/jquery.js"></script>
   <script src="/phpexcel/lib/Bootstrap_4/bootstrap.min.js"></script>
-  
+
+  <script src="/phpexcel/node_modules/bootstrap-select/dist/js/bootstrap-select.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
   <style>
     label {
       color : #000000;
@@ -501,7 +505,7 @@
                                 $sql = "SELECT * FROM task_user WHERE user_id = '".$_SESSION["id_user"]."'";
                                 $result = mysqli_query($conn,$sql);
                             ?>  
-                            <select class="form-control col-md-2"   data-placeholder="ชื่อตาราง" name="query" id="query" style="width:300px;margin-left:30px;">
+                            <select class="form-control col-md-2" data-live-search="true" data-placeholder="ชื่อตาราง" name="query" id="query" style="width:300px;margin-left:30px;">
                                 <?php while($row = mysqli_fetch_array($result)){ 
                                     echo '<option value="'.$row[1].'">'.$row[1].'</option>'; 
                                 } ?> 
@@ -773,6 +777,41 @@ $(document).on('click', '.selectMultiple > div .arrow, .selectMultiple > div spa
         timer: 3000
       })
     } 
+    function createOptions(number) {
+  var options = [], _options;
+
+  for (var i = 0; i < number; i++) {
+    var option = '<option value="' + i + '">Option ' + i + '</option>';
+    options.push(option);
+  }
+
+  _options = options.join('');
+  
+  $('#number')[0].innerHTML = _options;
+  $('#number-multiple')[0].innerHTML = _options;
+
+  $('#number2')[0].innerHTML = _options;
+  $('#number2-multiple')[0].innerHTML = _options;
+}
+
+var mySelect = $('#first-disabled2');
+
+createOptions(4000);
+
+$('#special').on('click', function () {
+  mySelect.find('option:selected').prop('disabled', true);
+  mySelect.selectpicker('refresh');
+});
+
+$('#special2').on('click', function () {
+  mySelect.find('option:disabled').prop('disabled', false);
+  mySelect.selectpicker('refresh');
+});
+
+$('#basic2').selectpicker({
+  liveSearch: true,
+  maxOptions: 1
+}); 
 
   </script>
 
