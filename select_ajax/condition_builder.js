@@ -84,10 +84,10 @@ $(document).ready(function() {
 
         let html = '';
 
-        if(sub_con_count["sub_con"+i] != undefined){}
+        if(sub_con_count["sub_con"+i] = undefined){}
         else{sub_con_count["sub_con"+i] = 0;}
 
-        //console.log(sub_con_count)
+        console.log(sub_con_count)
         html += '<tr name="row' + i + '" id="row' + i + '">';
         html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "'+i+'"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
         //html += '<td><input type="text" name="open_sub_con[]" class="form-control open_sub_con" value="(" readonly></td>';
@@ -122,7 +122,7 @@ $(document).ready(function() {
    
         let html = '';
     
-        html += '<tr name="sub_con' + btn_obj + '_'+ sub_con_count["sub_con"+btn_obj]+'" id="sub_con' + btn_obj + '_'+ sub_con_count["row"+btn_obj]+'">';
+        html += '<tr name="sub_con' + btn_obj + '_'+ sub_con_count["sub_con"+btn_obj]+'" id="'+sub_con_count["sub_con"+btn_obj]+'">';
        
         html += '<td><input type="text" name="test_subcon[]" class="form-control test_subcon" ></td>';
 
@@ -130,7 +130,7 @@ $(document).ready(function() {
 
         $(this).closest('tr').after(html);
         
-        //console.log(sub_con_count)
+        console.log(sub_con_count)
     });
 
     $(document).on('change', '.main_valuelist', function() {
