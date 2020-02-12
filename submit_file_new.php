@@ -600,7 +600,7 @@
             <form method="post" name="get_query" id="get_query" >
 
 
-                <!-- JSON data count sub condition -->
+                <!-- JSON data count sub condition   -->
                 <input type="hidden" name="sub_row_data_count" id="sub_row_data_count" >
                 
                <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;padding-top:1%;">จัดการข้อมูล</h4></center>
