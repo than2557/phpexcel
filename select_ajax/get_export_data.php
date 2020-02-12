@@ -50,7 +50,7 @@
    
          $count_record = $_POST['count_data'];
 
-         $sql = "INSERT INTO `alert`(`user_id`, `token_name`, `table_name`, `alert_date`, `alert_time`, `line_group_name`, `file_alert_path` , `record_count`, `status`) VALUES ('$user_id','$tokenname','$nametb','$date','$time','$groublinename','$database_file_path','$count_record',0)";
+         $sql = "INSERT INTO `alert`(`user_id`, `token_name`, `table_name`, `alert_date`, `alert_time`, `line_group_name`, `file_alert_path` , `record_count`, `status`) VALUES ('$user_id','$tokenname','$nametb','$date','$time','$groublinename','$database_file_path','$count_record',0) ";
 
          $query =  mysqli_query($conn,$sql);
 
