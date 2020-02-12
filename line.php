@@ -1,6 +1,7 @@
 <?php
+require('configDB.php');
 $token = $_POST["token"];
-
+$alert_id =$_POST["alert_id"];
 $message = $_POST["record"];
 
 $file_path = $_POST['file_path'];
@@ -15,6 +16,9 @@ $ip = gethostbyname($host);
 $ip = $ip.'/';
 
 $line_file_path = $ip.$root_folder.$file_path;
+
+$sql ="UPDATE `alert` SET `status`= 1 WHERE $alert_id";
+$Query=$conn->query($sql);
 
 header('Content-Type: text/html; charset=utf-8');
 

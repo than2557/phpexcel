@@ -152,7 +152,7 @@ function onClick(element) {
   
     <thead class="table-info"> 
       <tr>
-    
+        <th>รหัสการแจ้งเตือน</th>
         <th>ชื่อตาราง</th>
         <th>โทเคน</th>
         <th>วันเวลาแจ้งเตือน</th>
@@ -167,6 +167,7 @@ function onClick(element) {
     ?>
 
     <tr>
+    <td><span id="alert_id" value="<?=$row['alert_id'];?>"><?=$row['alert_id'];?><label></td>
       <td><span id="tbname" value="<?=$row['table_name'];?>"><?=$row['table_name'];?><label></td>
       <td><label id="tkname"><?=$row['token_name'];?></label></td>
      
@@ -189,7 +190,7 @@ function onClick(element) {
 
   <script>
 function JSalert(){
-
+  var alert_id = document.getElementById('alert_id').innerHTML;
   var tkname = document.getElementById('tkname').innerHTML;
   var record_count = document.getElementById('record_count').innerHTML;
 
@@ -204,7 +205,8 @@ function JSalert(){
       data: {
         token: tkname,
         record:record_count,
-        file_path:file_path
+        file_path:file_path,
+        alert_id:alert_id
       },
       success: function (result) {
         Swal.fire({
