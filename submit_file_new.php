@@ -552,14 +552,57 @@
         <script src="/phpexcel/lib/Webdatarocks/webdatarocks.js" ></script>
          <script type="text/javascript" src="select_ajax/webdatarocks_setting.js"></script>
       </div> -->
+      <style>
+        .dropbtn {
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
 
-               
-                
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          right: 0;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        .dropdown-content span {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+
+        .dropdown-content span:hover {
+          cursor: pointer;
+          background-color: #f1f1f1;
+          }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+          background-color: #3e8e41;
+        }
+</style>
       <div id="webdatarocks_div" class="col-sm-12" style="width:1000px;height:100%;background-color:#A6BBFF;margin-top:-20px;padding-bottom:5px;" align="center">
         <br> 
         <div class="condition_builder" style="background-color:#E4F5FF;padding-bottom:5px;">
             <form method="post" name="get_query" id="get_query" >
-            
+
+
+                <!-- JSON data count sub condition -->
+                <input type="hidden" name="sub_row_data_count" id="sub_row_data_count" >
+                
                <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;padding-top:1%;">จัดการข้อมูล</h4></center>
                <div class="row" style="margin-left:1%;margin-right:1%;">     
                
@@ -570,10 +613,25 @@
                    </center>
                               <input type="hidden" id="table_nameeeeeeeee" name="table_nameeeeeeeee">
                               <br>
-                      <table class="table table-sm table-bordered text-center">
+                      <table class="table table-sm table-bordered text-center condition_table">
                         <thead>
                            <tr>
-                              <th width="5%"> <input type="button" value="+" class="btn btn-success" id="add_condition"></th>
+                              <th width="5%"> 
+
+                              <!-- <input type="button" value="+" class="btn btn-success" id="add_condition"> -->
+                              
+                              <div class="dropdown " >
+                                  <input type="button" value="+" class="dropbtn btn btn-success">
+ 
+                                <div class="dropdown-content" style="left:0;">
+                                  <span id="add_condition" condition_type="main_condition">เพิ่มเงื่อนไข</span>
+                                  <span id="add_sub_condition" condition_type="sub_condition">เพิ่มเงื่อนไขย่อย</span>
+                                  <!-- <a href="#" id="add_condition">เพิ่มเงื่อนไข</a>
+                                  <a href="#" id="add_sub_condition">เพิ่มเงื่อนไขย่อย</a> -->
+                                </div>
+                              </div>
+                             
+                              </th>
                               <th width="5%">ประเภท</th>
                               <th width="15%">ฟีลด์</th>
                               <th width="10%">เงื่อนไข</th>
@@ -585,9 +643,6 @@
                       </table>         
                   </div>
                </div>
-                <!-- <div class="append_condition">
-                </div>                 -->
-
              
             </form>
          </div>
@@ -610,6 +665,7 @@
 
   
   <style >
+  
     .loading_page{
       position: absolute;  
       top: 0px;   
