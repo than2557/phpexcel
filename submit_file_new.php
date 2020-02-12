@@ -852,7 +852,7 @@ $(document).on('click', '.selectMultiple > div .arrow, .selectMultiple > div spa
 
 var mySelect = $('#first-disabled2');
 
-createOptions(4000);
+//createOptions(4000);
 
 $('#special').on('click', function () {
   mySelect.find('option:selected').prop('disabled', true);
