@@ -1,222 +1,268 @@
 <?php
-require('configDB.php');
-$conn = $DBconnect;
-$table = $_POST['table_nameeeeeeeee'];
-$response = array();
-$row_data = array();
-$row_raw_data = array();
-// $condition_data  = array();
-$sql = '';
 
-// sql select count 3 condition
-//$sql = 'SELECT DISTINCT(SELECT COUNT(*) as count1 FROM tb_test2 WHERE h16 = 0),( SELECT COUNT(*) as count2 FROM tb_test2 WHERE h16 > 0 AND h16 = h4) ,(SELECT COUNT(*) as count2 FROM tb_test2 WHERE h16 > 0 AND h16 < h4) FROM tb_test2 ORDER BY table_name_id';
-// $condition_loop_data = array();
+   // return main sql condition
+   function generate_main_sql_condition($conditions){
+      $sql = '';
 
-// check empty input 
+      // ตรวจสอบเงื่อนไขแรก จะไม่มี AND และ OR
+      if(empty($conditions['oplist'])){
+        $sql.= ' ';
+      }
+      else{
+         $sql.= ' '.$conditions['oplist'];
+      }  
 
+      // ตรวจสอบถ้าเลือกฟีลด์ h2 ให้เลือก attributes h2_1
+      if($conditions['fieldlist'] == 'h2'){
+         $sql.= ' h2_1';
+      }
+      else{
+         $sql.= ' '.$conditions['fieldlist'];
+      }
 
+      // ต่อข้อความ
+      $sql.= ' '.$conditions['condition_opv'];
 
+      // ตรวจสอบ ชนิดของค่าเงื่อนไข ถ้าเป็น ตัวเลขหรือตัวอักษร
+      if($conditions['value_type'] == 'con_value'){
 
-// if( (!empty($_POST['fieldlist'] ) && !empty($_POST['condition_opv'] ) && !empty($_POST['condition_value_input']) && !empty($_POST['condition_value_type'])) || !empty($_POST['oplist'])  ){
+         // ถ้าค่าเป็นตัวเลข
+         if(is_numeric($conditions['valuelist'])){
+            $sql.= ' '.$conditions['valuelist'];
+         }
+         else{
+            $sql.= ' '.'"'.$conditions['valuelist'].'"';
+         }
+      }
+      else{
 
-//    // count number of condition
-//    $count_condition = count($_POST['fieldlist']);
+         // ถ้าค่าของเงื่อนไขเป็นฟีลด์ และมีค่าเป็น h2
+         if($conditions['valuelist'] == 'h2'){
+            $sql.= ' h2_1';
+         }
+         else{
+            $sql.= ' '.$conditions['valuelist'];
+         }
+      }
+      return $sql;
+   }
 
-//    $sql .= 'SELECT * FROM '.$table.' WHERE ';
+   // return sub sql condition
+   function generate_sub_sql_condition($conditions){
 
-//    // loop for count condition
-//    for($i = 0 ; $i<= $count_condition-1 ; $i++){
+      // ตัวเชื่อมระหว่างเงื่อนไขหลักกับเงื่อนไขรอง
+      $sql = ' '.$conditions['conjection_condition'];
 
-//       //  ถ้าเป็นเงื่อนไงแรก ให้ คำสั่งไม่มี AND/OR 
-//       if($i == 0){
-
-//          // ถ้าค่าของเงื่อนไขเป็น ตัวเลขหรือตัวอักษร
-//          if($_POST['condition_value_type'][$i] == 'con_value'){
-
-
-//             // ถ้าค่า เป็นตัวเลข
-//             if(is_numeric($_POST['condition_value_input'][$i])){
-
-//                // ถ้าเลือกฟีลด์ "รายการ"
-//                if($_POST['fieldlist'][$i] == 'h2'){
-//                   $sql.= 'h2_1 '.$_POST['condition_opv'][$i].' '.$_POST['condition_value_input'][$i];
-//                } 
-//                else{ // ถ้าเลือกฟีลด์อื่นๆ
-//                   $sql.= $_POST['fieldlist'][$i].' '.$_POST['condition_opv'][$i].' '.$_POST['condition_value_input'][$i];
-//                }
-               
-//             }
-//             else{   // ถ้าค่าไม่ใช่ตัวเลข
-
-//                // ถ้าเลือกฟีลด์ "รายการ"
-//                if($_POST['fieldlist'][$i] == 'h2'){
-//                   $sql.= 'h2_1 '.$_POST['condition_opv'][$i].' '.'"'.$_POST['condition_value_input'][$i].'"';
-//                }
-//                else{ // ถ้าเลือกฟีลด์อื่นๆ
-//                   $sql.= $_POST['fieldlist'][$i].' '.$_POST['condition_opv'][$i].' '.'"'.$_POST['condition_value_input'][$i].'"';
-//                }    
-//             }
-//          }
-//          else{ // ถ้าค่าของเงื่อนไขเป็นฟีลด์
-
-//             // ถ้าเลือกฟีลด์ "รายการ"
-//             if($_POST['fieldlist'][$i] == 'h2'){
-//                $sql.= 'h2_1 '.$_POST['condition_opv'][$i];
-//             }
-//             else{ // ถ้าเลือกฟีลด์อื่นๆ
-//                $sql.= $_POST['fieldlist'][$i].' '.$_POST['condition_opv'][$i];
-//             }
-
-//              // ถ้าค่าของเงื่อนไขเป็นฟีลด์ และ เท่ากับ "h2"
-//             if($_POST['condition_value_input'][$i] == 'h2'){
-//                $sql.= ' h2_1';
-//             }
-//             else{ // ถ้าเลือกฟีลด์อื่นๆ
-//                $sql.=' '.$_POST['condition_value_input'][$i];
-//             }
-//          }
-//       }
-//       else{ // เงื่อนไขถัดไป
-
-//          // ถ้าค่าของเงื่อนไขเป็น ตัวเลขหรือตัวอักษร 
-//          if($_POST['condition_value_type'][$i] == 'con_value'){
-
-//              // ถ้าค่า เป็นตัวเลข
-//             if(is_numeric($_POST['condition_value_input'][$i])){
-
-//                 // ถ้าเลือกฟีลด์ "รายการ"
-//                if($_POST['fieldlist'][$i] == 'h2'){
-//                   $sql.= ' '.$_POST['oplist'][$i].' h2_1 '.$_POST['condition_opv'][$i].' '.$_POST['condition_value_input'][$i];
-//                }
-//                else{ // ถ้าเลือกฟีลด์อื่นๆ
-//                   $sql.= ' '.$_POST['oplist'][$i].' '.$_POST['fieldlist'][$i].' '.$_POST['condition_opv'][$i].' '.$_POST['condition_value_input'][$i];
-//                }
-//             }
-//             else{ // ถ้าค่าไม่ใช่ตัวเลข
-
-//                // ถ้าเลือกฟีลด์ "รายการ"
-//                if($_POST['fieldlist'][$i] == 'h2'){
-//                   $sql.= ' '.$_POST['oplist'][$i].' h2_1 '.$_POST['condition_opv'][$i].' '.'"'.$_POST['condition_value_input'][$i].'"';
-//                }
-//                else{  // ถ้าเลือกฟีลด์อื่นๆ
-//                   $sql.= ' '.$_POST['oplist'][$i].' '.$_POST['fieldlist'][$i].' '.$_POST['condition_opv'][$i].' '.'"'.$_POST['condition_value_input'][$i].'"';
-//                }
-//             }  
-//          }
-//          else{ // ถ้าค่าของเงื่อนไขเป็นฟีลด์
-
-//               // ถ้าเลือกฟีลด์ "รายการ"
-//             if($_POST['fieldlist'][$i] == 'h2'){
-//                $sql.= ' '.$_POST['oplist'][$i].' h2_1 '.$_POST['condition_opv'][$i];
-//             }
-//             else{ // ถ้าเลือกฟีลด์อื่นๆ
-//                $sql.= ' '.$_POST['oplist'][$i].' '.$_POST['fieldlist'][$i].' '.$_POST['condition_opv'][$i];
-//             } 
-
-//             // ถ้าค่าของเงื่อนไขเป็นฟีลด์ และ เท่ากับ "h2"
-//             if($_POST['condition_value_input'][$i] == 'h2'){
-//                $sql.= ' h2_1';
-//             }
-//             else{ // ถ้าเลือกฟีลด์อื่นๆ
-//                $sql.= ' '.$_POST['condition_value_input'][$i];
-//             } 
-//          } 
-//       }
-//       // $row_condition = array(
-//       //    'oplist' =>$_POST['oplist'][$i], 
-//       //    'fieldlist' =>$_POST['fieldlist'][$i],
-//       //    'condition_opv' =>$_POST['condition_opv'][$i],
-//       //    'valuelist' => $_POST['condition_value_input'][$i]
-//       // );
-//       // array_push($condition_loop_data,$row_condition);
+      $sql .= ' (';
       
-//    } 
+      // วนลูปตามจำนวนของเงื่อนไขย่อย
+      foreach($conditions['sub_con'] as $sub_con){
 
-//    // $condition_data['condition_data'] = $condition_loop_data;
+         if(empty($sub_con['sub_op_list'])){
+            $sql.= ' ';
+          }
+          else{
+             $sql.= ' '.$sub_con['sub_op_list'];
+          }  
+    
+          if($sub_con['sub_field_list'] == 'h2'){
+             $sql.= ' h2_1';
+          }
+          else{
+             $sql.= ' '.$sub_con['sub_field_list'];
+          }
+    
+          $sql.= ' '.$sub_con['sub_condition_opv'];
+    
+          if($sub_con['sub_condition_value_type'] == 'con_value'){
+    
+             if(is_numeric($sub_con['sub_value_list'])){
+                $sql.= ' '.$sub_con['sub_value_list'];
+             }
+             else{
+                $sql.= ' '.'"'.$sub_con['sub_value_list'].'"';
+             }
+          }
+          else{
+             if($sub_con['sub_value_list'] == 'h2'){
+                $sql.= ' h2_1';
+             }
+             else{
+                $sql.= ' '.$sub_con['sub_value_list'];
+             }
+          }
+      }
+      
+      $sql.= ' )';
 
-//    // $condition_data['table_name'] = $table;
+      return $sql;
+   }
 
-//    //echo json_encode($sql);
-// }
-// else{
-//    $sql .= 'SELECT * FROM '.$table;
-//    //echo json_encode($sql);
-// }
+   require('configDB.php'); // เรียกไฟล์ configDB.php
 
-// $result = mysqli_query($conn,$sql);
+   $conn = $DBconnect; // ตัวแปรเชื่อมต่อฐานข้อมูล
 
-// if($result){
-//    $rowcount=mysqli_num_rows($result);
+   $table = $_POST['table_nameeeeeeeee']; // ตัวแปรชื่อตาราง
 
-//    $data = array();
-
-//    if($rowcount > 0){
-
-//       while($row = mysqli_fetch_row($result)){
-
-//          $data = array();
+   $response = array(); // ตัวแปร response ชนิด array
    
-//          $data['ลำดับที่'] = $row[1];
-   
-//          // if($row[2] != 0){
-//          //    $data['รายการ'] = "0".$row[2]."".$row[3];
-//          // }
-//          // else{
-//          //    $data['รายการ'] = $row[3];
-//          // }
+   $sql = ''; // ตัวแปร sql ว่าง
 
-//          $data['รายการ'] = $row[2]."".$row[3];
-         
-//          $data['WBS'] = $row[4];
-//          $data['วงเงินงบประมาณปัจจุบัน'] = $row[5];
-//          $data['รวมจ่ายจริงถึงสิ้นปีก่อนหน้า'] = $row[6];
-//          $data['รวมจ่ายจริงปีปัจจุบัน'] = $row[7];
-//          $data['รวมจ่ายจริง'] = $row[8];
-//          $data['เงินล่วงหน้าปีก่อนหน้า'] = $row[9];
-//          $data['เงินประกันปีก่อนหน้า'] = $row[10];
-//          $data['เงินล่วงหน้าปีปัจจุบัน'] = $row[11];
-//          $data['เงินประกันปีปัจจุบัน'] = $row[12];
-//          $data['เงินล่วงหน้าคงเหลือ'] = $row[13];
-//          $data['เงินประกันค้างจ่าย'] = $row[14];
-//          $data['รวมจ่ายทั้งสิ้นปีก่อนหน้า'] = $row[15];
-//          $data['รวมจ่ายทั้งสิ้นปีปัจจุบัน'] = $row[16];
-//          $data['รวมจ่ายทั้งสิ้น'] = $row[17];
-//          $data['งบประมาณหักรวมจ่ายทั้งสั้น'] = $row[18];
-//          $data['PO_หัก_รวมจ่ายจริง_PO'] = $row[19];
-//          $data['งบประมาณหักรวมจ่ายจริง'] = $row[20];
-//          $data['IR_คงเหลือ'] = $row[21];
-//          $data['GR_คงเหลือ'] = $row[22];
-//          $data['PO_คงเหลือ'] = $row[23];
-//          $data['PR_คงเหลือ'] = $row[24];
-//          $data['วงเงินคงเหลือยังไม่ดำเนินการ'] = $row[25];
-//          $data['สถานะ'] = $row[26];
-//          $data['วันที่สร้าง'] = $row[27];
+   // ตรวจสอบ การส่งข้อมูลเงื่อนไข
+   if(!empty($_POST['condition_type_row'])){
 
-//          $row_data[] = $data;
-   
-//          $data['primary_key'] = $row[0];
-
-//          $row_raw_data[] = $data;
-//       }
-
-//       $response['data'] = $row_data;
-//       $response['raw_data'] = $row_raw_data;
-//       $response['sql'] = $sql;
-//       $response['error'] = false;
-//    }
-//    else{
-//       $response['sql'] = $sql;
-//       $response['message'] = "ไม่พบรายการ";
-//       $response['error'] = true;
-//    }   
-// }
-// else{
-//    $response['sql'] = $sql;
-//    $response['message'] = "ไม่พบรายการ";
-//    $response['error'] = true;
-// }
-   echo json_encode($_POST);
-// $json_Data = json_decode($_POST['sub_row_data_count']);
-// echo $json_Data->sub_con1;
+      // รับข้อมูล JSON ข้อมูลจำนวนเงื่อนไขของเงื่อนไขย่อย
+      $sub_row_data_count = json_decode($_POST['sub_row_data_count']);
  
+      $loop_count_main_con = 0; // ตัวแปรลูปของเงื่อนไขหลัก
+      $loop_count_sub_con = 0; // ตัวแปรลูปของเงื่อนไขย่อย
+      $loop_count_all_con = 0; // ตัวแปรลูปของเงื่อนไขทั้งหมด main/sub
+      $loop_conjection_condition_count = 0 ; // ตัวแปรลูปของตัวเชื่อมเงื่อนไขย่อย
+ 
+      $sql .= 'SELECT * FROM '.$table; 
+ 
+      $array_main_con = array(); // ประกาศตัวแปร array
+      $array_sub_con = array(); // ประกาศตัวแปร array
+
+      // ลูปเงื่อนไขทั้งหมด
+      foreach($_POST['condition_type_row'] as $condition_type){
+         
+         // ถ้าเป็นเงื่อนไขหลัก
+         if($condition_type == "main_con"){
+
+            // เก็บค่าเงื่อนไข ชนิด array
+            $loop_array_main = array(
+               'oplist' =>$_POST['main_oplist'][$loop_count_main_con], 
+               'fieldlist' =>$_POST['main_fieldlist'][$loop_count_main_con],
+               'condition_opv' =>$_POST['main_condition_opv'][$loop_count_main_con],
+               'valuelist' => $_POST['main_condition_value_input'][$loop_count_main_con],
+               'value_type' => $_POST['main_condition_value_type'][$loop_count_main_con]
+            );
+         
+            $loop_count_main_con++;
+            $loop_count_all_con++;
+
+            // ต่อข้อความด้วยเรียกใช้ฟังก์ชั่น
+            $sql .= generate_main_sql_condition($loop_array_main);
+
+         }
+         else if($condition_type == "main_row_sub_con"){
+          
+            $loop_array_sub = array();
+            $loop_array_sub2 = array();
+     
+            $loop_count_all_con++;
+
+            $number_of_sub_condition = $sub_row_data_count->{"sub_con".$loop_count_all_con};
+
+            $loop_array_sub['conjection_condition'] = $_POST['sub_con_optlist'][$loop_conjection_condition_count];
+
+            for( $i =1 ; $i <= $number_of_sub_condition ; $i++){
+               $sub_con = array(
+                  'sub_op_list' =>$_POST['sub_oplist'][$loop_count_sub_con], 
+                  'sub_field_list' =>$_POST['sub_fieldlist'][$loop_count_sub_con],
+                  'sub_condition_opv' =>$_POST['sub_condition_opv'][$loop_count_sub_con],
+                  'sub_value_list' => $_POST['sub_condition_value_input'][$loop_count_sub_con],
+                  'sub_condition_value_type' => $_POST['sub_condition_value_type'][$loop_count_sub_con]
+               );
+               $loop_count_sub_con++;
+               array_push($loop_array_sub2,$sub_con);
+            }
+            $loop_conjection_condition_count++;
+
+            $loop_array_sub['sub_con'] = $loop_array_sub2;
+          
+            $sql.= generate_sub_sql_condition($loop_array_sub);
+         }
+      }
+
+      $response['data'] = $_POST;
+      $response['sql'] = $sql;
+      $response['message'] = "success";
+      $response['error'] = false;
+   }
+   else{
+      $response['sql'] = $sql;
+      $response['message'] = "ไม่พบรายการ";
+      $response['error'] = true;
+   }
+
+
+
+
+
+   // $result = mysqli_query($conn,$sql);
+
+   // if($result){
+   //    $rowcount=mysqli_num_rows($result);
+
+   //    $data = array();
+
+   //    if($rowcount > 0){
+
+   //       while($row = mysqli_fetch_row($result)){
+
+   //          $data = array();
+      
+   //          $data['ลำดับที่'] = $row[1];
+      
+   //          // if($row[2] != 0){
+   //          //    $data['รายการ'] = "0".$row[2]."".$row[3];
+   //          // }
+   //          // else{
+   //          //    $data['รายการ'] = $row[3];
+   //          // }
+
+   //          $data['รายการ'] = $row[2]."".$row[3];
+            
+   //          $data['WBS'] = $row[4];
+   //          $data['วงเงินงบประมาณปัจจุบัน'] = $row[5];
+   //          $data['รวมจ่ายจริงถึงสิ้นปีก่อนหน้า'] = $row[6];
+   //          $data['รวมจ่ายจริงปีปัจจุบัน'] = $row[7];
+   //          $data['รวมจ่ายจริง'] = $row[8];
+   //          $data['เงินล่วงหน้าปีก่อนหน้า'] = $row[9];
+   //          $data['เงินประกันปีก่อนหน้า'] = $row[10];
+   //          $data['เงินล่วงหน้าปีปัจจุบัน'] = $row[11];
+   //          $data['เงินประกันปีปัจจุบัน'] = $row[12];
+   //          $data['เงินล่วงหน้าคงเหลือ'] = $row[13];
+   //          $data['เงินประกันค้างจ่าย'] = $row[14];
+   //          $data['รวมจ่ายทั้งสิ้นปีก่อนหน้า'] = $row[15];
+   //          $data['รวมจ่ายทั้งสิ้นปีปัจจุบัน'] = $row[16];
+   //          $data['รวมจ่ายทั้งสิ้น'] = $row[17];
+   //          $data['งบประมาณหักรวมจ่ายทั้งสั้น'] = $row[18];
+   //          $data['PO_หัก_รวมจ่ายจริง_PO'] = $row[19];
+   //          $data['งบประมาณหักรวมจ่ายจริง'] = $row[20];
+   //          $data['IR_คงเหลือ'] = $row[21];
+   //          $data['GR_คงเหลือ'] = $row[22];
+   //          $data['PO_คงเหลือ'] = $row[23];
+   //          $data['PR_คงเหลือ'] = $row[24];
+   //          $data['วงเงินคงเหลือยังไม่ดำเนินการ'] = $row[25];
+   //          $data['สถานะ'] = $row[26];
+   //          $data['วันที่สร้าง'] = $row[27];
+
+   //          $row_data[] = $data;
+      
+   //          $data['primary_key'] = $row[0];
+
+   //          $row_raw_data[] = $data;
+   //       }
+
+   //       $response['data'] = $row_data;
+   //       $response['raw_data'] = $row_raw_data;
+   //       $response['sql'] = $sql;
+   //       $response['error'] = false;
+   //    }
+   //    else{
+   //       $response['sql'] = $sql;
+   //       $response['message'] = "ไม่พบรายการ";
+   //       $response['error'] = true;
+   //    }   
+   // }
+   // else{
+   //    $response['sql'] = $sql;
+   //    $response['message'] = "ไม่พบรายการ";
+   //    $response['error'] = true;
+   // }
+
+   echo json_encode($response);
 ?> 
