@@ -251,8 +251,7 @@ $(document).ready(function() {
                 }
             })
             .done(function(data) { // response
-                //console.log(data)
-                // check error
+ 
                 if(!data.error){
                     //console.log(data.query_data.raw_data)
                     $(".result_table").empty();
