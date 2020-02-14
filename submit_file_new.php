@@ -613,6 +613,8 @@
                    </center>
                               <input type="hidden" id="table_nameeeeeeeee" name="table_nameeeeeeeee">
                               <br>
+
+                        <!-- ตาราง กำหนดเงื่อนไข -->
                       <table class="table table-sm table-bordered text-center condition_table">
                         <thead>
                            <tr>
@@ -638,18 +640,15 @@
                         
                       <br>
                       <div class="result_table">
+                        <!-- div ตาราง ผลลัพธ์ query -->
                       </div>    
+                      
                       <input  id="checkvoxclick" class="btn btn-success" type="button" value="click">
                   </div>
                </div>
              
             </form>
-         </div>
-         
-         <div class="table_result" style="background-color:#E4F5FF;padding-bottom:5px;">
-        
-   
-         </div>                          
+         </div>     
       </div>
     
     </center> 

@@ -29,20 +29,24 @@ $(document).ready(function() {
         h26: "วันที่สร้าง"
     };
 
+    // จำนวนแถวเงื่อนไข
     var i = 1;
 
+    // HTML code select box
     var html_table_fields;
 
-    var sub_con_count = new Object(); // ประกาศ object ว่าง
+    // ประกาศ object ว่าง
+    var sub_con_count = new Object(); 
 
     html_table_fields = populate_fields2(field);
 
-
-    if ($("#query").val() == null) { // เมื่อ select box id = query เป็นค่าว่าง
+    // เมื่อ select box id = query เป็นค่าว่าง
+    if ($("#query").val() == null) { 
         alert("ไม่สามารถเรียกข้อมูลได้");
     } else {
         $('#table_nameeeeeeeee').val($("#query").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     }
+
 
 
     $("#checkvoxclick").click(function(){
@@ -68,8 +72,10 @@ $(document).ready(function() {
     // on click button add main condition
     $('#add_condition').click(function() {
 
+        // HTML code input condition 
         let html = '';
 
+        // check first row
         if (i == 1) {
             html += '<tr name="row' + i + '" id="row' + i + '">';
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
@@ -88,20 +94,24 @@ $(document).ready(function() {
             html += '</tr>';
         }
 
+        // append HTML code
         $('#append_condition').append(html);
 
+        // increase row index
         i++;
     })
 
     // on click button add sub condition row
     $("#add_sub_condition").click(function(){
 
+        // HTML code sub condition 
         let html = '';
 
+        // check object property is undefined
         if(sub_con_count["sub_con"+i] = undefined){}
         else{sub_con_count["sub_con"+i] = 0;}
 
-       
+       // check first row
         if(i == 1 ){
             html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="'+i+'">';
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "'+i+'"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
@@ -121,9 +131,10 @@ $(document).ready(function() {
             html += '</tr>';
         }
       
-
+        // append HTML code
         $('#append_condition').append(html);
         
+        // increase row index
         i++;
  
     });
@@ -131,14 +142,19 @@ $(document).ready(function() {
     // on click button add sub condition
     $(document).on('click', '.add_sub_con' , function(){
 
+        // get row id
         let btn_obj = $(this).attr("row_id");
         
+        // increase row id count condition
         sub_con_count["sub_con"+btn_obj] ++ ;
 
+        // แปลง Object เป็น String
         $("#sub_row_data_count").val(JSON.stringify(sub_con_count));
    
+        // HTML code
         let html = '';
         
+        // check sub condition first row
         if (sub_con_count["sub_con"+btn_obj] == 1) {
             html += '<tr name="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'" id="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'">';
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
@@ -157,31 +173,54 @@ $(document).ready(function() {
             html += '</tr>';
         }
 
+        // append HTML code
         $('#append_condition').append(html);
     });
 
      // on change fields select box in main condition
     $(document).on('change', '.main_valuelist', function() {
 
+        // get tr object
         let td_tag_obj = $(this).closest("tr").find("tr td[data_row_id]");
 
+        // get row id
         let row_id = td_tag_obj.prevObject[0].id;
 
+        // get selected value
         let selected_value = $(this).val();
 
+        // check null value
         if (selected_value == 'null_value') {
             alert("กรุณาเลือกเงื่อนไข")
-        } else if (selected_value == 'con_value') {
+        } 
+        else if (selected_value == 'con_value') {
+
+            // HTML code
             let html = '';
+
+            // input box
             html += "<input class='form-control main_condition_value_input'  type='text' name='main_condition_value_input[]'   placeholder='กรอกค่า'/>";
             html += "<input class='form-control main_condition_value_type' type='hidden' name='main_condition_value_type[]'  value='con_value'/>";
+            
+            // clear cell in td
             $("tr[id='" + row_id + "'] td[id='selector_field4']").empty();
+
+            // show HTML code
             $("tr[id='" + row_id + "'] td[id='selector_field4']").html(html);
-        } else if (selected_value == 'con_fields') {
+        } 
+        else if (selected_value == 'con_fields') {
+
+            // HTML code
             let html = '';
+
+            // input box
             html += '<select class="form-control main_condition_value_input"  name="main_condition_value_input[]" >' + html_table_fields + '</select>';
             html += "<input class='form-control main_condition_value_type' type='hidden' name='main_condition_value_type[]'  value='con_fields'/>";
+            
+            // clear cell in td
             $("tr[id='" + row_id + "'] td[id='selector_field4']").empty();
+
+            // show HTML code
             $("tr[id='" + row_id + "'] td[id='selector_field4']").html(html);
         }
 
@@ -190,12 +229,16 @@ $(document).ready(function() {
     // on change fields select box in sub condition
     $(document).on('change', '.sub_valuelist', function() {
 
+        // get tr object
         let td_tag_obj = $(this).closest("tr").find("tr td[data_row_id]");
 
+        // get row id
         let row_id = td_tag_obj.prevObject[0].id;
 
+        // get selected value
         let selected_value = $(this).val();
  
+        // check null value
         if (selected_value == 'null_value') {
             alert("กรุณาเลือกเงื่อนไข")
         } else if (selected_value == 'con_value') {
@@ -244,20 +287,33 @@ $(document).ready(function() {
                 //url: "select_ajax/select_json_encode.php", // select dynamic field
                 method: "POST",
                 async: false,
-                dataType: "JSON",
-                data: $('#get_query').serialize(),
+                dataType: "JSON", // response variable type
+                data: $('#get_query').serialize(), // get form data
                 error: function(jqXHR, text, error) {
                     alert("กรุณากรอกข้อมูลให้ครบถ้วน")
                 }
             })
             .done(function(data) { // response
  
+                // check response is error
                 if(!data.error){
-                    //console.log(data.query_data.raw_data)
-                    $(".result_table").empty();
-                    $(".result_table").html(generate_table_result(data.query_data.raw_data));
+
+                    // check error query
+                    if(data.query_data == false){
+                        alert("ไม่พบข้อมูล")
+                    }
+                    else{ 
+
+                        // clear table result 
+                        $(".result_table").empty();
+
+                        // show HTML table
+                        $(".result_table").html(generate_table_result(data.query_data.raw_data));
+                    }
                 }
                 else{
+
+                    // alert error mssage
                     alert(data.message)
                 }
 
@@ -267,28 +323,38 @@ $(document).ready(function() {
  
 // generate fields options in select box
 function populate_fields2(field2) {
+
+    // HTML code
     var options = '';
+
+    // loop JSON 
     Object.keys(field2).forEach(function(key) {
         options += '<option value="' + key + '">' + field2[key] + '</option>';
     })
 
+    // return HTML code (Select box)
     return options;
 }
 
 // generate table result
 function generate_table_result(data){
+
+    // row count
     let row = 1;
+    
+    // HTML code
     let html = '';
 
+    // table thead
     html += '<table class="table table-sm table-primary table-bordered table-striped "><thead class="text-center"><tr><th>#</th><th>#</th><th>ลำดับที่</th><th>รายการ</th><th>WBS</th></tr></thead>';
-    // loop result (Row)
+
+    // tbody
     html += '<tbody>';
+
+    // loop query data
     Object.keys(data).forEach(function(k){
+
         html += '<tr>';
-        // loop result (Column)
-        // Object.keys(data[k]).forEach(function(val){
-        //     //console.log(data[k][val])
-        // });
         html += '<td class="text-center"><input type="checkbox" name="row_id[]" class="result_row_checkbox" value="'+data[k]['primary_key']+'" /></td>';
         html += '<td class="text-center"><b>'+row+'</b></td>';  
         html += '<td class="text-left">'+data[k]['ลำดับที่']+'</td>';
@@ -296,8 +362,13 @@ function generate_table_result(data){
         html += '<td class="text-left">'+data[k]['WBS']+'</td>';
         html += '</tr>';
         row++;
+
     });
+
+    // close tag
     html += '</tbody>';
     html += '</table>';
+
+    // return HTML code
     return html;
 }

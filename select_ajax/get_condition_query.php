@@ -259,6 +259,7 @@
             $sql.= generate_sub_sql_condition($loop_array_sub);
          }
       }
+      
       $response['query_data'] = query_data($sql,$conn);
       $response['HTTP_post_data'] = $_POST;
       $response['result_sql'] = $sql;
@@ -266,7 +267,7 @@
       $response['error'] = false;
    }
    else{
-      
+
       $sql = 'SELECT * FROM '.$table;
 
       $response['query_data'] = query_data($sql,$conn);
