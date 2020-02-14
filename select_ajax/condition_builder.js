@@ -44,6 +44,17 @@ $(document).ready(function() {
         $('#table_nameeeeeeeee').val($("#query").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     }
 
+
+    $("#checkvoxclick").click(function(){
+        var id = [];
+   
+        $('.result_row_checkbox:checkbox:checked').each(function(i){
+            id[i] = $(this).val();
+        });
+
+        console.log(id)
+    });
+
     // on table name select box change
     $('#query').change(function() { // เมื่อเลือก select box 
         $('#table_nameeeeeeeee').val($(this).val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
@@ -90,13 +101,26 @@ $(document).ready(function() {
         if(sub_con_count["sub_con"+i] = undefined){}
         else{sub_con_count["sub_con"+i] = 0;}
 
-        html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="'+i+'">';
-        html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "'+i+'"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
-        html += '<td colspan="1"></td>';
-        html += '<td colspan="1"><label>เลือกตัวเชื่อมเงื่อนไข</label></td>';
-        html += '<td colspan="1"><select class="form-control sub_con_optlist" name="sub_con_optlist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';  
-        html += '<td colspan="1"></td>';
-        html += '</tr>';
+       
+        if(i == 1 ){
+            html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="'+i+'">';
+            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "'+i+'"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
+            html += '<td colspan="1"></td>';
+            html += '<td colspan="1"><label>เลือกตัวเชื่อมเงื่อนไข</label></td>';
+            html += '<td colspan="1"> <input class="form-control sub_con_optlist" type="text" name="sub_con_optlist[]" readonly value=""></input></td>';  
+            html += '<td colspan="1"></td>';
+            html += '</tr>';
+        }
+        else{
+            html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="'+i+'">';
+            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "'+i+'"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
+            html += '<td colspan="1"></td>';
+            html += '<td colspan="1"><label>เลือกตัวเชื่อมเงื่อนไข</label></td>';
+            html += '<td colspan="1"><select class="form-control sub_con_optlist" name="sub_con_optlist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';  
+            html += '<td colspan="1"></td>';
+            html += '</tr>';
+        }
+      
 
         $('#append_condition').append(html);
         
@@ -114,7 +138,7 @@ $(document).ready(function() {
         $("#sub_row_data_count").val(JSON.stringify(sub_con_count));
    
         let html = '';
-    
+        
         if (sub_con_count["sub_con"+btn_obj] == 1) {
             html += '<tr name="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'" id="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'">';
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
@@ -190,20 +214,31 @@ $(document).ready(function() {
 
     });
 
-
     // reset table condition button
     $("#reset_condition").click(function() {
 
+        // clear console
+        console.clear;
+
+        // re variable
         i = 1;
+        
+        // clear object
         Object.keys(sub_con_count).forEach(function(key) {
             delete sub_con_count[key]; 
         })
+
+        // clear condition row
         $("#append_condition").empty();
+
+        // clear result table
+        $(".result_table").empty();
     });
 
     // send condition to php file
     $("#queryyyyy").click(function() {
 
+        // send HTTP post
         $.ajax({
                 url: "select_ajax/get_condition_query.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
                 //url: "select_ajax/select_json_encode.php", // select dynamic field
@@ -212,11 +247,21 @@ $(document).ready(function() {
                 dataType: "JSON",
                 data: $('#get_query').serialize(),
                 error: function(jqXHR, text, error) {
-                    alert(error)
+                    alert("กรุณากรอกข้อมูลให้ครบถ้วน")
                 }
             })
-            .done(function(data) {
-                console.log(data)
+            .done(function(data) { // response
+                //console.log(data)
+                // check error
+                if(!data.error){
+                    //console.log(data.query_data.raw_data)
+                    $(".result_table").empty();
+                    $(".result_table").html(generate_table_result(data.query_data.raw_data));
+                }
+                else{
+                    alert(data.message)
+                }
+
             });
     });
 })
@@ -229,4 +274,31 @@ function populate_fields2(field2) {
     })
 
     return options;
+}
+
+// generate table result
+function generate_table_result(data){
+    let row = 1;
+    let html = '';
+
+    html += '<table class="table table-sm table-primary table-bordered table-striped "><thead class="text-center"><tr><th>#</th><th>#</th><th>ลำดับที่</th><th>รายการ</th><th>WBS</th></tr></thead>';
+    // loop result (Row)
+    html += '<tbody>';
+    Object.keys(data).forEach(function(k){
+        html += '<tr>';
+        // loop result (Column)
+        // Object.keys(data[k]).forEach(function(val){
+        //     //console.log(data[k][val])
+        // });
+        html += '<td class="text-center"><input type="checkbox" name="row_id[]" class="result_row_checkbox" value="'+data[k]['primary_key']+'" /></td>';
+        html += '<td class="text-center"><b>'+row+'</b></td>';  
+        html += '<td class="text-left">'+data[k]['ลำดับที่']+'</td>';
+        html += '<td class="text-left">'+data[k]['รายการ']+'</td>';
+        html += '<td class="text-left">'+data[k]['WBS']+'</td>';
+        html += '</tr>';
+        row++;
+    });
+    html += '</tbody>';
+    html += '</table>';
+    return html;
 }

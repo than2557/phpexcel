@@ -59,7 +59,7 @@
       foreach($conditions['sub_con'] as $sub_con){
 
          if(empty($sub_con['sub_op_list'])){
-            $sql.= ' ';
+            $sql.= '';
           }
           else{
              $sql.= ' '.$sub_con['sub_op_list'];
@@ -98,6 +98,86 @@
       return $sql;
    }
 
+
+   // query data
+   function query_data($sql,$conn){
+
+      $row_data = array();
+      $row_raw_data = array();
+      $query_data = array();
+
+      $result = mysqli_query($conn,$sql);
+
+      if($result){
+
+         $rowcount=mysqli_num_rows($result);
+
+         $data = array();
+
+         if($rowcount > 0){
+
+            while($row = mysqli_fetch_row($result)){
+
+               $data = array();
+         
+               $data['ลำดับที่'] = $row[1];
+         
+               // if($row[2] != 0){
+               //    $data['รายการ'] = "0".$row[2]."".$row[3];
+               // }
+               // else{
+               //    $data['รายการ'] = $row[3];
+               // }
+
+               $data['รายการ'] = $row[2]."".$row[3];
+               
+               $data['WBS'] = $row[4];
+               $data['วงเงินงบประมาณปัจจุบัน'] = $row[5];
+               $data['รวมจ่ายจริงถึงสิ้นปีก่อนหน้า'] = $row[6];
+               $data['รวมจ่ายจริงปีปัจจุบัน'] = $row[7];
+               $data['รวมจ่ายจริง'] = $row[8];
+               $data['เงินล่วงหน้าปีก่อนหน้า'] = $row[9];
+               $data['เงินประกันปีก่อนหน้า'] = $row[10];
+               $data['เงินล่วงหน้าปีปัจจุบัน'] = $row[11];
+               $data['เงินประกันปีปัจจุบัน'] = $row[12];
+               $data['เงินล่วงหน้าคงเหลือ'] = $row[13];
+               $data['เงินประกันค้างจ่าย'] = $row[14];
+               $data['รวมจ่ายทั้งสิ้นปีก่อนหน้า'] = $row[15];
+               $data['รวมจ่ายทั้งสิ้นปีปัจจุบัน'] = $row[16];
+               $data['รวมจ่ายทั้งสิ้น'] = $row[17];
+               $data['งบประมาณหักรวมจ่ายทั้งสั้น'] = $row[18];
+               $data['PO_หัก_รวมจ่ายจริง_PO'] = $row[19];
+               $data['งบประมาณหักรวมจ่ายจริง'] = $row[20];
+               $data['IR_คงเหลือ'] = $row[21];
+               $data['GR_คงเหลือ'] = $row[22];
+               $data['PO_คงเหลือ'] = $row[23];
+               $data['PR_คงเหลือ'] = $row[24];
+               $data['วงเงินคงเหลือยังไม่ดำเนินการ'] = $row[25];
+               $data['สถานะ'] = $row[26];
+               $data['วันที่สร้าง'] = $row[27];
+
+               $row_data[] = $data;
+         
+               $data['primary_key'] = $row[0];
+
+               $row_raw_data[] = $data;
+            }
+
+            $query_data['result_data'] = $row_data;
+
+            $query_data['raw_data'] = $row_raw_data;
+
+            return $query_data;
+         }
+         else{
+            return false;
+         }
+      }
+      else{
+         return false;
+      }
+   }
+
    require('configDB.php'); // เรียกไฟล์ configDB.php
 
    $conn = $DBconnect; // ตัวแปรเชื่อมต่อฐานข้อมูล
@@ -119,7 +199,7 @@
       $loop_count_all_con = 0; // ตัวแปรลูปของเงื่อนไขทั้งหมด main/sub
       $loop_conjection_condition_count = 0 ; // ตัวแปรลูปของตัวเชื่อมเงื่อนไขย่อย
  
-      $sql .= 'SELECT * FROM '.$table; 
+      $sql .= 'SELECT * FROM '.$table.' WHERE'; 
  
       $array_main_con = array(); // ประกาศตัวแปร array
       $array_sub_con = array(); // ประกาศตัวแปร array
@@ -158,6 +238,7 @@
             $loop_array_sub['conjection_condition'] = $_POST['sub_con_optlist'][$loop_conjection_condition_count];
 
             for( $i =1 ; $i <= $number_of_sub_condition ; $i++){
+
                $sub_con = array(
                   'sub_op_list' =>$_POST['sub_oplist'][$loop_count_sub_con], 
                   'sub_field_list' =>$_POST['sub_fieldlist'][$loop_count_sub_con],
@@ -165,9 +246,12 @@
                   'sub_value_list' => $_POST['sub_condition_value_input'][$loop_count_sub_con],
                   'sub_condition_value_type' => $_POST['sub_condition_value_type'][$loop_count_sub_con]
                );
+
                $loop_count_sub_con++;
+
                array_push($loop_array_sub2,$sub_con);
             }
+
             $loop_conjection_condition_count++;
 
             $loop_array_sub['sub_con'] = $loop_array_sub2;
@@ -175,94 +259,26 @@
             $sql.= generate_sub_sql_condition($loop_array_sub);
          }
       }
-
-      $response['data'] = $_POST;
-      $response['sql'] = $sql;
+      $response['query_data'] = query_data($sql,$conn);
+      $response['HTTP_post_data'] = $_POST;
+      $response['result_sql'] = $sql;
       $response['message'] = "success";
       $response['error'] = false;
    }
    else{
-      $response['sql'] = $sql;
-      $response['message'] = "ไม่พบรายการ";
-      $response['error'] = true;
+      
+      $sql = 'SELECT * FROM '.$table;
+
+      $response['query_data'] = query_data($sql,$conn);
+      $response['HTTP_post_data'] = $_POST;
+      $response['result_sql'] = $sql;
+      $response['message'] = "success";
+      $response['error'] = false;
+
+      // $response['result_sql'] = $sql;
+      // $response['message'] = "ไม่พบข้อมูล";
+      // $response['error'] = true;
    }
-
-
-
-
-
-   // $result = mysqli_query($conn,$sql);
-
-   // if($result){
-   //    $rowcount=mysqli_num_rows($result);
-
-   //    $data = array();
-
-   //    if($rowcount > 0){
-
-   //       while($row = mysqli_fetch_row($result)){
-
-   //          $data = array();
-      
-   //          $data['ลำดับที่'] = $row[1];
-      
-   //          // if($row[2] != 0){
-   //          //    $data['รายการ'] = "0".$row[2]."".$row[3];
-   //          // }
-   //          // else{
-   //          //    $data['รายการ'] = $row[3];
-   //          // }
-
-   //          $data['รายการ'] = $row[2]."".$row[3];
-            
-   //          $data['WBS'] = $row[4];
-   //          $data['วงเงินงบประมาณปัจจุบัน'] = $row[5];
-   //          $data['รวมจ่ายจริงถึงสิ้นปีก่อนหน้า'] = $row[6];
-   //          $data['รวมจ่ายจริงปีปัจจุบัน'] = $row[7];
-   //          $data['รวมจ่ายจริง'] = $row[8];
-   //          $data['เงินล่วงหน้าปีก่อนหน้า'] = $row[9];
-   //          $data['เงินประกันปีก่อนหน้า'] = $row[10];
-   //          $data['เงินล่วงหน้าปีปัจจุบัน'] = $row[11];
-   //          $data['เงินประกันปีปัจจุบัน'] = $row[12];
-   //          $data['เงินล่วงหน้าคงเหลือ'] = $row[13];
-   //          $data['เงินประกันค้างจ่าย'] = $row[14];
-   //          $data['รวมจ่ายทั้งสิ้นปีก่อนหน้า'] = $row[15];
-   //          $data['รวมจ่ายทั้งสิ้นปีปัจจุบัน'] = $row[16];
-   //          $data['รวมจ่ายทั้งสิ้น'] = $row[17];
-   //          $data['งบประมาณหักรวมจ่ายทั้งสั้น'] = $row[18];
-   //          $data['PO_หัก_รวมจ่ายจริง_PO'] = $row[19];
-   //          $data['งบประมาณหักรวมจ่ายจริง'] = $row[20];
-   //          $data['IR_คงเหลือ'] = $row[21];
-   //          $data['GR_คงเหลือ'] = $row[22];
-   //          $data['PO_คงเหลือ'] = $row[23];
-   //          $data['PR_คงเหลือ'] = $row[24];
-   //          $data['วงเงินคงเหลือยังไม่ดำเนินการ'] = $row[25];
-   //          $data['สถานะ'] = $row[26];
-   //          $data['วันที่สร้าง'] = $row[27];
-
-   //          $row_data[] = $data;
-      
-   //          $data['primary_key'] = $row[0];
-
-   //          $row_raw_data[] = $data;
-   //       }
-
-   //       $response['data'] = $row_data;
-   //       $response['raw_data'] = $row_raw_data;
-   //       $response['sql'] = $sql;
-   //       $response['error'] = false;
-   //    }
-   //    else{
-   //       $response['sql'] = $sql;
-   //       $response['message'] = "ไม่พบรายการ";
-   //       $response['error'] = true;
-   //    }   
-   // }
-   // else{
-   //    $response['sql'] = $sql;
-   //    $response['message'] = "ไม่พบรายการ";
-   //    $response['error'] = true;
-   // }
 
    echo json_encode($response);
 ?> 

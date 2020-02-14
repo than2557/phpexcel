@@ -617,20 +617,14 @@
                         <thead>
                            <tr>
                               <th width="5%"> 
-
-                              <!-- <input type="button" value="+" class="btn btn-success" id="add_condition"> -->
-                              
-                              <div class="dropdown " >
-                                  <input type="button" value="+" class="dropbtn btn btn-success">
- 
-                                <div class="dropdown-content" style="left:0;">
-                                  <span id="add_condition" condition_type="main_condition">เพิ่มเงื่อนไข</span>
-                                  <span id="add_sub_condition" condition_type="sub_condition">เพิ่มเงื่อนไขย่อย</span>
-                                  <!-- <a href="#" id="add_condition">เพิ่มเงื่อนไข</a>
-                                  <a href="#" id="add_sub_condition">เพิ่มเงื่อนไขย่อย</a> -->
+                                <div class="dropdown" >
+                                    <input type="button" value="+" class="dropbtn btn btn-success">
+  
+                                  <div class="dropdown-content" style="left:0;">
+                                    <span id="add_condition" condition_type="main_condition">เพิ่มเงื่อนไข</span>
+                                    <span id="add_sub_condition" condition_type="sub_condition">เพิ่มเงื่อนไขย่อย</span>
+                                  </div>
                                 </div>
-                              </div>
-                             
                               </th>
                               <th width="5%">ประเภท</th>
                               <th width="15%">ฟีลด์</th>
@@ -640,7 +634,12 @@
                         </thead>
                         <tbody id="append_condition">
                         </tbody>
-                      </table>         
+                      </table>      
+                        
+                      <br>
+                      <div class="result_table">
+                      </div>    
+                      <input  id="checkvoxclick" class="btn btn-success" type="button" value="click">
                   </div>
                </div>
              
