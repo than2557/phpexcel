@@ -45,7 +45,9 @@ $(document).ready(function() {
 
     // เมื่อ select box id = query เป็นค่าว่าง
     if ($("#query").val() == null) { 
-        alert("ไม่สามารถเรียกข้อมูลได้");
+        //alert("ไม่สามารถเรียกข้อมูลได้");
+        Swal.fire({  title:'ไม่สามารถเรียกข้อมูลได้!',
+        icon:'warning'})
     } else {
         $('#table_nameeeeeeeee').val($("#query").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     }
@@ -193,7 +195,11 @@ $(document).ready(function() {
 
         // check null value
         if (selected_value == 'null_value') {
-            alert("กรุณาเลือกเงื่อนไข")
+            //alert("กรุณาเลือกเงื่อนไข")
+            Swal.fire({
+                title:'กรุณาเลือกเงื่อนไข!',
+               icon: 'warning'
+            } )
         } 
         else if (selected_value == 'con_value') {
 
@@ -325,7 +331,12 @@ $(document).ready(function() {
 
                     // check error query
                     if(data.query_data == false){
-                        alert("ไม่พบข้อมูล")
+                        //alert("ไม่พบข้อมูล")
+                        Swal.fire({ 
+                            title: 'ไม่พบข้อมูล!',
+                        icon: 'error'}
+                           
+                          )
                     }
                     else{ 
 
