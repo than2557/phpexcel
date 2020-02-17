@@ -609,7 +609,8 @@
                   <div class="col-md-12 text-left">
                    <center>
                     <input type="button" value="ส่ง" class="btn btn-success" id="queryyyyy" name="queryyyyy">
-                    <input type="button" value="Reset" class="btn btn-danger" id="reset_condition" name="reset_condition">
+                    <input type="button" value="เคลียร์เงื่อนไข" class="btn btn-danger" id="reset_condition" name="reset_condition">
+                    <input type="button" value="เคลียร์ทั้งหมด" class="btn btn-danger" id="reset_all" name="reset_all">
                    </center>
                               <input type="hidden" id="table_nameeeeeeeee" name="table_nameeeeeeeee">
                               <br>
@@ -642,8 +643,8 @@
                       <div class="result_table">
                         <!-- div ตาราง ผลลัพธ์ query -->
                       </div>    
+                        <center><input  id="checkvoxclick" class="btn btn-success" type="button" value="click"></center>
                       
-                      <input  id="checkvoxclick" class="btn btn-success" type="button" value="click">
                   </div>
                </div>
              

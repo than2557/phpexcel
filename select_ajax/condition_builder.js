@@ -40,13 +40,15 @@ $(document).ready(function() {
 
     html_table_fields = populate_fields2(field);
 
+    // query result object
+    var query_result_object;
+
     // เมื่อ select box id = query เป็นค่าว่าง
     if ($("#query").val() == null) { 
         alert("ไม่สามารถเรียกข้อมูลได้");
     } else {
         $('#table_nameeeeeeeee').val($("#query").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     }
-
 
 
     $("#checkvoxclick").click(function(){
@@ -59,12 +61,6 @@ $(document).ready(function() {
         console.log(id)
     });
 
-
-
-
-
-
-    
     // on table name select box change
     $('#query').change(function() { // เมื่อเลือก select box 
         $('#table_nameeeeeeeee').val($(this).val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
@@ -266,6 +262,28 @@ $(document).ready(function() {
     // reset table condition button
     $("#reset_condition").click(function() {
 
+       
+
+        // clear console
+        console.clear;
+
+        // re variable
+        i = 1;
+        
+        // clear object
+        Object.keys(sub_con_count).forEach(function(key) {
+            delete sub_con_count[key]; 
+        })
+
+        // clear condition row
+        $("#append_condition").empty();
+
+    });
+
+    //reser all table and condition 
+    $("#reset_all").click(function(){
+    
+    
         // clear console
         console.clear;
 
@@ -282,6 +300,7 @@ $(document).ready(function() {
 
         // clear result table
         $(".result_table").empty();
+
     });
 
     // send condition to php file
@@ -310,6 +329,7 @@ $(document).ready(function() {
                     }
                     else{ 
 
+                        query_result_object = data;
                         // clear table result 
                         $(".result_table").empty();
 
@@ -324,6 +344,8 @@ $(document).ready(function() {
                 }
 
             });
+
+            console.log(query_result_object)
     });
 })
  
