@@ -538,20 +538,6 @@
   <div class="form-group" >
     <center>
 
-      <!-- <div id="webdatarocks_div" class="col-sm-12" style="width:1000px;height:1000px;background-color:#A6BBFF;margin-top:-20px;"" align="center" id="result" >
-        <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;">ตัวอย่างข้อมูล</h4></center>
-        <div id="webdatarocks_command">
-          <button class="btn btn-success" onclick="onlick_btn();">บันทึกข้อมูลและไฟล์</button>    
-                  
-        </div>
-        <br>
-        <div id="webdatarocks"></div>
-        
-        <link href="/phpexcel/lib/Webdatarocks/webdatarocks.min.css"  rel="stylesheet"/>
-        <script src="/phpexcel/lib/Webdatarocks/webdatarocks.toolbar.min.js" ></script>
-        <script src="/phpexcel/lib/Webdatarocks/webdatarocks.js" ></script>
-         <script type="text/javascript" src="select_ajax/webdatarocks_setting.js"></script>
-      </div> -->
       <style>
         .dropbtn {
           color: white;
@@ -594,7 +580,7 @@
           background-color: #3e8e41;
         }
 </style>
-      <div id="webdatarocks_div" class="col-sm-12" style="width:1000px;height:100%;background-color:#A6BBFF;margin-top:-20px;padding-bottom:5px;" align="center">
+      <div class="col-sm-12" style="width:1000px;height:100%;background-color:#A6BBFF;margin-top:-20px;padding-bottom:5px;" align="center">
         <br> 
         <div class="condition_builder" style="background-color:#E4F5FF;padding-bottom:5px;">
             <form method="post" name="get_query" id="get_query" >
@@ -607,11 +593,11 @@
                <div class="row" style="margin-left:1%;margin-right:1%;">     
                
                   <div class="col-md-12 text-left">
-                   <center>
-                    <input type="button" value="ส่ง" class="btn btn-success" id="queryyyyy" name="queryyyyy">
-                    <input type="button" value="เคลียร์เงื่อนไข" class="btn btn-danger" id="reset_condition" name="reset_condition">
-                    <input type="button" value="เคลียร์ทั้งหมด" class="btn btn-danger" id="reset_all" name="reset_all">
-                   </center>
+                    <center>
+                      <input type="button" value="ส่ง" class="btn btn-success" id="queryyyyy" name="queryyyyy">
+                      <input type="button" value="เคลียร์เงื่อนไข" class="btn btn-danger" id="reset_condition" name="reset_condition">
+                      <input type="button" value="เคลียร์ทั้งหมด" class="btn btn-danger" id="reset_all" name="reset_all">
+                    </center>
                               <input type="hidden" id="table_nameeeeeeeee" name="table_nameeeeeeeee">
                               <br>
 
@@ -638,22 +624,38 @@
                         <tbody id="append_condition">
                         </tbody>
                       </table>      
-                        
-                      <br>
+                    </div>
+                    <div class="col-md-12">
                       <div class="result_table">
-                        <!-- div ตาราง ผลลัพธ์ query -->
-                      </div>    
-                        <center><input  id="checkvoxclick" class="btn btn-success" type="button" value="click"></center>
-                      
-                  </div>
+                          <!-- div ตาราง ผลลัพธ์ query -->
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <center><input  id="checkvoxclick" class="btn btn-success" type="button" value="click"></center>
+                    </div>     
                </div>
              
             </form>
-         </div>     
-      </div>
-    
+         </div>    
+         <div class="result_condition" style="background-color:#E4F5FF;padding-bottom:5px;">
+          <div class="row" style="margin-left:1%;margin-right:1%;">
+            <!-- <div id="webdatarocks_command">
+              <button class="btn btn-success" onclick="onlick_btn();">บันทึกข้อมูลและไฟล์</button>    
+                      
+            </div> -->
+            <br>
+            <div id="webdatarocks"></div>
+            
+            <link href="/phpexcel/lib/Webdatarocks/webdatarocks.min.css"  rel="stylesheet"/>
+            <script src="/phpexcel/lib/Webdatarocks/webdatarocks.toolbar.min.js" ></script>
+            <script src="/phpexcel/lib/Webdatarocks/webdatarocks.js" ></script>
+            <!-- <script type="text/javascript" src="select_ajax/webdatarocks_setting.js"></script> -->
+          </div>
+        </div>   
+      </div> 
     </center> 
   </div>
+
   <script type="text/javascript" src="select_ajax/condition_builder.js"></script>  
 
   <script type="text/javascript" src="/phpexcel/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>

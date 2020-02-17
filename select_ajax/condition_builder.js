@@ -29,8 +29,14 @@ $(document).ready(function() {
         h26: "วันที่สร้าง"
     };
 
+    // raw data
+    var raw_data;
+
     // จำนวนแถวเงื่อนไข
     var i = 1;
+
+    // webdatarocks pivot table
+    var pivot;
 
     // HTML code select box
     var html_table_fields;
@@ -52,15 +58,81 @@ $(document).ready(function() {
         $('#table_nameeeeeeeee').val($("#query").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     }
 
-
     $("#checkvoxclick").click(function(){
-        var id = [];
+        // var id = [];
    
-        $('.result_row_checkbox:checkbox:checked').each(function(i){
-            id[i] = $(this).val();
-        });
+        // $('.result_row_checkbox:checkbox:checked').each(function(i){
+        //     id[i] = $(this).val();
+        // });
 
-        console.log(id)
+        $.ajax({
+            url: "select_ajax/get_condition_query2.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+            //url: "select_ajax/select_json_encode.php", // select dynamic field
+            method: "POST",
+            async: false,
+            dataType: "JSON", // response variable type
+            data: $('#get_query').serialize(), // get form data
+            error: function(jqXHR, text, error) { 
+                Swal.fire({ 
+                    title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
+                    icon: 'warning'}                
+                )
+            }
+        })
+        .done(function(data) { // response
+            console.log(data)
+            $("#get_query").hide();
+
+            pivot = new WebDataRocks({
+                container: "#webdatarocks",
+                beforetoolbarcreated: customizeToolbar,
+                toolbar: true,
+                height: "100vh",
+                width: "100vw",
+            
+                report: {
+                    dataSource: {
+                        dataSourceType: "json",
+                        data: getJSONData(data.result_sql)
+                    },
+                    options: {
+                        drillThrough: false
+                    }
+                },
+                global: { // แสดงเมนูภาษาไทยจากไฟล์ lang_th.json
+                    localization: "lib/lang_th.json"
+                }
+            });
+
+            // // check response is error
+            // if(!data.error){
+
+            //     // check error query
+            //     if(data.query_data == false){
+            //         //alert("ไม่พบข้อมูล")
+            //         Swal.fire({ 
+            //             title: 'ไม่พบข้อมูล!',
+            //             icon: 'error'}   
+            //         )
+            //     }
+            //     else{ 
+
+            //         query_result_object = data;
+            //         // clear table result 
+            //         $(".result_table").empty();
+
+            //         // show HTML table
+            //         $(".result_table").html(generate_table_result(data.query_data.raw_data));
+            //     }
+            // }
+            // else{
+
+            //     // alert error mssage
+            //     alert(data.message)
+            // }
+
+        });
+      
     });
 
     // on table name select box change
@@ -268,8 +340,6 @@ $(document).ready(function() {
     // reset table condition button
     $("#reset_condition").click(function() {
 
-       
-
         // clear console
         console.clear;
 
@@ -288,7 +358,6 @@ $(document).ready(function() {
 
     //reser all table and condition 
     $("#reset_all").click(function(){
-    
     
         // clear console
         console.clear;
@@ -311,7 +380,7 @@ $(document).ready(function() {
 
     // send condition to php file
     $("#queryyyyy").click(function() {
-
+       
         // send HTTP post
         $.ajax({
                 url: "select_ajax/get_condition_query.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
@@ -320,8 +389,11 @@ $(document).ready(function() {
                 async: false,
                 dataType: "JSON", // response variable type
                 data: $('#get_query').serialize(), // get form data
-                error: function(jqXHR, text, error) {
-                    alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+                error: function(jqXHR, text, error) { 
+                    Swal.fire({ 
+                        title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
+                        icon: 'warning'}                
+                      )
                 }
             })
             .done(function(data) { // response
@@ -334,9 +406,8 @@ $(document).ready(function() {
                         //alert("ไม่พบข้อมูล")
                         Swal.fire({ 
                             title: 'ไม่พบข้อมูล!',
-                        icon: 'error'}
-                           
-                          )
+                            icon: 'error'}   
+                        )
                     }
                     else{ 
 
@@ -410,4 +481,133 @@ function generate_table_result(data){
 
     // return HTML code
     return html;
+}
+
+// get JSON data format from database
+function getJSONData(sql) { // เรียกข้อมูลจากฐานข้อมูล
+
+    var response;
+
+    $.ajax({
+            url: "select_ajax/select_json_fx_field2.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+            //url: "select_ajax/select_json_encode.php", // select dynamic field
+            method: "POST",
+            async: false,
+            dataType: "JSON",
+            data: { sql: sql },
+            error: function(jqXHR, text, error) {
+                alert(error)
+            }
+        })
+        .done(function(data) {
+            response = data.data;
+            raw_data = data.raw_data;
+        });
+    return response
+}
+
+function customizeToolbar(toolbar) { // แก้ไข toolbar ของไลบรารี่ 
+
+    var tabs = toolbar.getTabs(); // get all tabs from the toolbar
+ 
+    toolbar.getTabs = function() {
+        delete tabs[0];
+        delete tabs[1];
+        delete tabs[2];
+        delete tabs[3];
+       
+        tabs.unshift(
+            {
+               id: "wdr-tab-default2",
+               title: "ขยายเซลล์",
+               handler: expand_cell,
+               icon: this.icons.options
+           }
+           , 
+            {
+               id: "wdr-tab-default2",
+               title: "ยุบเซลล์",
+               handler: collapse_cell,
+               icon: this.icons.options
+           },
+        //    {
+        //     id: "wdr-tab-lightblue",
+        //     title: "คำนวณ",
+        //     handler: calculate,
+        //     icon: this.icons.fields
+
+        //  }, 
+         {
+            id: "wdr-tab-default",
+            title: "เปิด",
+            handler: open_file,
+            icon: this.icons.open_local
+        }, 
+        {
+           id: "wdr-tab-default2",
+           title: "บันทึก",
+           handler: save_file,
+           icon: this.icons.save
+       }
+      
+      );
+        return tabs;
+    }
+    var calculate = function() {
+        foo1();
+    };
+    var open_file = function() {
+        open_file_tag();
+    };
+    var save_file = function(){
+        save_file_foo();
+    }
+    var expand_cell = function(){
+        func_expand_cell();
+    }
+    var collapse_cell = function(){
+        func_collpase_cell();
+    }
+}
+
+function func_expand_cell(){
+    webdatarocks.expandAllData();
+}
+function func_collpase_cell(){
+    webdatarocks.collapseAllData();
+}
+function open_file_tag(){
+    $("#open_file").click();
+}
+
+function save_file_foo(){
+
+    if(confirm("ยืนยันการบันทึกรูปแบบรายงาน")){
+        webdatarocks.save({
+            filename: $("#query").val()+'.json',
+            destination: "server",
+            url: "select_ajax/blank_post_ajax.php"
+        });
+    }
+
+   
+}
+function foo1() {
+
+    $("#select_test").empty();
+
+    let json_data = getJSONData($("#query").val());
+
+    $('#exampleModalLong').modal('show')
+
+    let key_obj = Object.keys(json_data[0])
+
+    for (var i = 0; i <= key_obj.length - 1; i++) {
+        $("#select_test").append("<option value='" + key_obj[i] + "'>" + key_obj[i] + "</option>");
+    }
+
+}
+
+function foo2() {
+    alert("foo2");
 }
