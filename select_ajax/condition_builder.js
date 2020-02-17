@@ -59,6 +59,12 @@ $(document).ready(function() {
         console.log(id)
     });
 
+
+
+
+
+
+    
     // on table name select box change
     $('#query').change(function() { // เมื่อเลือก select box 
         $('#table_nameeeeeeeee').val($(this).val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
