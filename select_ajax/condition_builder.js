@@ -80,8 +80,11 @@ $(document).ready(function() {
             }
         })
         .done(function(data) { // response
-            console.log(data)
+            //console.log(data)
+            
             $("#get_query").hide();
+
+            query_result_object = data;
 
             pivot = new WebDataRocks({
                 container: "#webdatarocks",
