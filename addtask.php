@@ -126,14 +126,18 @@ else{
 <div class="container">
 
 <card class="neumorphic" style="margin-top:-15%;width:300px;height:100px;"><h2 style="margin-left:15%;">เพิ่มขอมูลงาน</h2></card>
-<center><card class="neumorphic" style="width:700px;height:100px;margin-top:-5%;"> <form class="form-group"> 
+<center><card class="neumorphic" style="width:700px;height:100px;margin-top:-5%;"> 
+
+
+<form id="dataqy" class="form-group"> 
 <div class="row">
-<input type="text" id="id_user" value="<?php echo $_SESSION['id_user'];?>" hidden>
+
+<input type="text" id="id_user"  name="id_user" value="<?php echo $_SESSION['id_user'];?>" hidden>
 <label for="task" class="col-sm-1">งาน:</label>
-    <input type="text" id="task_name" class="form-control col-sm-2">
+    <input type="text" id="task_name" name="task_name" class="form-control col-sm-2">
 
 <label for="colum">คอลัมน์ :</label>
-<input type="button" onclick="gencolum()" id="addcolum" value="+">
+<input type="button" onclick="gencolum()"  class="btn btn-success" id="addcolum" value="+">
 <input type="button" onclick="test()" class="btn btn-danger" value="reset" style="height:40px;width:100px;margin-left:10px;">
 <input  style="margin-left:6%;margin-top:1%;" type="button"  class="btn btn-success" onclick="insert()" value="Submit">
 
@@ -170,16 +174,13 @@ else{
 
 
     function insert(){
-        var task_name = document.getElementById("task_name").value;
-        var id_user = document.getElementById("id_user").value;
-        console.log(task_name);
-        console.log(id_user);
+        
         $.ajax({
     url: "insert_task.php", 
     method: "POST",
     async: false,
     datatype:'json',
-    data: { task_name: task_name,id_user:id_user },
+    data: $('#dataqy').serialize(),
     error: function(jqXHR, text, error) {
         alert(error)
     }
@@ -202,7 +203,7 @@ function gencolum()
      
         let html = '';
         html += '<tr>';
-        html += '<td><input name="colum[]" class="condition_type_row" value=""></td>';
+        html += '<td><input id="colum[]" name="colum[]" class="condition_type_row" value=""></td>';
         html += '</tr>';
 
         $('#gencolum').append(html);
