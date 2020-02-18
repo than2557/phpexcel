@@ -7,8 +7,13 @@
 <head>
 
   <?php  
-		include_once("configDB.php");
-		$conn = $DBconnect;
+    include_once("configDB.php");
+    $conn = $DBconnect;
+
+    $user_id = $_SESSION['id_user'];
+    $sql = "SELECT * FROM `task_user` WHERE `user_id`=$user_id"; 
+    $result = mysqli_query($conn,$sql);
+   
   ?>
 
   <meta charset="UTF-8">
@@ -21,7 +26,50 @@
   <link rel="stylesheet" href="/phpexcel/lib/Bootstrap_4/bootstrap.min.css">
   <script src="/phpexcel/lib/Jquery/jquery.js"></script>
   <script src="/phpexcel/lib/Bootstrap_4/bootstrap.min.js"></script>
-  
+  <script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+function inserttoken(){
+  $.ajax({
+    url: "insert_token.php", 
+    method: "POST",
+    async: false,
+    datatype:'json',
+    data: $('#insert').serialize(),
+    error: function(jqXHR, text, error) {
+        alert(error)
+    }
+  })
+  .done(function(data) {
+    Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'บันทึกโทเคนเสร็จสิ้น',
+  showConfirmButton: false,
+  timer: 1500
+})
+  });
+
+
+}
+</script>
   <style>
   body,h1,h2,h3,h4,h5,a,label{font-family: 'Sriracha', cursive;}
     label {
@@ -110,7 +158,7 @@
       <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลไลน์โทเคน</h2></center>
     </card>
     <card class="neumorphic" style="width:900px;margin-left:10%;height:200px;margin-top:-70px;" >
-      <form autocomplete="off" class="form-horizontal">
+      <form autocomplete="off" class="form-horizontal" id="insert">
         <div class="col-md-12">
           <div class="row">
             <label for="tokename" style="margin-left:20px">ชื่อโทเคน :</label>
@@ -121,7 +169,16 @@
 
               <input type="file" id="open_file" style="display:none;">
               <label for="task_id" class="col-sm-1">งาน:</label>
-              <select name="" id="task_id" class="form-control control-label"  style="width:150px;"></select>
+              <select name="task_id" id="task_id" class="form-control control-label"  style="width:150px;">
+              <?php
+              
+              
+              while($row = mysqli_fetch_array($result)){ 
+                           echo '<option value="'.$row['task_user_id'].'">'.$row['task_name'].'</option>'; 
+                       } ?> 
+            
+            </select>
+
 
           
                              
@@ -131,7 +188,7 @@
 
 
     <div>
-       <center> <butt type="submit" class="btn btn-success" style="margin-top:100px;">บันทึก</button></center>
+       <center> <butt type="submit" onclick="inserttoken()" class="btn btn-success" style="margin-top:100px;">บันทึก</button></center>
     
   
       <div>
