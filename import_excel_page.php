@@ -205,6 +205,18 @@ card {
          <div class="loading_page"></div>
          <form id="export_excel" method="POST">
             <div class="row">
+               <label for="task_user_id" style="margin-left:40px;">ชื่องาน:</label>
+               <select name="task_user_id" id="task_user_id" class="form-control" style="width:200px;margin-left:10px;">
+
+
+               <?php while($row = mysqli_fetch_array($result)){ 
+                                    echo '<option value="'.$row[task_user_id ].'">'.$row[task_name].'</option>'; 
+                                } ?> 
+
+               </select>
+   </div>
+   <br>
+            <div class="row">
                <div style="margin-left:30px;">
                   <label for="tb_name">ชื่อตาราง:</label>
                </div>   

@@ -318,8 +318,8 @@ $(document).ready(function(){
 /* ====================== *
  *  Initiate Canvas       *
  * ====================== */
-paper.install(window);
-paper.setup(document.getElementById("canvas"));
+// paper.install(window);
+// paper.setup(document.getElementById("canvas"));
 
 // Paper JS Variables
 var canvasWidth, 
