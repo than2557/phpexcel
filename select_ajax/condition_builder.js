@@ -59,8 +59,8 @@ $(document).ready(function() {
     }
 
     $("#checkvoxclick").click(function(){
+
         // var id = [];
-   
         // $('.result_row_checkbox:checkbox:checked').each(function(i){
         //     id[i] = $(this).val();
         // });
@@ -80,12 +80,15 @@ $(document).ready(function() {
             }
         })
         .done(function(data) { // response
-            //console.log(data)
-            
-            $("#get_query").hide();
+              // submit button alert form
+            $("#btn_submit_alert").css("display","");
+            $("#btn_back").css("display","");
+            // condition table fade out animation 
+            $("#get_query").fadeOut(500);
 
             query_result_object = data;
 
+            // pivot table
             pivot = new WebDataRocks({
                 container: "#webdatarocks",
                 beforetoolbarcreated: customizeToolbar,
@@ -106,34 +109,6 @@ $(document).ready(function() {
                     localization: "lib/lang_th.json"
                 }
             });
-
-            // // check response is error
-            // if(!data.error){
-
-            //     // check error query
-            //     if(data.query_data == false){
-            //         //alert("ไม่พบข้อมูล")
-            //         Swal.fire({ 
-            //             title: 'ไม่พบข้อมูล!',
-            //             icon: 'error'}   
-            //         )
-            //     }
-            //     else{ 
-
-            //         query_result_object = data;
-            //         // clear table result 
-            //         $(".result_table").empty();
-
-            //         // show HTML table
-            //         $(".result_table").html(generate_table_result(data.query_data.raw_data));
-            //     }
-            // }
-            // else{
-
-            //     // alert error mssage
-            //     alert(data.message)
-            // }
-
         });
       
     });
@@ -190,7 +165,7 @@ $(document).ready(function() {
         if(sub_con_count["sub_con"+i] = undefined){}
         else{sub_con_count["sub_con"+i] = 0;}
 
-       // check first row
+        // check first row
         if(i == 1 ){
             html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="'+i+'">';
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "'+i+'"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
@@ -592,8 +567,6 @@ function save_file_foo(){
             url: "select_ajax/blank_post_ajax.php"
         });
     }
-
-   
 }
 function foo1() {
 

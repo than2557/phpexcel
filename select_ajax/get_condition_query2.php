@@ -1,4 +1,7 @@
 <?php
+
+   // SELECT DISTINCT(SUBSTR(h3,8,3)) as WBS FROM `tb_test2`
+
 // return main sql condition
 function generate_main_sql_condition($conditions){
    $sql = '';
@@ -97,7 +100,6 @@ function generate_sub_sql_condition($conditions){
    return $sql;
 }
 
-
 // query data
 function query_data($sql,$conn){
 
@@ -176,6 +178,8 @@ function query_data($sql,$conn){
       return false;
    }
 }
+
+
    require('configDB.php'); // เรียกไฟล์ configDB.php
 
    $conn = $DBconnect; // ตัวแปรเชื่อมต่อฐานข้อมูล
@@ -279,6 +283,7 @@ function query_data($sql,$conn){
    }
 
    if(!empty($_POST['row_id'])){
+
       $sql .= ' AND table_name_id IN (';
       
       $record_count = count($_POST['row_id']);
@@ -305,4 +310,5 @@ function query_data($sql,$conn){
       $response['message'] = "success";
       $response['error'] = false;
    }  
+
    echo json_encode($response);

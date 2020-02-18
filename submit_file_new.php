@@ -478,12 +478,6 @@
       </div>
    </div>
    </div>
-
-
-
-
-
-
   <div class="container" >
     <card class="neumorphic" style="margin-top:-250px;height:100px;margin-left:10%;">
       <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
@@ -502,14 +496,14 @@
 
             <label class="control-label" style="margin-left:30px;">ชื่อตาราง :</label>
                  <?php 
-                                $sql = "SELECT * FROM task_user WHERE user_id = '".$_SESSION["id_user"]."'";
-                                $result = mysqli_query($conn,$sql);
-                            ?>  
-                            <select class="form-control col-md-2" data-live-search="true" data-placeholder="ชื่อตาราง" name="query" id="query" style="width:300px;margin-left:30px;">
-                                <?php while($row = mysqli_fetch_array($result)){ 
-                                    echo '<option value="'.$row[1].'">'.$row[1].'</option>'; 
-                                } ?> 
-                            </select>    
+                       $sql = "SELECT * FROM task_user WHERE user_id = '".$_SESSION["id_user"]."'";
+                       $result = mysqli_query($conn,$sql);
+                   ?>  
+                   <select class="form-control col-md-2" data-live-search="true" data-placeholder="ชื่อตาราง" name="query" id="query" style="width:300px;margin-left:30px;">
+                       <?php while($row = mysqli_fetch_array($result)){ 
+                           echo '<option value="'.$row[1].'">'.$row[1].'</option>'; 
+                       } ?> 
+                   </select>    
                                  
     </div>
     </div>
@@ -583,13 +577,20 @@
       <div class="col-sm-12" style="width:1000px;height:100%;background-color:#A6BBFF;margin-top:-20px;padding-bottom:5px;" align="center">
         <br> 
         <div class="condition_builder" style="background-color:#E4F5FF;padding-bottom:5px;">
-            <form method="post" name="get_query" id="get_query" >
+        <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;padding-top:1%;">จัดการข้อมูล</h4></center>
+        
+        <div class="row">
+          <div class="col-md-12">
+          <center><input style="display:none;" type="button" value="บันทึกข้อมูล" class="btn btn-success" name="btn_submit_alert" id="btn_submit_alert">
+    <input style="display:none;" type="button" value="ย้อนกลับ" class="btn btn-warning" name="btn_back" id="btn_back"></center> 
+       </div>
 
-
+        </div>
+      
+        
+        <form method="post" name="get_query" id="get_query" >
                 <!-- JSON data count sub condition   -->
                 <input type="hidden" name="sub_row_data_count" id="sub_row_data_count" >
-                
-               <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;padding-top:1%;">จัดการข้อมูล</h4></center>
                <div class="row" style="margin-left:1%;margin-right:1%;">     
                
                   <div class="col-md-12 text-left">

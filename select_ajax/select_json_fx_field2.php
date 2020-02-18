@@ -3,12 +3,14 @@
 
    $select_sql = 'SELECT * FROM tb_test45 WHERE h2_1 <= "02" AND h2_1 != "" ORDER BY table_name_id';
 
-
     $conn = $DBconnect;
  
     $response = array();
+
     $row_data = array();
+
     $row_raw_data = array();
+
     if(isset($_POST['sql'])){
 
       //$tb_name = $_POST['table_name']; 
