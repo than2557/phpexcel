@@ -75,10 +75,7 @@ else{
       position: absolute;
       top: 50vh;
       left: 50vw;
-      width: 400px;
-      height: 300px;
-      max-width: 80vw;
-      max-height: 80vh;
+      
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
       box-sizing: border-box;
@@ -96,6 +93,12 @@ else{
 
     background:#f5f5f0;
     }
+ #divtable{
+  background: #f5f7f7;
+  margin-top:10%;
+  width:600px;
+  margin-top:%;
+ }
 
 </style>
 </head>
@@ -104,7 +107,7 @@ else{
 <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:240px;font-weight:bold" id="mySidebar"><br>
 <a  style="width:45%;" class="w3-round"></a><br><br>
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
-  <img src="<?php echo $_SESSION['img_em']; ?>"  style="width:45%;height:15%;" class="w3-round"  alt="picture"/>
+  <img src="https://plms.pea.co.th/Personal/EmployeeImage?EmpCode=<?php echo $_SESSION['username']; ?>"   style="width:45%;height:15%;" class="w3-round"  alt="picture"/>
   <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">username : <?php echo $_SESSION['username'];?></a> 
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a> 
   <a href="import_excel_page.php" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
@@ -120,22 +123,49 @@ else{
 </header>
 
 
-<div class="contrainer">
-<div class="row" style="margin-left:40%;margin-top:20%;">
-<card class="neumorphic" style="margin-top:-15%;width:300px;height:100px;"><h2 style="margin-left:15%;">เพิ่มขอมูลงาน</h2></card>
-<center><card class="neumorphic"> <form class="form-inline"> 
+<div class="container">
 
+<card class="neumorphic" style="margin-top:-15%;width:300px;height:100px;"><h2 style="margin-left:15%;">เพิ่มขอมูลงาน</h2></card>
+<center><card class="neumorphic" style="width:700px;height:100px;margin-top:-5%;"> <form class="form-group"> 
+<div class="row">
 <input type="text" id="id_user" value="<?php echo $_SESSION['id_user'];?>" hidden>
-<label for="task" class="col-sm-2" style="margin-top:30%;">งาน:</label>
-    <input type="text" id="task_name" class="form-control col-sm-5" style="margin-top:30%;">
-<input  style="margin-left:5%;margin-top:30%;"" type="button"  class="btn btn-success" onclick="insert()" value="Submit" >
+<label for="task" class="col-sm-1">งาน:</label>
+    <input type="text" id="task_name" class="form-control col-sm-2">
+
+<label for="colum">คอลัมน์ :</label>
+<input type="button" onclick="gencolum()" id="addcolum" value="+">
+<input type="button" onclick="test()" class="btn btn-danger" value="reset" style="height:40px;width:100px;margin-left:10px;">
+<input  style="margin-left:6%;margin-top:1%;" type="button"  class="btn btn-success" onclick="insert()" value="Submit">
+
+</div>
+<div style="width:700px;background: #aee0ee;">
+<div id="divtable">
+<table class="table table-striped">
+  
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ชื่อตาราง</th>
+    
+    </tr>
+  </thead>
+ 
+  <tbody id="gencolum">
+   
+ 
+  </tbody>
+</table>
+  </div>
+</div>
 
     </form>
     </card>
     </center>
-    </div>
+   
     </div>
 </body>
+
+
+
 <script>
 
 
@@ -165,5 +195,29 @@ else{
   });
                 
 }
+
+function gencolum()
+     {
+
+     
+        let html = '';
+        html += '<tr>';
+        html += '<td><input name="colum[]" class="condition_type_row" value=""></td>';
+        html += '</tr>';
+
+        $('#gencolum').append(html);
+
+
+    }
+
+function test(){
+  // alert("TEST");
+  $('#gencolum').empty();
+
+
+}
+
+
+
 </script>
 </html>

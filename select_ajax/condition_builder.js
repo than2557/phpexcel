@@ -42,7 +42,7 @@ $(document).ready(function() {
     var html_table_fields;
 
     // ประกาศ object ว่าง
-    var sub_con_count = new Object(); 
+    var sub_con_count = new Object();
 
     html_table_fields = populate_fields2(field);
 
@@ -50,15 +50,17 @@ $(document).ready(function() {
     var query_result_object;
 
     // เมื่อ select box id = query เป็นค่าว่าง
-    if ($("#query").val() == null) { 
+    if ($("#query").val() == null) {
         //alert("ไม่สามารถเรียกข้อมูลได้");
-        Swal.fire({  title:'ไม่สามารถเรียกข้อมูลได้!',
-        icon:'warning'})
+        Swal.fire({
+            title: 'ไม่สามารถเรียกข้อมูลได้!',
+            icon: 'warning'
+        })
     } else {
         $('#table_nameeeeeeeee').val($("#query").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     }
 
-    $("#checkvoxclick").click(function(){
+    $("#checkvoxclick").click(function() {
 
         // var id = [];
         // $('.result_row_checkbox:checkbox:checked').each(function(i){
@@ -66,51 +68,51 @@ $(document).ready(function() {
         // });
 
         $.ajax({
-            url: "select_ajax/get_condition_query2.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
-            //url: "select_ajax/select_json_encode.php", // select dynamic field
-            method: "POST",
-            async: false,
-            dataType: "JSON", // response variable type
-            data: $('#get_query').serialize(), // get form data
-            error: function(jqXHR, text, error) { 
-                Swal.fire({ 
-                    title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
-                    icon: 'warning'}                
-                )
-            }
-        })
-        .done(function(data) { // response
-              // submit button alert form
-            $("#btn_submit_alert").css("display","");
-            $("#btn_back").css("display","");
-            // condition table fade out animation 
-            $("#get_query").fadeOut(500);
-
-            query_result_object = data;
-
-            // pivot table
-            pivot = new WebDataRocks({
-                container: "#webdatarocks",
-                beforetoolbarcreated: customizeToolbar,
-                toolbar: true,
-                height: "100vh",
-                width: "100vw",
-            
-                report: {
-                    dataSource: {
-                        dataSourceType: "json",
-                        data: getJSONData(data.result_sql)
-                    },
-                    options: {
-                        drillThrough: false
-                    }
-                },
-                global: { // แสดงเมนูภาษาไทยจากไฟล์ lang_th.json
-                    localization: "lib/lang_th.json"
+                url: "select_ajax/get_condition_query2.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+                //url: "select_ajax/select_json_encode.php", // select dynamic field
+                method: "POST",
+                async: false,
+                dataType: "JSON", // response variable type
+                data: $('#get_query').serialize(), // get form data
+                error: function(jqXHR, text, error) {
+                    Swal.fire({
+                        title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
+                        icon: 'warning'
+                    })
                 }
+            })
+            .done(function(data) { // response
+                // submit button alert form
+                $("#btn_submit_alert").css("display", "");
+                $("#btn_back").css("display", "");
+                // condition table fade out animation 
+                $("#get_query").fadeOut(500);
+
+                query_result_object = data;
+
+                // pivot table
+                pivot = new WebDataRocks({
+                    container: "#webdatarocks",
+                    beforetoolbarcreated: customizeToolbar,
+                    toolbar: true,
+                    height: "100vh",
+                    width: "100vw",
+
+                    report: {
+                        dataSource: {
+                            dataSourceType: "json",
+                            data: getJSONData(data.result_sql)
+                        },
+                        options: {
+                            drillThrough: false
+                        }
+                    },
+                    global: { // แสดงเมนูภาษาไทยจากไฟล์ lang_th.json
+                        localization: "lib/lang_th.json"
+                    }
+                });
             });
-        });
-      
+
     });
 
     // on table name select box change
@@ -156,70 +158,68 @@ $(document).ready(function() {
     })
 
     // on click button add sub condition row
-    $("#add_sub_condition").click(function(){
+    $("#add_sub_condition").click(function() {
 
         // HTML code sub condition 
         let html = '';
 
         // check object property is undefined
-        if(sub_con_count["sub_con"+i] = undefined){}
-        else{sub_con_count["sub_con"+i] = 0;}
+        if (sub_con_count["sub_con" + i] = undefined) {} else { sub_con_count["sub_con" + i] = 0; }
 
         // check first row
-        if(i == 1 ){
-            html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="'+i+'">';
-            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "'+i+'"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
+        if (i == 1) {
+            html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="' + i + '">';
+            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "' + i + '"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
             html += '<td colspan="1"></td>';
             html += '<td colspan="1"><label>เลือกตัวเชื่อมเงื่อนไข</label></td>';
-            html += '<td colspan="1"> <input class="form-control sub_con_optlist" type="text" name="sub_con_optlist[]" readonly value=""></input></td>';  
+            html += '<td colspan="1"> <input class="form-control sub_con_optlist" type="text" name="sub_con_optlist[]" readonly value=""></input></td>';
+            html += '<td colspan="1"></td>';
+            html += '</tr>';
+        } else {
+            html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="' + i + '">';
+            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "' + i + '"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
+            html += '<td colspan="1"></td>';
+            html += '<td colspan="1"><label>เลือกตัวเชื่อมเงื่อนไข</label></td>';
+            html += '<td colspan="1"><select class="form-control sub_con_optlist" name="sub_con_optlist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
             html += '<td colspan="1"></td>';
             html += '</tr>';
         }
-        else{
-            html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="'+i+'">';
-            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "'+i+'"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
-            html += '<td colspan="1"></td>';
-            html += '<td colspan="1"><label>เลือกตัวเชื่อมเงื่อนไข</label></td>';
-            html += '<td colspan="1"><select class="form-control sub_con_optlist" name="sub_con_optlist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';  
-            html += '<td colspan="1"></td>';
-            html += '</tr>';
-        }
-      
+
         // append HTML code
         $('#append_condition').append(html);
-        
+
         // increase row index
         i++;
- 
+
     });
 
     // on click button add sub condition
-    $(document).on('click', '.add_sub_con' , function(){
+    $(document).on('click', '.add_sub_con', function() {
 
         // get row id
         let btn_obj = $(this).attr("row_id");
-        
+
         // increase row id count condition
-        sub_con_count["sub_con"+btn_obj] ++ ;
+        sub_con_count["sub_con" + btn_obj]++;
 
         // แปลง Object เป็น String
         $("#sub_row_data_count").val(JSON.stringify(sub_con_count));
-   
+
         // HTML code
         let html = '';
-        
+
         // check sub condition first row
-        if (sub_con_count["sub_con"+btn_obj] == 1) {
-            html += '<tr name="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'" id="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'">';
-            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
+        if (sub_con_count["sub_con" + btn_obj] == 1) {
+            html += '<tr name="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '" id="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '">';
+            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
             html += '<td><input class="form-control sub_oplist" type="text" name="sub_oplist[]" readonly value=""></td>';
             html += '<td><select class="form-control sub_fieldlist" name="sub_fieldlist[]" data-live-search="true">' + html_table_fields + '</select></td>';
             html += '<td><input class="form-control sub_condition_opv" type="text" name="sub_condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
             html += '<td id="sub_con_selector_field4"><select class="form-control sub_valuelist" name="sub_valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
             html += '</tr>';
         } else {
-            html += '<tr name="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'" id="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'">';
-            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_'+sub_con_count["sub_con"+btn_obj]+'"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
+            html += '<tr name="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '" id="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '">';
+            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
             html += '<td><select class="form-control sub_oplist" name="sub_oplist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
             html += '<td><select class="form-control sub_fieldlist" name="sub_fieldlist[]"  data-live-search="true">' + html_table_fields + '</select></td>';
             html += '<td><input class="form-control sub_condition_opv" type="text" name="sub_condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
@@ -231,7 +231,7 @@ $(document).ready(function() {
         $('#append_condition').append(html);
     });
 
-     // on change fields select box in main condition
+    // on change fields select box in main condition
     $(document).on('change', '.main_valuelist', function() {
 
         // get tr object
@@ -247,11 +247,10 @@ $(document).ready(function() {
         if (selected_value == 'null_value') {
             //alert("กรุณาเลือกเงื่อนไข")
             Swal.fire({
-                title:'กรุณาเลือกเงื่อนไข!',
-               icon: 'warning'
-            } )
-        } 
-        else if (selected_value == 'con_value') {
+                title: 'กรุณาเลือกเงื่อนไข!',
+                icon: 'warning'
+            })
+        } else if (selected_value == 'con_value') {
 
             // HTML code
             let html = '';
@@ -259,14 +258,13 @@ $(document).ready(function() {
             // input box
             html += "<input class='form-control main_condition_value_input'  type='text' name='main_condition_value_input[]'   placeholder='กรอกค่า'/>";
             html += "<input class='form-control main_condition_value_type' type='hidden' name='main_condition_value_type[]'  value='con_value'/>";
-            
+
             // clear cell in td
             $("tr[id='" + row_id + "'] td[id='selector_field4']").empty();
 
             // show HTML code
             $("tr[id='" + row_id + "'] td[id='selector_field4']").html(html);
-        } 
-        else if (selected_value == 'con_fields') {
+        } else if (selected_value == 'con_fields') {
 
             // HTML code
             let html = '';
@@ -274,7 +272,7 @@ $(document).ready(function() {
             // input box
             html += '<select class="form-control main_condition_value_input"  name="main_condition_value_input[]" >' + html_table_fields + '</select>';
             html += "<input class='form-control main_condition_value_type' type='hidden' name='main_condition_value_type[]'  value='con_fields'/>";
-            
+
             // clear cell in td
             $("tr[id='" + row_id + "'] td[id='selector_field4']").empty();
 
@@ -295,7 +293,7 @@ $(document).ready(function() {
 
         // get selected value
         let selected_value = $(this).val();
- 
+
         // check null value
         if (selected_value == 'null_value') {
             alert("กรุณาเลือกเงื่อนไข")
@@ -303,7 +301,7 @@ $(document).ready(function() {
             let html = '';
             html += "<input class='form-control sub_condition_value_input'  type='text' name='sub_condition_value_input[]'   placeholder='กรอกค่า'/>";
             html += "<input class='form-control sub_condition_value_type' type='hidden' name='sub_condition_value_type[]'  value='con_value'/>";
-            $("tr[id='"+row_id+"'] td[id='sub_con_selector_field4']").empty();
+            $("tr[id='" + row_id + "'] td[id='sub_con_selector_field4']").empty();
             $("tr[id='" + row_id + "'] td[id='sub_con_selector_field4']").html(html);
         } else if (selected_value == 'con_fields') {
             let html = '';
@@ -323,10 +321,10 @@ $(document).ready(function() {
 
         // re variable
         i = 1;
-        
+
         // clear object
         Object.keys(sub_con_count).forEach(function(key) {
-            delete sub_con_count[key]; 
+            delete sub_con_count[key];
         })
 
         // clear condition row
@@ -335,17 +333,17 @@ $(document).ready(function() {
     });
 
     //reser all table and condition 
-    $("#reset_all").click(function(){
-    
+    $("#reset_all").click(function() {
+
         // clear console
         console.clear;
 
         // re variable
         i = 1;
-        
+
         // clear object
         Object.keys(sub_con_count).forEach(function(key) {
-            delete sub_con_count[key]; 
+            delete sub_con_count[key];
         })
 
         // clear condition row
@@ -358,7 +356,7 @@ $(document).ready(function() {
 
     // send condition to php file
     $("#queryyyyy").click(function() {
-       
+
         // send HTTP post
         $.ajax({
                 url: "select_ajax/get_condition_query.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
@@ -367,27 +365,26 @@ $(document).ready(function() {
                 async: false,
                 dataType: "JSON", // response variable type
                 data: $('#get_query').serialize(), // get form data
-                error: function(jqXHR, text, error) { 
-                    Swal.fire({ 
+                error: function(jqXHR, text, error) {
+                    Swal.fire({
                         title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
-                        icon: 'warning'}                
-                      )
+                        icon: 'warning'
+                    })
                 }
             })
             .done(function(data) { // response
- 
+
                 // check response is error
-                if(!data.error){
+                if (!data.error) {
 
                     // check error query
-                    if(data.query_data == false){
+                    if (data.query_data == false) {
                         //alert("ไม่พบข้อมูล")
-                        Swal.fire({ 
+                        Swal.fire({
                             title: 'ไม่พบข้อมูล!',
-                            icon: 'error'}   
-                        )
-                    }
-                    else{ 
+                            icon: 'error'
+                        })
+                    } else {
 
                         query_result_object = data;
                         // clear table result 
@@ -396,8 +393,7 @@ $(document).ready(function() {
                         // show HTML table
                         $(".result_table").html(generate_table_result(data.query_data.raw_data));
                     }
-                }
-                else{
+                } else {
 
                     // alert error mssage
                     alert(data.message)
@@ -405,10 +401,10 @@ $(document).ready(function() {
 
             });
 
-            console.log(query_result_object)
+        console.log(query_result_object)
     });
 })
- 
+
 // generate fields options in select box
 function populate_fields2(field2) {
 
@@ -425,11 +421,11 @@ function populate_fields2(field2) {
 }
 
 // generate table result
-function generate_table_result(data){
+function generate_table_result(data) {
 
     // row count
     let row = 1;
-    
+
     // HTML code
     let html = '';
 
@@ -440,14 +436,14 @@ function generate_table_result(data){
     html += '<tbody>';
 
     // loop query data
-    Object.keys(data).forEach(function(k){
+    Object.keys(data).forEach(function(k) {
 
         html += '<tr>';
-        html += '<td class="text-center"><input type="checkbox" name="row_id[]" class="result_row_checkbox" value="'+data[k]['primary_key']+'" /></td>';
-        html += '<td class="text-center"><b>'+row+'</b></td>';  
-        html += '<td class="text-left">'+data[k]['ลำดับที่']+'</td>';
-        html += '<td class="text-left">'+data[k]['รายการ']+'</td>';
-        html += '<td class="text-left">'+data[k]['WBS']+'</td>';
+        html += '<td class="text-center"><input type="checkbox" name="row_id[]" class="result_row_checkbox" value="' + data[k]['primary_key'] + '" /></td>';
+        html += '<td class="text-center"><b>' + row + '</b></td>';
+        html += '<td class="text-left">' + data[k]['ลำดับที่'] + '</td>';
+        html += '<td class="text-left">' + data[k]['รายการ'] + '</td>';
+        html += '<td class="text-left">' + data[k]['WBS'] + '</td>';
         html += '</tr>';
         row++;
 
@@ -487,48 +483,44 @@ function getJSONData(sql) { // เรียกข้อมูลจากฐา�
 function customizeToolbar(toolbar) { // แก้ไข toolbar ของไลบรารี่ 
 
     var tabs = toolbar.getTabs(); // get all tabs from the toolbar
- 
+
     toolbar.getTabs = function() {
         delete tabs[0];
         delete tabs[1];
         delete tabs[2];
         delete tabs[3];
-       
-        tabs.unshift(
-            {
-               id: "wdr-tab-default2",
-               title: "ขยายเซลล์",
-               handler: expand_cell,
-               icon: this.icons.options
-           }
-           , 
-            {
-               id: "wdr-tab-default2",
-               title: "ยุบเซลล์",
-               handler: collapse_cell,
-               icon: this.icons.options
-           },
-        //    {
-        //     id: "wdr-tab-lightblue",
-        //     title: "คำนวณ",
-        //     handler: calculate,
-        //     icon: this.icons.fields
 
-        //  }, 
-         {
-            id: "wdr-tab-default",
-            title: "เปิด",
-            handler: open_file,
-            icon: this.icons.open_local
-        }, 
-        {
-           id: "wdr-tab-default2",
-           title: "บันทึก",
-           handler: save_file,
-           icon: this.icons.save
-       }
-      
-      );
+        tabs.unshift({
+                id: "wdr-tab-default2",
+                title: "ขยายเซลล์",
+                handler: expand_cell,
+                icon: this.icons.options
+            }, {
+                id: "wdr-tab-default2",
+                title: "ยุบเซลล์",
+                handler: collapse_cell,
+                icon: this.icons.options
+            },
+            //    {
+            //     id: "wdr-tab-lightblue",
+            //     title: "คำนวณ",
+            //     handler: calculate,
+            //     icon: this.icons.fields
+
+            //  }, 
+            {
+                id: "wdr-tab-default",
+                title: "เปิด",
+                handler: open_file,
+                icon: this.icons.open_local
+            }, {
+                id: "wdr-tab-default2",
+                title: "บันทึก",
+                handler: save_file,
+                icon: this.icons.save
+            }
+
+        );
         return tabs;
     }
     var calculate = function() {
@@ -537,37 +529,40 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
     var open_file = function() {
         open_file_tag();
     };
-    var save_file = function(){
+    var save_file = function() {
         save_file_foo();
     }
-    var expand_cell = function(){
+    var expand_cell = function() {
         func_expand_cell();
     }
-    var collapse_cell = function(){
+    var collapse_cell = function() {
         func_collpase_cell();
     }
 }
 
-function func_expand_cell(){
+function func_expand_cell() {
     webdatarocks.expandAllData();
 }
-function func_collpase_cell(){
+
+function func_collpase_cell() {
     webdatarocks.collapseAllData();
 }
-function open_file_tag(){
+
+function open_file_tag() {
     $("#open_file").click();
 }
 
-function save_file_foo(){
+function save_file_foo() {
 
-    if(confirm("ยืนยันการบันทึกรูปแบบรายงาน")){
+    if (confirm("ยืนยันการบันทึกรูปแบบรายงาน")) {
         webdatarocks.save({
-            filename: $("#query").val()+'.json',
+            filename: $("#query").val() + '.json',
             destination: "server",
             url: "select_ajax/blank_post_ajax.php"
         });
     }
 }
+
 function foo1() {
 
     $("#select_test").empty();
