@@ -204,8 +204,8 @@ function gencolum()
      
         let html = '';
         html += '<tr>';
-        html += '<td><input id="colum[]" name="colum[]" class="condition_type_row" value=""></td>';
-        html += '<td><input id="datatype[]" name="datatype[]" class="condition_type_row" value=""></td>';
+        html += '<td><input class="form-control" id="colum[]" name="colum[]" class="condition_type_row" value=""></td>';
+        html += '<td><input  class="form-control" id="datatype[]" name="datatype[]" class="condition_type_row" value=""></td>';
         html += '</tr>';
 
         $('#gencolum').append(html);
