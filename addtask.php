@@ -204,8 +204,8 @@ function gencolum()
      
         let html = '';
         html += '<tr>';
-        html += '<td><input class="form-control" id="colum[]" name="colum[]" class="condition_type_row" value=""></td>';
-        html += '<td><input  class="form-control" id="datatype[]" name="datatype[]" class="condition_type_row" value=""></td>';
+        html += '<td><input class="form-control" id="colum[]" name="colum[]" style="width:300px;" class="condition_type_row" value=""></td>';
+        html += '<td><select class="form-control" id="datatype[]" name="datatype[]" class="condition_type_row" value=""><option value="varchar(255)">ตัวอักษร</option><option value="int">ตัวเลข</option><option value="double">ทศนิยม</option><option value="date">วันที่</option></select></td>';
         html += '</tr>';
 
         $('#gencolum').append(html);

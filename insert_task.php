@@ -34,10 +34,10 @@ for ($a;$a<=$row+1;$a++) {
    $head = "h".$a;
    
    if($a == $row+1){
-      $sql_create_table.= "`$head` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL";
+      $sql_create_table.= "`$head` $datatype  NOT NULL";
    }
    else{
-      $sql_create_table.= "`$head` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,";
+      $sql_create_table.= "`$head`  $datatype NOT NULL,";
    }
       
 }
