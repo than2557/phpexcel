@@ -28,6 +28,7 @@ $a = 1;
 
 $sql_create_table = "CREATE TABLE `test_import_excel`.`$task_name` ( 
    `table_name_id` INT NOT NULL AUTO_INCREMENT COMMENT 'primary_key' , ";
+   $Query = mysqli_query($conn,$sql_create_table);
 
 for ($a;$a<=$row+1;$a++) {
    
@@ -45,7 +46,7 @@ for ($a;$a<=$row+1;$a++) {
 $sql_create_table.= " ,PRIMARY KEY (`table_name_id`)
 ) ENGINE = InnoDB COMMENT = '$task_name';";
 
-echo $sql_create_table;
+// echo $sql_create_table;
 
 //mysqli_query($conn,$sql_create_table);
 
