@@ -54,7 +54,12 @@ function inserttoken(){
     datatype:'json',
     data: $('#insert').serialize(),
     error: function(jqXHR, text, error) {
-        alert(error)
+      Swal.fire({
+  icon: 'error',
+  title: 'ไม่สามารถเพิ่มข้อมูลโทเคนได้',
+  text: 'ข้อมูลอาจผิดลาดหรือกรอกข้อมูลไม่ถูกต้อง!'
+ 
+})
     }
   })
   .done(function(data) {
