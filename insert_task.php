@@ -19,24 +19,34 @@ for ($i=0; $i <=$row;$i++) {
    $colum =$_POST['colum'][$i];
 
 
-echo $task_user_id;
+//echo $task_user_id;
 $sql2 = "INSERT INTO `template_tb`(`task_user_id`, `colum_name`,`datatype`) VALUES ($task_user_id,'$colum','$datatype')";
 $Query = mysqli_query($conn,$sql2);
-echo $sql2;
+//echo $sql2;
 }
 $a = 1;
 
+$sql_create_table = "CREATE TABLE `test_import_excel`.`$task_name` ( 
+   `table_name_id` INT NOT NULL AUTO_INCREMENT COMMENT 'primary_key' , ";
+
 for ($a;$a<=$row+1;$a++) {
-   $head = "h".$a.'<br>';
-   echo $head;
-$sql="CREATE TABLE $task_name (
-    `tb_id` int(11) NOT NULL,
-    `head` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
    
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+   $head = "h".$a;
    
+   if($a == $row+1){
+      $sql_create_table.= "`$head` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL";
+   }
+   else{
+      $sql_create_table.= "`$head` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,";
+   }
+      
 }
 
+$sql_create_table.= " ,PRIMARY KEY (`table_name_id`)
+) ENGINE = InnoDB COMMENT = '$task_name';";
 
+echo $sql_create_table;
+
+//mysqli_query($conn,$sql_create_table);
 
 ?>
