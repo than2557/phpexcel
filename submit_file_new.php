@@ -632,7 +632,7 @@
                       </div>
                     </div>
                     <div class="col-md-12">
-                      <center><input  id="checkvoxclick" class="btn btn-success" type="button" value="click"></center>
+                      <center><input id="checkvoxclick" class="btn btn-success" type="button" value="click"></center>
                     </div>     
                </div>
              
@@ -873,18 +873,21 @@ $('#basic2').selectpicker({
 $(function() {
     
     $('#task_user_id').change(function() {
-       alert('test');
+      
                       $.ajax({
                           type: 'POST',
                           data: {task_user_id: $(this).val()},
                           url: 'select_groupline.php',
                           success: function(data) {
-                          //alert("data : ",data);
+                          
                         $('#line_group_name').html(data);     
-                        //$('#results').html(data);
+                       
                           },
               error: function(jqXHR, text, error){
-              // Displaying if there are any errors
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'เรียกข้อมูลผิดพลาด...'
+                    })
                     $('#results').html(error);           
           }
                       });
