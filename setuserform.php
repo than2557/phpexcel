@@ -1059,7 +1059,11 @@ button {
     dataType: "JSON",
     data: { username: id.value },
     error: function(jqXHR, text, error) {
-        alert(error)
+      Swal.fire({
+  icon: 'warning',
+  title: 'ไม่พบข้อมูลพนักงาน!!!',
+  text: 'กรุณาตรวจสอบข้อมูล!'
+})
     }
   })
   .done(function(data) {
