@@ -1,5 +1,10 @@
 <?php
 
+   function validateDate($date, $format = 'd/m/Y'){
+      $d = DateTime::createFromFormat($format, $date);
+      return $d && $d->format($format) === $date;
+   }
+
    function parse_data_type($data){
 
       $result_data ;
@@ -9,6 +14,11 @@
             if(is_numeric($data)){
                $result_data = floatval($data);
               
+            }
+            else if(validateDate($data)){
+               $datee = str_replace('/', '-', $data ); // แทนที่เครื่องหมาย "/" ด้วย "-"
+               $date2 = date("Y-m-d", strtotime($datee)); // แปลงรูปแบบของวันที่เป็น ปี-เดือน-วัน
+               $result_data = '"'.$date2.'"';
             }
             else{
                $result_data = '"'.strval($data).'"';
@@ -74,12 +84,7 @@
             $sql_insert .= ' h'.$i.',';
          }
       }
-      // $array_fields = array();
-
-      // while($row = mysqli_fetch_field($query_task_fields)){
-      //    array_push($array_fields,$row->name);
-      // }
-
+   
       $sql_insert.= ' VALUES (';
 
       // แปลง object เป็น array
@@ -98,6 +103,7 @@
          for($j = 0 ; $j <= count($key_obj)-1 ; $j++){
 
             if($key_obj[$j] == "ลำดับที่"){
+
                if($j+1 == count($key_obj)){
 
                   $sql_loop_insert .=' "'.strval($data->{$key_obj[$j]}[$i]).'"';
@@ -108,6 +114,7 @@
                }
             }
             else{
+
                if($j+1 == count($key_obj)){
 
                   $sql_loop_insert .=' '.parse_data_type($data->{$key_obj[$j]}[$i]);
@@ -124,7 +131,9 @@
 
          $sql_loop_insert .= ')';
 
-         echo $sql_loop_insert."\n";
+         mysqli_query($connectDB,$sql_loop_insert);
+         
+         //echo $sql_loop_insert."\n";
       }
    }
 
