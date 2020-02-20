@@ -26,19 +26,7 @@
 
          background: #f5f2eb;
       }
-        /* .loading_page{
-            position: absolute;  
-            top: 0px;   
-            left: 0px;  
-            background: #ccc;   
-            width: 100%;   
-            height: 100%;   
-            opacity: .75;   
-            filter: alpha(opacity=75);   
-            -moz-opacity: .75;  
-            z-index: 999;  
-            background: #fff url(loading_page.gif) 50% 50% no-repeat;
-        } */
+      
         * {
 
          font-family: 'Sriracha', cursive;
@@ -197,12 +185,12 @@ card {
 
    <div class="root_page" style="margin-top: 100px">
 
-   <card class="neumorphic" style="margin-top:-250px;height:100px;">
+   <card class="neumorphic" style="margin-top:-15%;height:100px;">
 <center><h2 style="font-family: 'Sriracha', cursive;margin-top:20px;">อัพโหลดไฟล์</h2></center>
 
 </card>
 
-<card class="neumorphic" style="width: 700px;">
+<card class="neumorphic" style="width:100%;height:60vh;margin-left:10%;margin-top:5%;">
       <div class="container-fluid"style="margin-top:50px;" >
          <div class="loading_page"></div>
          <form id="export_excel" method="POST">
