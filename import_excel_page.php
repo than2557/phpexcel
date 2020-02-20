@@ -82,13 +82,56 @@ card {
   background: #aee0ee;
 
 }
+
+
+.mystyle {
+   margin-left:-50%;
+   margin-top:-3%;
+position: absolute;
+  top: 50vh;
+  left: 50vw;
+  width: 100%;
+  height:100vh;
+  max-width: 80vw;
+  max-height: 80vh;
+  -webkit-transform: translate(-50%, -50%);
+ transform: translate(-50%, -50%);
+  box-sizing: border-box;
+ 
+  --color: hsl(210deg,10%,30%);
+
+ 
+/* color:#d9d9d9; 
+  color:#aee0ee; */
+}
+
+.back2 {
+   margin-left:-20%;
+   margin-top:-5%;
+position: absolute;
+  top: 50vh;
+  left: 50vw;
+  width: 100%;
+  height:100vh;
+  max-width: 80vw;
+  max-height: 80vh;
+  -webkit-transform: translate(-50%, -50%);
+ transform: translate(-50%, -50%);
+  box-sizing: border-box;
+ 
+  --color: hsl(210deg,10%,30%);
+
+ 
+/* color:#d9d9d9; 
+  color:#aee0ee; */
+}
  
     </style>
        
 </head>
 <body>
    <br><br>
-  
+   
    <nav class="w3-sidebar w3-bar-block w3-white w3-animate-left w3-text-grey w3-collapse w3-top w3-center"  style="z-index:3;width:240px;font-weight:bold" id="mySidebar"><br>
   
 <a  style="width:45%;" class="w3-round"></a><br><br>
@@ -112,14 +155,20 @@ card {
 		$conn = $DBconnect;
     ?>
 
+
+
+
+
+
+
+
    <div class="root_page" style="margin-top: 100px">
 
    <card class="neumorphic" style="margin-top:-20%;height:80px;width:200px;">
 <center><h2 style="font-family: 'Sriracha', cursive;margin-top:20px;">อัพโหลดไฟล์</h2></center>
 
 </card>
-
-<card class="neumorphic" style="width:100%;height:100vh;margin-left:10%;margin-top:3%;padding-bottom:50px;">
+<card  class="neumorphic" style="width:100%;height:100vh;margin-left:10%;margin-top:3%;padding-bottom:50px;">
    <div class="container-fluid"style="margin-top:10px;" >
       <div class="loading_page"></div>
       <div class="row">

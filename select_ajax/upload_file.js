@@ -1,221 +1,228 @@
-$(document).ready(function(){  
+$(document).ready(function() {
 
-//    $(".loading_page").hide();
+    //    $(".loading_page").hide();
 
-//    $('#excel_file').change(function(){  
-//       $('#export_excel').submit();  
-//    });  
+    //    $('#excel_file').change(function(){  
+    //       $('#export_excel').submit();  
+    //    });  
 
-//    $('#export_excel').on('submit', function(event){  
-//       event.preventDefault();  
+    //    $('#export_excel').on('submit', function(event){  
+    //       event.preventDefault();  
 
-//       if($("#tb_name").val() == ""){
-//          alert('กรุณากรอกชื่อตาราง');
-//          $('#excel_file').val(''); 
-//       }
-//       else{
-//          // $(".loading_page").show();
+    //       if($("#tb_name").val() == ""){
+    //          alert('กรุณากรอกชื่อตาราง');
+    //          $('#excel_file').val(''); 
+    //       }
+    //       else{
+    //          // $(".loading_page").show();
 
-//          // $(".root_page").css({
-//          //    "position": "absolute", 
-//          //    "top": "0px",  
-//          //    "left": "0px",  
-//          //    "width": "100%",   
-//          //    "height": "100%",   
-//          //    "overflow": "hidden"
-//          // });
+    //          // $(".root_page").css({
+    //          //    "position": "absolute", 
+    //          //    "top": "0px",  
+    //          //    "left": "0px",  
+    //          //    "width": "100%",   
+    //          //    "height": "100%",   
+    //          //    "overflow": "hidden"
+    //          // });
 
-//          $.ajax({  
-//             url:"select_ajax/import_to_databasefix.php",  // => fix field import excel
-//             //url:"select_ajax/import_to_databasefix.php",  // => dynamic field import excel 
-//             method:"POST",  
-//             data:new FormData(this),  
-//             contentType:false,  
-//             processData:false, 
-//             dataType: "JSON", 
-//             success:function(data){ 
+    //          $.ajax({  
+    //             url:"select_ajax/import_to_databasefix.php",  // => fix field import excel
+    //             //url:"select_ajax/import_to_databasefix.php",  // => dynamic field import excel 
+    //             method:"POST",  
+    //             data:new FormData(this),  
+    //             contentType:false,  
+    //             processData:false, 
+    //             dataType: "JSON", 
+    //             success:function(data){ 
 
-//                if(data.error){
-//                   $('#excel_file').val(''); 
-//                   $('#result').empty(); 
+    //                if(data.error){
+    //                   $('#excel_file').val(''); 
+    //                   $('#result').empty(); 
 
-//                   // $('.loading_page').hide();
-//                   // $('.root_page').removeAttr('style');
+    //                   // $('.loading_page').hide();
+    //                   // $('.root_page').removeAttr('style');
 
-//                   Swal.fire({
-//                      icon: 'error',
-//                            title: 'เกิดข้อผิดพลาด...',
-//                         text: 'ไม่สามารถเรียกข้อมูลได้!!!',
-//                      text:'สกุลไฟล์ต้องเป็น xsl,xlsx',
-//                         footer: '<a href>กรุณาตรวจสอบไฟล์</a>'
-//                })
-//                } 
-//                else{
+    //                   Swal.fire({
+    //                      icon: 'error',
+    //                            title: 'เกิดข้อผิดพลาด...',
+    //                         text: 'ไม่สามารถเรียกข้อมูลได้!!!',
+    //                      text:'สกุลไฟล์ต้องเป็น xsl,xlsx',
+    //                         footer: '<a href>กรุณาตรวจสอบไฟล์</a>'
+    //                })
+    //                } 
+    //                else{
 
 
 
-//                   $('#excel_file').val('');  
+    //                   $('#excel_file').val('');  
 
-//                   // $('.loading_page').hide();
-//                   // $('.root_page').removeAttr('style');
+    //                   // $('.loading_page').hide();
+    //                   // $('.root_page').removeAttr('style');
 
-//                   Swal.fire(
-//                'บันทึกสำเร็จ!',
-//                   'กด OK!',
-//                      'success'
-//                           )
+    //                   Swal.fire(
+    //                'บันทึกสำเร็จ!',
+    //                   'กด OK!',
+    //                      'success'
+    //                           )
 
-//                } 
-//             }  
-//          });  
-//       }   
-//   });  
-   var raw_data;
+    //                } 
+    //             }  
+    //          });  
+    //       }   
+    //   });  
+    var raw_data;
 
-   // input file change
-   $("#file_input").change(function(){
-      if($("#select_task").val() == "null_val"){
-         alert("กรุณาเลือกงาน")
-         $(this).val('');
-      }
-      else{
-         $("#form_input").submit();
-      }
-     
-   });
+    // input file change
+    $("#file_input").change(function() {
+        if ($("#select_task").val() == "null_val") {
+            // alert("กรุณาเลือกงาน")
+            Swal.fire({
+                icon: 'warning',
+                title: 'กรุณาเลือกงาน...',
+                text: 'กรุณาเลือกงานก่อนเลือกไฟล์!',
 
-   // submit form upload
-   $('#form_input').on('submit',function(event){
+            })
+            $(this).val('');
+        } else {
+            $("#form_input").submit();
+        }
 
-      event.preventDefault(); 
+    });
 
-      $.ajax({  
-         url:"select_ajax/read_import_data.php", 
-         method:"POST",  
-         data:new FormData(this),  
-         contentType:false,  
-         dataType: 'JSON',
-         processData:false, 
-         async: false,
-         success:function(data){ 
+    // submit form upload
+    $('#form_input').on('submit', function(event) {
 
-            // raw data
-            raw_data = data.raw_data;
-            
-            // table html code
-            $(".result").html(data.result_table);
-         }  
-      }); 
-   })
+        event.preventDefault();
 
-   
-         // on checkbox click (Table header)
-         $(document).on("click",".checkcol",function(){
+        $.ajax({
+            url: "select_ajax/read_import_data.php",
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            dataType: 'JSON',
+            processData: false,
+            async: false,
+            success: function(data) {
 
-            // check header is checked
-            if( $(this).is(':checked') ) {
-              
-               // change background color
-               $(this).parent().css("background-color", "lightgreen");
-               $('td[class="'+$(this).val()+'"]').css("background-color", "lightgreen");
+                // raw data
+                raw_data = data.raw_data;
 
-               // set check each field table (Task)
-               $('input[value="'+$(this).val()+'"]').prop("checked", true);
+                // table html code
+                $(".result").html(data.result_table);
             }
-            else {
-               $(this).parent().css("background-color", "");
-               $('td[class="'+$(this).val()+'"]').css("background-color", "");
+        });
+    })
 
-               // set uncheck
-               $('input[value="'+$(this).val()+'"]').prop("checked", false);
-            }
 
-         })
+    // on checkbox click (Table header)
+    $(document).on("click", ".checkcol", function() {
 
-         // submit file (Confirm upload file)
-         $("#btn_submit").click(function(){
+        // check header is checked
+        if ($(this).is(':checked')) {
 
-            var task_id = $("#select_task").val();
-            // object data selected fields
-            let dadadsadad = new Object();
+            // change background color
+            $(this).parent().css("background-color", "lightgreen");
+            $('td[class="' + $(this).val() + '"]').css("background-color", "lightgreen");
 
-            // value in checkbox (Field name)
-            let id = [];
+            // set check each field table (Task)
+            $('input[value="' + $(this).val() + '"]').prop("checked", true);
+        } else {
+            $(this).parent().css("background-color", "");
+            $('td[class="' + $(this).val() + '"]').css("background-color", "");
 
-            // get all value in checked (Field name)
-            $('.checkcol:checkbox:checked').each(function(i){
-               id[i] = $(this).val();
+            // set uncheck
+            $('input[value="' + $(this).val() + '"]').prop("checked", false);
+        }
+
+    })
+
+    // submit file (Confirm upload file)
+    $("#btn_submit").click(function() {
+
+        var task_id = $("#select_task").val();
+        // object data selected fields
+        let dadadsadad = new Object();
+
+        // value in checkbox (Field name)
+        let id = [];
+
+        // get all value in checked (Field name)
+        $('.checkcol:checkbox:checked').each(function(i) {
+            id[i] = $(this).val();
+        });
+
+        // count checked field template (From database)
+        let col_template_count = $('.check_row_template').length;
+
+        // count checked field Table (From user upload)
+        let col_file_checked_count = $('.checkcol:checkbox:checked').length;
+
+        // check if equal ถ้าผู้ใช้เลือกฟีลด์ตรงตามงาน
+        if (col_template_count != col_file_checked_count) {
+            // alert("กรุณาเลือกคอลัมภ์ให้ครบถ้วน")
+            Swal.fire({
+                icon: 'warning',
+                title: 'กรุณาเลือกคอลัมภ์ให้ครบถ้วน...'
+
+            })
+        } else {
+
+            // Loop user fields selected
+            id.forEach(function(key) {
+
+                // populate data each field (From user selected)
+                dadadsadad[key] = raw_data[key];
+            })
+
+            $.ajax({
+                url: "select_ajax/get_upload_data.php",
+                method: "POST",
+                data: {
+                    data: JSON.stringify(dadadsadad),
+                    task_id: task_id
+                },
+                dataType: 'JSON',
+                async: false,
+                success: function(data) {
+                    console.log(data)
+                }
             });
 
-            // count checked field template (From database)
-            let col_template_count = $('.check_row_template').length;
+        }
 
-            // count checked field Table (From user upload)
-            let col_file_checked_count = $('.checkcol:checkbox:checked').length;
-            
-            // check if equal ถ้าผู้ใช้เลือกฟีลด์ตรงตามงาน
-            if(col_template_count != col_file_checked_count){
-               alert("กรุณาเลือกคอลัมภ์ให้ครบถ้วน")
-            }
-            else{
+    })
 
-               // Loop user fields selected
-               id.forEach(function(key) {
+    // on Task(ตารางงาน) selectbox change
+    $("#select_task").change(function() {
 
-                  // populate data each field (From user selected)
-                  dadadsadad[key] = raw_data[key];
-               })
- 
-               $.ajax({  
-                  url:"select_ajax/get_upload_data.php", 
-                  method:"POST",  
-                  data:{ 
-                     data: JSON.stringify(dadadsadad) ,
-                     task_id : task_id
-                  },  
-                  dataType: 'JSON', 
-                  async: false,
-                  success:function(data){ 
-                     console.log(data)
-                  }  
-               }); 
-                
-            }
-            
-         }) 
+        // clear checkbox div
+        $(".result_template").empty();
 
-         // on Task(ตารางงาน) selectbox change
-         $("#select_task").change(function(){
+        // HTML code
+        html = '';
 
-            // clear checkbox div
-            $(".result_template").empty();
+        if ($(this).val() != "null_val") {
 
-            // HTML code
-            html= '';
-            
-            if($(this).val() != "null_val"){
-
-               $.ajax({  
-                  url:"select_ajax/get_tempalte_task.php", 
-                  method:"POST",  
-                  data:{ 
-                    task_id:$(this).val()
-                  },  
-                  dataType: 'JSON', 
-                  async: false,
-                  success:function(data){ 
-                     if(!data.error){
+            $.ajax({
+                url: "select_ajax/get_tempalte_task.php",
+                method: "POST",
+                data: {
+                    task_id: $(this).val()
+                },
+                dataType: 'JSON',
+                async: false,
+                success: function(data) {
+                    if (!data.error) {
                         html = data.result;
-                     }
-                     else{
+                    } else {
                         alert(data.message)
-                     }
-                  }  
-               }); 
-            }
- 
-            
-            $(".result_template").html(html);
-            
-         });
-});  
+                    }
+                }
+            });
+        }
+
+
+        $(".result_template").html(html);
+
+    });
+});
