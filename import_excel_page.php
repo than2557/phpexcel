@@ -119,7 +119,7 @@ card {
 
 </card>
 
-<card class="neumorphic" style="width:100%;height:100vh;margin-left:10%;margin-top:3   %;padding-bottom:50px;">
+<card class="neumorphic" style="width:100%;height:100vh;margin-left:10%;margin-top:3%;padding-bottom:50px;">
    <div class="container-fluid"style="margin-top:10px;" >
       <div class="loading_page"></div>
       <div class="row">
@@ -149,22 +149,37 @@ card {
          <div class="col-md-1"></div>
       </div>
       <style>
+               .result_div{
+                  width:100%;
+                  height:65vh;
+                 
+               }
                .result{
                   width:100%;
-                  height:70vh;
+                  height:60vh;
                  
                   overflow:auto;
                }
-               .result_template{
+               .div_tamplate{
                   width:100%;
-                  height:80vh;
+                  height:65vh;
                  
+                 
+               }
+               .result_template{
                   overflow:auto;
+                  height:60vh;
                }
             </style><br>
       <div class="row" id="result_div">
-         <div class="col-md-9 result"></div>
-         <div class="col-md-3 result_template"></div>                     
+         <div style="background-color:#F2F9FF;" class="col-md-9 result_div text-center">
+               <label><b>ผลลัพธ์</b></label>
+               <div class="result text-left"></div>
+         </div>
+         <div style="background-color:#F2F9FF;" class="col-md-3 text-center div_tamplate">
+               <label><b>รูปแบบตารางงาน</b></label>
+               <div class="result_template text-left"></div>
+         </div>                     
       </div> 
 
    </div>
