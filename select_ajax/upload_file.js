@@ -162,7 +162,7 @@ $(document).ready(function() {
             // alert("กรุณาเลือกคอลัมภ์ให้ครบถ้วน")
             Swal.fire({
                 icon: 'warning',
-                title: 'กรุณาเลือกคอลัมภ์ให้ครบถ้วน...'
+                title: 'กรุณาเลือกคอลัมน์ให้ครบถ้วน...'
 
             })
         } else {
