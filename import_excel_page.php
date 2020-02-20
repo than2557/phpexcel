@@ -19,6 +19,11 @@
 <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
 
+
+
+<!-- script Upload file -->
+<script src="select_ajax/upload_file.js"></script>
+
    <title>Import excel page</title>
 
    <style>
@@ -77,88 +82,9 @@ card {
   background: #aee0ee;
 
 }
-
-
-
-
-
+ 
     </style>
-
-     <script>  
-      $(document).ready(function(){  
-
-         $(".loading_page").hide();
-
-         $('#excel_file').change(function(){  
-            $('#export_excel').submit();  
-         });  
-
-         $('#export_excel').on('submit', function(event){  
-            event.preventDefault();  
-
-            if($("#tb_name").val() == ""){
-               alert('กรุณากรอกชื่อตาราง');
-               $('#excel_file').val(''); 
-            }
-            else{
-               // $(".loading_page").show();
-
-               // $(".root_page").css({
-               //    "position": "absolute", 
-               //    "top": "0px",  
-               //    "left": "0px",  
-               //    "width": "100%",   
-               //    "height": "100%",   
-               //    "overflow": "hidden"
-               // });
-
-               $.ajax({  
-                  url:"select_ajax/import_to_databasefix.php",  // => fix field import excel
-                  //url:"select_ajax/import_to_databasefix.php",  // => dynamic field import excel 
-                  method:"POST",  
-                  data:new FormData(this),  
-                  contentType:false,  
-                  processData:false, 
-                  dataType: "JSON", 
-                  success:function(data){ 
- 
-                     if(data.error){
-                        $('#excel_file').val(''); 
-                        $('#result').empty(); 
-
-                        // $('.loading_page').hide();
-                        // $('.root_page').removeAttr('style');
- 
-                        Swal.fire({
-                           icon: 'error',
-                                 title: 'เกิดข้อผิดพลาด...',
-                              text: 'ไม่สามารถเรียกข้อมูลได้!!!',
-                           text:'สกุลไฟล์ต้องเป็น xsl,xlsx',
-                              footer: '<a href>กรุณาตรวจสอบไฟล์</a>'
-                     })
-                     } 
-                     else{
-
-      
-
-                        $('#excel_file').val('');  
-
-                        // $('.loading_page').hide();
-                        // $('.root_page').removeAttr('style');
- 
-                        Swal.fire(
-                     'บันทึกสำเร็จ!',
-                        'กด OK!',
-                           'success'
-                                )
- 
-                     } 
-                  }  
-               });  
-            }   
-        });  
-      });  
-   </script>         
+       
 </head>
 <body>
    <br><br>
@@ -190,46 +116,64 @@ card {
 
 </card>
 
-<card class="neumorphic" style="width:100%;height:60vh;margin-left:10%;margin-top:5%;">
-      <div class="container-fluid"style="margin-top:50px;" >
-         <div class="loading_page"></div>
-         <form id="export_excel" method="POST">
-            <div class="row">
-               <label for="task_user_id" style="margin-left:40px;">ชื่องาน:</label>
-               <select name="task_user_id" id="task_user_id" class="form-control" style="width:200px;margin-left:10px;">
-
-
-               <?php while($row = mysqli_fetch_array($result)){ 
-                                    echo '<option value="'.$row[task_user_id ].'">'.$row[task_name].'</option>'; 
-                                } ?> 
-
-               </select>
-   </div>
-   <br>
-            <div class="row">
-               <div style="margin-left:30px;">
-                  <label for="tb_name">ชื่อตาราง:</label>
-               </div>   
-
-               <div  style="margin-left:20px;">
-                  <input autofocus class="form-control" type="text" name="tb_name" id="tb_name" placeholder="กรอกชื่องาน" style="width:200px;" >
+<card class="neumorphic" style="width:100%;height:60vh;margin-left:10%;margin-top:5%;padding-bottom:50px;">
+   <div class="container-fluid"style="margin-top:10px;" >
+      <div class="loading_page"></div>
+      <div class="row">
+         <div class="col-md-1"></div>
+         <div class="col-md-10">
+         <form class="form-inline" id="form_input">
+               <div class="form-group">
+               <?php   
+                  $sql = 'SELECT * FROM `task_user` WHERE `user_id` =' .$_SESSION['id_user'];
+                        $conn = $DBconnect;
+                        //echo $sql; ?>
+                  <select class="form-control col-md-3" name="select_task" id="select_task">
+                     <option value="null_val">เลือกงาน</option>
+                     <?php
+                        $result = mysqli_query($conn,$sql);
+                        while($row = mysqli_fetch_row($result)){
+                           echo '<option value="'.$row[0].'">'.$row[2].'</option>';
+                        }
+                     ?>
+                  </select>
+                  <input type="file" id="file_input" name="file_input" class="form-control mx-sm-3 col-md-6">
+                  <input value="ส่ง" type="button" name="btn_submit" class="btn btn-success" id="btn_submit">
                </div>
-               <div class="col-md-2"  style="margin-left:50px;">
-                  <label>เลือกไฟล์:</label>                
-               </div>
-               <div class="col-md-3">
-                  <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['id_user'];?>">
-                  <input class="form-control" type="file" name="excel_file" id="excel_file"  style="margin-left:-20px;width:200px;" />  
-               </div>
-            </div>            
-         </form>
-   </card>
-         <div class="row">
-            <div class="col-md-12"><br>
-            <div id="result"></div>
+              
+            </form>
          </div>
+         <div class="col-md-1"></div>
       </div>
+      <style>
+               .result{
+                  width:100%;
+                  height:70vh;
+                 
+                  overflow:auto;
+               }
+               .result_template{
+                  width:100%;
+                  height:80vh;
+                 
+                  overflow:auto;
+               }
+            </style><br>
+      <div class="row" id="result_div">
+         <div class="col-md-9 result"></div>
+         <div class="col-md-3 result_template"></div>                     
+      </div> 
+
    </div>
+</card>
+
+         <!-- <div class="row">
+            <div class="col-md-12"><br>
+               <div id="result"></div>
+            </div>
+         </div> -->
+
+   
 <script>
    function w3_open() {
   document.getElementById("mySidebar").style.display = "block";
