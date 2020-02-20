@@ -38,18 +38,31 @@
 
                if($data != NULL || $data != ''){ //ตรวจสอบเมื่อค่าในตัวแปร data ไม่ว่าง
 
-                  // check date 
-                  if(PHPExcel_Shared_Date::isDateTime($data_obj)){
-
-                     // parse to Date
-                     $date_data = date($format = "d/m/Y", PHPExcel_Shared_Date::ExcelToPHP($data));
-                     
-                     // push data
-                     array_push($row_data_obj ->{$header_data[$j]},$date_data);
+                  if($data == 0){
+                     array_push($row_data_obj ->{$header_data[$j]},strval($data));
                   }
                   else{
-                     array_push($row_data_obj ->{$header_data[$j]},$data);
-                  }
+
+                     if(PHPExcel_Shared_Date::isDateTime($data_obj)){
+                        
+                        // parse to Date
+                        $date_data = date($format = "d/m/Y", PHPExcel_Shared_Date::ExcelToPHP($data));
+                        
+                        // push data
+                        array_push($row_data_obj ->{$header_data[$j]},$date_data);
+                     }
+                     else{
+
+                        if(is_numeric($data)){
+                           $cell_data = floatval($data);
+                           array_push($row_data_obj ->{$header_data[$j]},$cell_data);
+                        }
+                        else{
+                           $cell_data = strval($data);
+                           array_push($row_data_obj ->{$header_data[$j]},$cell_data);
+                        }
+                     }
+                  }  
                }  
                else{
                   
