@@ -26,7 +26,7 @@
 
          background: #f5f2eb;
       }
-        .loading_page{
+        /* .loading_page{
             position: absolute;  
             top: 0px;   
             left: 0px;  
@@ -38,7 +38,7 @@
             -moz-opacity: .75;  
             z-index: 999;  
             background: #fff url(loading_page.gif) 50% 50% no-repeat;
-        }
+        } */
         * {
 
          font-family: 'Sriracha', cursive;
@@ -113,16 +113,16 @@ card {
                $('#excel_file').val(''); 
             }
             else{
-               $(".loading_page").show();
+               // $(".loading_page").show();
 
-               $(".root_page").css({
-                  "position": "absolute", 
-                  "top": "0px",  
-                  "left": "0px",  
-                  "width": "100%",   
-                  "height": "100%",   
-                  "overflow": "hidden"
-               });
+               // $(".root_page").css({
+               //    "position": "absolute", 
+               //    "top": "0px",  
+               //    "left": "0px",  
+               //    "width": "100%",   
+               //    "height": "100%",   
+               //    "overflow": "hidden"
+               // });
 
                $.ajax({  
                   url:"select_ajax/import_to_databasefix.php",  // => fix field import excel
@@ -137,8 +137,9 @@ card {
                      if(data.error){
                         $('#excel_file').val(''); 
                         $('#result').empty(); 
-                        $('.loading_page').hide();
-                        $('.root_page').removeAttr('style');
+
+                        // $('.loading_page').hide();
+                        // $('.root_page').removeAttr('style');
  
                         Swal.fire({
                            icon: 'error',
@@ -153,8 +154,9 @@ card {
       
 
                         $('#excel_file').val('');  
-                        $('.loading_page').hide();
-                        $('.root_page').removeAttr('style');
+
+                        // $('.loading_page').hide();
+                        // $('.root_page').removeAttr('style');
  
                         Swal.fire(
                      'บันทึกสำเร็จ!',
@@ -258,7 +260,7 @@ function onClick(element) {
   var captionText = document.getElementById("caption");
   captionText.innerHTML = element.alt;
 }
-function link_page(level){
+function link_page(level){ 
 
 //var level = document.getElementById('level');
 if(level == 1){
