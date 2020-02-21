@@ -67,3 +67,7 @@ dropdown input:checked~ul {
     -ms-backface-visibility: hidden;
     /* Internet Explorer */
 }
+
+body {
+    background-color: #e5affa;
+}

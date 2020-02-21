@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="select_ajax/index.css">
 <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
 <style>
-body,h1,h2,h3,h4,h5,a {font-family: 'Sriracha', cursive;}
+h1,h2,h3,h4,h5,a {font-family: 'Sriracha', cursive;}
 .w3-third img{margin-bottom: -6px; opacity: 0.8; cursor: pointer}
 .w3-third img:hover{opacity: 1}
 
@@ -26,7 +26,7 @@ body,h1,h2,h3,h4,h5,a {font-family: 'Sriracha', cursive;}
   <img src="https://plms.pea.co.th/Personal/EmployeeImage?EmpCode=<?php echo $_SESSION['username']; ?>"  style="width:45%;height:20%;" class="w3-round"  alt="picture"/>
   <a  onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-user fa-fw"></i>&nbsp;username : <?php echo $_SESSION['username'];?></a> 
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-user fa-fw"></i>&nbsp;name :<?php echo $_SESSION['name'];?></a> 
-  <dropdown>
+ <dropdown>
   <input id="toggle1" type="checkbox">
   <label for="toggle1" class="animate">MENU<i class="fa fa-bars float-right"></i></label>
   <ul class="animate" >
@@ -35,7 +35,7 @@ body,h1,h2,h3,h4,h5,a {font-family: 'Sriracha', cursive;}
   <a href="displayatline.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;ข้อมูลการส่งไลน์</a>
   <a href="addtoken.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp;เพิ่มข้อมูลโทเคน</a>
   <a href="addtask.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp;เพิ่มข้อมูลงาน</a>
-    </ul>
+   </ul>
 </dropdown>
   <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;logout</a>
 </nav>

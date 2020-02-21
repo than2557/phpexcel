@@ -23,13 +23,14 @@
   <script src="/phpexcel/node_modules/bootstrap-select/dist/js/bootstrap-select.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
   <style>
+    body{background-color:#e5affa;}
     label {
       color : #000000;
       font-family: 'Sriracha', cursive;
 
       }
     body {
-      background-color: #aee0ee;
+      background-color:#e5affa;
     }
     h2{
       color:#000000;
