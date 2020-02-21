@@ -80,6 +80,7 @@ $(document).ready(function() {
                 dataType: "JSON", // response variable type
                 data: $('#get_query').serialize(), // get form data
                 error: function(jqXHR, text, error) {
+
                     Swal.fire({
                         title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
                         icon: 'warning'
@@ -87,9 +88,11 @@ $(document).ready(function() {
                 }
             })
             .done(function(data) { // response
+
                 // submit button alert form
                 $("#btn_submit_alert").css("display", "");
                 $("#btn_back").css("display", "");
+
                 // condition table fade out animation 
                 $("#get_query").fadeOut(500);
 
@@ -138,6 +141,7 @@ $(document).ready(function() {
 
         // check first row
         if (i == 1) {
+
             html += '<tr name="row' + i + '" id="row' + i + '">';
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
             html += '<td><input class="form-control main_oplist" type="text" name="main_oplist[]" readonly value=""></td>';
@@ -145,7 +149,9 @@ $(document).ready(function() {
             html += '<td><input class="form-control main_condition_opv" type="text" name="main_condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
             html += '<td id="selector_field4"><select class="form-control main_valuelist" name="main_valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
             html += '</tr>';
-        } else {
+        } 
+        else {
+
             html += '<tr name="row' + i + '" id="row' + i + '">';
             html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
             html += '<td><select class="form-control main_oplist" name="main_oplist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
@@ -173,6 +179,7 @@ $(document).ready(function() {
 
         // check first row
         if (i == 1) {
+
             html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="' + i + '">';
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "' + i + '"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
             html += '<td colspan="1"></td>';
@@ -180,7 +187,9 @@ $(document).ready(function() {
             html += '<td colspan="1"> <input class="form-control sub_con_optlist" type="text" name="sub_con_optlist[]" readonly value=""></input></td>';
             html += '<td colspan="1"></td>';
             html += '</tr>';
-        } else {
+        } 
+        else {
+
             html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="' + i + '">';
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "' + i + '"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
             html += '<td colspan="1"></td>';
@@ -222,7 +231,8 @@ $(document).ready(function() {
             html += '<td><input class="form-control sub_condition_opv" type="text" name="sub_condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
             html += '<td id="sub_con_selector_field4"><select class="form-control sub_valuelist" name="sub_valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
             html += '</tr>';
-        } else {
+        } 
+        else {
             html += '<tr name="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '" id="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '">';
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
             html += '<td><select class="form-control sub_oplist" name="sub_oplist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
@@ -250,6 +260,7 @@ $(document).ready(function() {
 
         // check null value
         if (selected_value == 'null_value') {
+
             //alert("กรุณาเลือกเงื่อนไข")
             Swal.fire({
                 title: 'กรุณาเลือกเงื่อนไข!',
@@ -383,6 +394,7 @@ $(document).ready(function() {
                 dataType: "JSON", // response variable type
                 data: $('#get_query').serialize(), // get form data
                 error: function(jqXHR, text, error) {
+                    
                     Swal.fire({
                         title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
                         icon: 'warning'
@@ -396,12 +408,14 @@ $(document).ready(function() {
 
                     // check error query
                     if (data.query_data == false) {
+
                         //alert("ไม่พบข้อมูล")
                         Swal.fire({
                             title: 'ไม่พบข้อมูล!',
                             icon: 'error'
                         })
-                    } else {
+                    } 
+                    else {
 
                         query_result_object = data;
                         // clear table result 
@@ -462,6 +476,7 @@ function generate_table_result(data) {
         html += '<td class="text-left">' + data[k]['รายการ'] + '</td>';
         html += '<td class="text-left">' + data[k]['WBS'] + '</td>';
         html += '</tr>';
+
         row++;
 
     });
@@ -572,6 +587,7 @@ function open_file_tag() {
 function save_file_foo() {
 
     if (confirm("ยืนยันการบันทึกรูปแบบรายงาน")) {
+        
         webdatarocks.save({
             filename: $("#query").val() + '.json',
             destination: "server",
