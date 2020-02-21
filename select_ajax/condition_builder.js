@@ -53,7 +53,8 @@ $(document).ready(function() {
     if ($("#query").val() == null) {
         //alert("ไม่สามารถเรียกข้อมูลได้");
         Swal.fire({
-            title: 'ไม่สามารถเรียกข้อมูลได้!',
+            title: 'ไม่สามารถเรียกข้อมูลได้งานได้!',
+            text: 'กรุณเพิ่มงานและอัพโหลดไฟล์งาน!!',
             icon: 'warning'
         })
     } else {
