@@ -1,0 +1,69 @@
+dropdown {
+    display: inline-block;
+    margin: 20px 50px;
+    margin-left: 50px;
+}
+
+dropdown label,
+dropdown ul li {
+    margin-left: 30px;
+    display: block;
+    width: 200px;
+    background: #ECF0F1;
+    padding: 15px 20px;
+}
+
+dropdown label:hover,
+dropdown ul li:hover {
+    background: #1ABC9C;
+    color: white;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+dropdown label {
+    color: #1ABC9C;
+    border-left: 4px solid #1ABC9C;
+    border-radius: 0 5px 0 0;
+    position: relative;
+    z-index: 2;
+}
+
+dropdown input {
+    display: none;
+}
+
+dropdown input~ul {
+    position: relative;
+    visibility: hidden;
+    opacity: 0;
+    top: -20px;
+    z-index: 1;
+}
+
+dropdown input:checked+label {
+    background: #1ABC9C;
+    color: white;
+}
+
+dropdown input:checked~ul {
+    visibility: visible;
+    opacity: 1;
+    top: 0;
+}
+
+.animate {
+    margin-left: -40px;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Chrome and Safari */
+    -moz-backface-visibility: hidden;
+    /* Firefox */
+    -ms-backface-visibility: hidden;
+    /* Internet Explorer */
+}
