@@ -51,13 +51,17 @@ $(document).ready(function() {
 
     // เมื่อ select box id = query เป็นค่าว่าง
     if ($("#query").val() == null) {
+        
         //alert("ไม่สามารถเรียกข้อมูลได้");
+
         Swal.fire({
             title: 'ไม่สามารถเรียกข้อมูลได้งานได้!',
             text: 'กรุณาเพิ่มงานและอัพโหลดไฟล์งาน!!',
             icon: 'warning'
         })
-    } else {
+    } 
+    else {
+
         $('#table_nameeeeeeeee').val($("#query").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     }
 
@@ -251,7 +255,8 @@ $(document).ready(function() {
                 title: 'กรุณาเลือกเงื่อนไข!',
                 icon: 'warning'
             })
-        } else if (selected_value == 'con_value') {
+        } 
+        else if (selected_value == 'con_value') {
 
             // HTML code
             let html = '';
@@ -265,7 +270,9 @@ $(document).ready(function() {
 
             // show HTML code
             $("tr[id='" + row_id + "'] td[id='selector_field4']").html(html);
-        } else if (selected_value == 'con_fields') {
+
+        } 
+        else if (selected_value == 'con_fields') {
 
             // HTML code
             let html = '';
@@ -297,17 +304,26 @@ $(document).ready(function() {
 
         // check null value
         if (selected_value == 'null_value') {
+
             alert("กรุณาเลือกเงื่อนไข")
-        } else if (selected_value == 'con_value') {
+        } 
+        else if (selected_value == 'con_value') {
+
             let html = '';
+
             html += "<input class='form-control sub_condition_value_input'  type='text' name='sub_condition_value_input[]'   placeholder='กรอกค่า'/>";
             html += "<input class='form-control sub_condition_value_type' type='hidden' name='sub_condition_value_type[]'  value='con_value'/>";
+            
             $("tr[id='" + row_id + "'] td[id='sub_con_selector_field4']").empty();
             $("tr[id='" + row_id + "'] td[id='sub_con_selector_field4']").html(html);
-        } else if (selected_value == 'con_fields') {
+        } 
+        else if (selected_value == 'con_fields') {
+            
             let html = '';
+
             html += '<select class="form-control sub_condition_value_input"  name="sub_condition_value_input[]" >' + html_table_fields + '</select>';
             html += "<input class='form-control sub_condition_value_type' type='hidden' name='sub_condition_value_type[]'  value='con_fields'/>";
+            
             $("tr[id='" + row_id + "'] td[id='sub_con_selector_field4']").empty();
             $("tr[id='" + row_id + "'] td[id='sub_con_selector_field4']").html(html);
         }
