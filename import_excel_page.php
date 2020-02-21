@@ -155,13 +155,6 @@ position: absolute;
 		$conn = $DBconnect;
     ?>
 
-
-
-
-
-
-
-
    <div class="root_page" style="margin-top: 100px">
 
    <card class="neumorphic" style="margin-top:-20%;height:80px;width:200px;">

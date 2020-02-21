@@ -69,11 +69,15 @@ $(document).ready(function() {
     //             }  
     //          });  
     //       }   
-    //   });  
+    //   });
+
+    // Raw data
     var raw_data;
 
-    // input file change
+    // Input file change
     $("#file_input").change(function() {
+
+        // Check empty task
         if ($("#select_task").val() == "null_val") {
             // alert("กรุณาเลือกงาน")
             Swal.fire({
@@ -82,8 +86,12 @@ $(document).ready(function() {
                 text: 'กรุณาเลือกงานก่อนเลือกไฟล์!',
 
             })
+
             $(this).val('');
-        } else {
+
+        } 
+        else {
+
             $("#form_input").submit();
         }
 
@@ -140,6 +148,7 @@ $(document).ready(function() {
     $("#btn_submit").click(function() {
 
         var task_id = $("#select_task").val();
+
         // object data selected fields
         let dadadsadad = new Object();
 
@@ -159,13 +168,15 @@ $(document).ready(function() {
 
         // check if equal ถ้าผู้ใช้เลือกฟีลด์ตรงตามงาน
         if (col_template_count != col_file_checked_count) {
+
             // alert("กรุณาเลือกคอลัมภ์ให้ครบถ้วน")
             Swal.fire({
                 icon: 'warning',
                 title: 'กรุณาเลือกคอลัมน์ให้ครบถ้วน...'
 
             })
-        } else {
+        } 
+        else {
 
             // Loop user fields selected
             id.forEach(function(key) {
