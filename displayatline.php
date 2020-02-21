@@ -142,7 +142,7 @@ function onClick(element) {
     ?>
    <div class="container">
    <card class="neumorphic" style="margin-top:-250px;height:100px;margin-left:5%">
-<center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
+<center><h2 style="font-family: 'Sriracha', cursive;">ข้อมูลการแจ้งเตือน</h2></center>
 
 </card>
 <div class="container">
