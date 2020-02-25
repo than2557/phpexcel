@@ -596,7 +596,7 @@
                
                   <div class="col-md-12 text-left">
                     <center>
-                      <input type="button" value="ส่ง" class="btn btn-success" id="queryyyyy" name="queryyyyy">
+                      <input type="button" value="ส่ง" class="btn btn-success"  onclick="check_line()"  id="queryyyyy" name="queryyyyy">
                       <input type="button" value="เคลียร์เงื่อนไข" class="btn btn-danger" id="reset_condition" name="reset_condition">
                       <input type="button" value="เคลียร์ทั้งหมด" class="btn btn-danger" id="reset_all" name="reset_all">
                     </center>
@@ -900,39 +900,22 @@ $(function() {
     
   });
 
-  $(function(){
 
-    $('#queryyyyy').onclick(function()
-    {
-      var group_line = document.getElementById("line_group_name");
-      if(group_line == ''){
+  function check_line(){
+    var group_line = document.getElementById("line_group_name");
+    if(group_line == ''){
 
-        Swal.fire({
-                        icon: 'error',
-                        title: 'ไม่พบกลุ่มไลน์...',
-                        text:'กรุณาเพิ่มกลุ่ม line..'
-                    })
+      Swal.fire({
+                      icon: 'error',
+                      title: 'ไม่พบกลุ่มไลน์...',
+                      text:'กรุณาเพิ่มกลุ่ม line..'
+                  })
 
 
-      }
+    }
 
 
-    })
-
-
-
-
-
-  })
-
-  
-  
-
-
-
-
-
-
+  }
   </script>
 
 
