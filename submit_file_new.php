@@ -601,6 +601,7 @@
                       <input type="button" value="เคลียร์ทั้งหมด" class="btn btn-danger" id="reset_all" name="reset_all">
                     </center>
                               <input type="hidden" id="table_nameeeeeeeee" name="table_nameeeeeeeee">
+                              <input type="hidden" id="fields_count" name="fields_count">
                               <br>
 
                         <!-- ตาราง กำหนดเงื่อนไข -->

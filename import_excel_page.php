@@ -187,6 +187,7 @@ position: absolute;
                </div>
               
             </form>
+           
          </div>
          <div class="col-md-1"></div>
       </div>

@@ -1,6 +1,6 @@
 <?php
    // return main sql condition
-   function generate_main_sql_condition($conditions){
+   function generate_main_sql_condition($conditions,$fields_json){
       $sql = '';
 
       // ตรวจสอบเงื่อนไขแรก จะไม่มี AND และ OR
@@ -12,8 +12,10 @@
       }  
 
       // ตรวจสอบถ้าเลือกฟีลด์ h2 ให้เลือก attributes h2_1
-      if($conditions['fieldlist'] == 'h2'){
-         $sql.= ' h2_1';
+      if($conditions['fieldlist'] == 'รายการ'){
+			$array_ekys = array_keys($fields_json, "รายการ")+1;
+		  	$sql.= ' h'.$array_ekys.'_1';
+         //$sql.= ' h2_1';
       }
       else{
          $sql.= ' '.$conditions['fieldlist'];
@@ -47,7 +49,7 @@
    }
 
    // return sub sql condition
-   function generate_sub_sql_condition($conditions){
+   function generate_sub_sql_condition($conditions,$fields_json){
 
       // ตัวเชื่อมระหว่างเงื่อนไขหลักกับเงื่อนไขรอง
       $sql = ' '.$conditions['conjection_condition'];
@@ -196,6 +198,7 @@
       $array_main_con = array(); // ประกาศตัวแปร array
       $array_sub_con = array(); // ประกาศตัวแปร array
 
+	  $fields_json = json_decode($_POST['fields_count']);
       // ลูปเงื่อนไขทั้งหมด
       foreach($_POST['condition_type_row'] as $condition_type){
          
@@ -215,7 +218,7 @@
             $loop_count_all_con++;
 
             // ต่อข้อความด้วยเรียกใช้ฟังก์ชั่น
-            $sql .= generate_main_sql_condition($loop_array_main);
+            $sql .= generate_main_sql_condition($loop_array_main,$fields_json);
 
          }
          else if($condition_type == "main_row_sub_con"){
@@ -248,11 +251,12 @@
 
             $loop_array_sub['sub_con'] = $loop_array_sub2;
           
-            $sql.= generate_sub_sql_condition($loop_array_sub);
+            $sql.= generate_sub_sql_condition($loop_array_sub,$fields_json);
          }
       }
       
-      $response['query_data'] = query_data($sql,$conn);
+	  //$response['query_data'] = query_data($sql,$conn);
+	  $response['json_count'] = $fields_json;
       $response['HTTP_post_data'] = $_POST;
       $response['result_sql'] = $sql;
       $response['message'] = "success";
@@ -262,7 +266,7 @@
     
       $sql = 'SELECT * FROM '.$table;
 
-      $response['query_data'] = query_data($sql,$conn);
+      //$response['query_data'] = query_data($sql,$conn);
       $response['HTTP_post_data'] = $_POST;
       $response['result_sql'] = $sql;
       $response['message'] = "success";

@@ -44,7 +44,7 @@ $(document).ready(function() {
     // ประกาศ object ว่าง
     var sub_con_count = new Object();
 
-    html_table_fields = populate_fields2(field);
+   // html_table_fields = populate_fields2(field);
 
     // query result object
     var query_result_object;
@@ -125,7 +125,36 @@ $(document).ready(function() {
 
     // on table name select box change
     $('#task_user_id').change(function() { // เมื่อเลือก select box 
-        
+
+        $.ajax({
+            url: "select_ajax/select_fields_task.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+            //url: "select_ajax/select_json_encode.php", // select dynamic field
+            method: "POST",
+            async: false,
+            dataType: "JSON", // response variable type
+            data: {task_id:$("#task_user_id").val()}, // get form data
+            error: function(jqXHR, text, error) {
+
+                Swal.fire({
+                    title: 'ไม่พบข้อมูล!',
+                    icon: 'warning'
+                })
+            }
+        })
+        .done(function(data) { // response
+            console.log(data)
+            
+            // clear condition row
+            $("#append_condition").empty();
+
+            // clear result table
+            $(".result_table").empty();
+
+            html_table_fields = populate_fields2(data);
+
+            $('#fields_count').val(JSON.stringify(data));
+        });
+
         $('#table_nameeeeeeeee').val($("#task_user_id option:selected").text()) // กำหนดค่าให้ element id = table_nameeeeeeeee
 
     })
@@ -443,11 +472,13 @@ $(document).ready(function() {
 function populate_fields2(field2) {
 
     // HTML code
-    var options = '';
+    let options = '';
 
+    let i = 1 ;
     // loop JSON 
     Object.keys(field2).forEach(function(key) {
-        options += '<option value="' + key + '">' + field2[key] + '</option>';
+        options += '<option value="' + field2[key] + '">' + field2[key] + '</option>';
+        i++;
     })
 
     // return HTML code (Select box)
