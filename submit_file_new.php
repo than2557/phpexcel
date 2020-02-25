@@ -871,6 +871,8 @@ $('#basic2').selectpicker({
   liveSearch: true,
   maxOptions: 1
 }); 
+
+
 $(function() {
     
     $('#task_user_id').change(function() {
@@ -897,6 +899,40 @@ $(function() {
           
     
   });
+
+  $(function(){
+
+    $('#queryyyyy').onclick(function()
+    {
+      var group_line = document.getElementById("line_group_name");
+      if(group_line == ''){
+
+        Swal.fire({
+                        icon: 'error',
+                        title: 'ไม่พบกลุ่มไลน์...',
+                        text:'กรุณาเพิ่มกลุ่ม line..'
+                    })
+
+
+      }
+
+
+    })
+
+
+
+
+
+  })
+
+  
+  
+
+
+
+
+
+
   </script>
 
 
