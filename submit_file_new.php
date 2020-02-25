@@ -882,7 +882,6 @@ $(function() {
                           data: {task_user_id: $(this).val()},
                           url: 'select_groupline.php',
                           success: function(data) {
-                          
                         $('#line_group_name').html(data);     
                        
                           },

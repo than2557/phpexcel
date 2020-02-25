@@ -125,6 +125,7 @@ $(document).ready(function() {
 
     // on table name select box change
     $('#task_user_id').change(function() { // เมื่อเลือก select box 
+        
         $('#table_nameeeeeeeee').val($("#task_user_id option:selected").text()) // กำหนดค่าให้ element id = table_nameeeeeeeee
 
     })

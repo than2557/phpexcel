@@ -107,7 +107,7 @@
       // Count fields
       $fields_count = mysqli_num_fields($query_task_fields);
 
-      // Loop fields 
+      // // Loop fields 
       for($i =1 ; $i <= $fields_count-1; $i++){
 
          // Check last field
@@ -118,6 +118,7 @@
             $sql_insert .= ' h'.$i.',';
          }
       }
+
    
       // Append SQL code
       $sql_insert.= ' VALUES (';
@@ -178,6 +179,144 @@
       }
    }
 
+   function upload_data_2($data,$task_name,$connectDB){
+
+      // Declear result variable
+      $result ;
+
+      // SQL code
+      $sql_task_fields = 'SELECT * FROM '.'`'.$task_name.'`';
+
+      // Query
+      $query_task_fields = mysqli_query($connectDB,$sql_task_fields);
+
+      $sql_insert = 'INSERT INTO '.'`'.$task_name.'` (';
+
+      // Count fields
+      $fields_count = mysqli_num_fields($query_task_fields);
+
+      $i = 1 ;
+
+      while($fields = mysqli_fetch_field($query_task_fields)){
+
+         if($fields->name == 'table_name_id'){
+            $i++;
+         }
+         else{
+            if($fields_count == $i){
+
+               $sql_insert .= $fields->name.')';
+            }
+            else{
+               $sql_insert .= $fields->name.',';
+            }
+
+            $i++;
+         }
+         
+      }
+
+      // Append SQL code
+      $sql_insert.= ' VALUES (';
+
+      // แปลง object เป็น array
+      $parse_to_array = get_object_vars($data);
+
+      // เก็บ keys ของ Object
+      $key_obj = array_keys($parse_to_array);
+
+      // นับจำนวนรายการ
+      $count_row = count($data->{$key_obj[0]});
+
+      // Loop row (Record) 
+      for($i = 0 ; $i <= $count_row-1 ; $i++){
+
+         // Set value SQL code
+         $sql_loop_insert = '';
+         $sql_loop_insert = $sql_insert;
+         
+         // Loop key object (Column)
+         for($j = 0 ; $j <= count($key_obj)-1 ; $j++){
+
+            // Check column is ลำดับที่
+            if($key_obj[$j] == "ลำดับที่"){
+
+               // Check last column
+               if($j+1 == count($key_obj)){
+
+                  $sql_loop_insert .=' "'.strval($data->{$key_obj[$j]}[$i]).'"';
+               }  
+               else{
+   
+                  $sql_loop_insert .=' "'.strval($data->{$key_obj[$j]}[$i]).'" ,';
+               }
+            }
+            else if($key_obj[$j] == "รายการ"){
+               // Check last column
+               if($j+1 == count($key_obj)){
+
+                  //$sql_loop_insert .=' "'.strval($data->{$key_obj[$j]}[$i]).'"';
+
+                  $numberr = mb_substr($data->{$key_obj[$j]}[$i],0,2,'UTF-8');
+                        
+                  if(is_numeric($numberr)){
+                     $strr = mb_substr($data->{$key_obj[$j]}[$i],2);
+                     $data_push = $strr;
+               
+                     $sql_loop_insert .=' "'.$numberr.'",';
+                     $sql_loop_insert .=' "'.$strr.'"';
+                  }
+                  else{
+                     $data_push = $data->{$key_obj[$j]}[$i];
+                    
+                     $sql_loop_insert .=' "",';
+                     $sql_loop_insert .=' "'.$data_push.'"';
+                  }
+
+               }  
+               else{
+                  $numberr = mb_substr($data->{$key_obj[$j]}[$i],0,2,'UTF-8');
+                        
+                  if(is_numeric($numberr)){
+                     $strr = mb_substr($data->{$key_obj[$j]}[$i],2);
+                     $data_push = $strr;
+               
+                     $sql_loop_insert .=' "'.$numberr.'",';
+                     $sql_loop_insert .=' "'.$strr.'",';
+                  }
+                  else{
+                     $data_push = $data->{$key_obj[$j]}[$i];
+                    
+                     $sql_loop_insert .=' "",';
+                     $sql_loop_insert .=' "'.$data_push.'",';
+                  }
+
+                  //$sql_loop_insert .=' "'.strval($data->{$key_obj[$j]}[$i]).'" ,';
+               }
+            }
+            else{
+
+               // Check last column
+               if($j+1 == count($key_obj)){
+
+                  // Parse data
+                  $sql_loop_insert .=' '.parse_data_type($data->{$key_obj[$j]}[$i]);
+               }  
+               else{
+   
+                  $sql_loop_insert .=' '.parse_data_type($data->{$key_obj[$j]}[$i]).' ,';
+               }
+            }
+         }
+
+         // Close SQL code
+         $sql_loop_insert .= ')';
+
+         // Query (Insert)
+         mysqli_query($connectDB,$sql_loop_insert);
+      }
+   }
+
    // Call configDB.php 
    require_once("configDB.php");
 
@@ -205,4 +344,4 @@
    $new_obj = reConstruct_object_data($parse_object_data,$conn,$task_id);
 
    // Upload data
-   uplaod_data($new_obj,$task_name,$conn);
+   upload_data_2($new_obj,$task_name,$conn);
