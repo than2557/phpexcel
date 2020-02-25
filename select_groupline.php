@@ -17,7 +17,8 @@ $row = $result2->fetch_assoc();
 $tbb = $row['task_name'];
 
 $sqltb = "SELECT * FROM $tbb";
- 
+$resulttb = $conn->query($sql2);
+$tb = $resulttb->fetch_assoc();
 
 $sql = "SELECT * FROM token_line  WHERE  task_id ='$p_id' ";
 $result = $conn->query($sql);
