@@ -50,20 +50,20 @@ $(document).ready(function() {
     var query_result_object;
 
     // เมื่อ select box id = query เป็นค่าว่าง
-    if ($("#query").val() == null) {
+    // if ($("#task_user_id").val() == "--เลือกงาน--") {
         
-        //alert("ไม่สามารถเรียกข้อมูลได้");
+    //     //alert("ไม่สามารถเรียกข้อมูลได้");
 
-        Swal.fire({
-            title: 'ไม่สามารถเรียกข้อมูลได้งานได้!',
-            text: 'กรุณาเพิ่มงานและอัพโหลดไฟล์งาน!!',
-            icon: 'warning'
-        })
-    } 
-    else {
-
-        $('#table_nameeeeeeeee').val($("#query").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
-    }
+    //     Swal.fire({
+    //         title: 'ไม่สามารถเรียกข้อมูลได้งานได้!',
+    //         text: 'กรุณาเพิ่มงานและอัพโหลดไฟล์งาน!!',
+    //         icon: 'warning'
+    //     })
+    // } 
+    // else {
+    //     console.log($("#task_user_id").val())
+    //     $('#table_nameeeeeeeee').val($("#task_user_id").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
+    // }
 
     $("#checkvoxclick").click(function() {
 
@@ -124,8 +124,8 @@ $(document).ready(function() {
     });
 
     // on table name select box change
-    $('#query').change(function() { // เมื่อเลือก select box 
-        $('#table_nameeeeeeeee').val($(this).val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
+    $('#task_user_id').change(function() { // เมื่อเลือก select box 
+        $('#table_nameeeeeeeee').val($("#task_user_id option:selected").text()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     })
 
     // on click remove row
@@ -146,7 +146,7 @@ $(document).ready(function() {
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
             html += '<td><input class="form-control main_oplist" type="text" name="main_oplist[]" readonly value=""></td>';
             html += '<td><select class="form-control main_fieldlist" name="main_fieldlist[]" data-live-search="true">' + html_table_fields + '</select></td>';
-            html += '<td><input class="form-control main_condition_opv" type="text" name="main_condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
+            html +='<td><select class="form-control main_condition_opv" name="main_condition_opv[]" ><option value="=">เท่ากับ</option><option value=">">มากกว่า</option><option value="<">น้อยกว่า</option><option value=">=">มากกว่าหรือเท่ากับ</option><option value="<=">น้อยกว่าหรือเท่ากับ</option></select></td>';
             html += '<td id="selector_field4"><select class="form-control main_valuelist" name="main_valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
             html += '</tr>';
         } 
@@ -156,7 +156,7 @@ $(document).ready(function() {
             html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
             html += '<td><select class="form-control main_oplist" name="main_oplist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
             html += '<td><select class="form-control main_fieldlist" name="main_fieldlist[]"  data-live-search="true">' + html_table_fields + '</select></td>';
-            html += '<td><input class="form-control main_condition_opv" type="text" name="main_condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
+            html +='<td><select class="form-control main_condition_opv" name="main_condition_opv[]" ><option value="=">เท่ากับ</option><option value=">">มากกว่า</option><option value="<">น้อยกว่า</option><option value=">=">มากกว่าหรือเท่ากับ</option><option value="<=">น้อยกว่าหรือเท่ากับ</option></select></td>';
             html += '<td id="selector_field4"><select class="form-control main_valuelist" name="main_valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
             html += '</tr>';
         }
@@ -228,7 +228,7 @@ $(document).ready(function() {
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
             html += '<td><input class="form-control sub_oplist" type="text" name="sub_oplist[]" readonly value=""></td>';
             html += '<td><select class="form-control sub_fieldlist" name="sub_fieldlist[]" data-live-search="true">' + html_table_fields + '</select></td>';
-            html += '<td><input class="form-control sub_condition_opv" type="text" name="sub_condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
+            html +='<td><select class="form-control sub_condition_opv" name="sub_condition_opv[]" ><option value="=">เท่ากับ</option><option value=">">มากกว่า</option><option value="<">น้อยกว่า</option><option value=">=">มากกว่าหรือเท่ากับ</option><option value="<=">น้อยกว่าหรือเท่ากับ</option></select></td>';
             html += '<td id="sub_con_selector_field4"><select class="form-control sub_valuelist" name="sub_valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
             html += '</tr>';
         } 
@@ -237,7 +237,7 @@ $(document).ready(function() {
             html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
             html += '<td><select class="form-control sub_oplist" name="sub_oplist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
             html += '<td><select class="form-control sub_fieldlist" name="sub_fieldlist[]"  data-live-search="true">' + html_table_fields + '</select></td>';
-            html += '<td><input class="form-control sub_condition_opv" type="text" name="sub_condition_opv[]" placeholder="กรอกเงื่อนไข"></td>';
+            html +='<td><select class="form-control sub_condition_opv" name="sub_condition_opv[]" ><option value="=">เท่ากับ</option><option value=">">มากกว่า</option><option value="<">น้อยกว่า</option><option value=">=">มากกว่าหรือเท่ากับ</option><option value="<=">น้อยกว่าหรือเท่ากับ</option></select></td>';
             html += '<td id="sub_con_selector_field4"><select class="form-control sub_valuelist" name="sub_valuelist[]" ><option value="null_value">กรุณาเลือก</option><option value="con_value">ค่า</option><option value="con_fields">ฟีลด์</option></select></td>';
             html += '</tr>';
         }
@@ -385,9 +385,16 @@ $(document).ready(function() {
     // send condition to php file
     $("#queryyyyy").click(function() {
 
-        // send HTTP post
-        $.ajax({
-                url: "select_ajax/get_condition_query.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+        if($("#task_user_id").val() == "--เลือกงาน--" && $("#line_group_name").val() == null){
+            Swal.fire({
+                title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
+                icon: 'warning'
+            })
+        }
+        else{
+            // send HTTP post
+            $.ajax({
+                url: "select_ajax/get_condition_query_dynamic_fields.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
                 //url: "select_ajax/select_json_encode.php", // select dynamic field
                 method: "POST",
                 async: false,
@@ -431,8 +438,11 @@ $(document).ready(function() {
                 }
 
             });
+            console.log(query_result_object)
+        }
 
-        console.log(query_result_object)
+
+       
     });
 })
 

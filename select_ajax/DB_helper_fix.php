@@ -22,7 +22,7 @@
             `table_name_id` INT NOT NULL AUTO_INCREMENT COMMENT 'primary_key' , 
             `h1` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'ลำดับที่' , 
             `h2_1` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'เลขที่รายการ' , 
-            `h2_2` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'ชื่อรายการ' , 
+            `h2_2` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '   ' , 
             `h3` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'WBS' , 
             `h4` DOUBLE NOT NULL COMMENT 'วงเงินงบประมาณปัจจุบัน' , 
             `h5` DOUBLE NOT NULL COMMENT 'รวมจ่ายจริงถึงสิ้นปีก่อนหน้า' , 

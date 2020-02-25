@@ -493,7 +493,7 @@
                    ?>  
             <label for="tokename" style="margin-left:20px">ชื่องาน :</label>
             <select class="form-control col-md-2" data-live-search="true" data-placeholder="task_user_id" name="task_user_id" id="task_user_id" style="width:300px;margin-left:30px;">
-                      <option value="">--เลือกงาน--</option>
+                      <option value="--เลือกงาน--">--เลือกงาน--</option>
                        <?php while($row = mysqli_fetch_array($result)){ 
                            echo '<option value="'.$row['task_user_id'].'">'.$row['task_name'].'</option>'; 
                        } ?> 

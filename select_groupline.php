@@ -22,10 +22,12 @@ $tb = $resulttb->fetch_assoc();
 
 $sql = "SELECT * FROM token_line  WHERE  task_id ='$p_id' ";
 $result = $conn->query($sql);
-    while ($row = $result->fetch_assoc()) {
-		?>
-        <option value="<?php $row['id']; ?>">
-        <?php echo $row['namegroup_line'];?> 
-        </optio>
-
-   <?php }?>
+if($result){
+  while($row = $result->fetch_assoc()){
+    echo '<option value="'.$row['id'].'">'.$row['namegroup_line'].'</option>';
+  }
+}
+else{
+  echo '<option value="'.null.'">'.null.'</option>';
+}
+   

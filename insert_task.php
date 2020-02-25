@@ -27,7 +27,7 @@ $Query = mysqli_query($conn,$sql2);
 $a = 1;
 
 $sql_create_table = "CREATE TABLE `test_import_excel`.`$task_name` ( 
-   `table_name_id` INT NOT NULL AUTO_INCREMENT COMMENT 'primary_key' , ";
+   `table_name_id` INT NOT NULL AUTO_INCREMENT, ";
    
 
 for ($a;$a<=$row+1;$a++) {
@@ -35,20 +35,36 @@ for ($a;$a<=$row+1;$a++) {
    $head = "h".$a;
    
    if($a == $row+1){
-      $sql_create_table.= "`$head` ".$_POST['datatype'][$a-1]."  NOT NULL";
+
+      if($_POST['colum'][$a-1] == "รายการ"){
+         $sql_create_table.= "`".$head."_1` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,";
+         $sql_create_table.= "`".$head."_2` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL";
+       
+      }
+      else{
+         $sql_create_table.= "`$head` ".$_POST['datatype'][$a-1]."  NOT NULL";
+      }
+      
    }
    else{
-      $sql_create_table.= "`$head`  ".$_POST['datatype'][$a-1]." NOT NULL,";
+      if($_POST['colum'][$a-1] == "รายการ"){
+         $sql_create_table.= "`".$head."_1` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,";
+         $sql_create_table.= "`".$head."_2` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,";
+      }
+      else{
+         $sql_create_table.= "`$head`  ".$_POST['datatype'][$a-1]." NOT NULL,";
+      }
+      
    }
       
 }
 
 $sql_create_table.= " ,PRIMARY KEY (`table_name_id`)
-) ENGINE = InnoDB COMMENT = '$task_name';";
+) ENGINE = InnoDB;";
 
-$Query = mysqli_query($conn,$sql_create_table);
-// echo $sql_create_table;
+//$Query = mysqli_query($conn,$sql_create_table);
+ //echo $sql_create_table;
 
-//mysqli_query($conn,$sql_create_table);
+mysqli_query($conn,$sql_create_table);
 
 ?>
