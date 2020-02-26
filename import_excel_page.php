@@ -7,16 +7,19 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="/phpexcel/lib/Bootstrap_4/bootstrap.min.css">
-   <script src="/phpexcel/lib/Jquery/jquery.js"></script>
-   <script src="/phpexcel/lib/Bootstrap_4/bootstrap.min.js"></script>
-   <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+   <script src="/phpexcel/lib/Jquery/jquery.js"></script>
+   <script src="/phpexcel/lib/Bootstrap_4/bootstrap.min.js"></script>
+   
+
 
 <link rel="icon" type="img/png" href="iconpea.png"/>
-<link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
 
 
@@ -137,12 +140,12 @@ position: absolute;
 <a  style="width:45%;" class="w3-round"></a><br><br>
 
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
-  <img src="https://plms.pea.co.th/Personal/EmployeeImage?EmpCode=<?php echo $_SESSION['username']; ?>"   style="width:45%;height:15%;" class="w3-round"  alt="picture"/>
-  <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">username : <?php echo $_SESSION['username'];?></a> 
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a> 
-  <a href="#upload_file" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
-  <button class="w3-bar-item w3-button" onclick="link_page('<?php echo $_SESSION['leveltest'] ?>')">back</button>
-  <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
+  <img src="https://plms.pea.co.th/Personal/EmployeeImage?EmpCode=<?php echo $_SESSION['username']; ?>"   style="width:45%;height:20%;" class="w3-round"  alt="picture"/>
+  <a href="#" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-user" aria-hidden="true"></i></i>&nbsp;username : <?php echo $_SESSION['username'];?></a> 
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-user" aria-hidden="true"></i></i>&nbsp;name :<?php echo $_SESSION['name'];?></a> 
+  <a href="#upload_file" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-upload" aria-hidden="true"></i></i>&nbsp;อัพโหลดไฟล์</a>
+  <button class="w3-bar-item w3-button" onclick="link_page('<?php echo $_SESSION['leveltest'] ?>')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></i>&nbsp;ย้อนกลับ</button>
+  <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;logout</a>
 </nav>
 
 <!-- Top menu on small screens -->

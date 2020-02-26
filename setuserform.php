@@ -927,7 +927,7 @@ button {
     <h3>รหัสพนักงาน</h3>
 
     <input type="search" placeholder="กรอกรหัสพนักงาน" id="idem">
-   <button onclick="insertuser()">ค้นหาข้อมูล</button>
+   <button onclick="insertuser()" class="btn btn-primary">ค้นหาข้อมูล</button>
     </card>
 
 
@@ -1046,7 +1046,7 @@ button {
         showConfirmButton: false,
         timer: 3000
       })
-    } 
+    }   
 
  function insertuser() {
     // alert("test");

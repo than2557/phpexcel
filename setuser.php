@@ -23,14 +23,14 @@ body,h1,h2,h3,h4,h5,a {font-family: 'Sriracha', cursive;}
 <a  style="width:45%;" class="w3-round"></a><br><br>
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
   <img src="https://plms.pea.co.th/Personal/EmployeeImage?EmpCode=<?php echo $_SESSION['username']; ?>"  style="width:45%;height:20%;" class="w3-round"  alt="picture"/>
-  <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">username : <?php echo $_SESSION['username'];?></a> 
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">name :<?php echo $_SESSION['name'];?></a> 
-  <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">กำหนดสิทธิผู้ใช้</a>
-  <a href="import_excel_page.php" onclick="w3_close()" class="w3-bar-item w3-button">อัพโหลดไฟล์</a>
-  <a href="displayatline.php" onclick="w3_close()" class="w3-bar-item w3-button">ข้อมูลการส่งไลน์</a>
-  <button class="w3-bar-item w3-button" onclick="link_page('<?php echo $_SESSION['leveltest'] ?>')">back</button>
+  <a href="#" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-user fa-fw"></i>&nbsp;username : <?php echo $_SESSION['username'];?></a> 
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-user fa-fw"></i>&nbsp;name :<?php echo $_SESSION['name'];?></a> 
+  <!-- <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">กำหนดสิทธิผู้ใช้</a> -->
+  <a href="import_excel_page.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-upload" aria-hidden="true"></i></i>&nbsp;อัพโหลดไฟล์</a>
+  <a href="displayatline.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;ข้อมูลการส่งไลน์</a>
+  <button class="w3-bar-item w3-button" onclick="link_page('<?php echo $_SESSION['leveltest'] ?>')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></i>&nbsp;ย้อนกลับ</button>
 
-  <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button">logout</a>
+  <a href="logout.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;logout</a>
 </nav>
 
 <!-- Top menu on small screens -->
