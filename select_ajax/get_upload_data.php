@@ -6,6 +6,34 @@
       return $d && $d->format($format) === $date;
    }
 
+   // convert price to numberic
+   // REF. https://stackoverflow.com/questions/4982291/how-to-check-if-an-entered-value-is-currency
+   function convertToValidPrice($price) {
+      $price = str_replace(['-', ',', '$', ' '], '', $price);
+      if(!is_numeric($price)) {
+          $price = null;
+      } else {
+          if(strpos($price, '.') !== false) {
+              $dollarExplode = explode('.', $price);
+              $dollar = $dollarExplode[0];
+              $cents = $dollarExplode[1];
+              if(strlen($cents) === 0) {
+                  $cents = '00';
+              } elseif(strlen($cents) === 1) {
+                  $cents = $cents.'0';
+              } elseif(strlen($cents) > 2) {
+                  $cents = substr($cents, 0, 2);
+              }
+              $price = $dollar.'.'.$cents;
+          } else {
+              $cents = '00';
+              $price = $price.'.'.$cents;
+          }
+      }
+  
+      return $price;
+  }
+
    // Check and parse data type
    function parse_data_type($data){
 
@@ -15,14 +43,14 @@
       // Check null data
       if($data != NULL || $data != ''){
 
-            // Check numeric data
-            if(is_numeric($data)){
+            // // Check numeric data
+            // if(is_numeric($data)){
 
-               // Parse data to float value
-               $result_data = floatval($data);
+            //    // Parse data to float value
+            //    $result_data = floatval($data);
               
-            }
-            else if(validateDate($data)){ // Check data is Date format
+            // }
+            if(validateDate($data)){ // Check data is Date format
 
                // แทนที่เครื่องหมาย "/" ด้วย "-"
                $datee = str_replace('/', '-', $data );
@@ -35,8 +63,16 @@
             }
             else{
 
-               // Parse data to String
-               $result_data = '"'.strval($data).'"';
+               $validate_price = convertToValidPrice($data);
+
+               if($validate_price == null){
+                     // Parse data to String
+                  $result_data = '"'.strval($data).'"';
+               }
+               else{
+                  $result_data = $validate_price;
+               }
+            
             }
          
       }
@@ -311,7 +347,7 @@
 
          // Close SQL code
          $sql_loop_insert .= ')';
-
+         //echo $sql_loop_insert."\n";
          // Query (Insert)
          mysqli_query($connectDB,$sql_loop_insert);
       }
@@ -343,5 +379,6 @@
    // Restructure object 
    $new_obj = reConstruct_object_data($parse_object_data,$conn,$task_id);
 
+   //echo json_encode($new_obj);
    // Upload data
    upload_data_2($new_obj,$task_name,$conn);
