@@ -144,6 +144,7 @@ $(document).ready(function() {
         .done(function(data) { // response
             console.log(data)
             
+            i = 1;
             // clear condition row
             $("#append_condition").empty();
 

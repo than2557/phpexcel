@@ -10,15 +10,23 @@
       else{
          $sql.= ' '.$conditions['oplist'];
       }  
-
-      // ตรวจสอบถ้าเลือกฟีลด์ h2 ให้เลือก attributes h2_1
+ 
       if($conditions['fieldlist'] == 'รายการ'){
-			$array_ekys = array_keys($fields_json, "รายการ")+1;
-		  	$sql.= ' h'.$array_ekys.'_1';
-         //$sql.= ' h2_1';
+
+         $array_key = array_keys($fields_json, "รายการ");
+          
+         $field_header = $array_key[0]+1;
+
+         //$sql.= ' ( h'.$field_header.'_1';
+           
+         $sql.= ' ( h'.$field_header.'_1';
       }
       else{
-         $sql.= ' '.$conditions['fieldlist'];
+         $array_key = array_keys($fields_json, $conditions['fieldlist']);
+
+         $field_header = $array_key[0]+1;
+
+         $sql.= ' ( h'.$field_header;
       }
 
       // ต่อข้อความ
@@ -38,13 +46,36 @@
       else{
 
          // ถ้าค่าของเงื่อนไขเป็นฟีลด์ และมีค่าเป็น h2
-         if($conditions['valuelist'] == 'h2'){
-            $sql.= ' h2_1';
+         if($conditions['valuelist'] == 'รายการ'){
+
+            $array_key = array_keys($fields_json, "รายการ");
+             
+            $field_header = $array_key[0]+1;
+   
+              $sql.= ' h'.$field_header.'_1';
          }
          else{
-            $sql.= ' '.$conditions['valuelist'];
+            $array_key = array_keys($fields_json, $conditions['valuelist']);
+   
+            $field_header = $array_key[0]+1;
+   
+            $sql.= ' h'.$field_header;
          }
+
       }
+
+      if($conditions['fieldlist'] == 'รายการ'){
+
+         $array_key = array_keys($fields_json, "รายการ");
+          
+         $field_header = $array_key[0]+1;
+ 
+         $sql.= ' AND h'.$field_header.'_1 != "" )';
+      }
+      else{
+         $sql.= ' )';
+      }
+
       return $sql;
    }
 
@@ -65,12 +96,21 @@
           else{
              $sql.= ' '.$sub_con['sub_op_list'];
           }  
-    
-          if($sub_con['sub_field_list'] == 'h2'){
-             $sql.= ' h2_1';
+
+          if($sub_con['sub_field_list'] == 'รายการ'){
+
+               $array_key = array_keys($fields_json, "รายการ");
+             
+               $field_header = $array_key[0]+1;
+   
+              $sql.= ' ( h'.$field_header.'_1';
           }
           else{
-             $sql.= ' '.$sub_con['sub_field_list'];
+             $array_key = array_keys($fields_json, $sub_con['sub_field_list']);
+   
+               $field_header = $array_key[0]+1;
+      
+               $sql.= ' ( h'.$field_header;
           }
     
           $sql.= ' '.$sub_con['sub_condition_opv'];
@@ -85,13 +125,34 @@
              }
           }
           else{
-             if($sub_con['sub_value_list'] == 'h2'){
-                $sql.= ' h2_1';
+ 
+             if($sub_con['sub_value_list'] == 'รายการ'){
+               $array_key = array_keys($fields_json, "รายการ");
+             
+               $field_header = $array_key[0]+1;
+   
+              $sql.= ' h'.$field_header.'_1';
              }
              else{
-                $sql.= ' '.$sub_con['sub_value_list'];
+               $array_key = array_keys($fields_json, $sub_con['sub_value_list']);
+   
+               $field_header = $array_key[0]+1;
+      
+               $sql.= ' h'.$field_header;
              }
           }
+
+          if($sub_con['sub_field_list'] == 'รายการ'){
+
+            $array_key = array_keys($fields_json, "รายการ");
+             
+            $field_header = $array_key[0]+1;
+    
+            $sql.= ' AND h'.$field_header.'_1 != "" )';
+         }
+         else{
+            $sql.= ' )';
+         }
       }
       
       $sql.= ' )';
@@ -101,7 +162,7 @@
 
 
    // query data
-   function query_data($sql,$conn){
+   function query_data($sql,$conn,$fields){
 
       $row_data = array();
       $row_raw_data = array();
@@ -111,51 +172,70 @@
 
       if($result){
 
-         $rowcount=mysqli_num_rows($result);
-
-         $data = array();
+         $rowcount = mysqli_num_rows($result);
 
          if($rowcount > 0){
 
             while($row = mysqli_fetch_row($result)){
 
-               $data = array();
-         
-               $data['ลำดับที่'] = $row[1];
+               $data = new stdClass();
 
-               
-               $data['รายการ'] = $row[2]."".$row[3];
-               
-               $data['WBS'] = $row[4];
-               $data['วงเงินงบประมาณปัจจุบัน'] = $row[5];
-               $data['รวมจ่ายจริงถึงสิ้นปีก่อนหน้า'] = $row[6];
-               $data['รวมจ่ายจริงปีปัจจุบัน'] = $row[7];
-               $data['รวมจ่ายจริง'] = $row[8];
-               $data['เงินล่วงหน้าปีก่อนหน้า'] = $row[9];
-               $data['เงินประกันปีก่อนหน้า'] = $row[10];
-               $data['เงินล่วงหน้าปีปัจจุบัน'] = $row[11];
-               $data['เงินประกันปีปัจจุบัน'] = $row[12];
-               $data['เงินล่วงหน้าคงเหลือ'] = $row[13];
-               $data['เงินประกันค้างจ่าย'] = $row[14];
-               $data['รวมจ่ายทั้งสิ้นปีก่อนหน้า'] = $row[15];
-               $data['รวมจ่ายทั้งสิ้นปีปัจจุบัน'] = $row[16];
-               $data['รวมจ่ายทั้งสิ้น'] = $row[17];
-               $data['งบประมาณหักรวมจ่ายทั้งสั้น'] = $row[18];
-               $data['PO_หัก_รวมจ่ายจริง_PO'] = $row[19];
-               $data['งบประมาณหักรวมจ่ายจริง'] = $row[20];
-               $data['IR_คงเหลือ'] = $row[21];
-               $data['GR_คงเหลือ'] = $row[22];
-               $data['PO_คงเหลือ'] = $row[23];
-               $data['PR_คงเหลือ'] = $row[24];
-               $data['วงเงินคงเหลือยังไม่ดำเนินการ'] = $row[25];
-               $data['สถานะ'] = $row[26];
-               $data['วันที่สร้าง'] = $row[27];
+               $raw_data = new stdClass();
 
+               $raw_data->{'primary_key'} = $row[0];
+
+               foreach($fields as $field){
+
+                  $keys = array_keys($fields, $field);
+
+                  if($field == "รายการ"){
+
+                     $data->{$field} = $row[intval($keys[0])+1]."".$row[intval($keys[0])+2];
+
+                     $raw_data->{$field} = $row[intval($keys[0])+1]."".$row[intval($keys[0])+2];
+                  }
+                  else{
+
+                     $data->{$field} = $row[intval($keys[0])+1];
+
+                     $raw_data->{$field} = $row[intval($keys[0])+1];
+                  }
+                 
+
+                 
+               }
+               
+               // $data['ลำดับที่'] = $row[1];
+               // $data['รายการ'] = $row[2]."".$row[3];
+               // $data['WBS'] = $row[4];
+               // $data['วงเงินงบประมาณปัจจุบัน'] = $row[5];
+               // $data['รวมจ่ายจริงถึงสิ้นปีก่อนหน้า'] = $row[6];
+               // $data['รวมจ่ายจริงปีปัจจุบัน'] = $row[7];
+               // $data['รวมจ่ายจริง'] = $row[8];
+               // $data['เงินล่วงหน้าปีก่อนหน้า'] = $row[9];
+               // $data['เงินประกันปีก่อนหน้า'] = $row[10];
+               // $data['เงินล่วงหน้าปีปัจจุบัน'] = $row[11];
+               // $data['เงินประกันปีปัจจุบัน'] = $row[12];
+               // $data['เงินล่วงหน้าคงเหลือ'] = $row[13];
+               // $data['เงินประกันค้างจ่าย'] = $row[14];
+               // $data['รวมจ่ายทั้งสิ้นปีก่อนหน้า'] = $row[15];
+               // $data['รวมจ่ายทั้งสิ้นปีปัจจุบัน'] = $row[16];
+               // $data['รวมจ่ายทั้งสิ้น'] = $row[17];
+               // $data['งบประมาณหักรวมจ่ายทั้งสั้น'] = $row[18];
+               // $data['PO_หัก_รวมจ่ายจริง_PO'] = $row[19];
+               // $data['งบประมาณหักรวมจ่ายจริง'] = $row[20];
+               // $data['IR_คงเหลือ'] = $row[21];
+               // $data['GR_คงเหลือ'] = $row[22];
+               // $data['PO_คงเหลือ'] = $row[23];
+               // $data['PR_คงเหลือ'] = $row[24];
+               // $data['วงเงินคงเหลือยังไม่ดำเนินการ'] = $row[25];
+               // $data['สถานะ'] = $row[26];
+               // $data['วันที่สร้าง'] = $row[27];
+               // $row_data[] = $data;
+               // $data['primary_key'] = $row[0];
+
+               $row_raw_data[] = $raw_data;
                $row_data[] = $data;
-         
-               $data['primary_key'] = $row[0];
-
-               $row_raw_data[] = $data;
             }
 
             $query_data['result_data'] = $row_data;
@@ -183,6 +263,8 @@
    
    $sql = ''; // ตัวแปร sql ว่าง
 
+   $fields_json = json_decode($_POST['fields_count']);
+
    if(!empty($_POST['condition_type_row'])){
      
       // รับข้อมูล JSON ข้อมูลจำนวนเงื่อนไขของเงื่อนไขย่อย
@@ -193,12 +275,13 @@
       $loop_count_all_con = 0; // ตัวแปรลูปของเงื่อนไขทั้งหมด main/sub
       $loop_conjection_condition_count = 0 ; // ตัวแปรลูปของตัวเชื่อมเงื่อนไขย่อย
  
-      $sql .= 'SELECT * FROM '.$table.' WHERE'; 
+      $sql .= 'SELECT * FROM '.'`'.$table.'`'.' WHERE'; 
  
       $array_main_con = array(); // ประกาศตัวแปร array
       $array_sub_con = array(); // ประกาศตัวแปร array
-
-	  $fields_json = json_decode($_POST['fields_count']);
+ 
+     
+      
       // ลูปเงื่อนไขทั้งหมด
       foreach($_POST['condition_type_row'] as $condition_type){
          
@@ -255,8 +338,8 @@
          }
       }
       
-	  //$response['query_data'] = query_data($sql,$conn);
-	  $response['json_count'] = $fields_json;
+	   $response['query_data'] = query_data($sql,$conn,$fields_json);
+	   $response['json_count'] = $fields_json;
       $response['HTTP_post_data'] = $_POST;
       $response['result_sql'] = $sql;
       $response['message'] = "success";
@@ -264,21 +347,15 @@
    }
    else{
     
-      $sql = 'SELECT * FROM '.$table;
+      $sql = 'SELECT * FROM '.'`'.$table.'`';
 
-      //$response['query_data'] = query_data($sql,$conn);
+      $response['query_data'] = query_data($sql,$conn,$fields_json);
       $response['HTTP_post_data'] = $_POST;
       $response['result_sql'] = $sql;
       $response['message'] = "success";
       $response['error'] = false;
 
-      // $response['result_sql'] = $sql;
-      // $response['message'] = "ไม่พบข้อมูล";
-      // $response['error'] = true;
    }
-
  
-
-
    echo json_encode($response);
 ?>
