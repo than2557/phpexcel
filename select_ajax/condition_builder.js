@@ -142,7 +142,8 @@ $(document).ready(function() {
             }
         })
         .done(function(data) { // response
-            console.log(data)
+
+            //console.log(data)
             
             i = 1;
             // clear condition row
@@ -163,6 +164,7 @@ $(document).ready(function() {
     // on click remove row
     $(document).on('click', '.remove', function() { // เมื่อคลิกปุ่ม remove
         $(this).closest('tr').remove(); // ลบรายการที่เลือก (tr)
+        i--;
     });
 
     // on click button add main condition
@@ -383,6 +385,7 @@ $(document).ready(function() {
         // clear condition row
         $("#append_condition").empty();
 
+        $("#sub_row_data_count").val('');
     });
 
     //reser all table and condition 
@@ -405,6 +408,7 @@ $(document).ready(function() {
         // clear result table
         $(".result_table").empty();
 
+        $("#sub_row_data_count").val('');
     });
 
     // send condition to php file
@@ -433,7 +437,7 @@ $(document).ready(function() {
                     }
                 })
                 .done(function(data) { // response
-
+                    console.log(data)
                     // check response is error
                     if (!data.error) {
 
@@ -461,7 +465,7 @@ $(document).ready(function() {
                     }
 
                 });
-            console.log(query_result_object)
+                
         }
 
 
