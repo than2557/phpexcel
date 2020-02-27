@@ -38,7 +38,7 @@ body,h1,h2,h3,h4,h5,a {font-family: 'Sriracha', cursive;}
   <a href="addtoken.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="animate fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp;เพิ่มข้อมูลโทเคน</a>
   <a href="displayatline.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="animate fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;ข้อมูลการส่งไลน์</a>
   <a href="addtask.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="animate fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp;เพิ่มข้อมูลงาน</a>
-  <a href="#" onclick="w3_close()" class="w3-bar-item w3-button"><i class="animate fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp;เพิ่มคอลัมน์งาน</a>
+  <a href="addcolumtask.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="animate fa  fa-plus-square fa-fw" aria-hidden="true"></i>&nbsp;เพิ่มคอลัมน์งาน</a>
   </dropdown>
   </ul>
 </dropdown>
