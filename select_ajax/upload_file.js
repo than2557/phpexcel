@@ -89,8 +89,7 @@ $(document).ready(function() {
 
             $(this).val('');
 
-        } 
-        else {
+        } else {
 
             $("#form_input").submit();
         }
@@ -175,8 +174,7 @@ $(document).ready(function() {
                 title: 'กรุณาเลือกคอลัมน์ให้ครบถ้วน...'
 
             })
-        } 
-        else {
+        } else {
 
             // Loop user fields selected
             id.forEach(function(key) {
@@ -195,7 +193,14 @@ $(document).ready(function() {
                 dataType: 'JSON',
                 async: false,
                 success: function(data) {
-                    console.log(data)
+                    Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'อัพโหลดไฟล์เสร็จสิ้น',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        // console.log(data)
                 }
             });
 
