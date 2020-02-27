@@ -124,7 +124,7 @@
       return $html;
    }
 
-   require_once $_SERVER['DOCUMENT_ROOT']."/MyPhpSpreadsheet/lib/PHPExcel-1.8/Classes/PHPExcel.php"; //เรียกใช้ไลบรารี่ PHPExcel
+   require_once $_SERVER['DOCUMENT_ROOT']."/phpexcel/lib/PHPExcel-1.8/Classes/PHPExcel.php"; //เรียกใช้ไลบรารี่ PHPExcel
  
    $response  = array();
 

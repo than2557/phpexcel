@@ -480,7 +480,8 @@ $(document).ready(function() {
 
                         // clear table result 
                         $(".result_table").empty();
-
+                        
+                        console.log(data.query_data.raw_data)
                         // show HTML table
                         $(".result_table").html(generate_table_result(data.query_data.raw_data));
                     }
