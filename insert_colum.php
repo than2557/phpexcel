@@ -49,15 +49,18 @@ for($i=$rowsql;$i<=$numrow+3;$i++){
     print_r($data).'\n';  
     $colum =$_POST['colum'][$i-4];
    
-    $sql3 ="ALTER TABLE `$taskname` ADD `$head` $data CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER $head_before;";
-    echo $sql3;
-    $Query = mysqli_query($conn,$sql3);
+    // $sql3 ="ALTER TABLE `$taskname` ADD `$head` $data CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER $head_before;";
+    // echo $sql3;
+    // $Query = mysqli_query($conn,$sql3);
 
 
 
-    $inserttem = "INSERT INTO `template_tb`(`task_user_id`, `colum_name`, `datatype`) VALUES ('$task_user_id','$colum','$data')";
-    $Query = mysqli_query($conn,$inserttem);
+    // $inserttem = "INSERT INTO `template_tb`(`task_user_id`, `colum_name`, `datatype`) VALUES ('$task_user_id','$colum','$data')";
+    // $Query = mysqli_query($conn,$inserttem);
 }
+
+
+
 
 
 // $count_sql = count($_POST['$Query']);
