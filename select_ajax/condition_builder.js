@@ -177,7 +177,7 @@ $(document).ready(function() {
         if (i == 1) {
 
             html += '<tr name="row' + i + '" id="row' + i + '">';
-            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
+            html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button></td>';
             html += '<td><input class="form-control main_oplist" type="text" name="main_oplist[]" readonly value=""></td>';
             html += '<td><select class="form-control main_fieldlist" name="main_fieldlist[]" data-live-search="true">' + html_table_fields + '</select></td>';
             html += '<td><select class="form-control main_condition_opv" name="main_condition_opv[]" ><option value="=">เท่ากับ</option><option value=">">มากกว่า</option><option value="<">น้อยกว่า</option><option value=">=">มากกว่าหรือเท่ากับ</option><option value="<=">น้อยกว่าหรือเท่ากับ</option></select></td>';
@@ -214,7 +214,7 @@ $(document).ready(function() {
         if (i == 1) {
 
             html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="' + i + '">';
-            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "' + i + '"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
+            html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "' + i + '"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
             html += '<td colspan="1"></td>';
             html += '<td colspan="1"><label>เลือกตัวเชื่อมเงื่อนไข</label></td>';
             html += '<td colspan="1"> <input class="form-control sub_con_optlist" type="text" name="sub_con_optlist[]" readonly value=""></input></td>';
@@ -223,7 +223,7 @@ $(document).ready(function() {
         } else {
 
             html += '<tr name="row' + i + '" id="row' + i + '" sub_con_row="' + i + '">';
-            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "' + i + '"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
+            html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="main_row_sub_con"><button data_row_id ="row' + i + '"  type="button" name="remove" class="btn btn-danger btn-sm remove">X</button>     <button data_row_id ="row' + i + '" row_id = "' + i + '"  type="button" name="add_sub_con" class="btn btn-primary btn-sm add_sub_con">+</button></td>';
             html += '<td colspan="1"></td>';
             html += '<td colspan="1"><label>เลือกตัวเชื่อมเงื่อนไข</label></td>';
             html += '<td colspan="1"><select class="form-control sub_con_optlist" name="sub_con_optlist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
@@ -257,7 +257,7 @@ $(document).ready(function() {
         // check sub condition first row
         if (sub_con_count["sub_con" + btn_obj] == 1) {
             html += '<tr name="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '" id="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '">';
-            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
+            html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
             html += '<td><input class="form-control sub_oplist" type="text" name="sub_oplist[]" readonly value=""></td>';
             html += '<td><select class="form-control sub_fieldlist" name="sub_fieldlist[]" data-live-search="true">' + html_table_fields + '</select></td>';
             html += '<td><select class="form-control sub_condition_opv" name="sub_condition_opv[]" ><option value="=">เท่ากับ</option><option value=">">มากกว่า</option><option value="<">น้อยกว่า</option><option value=">=">มากกว่าหรือเท่ากับ</option><option value="<=">น้อยกว่าหรือเท่ากับ</option></select></td>';
@@ -265,7 +265,7 @@ $(document).ready(function() {
             html += '</tr>';
         } else {
             html += '<tr name="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '" id="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '">';
-            html += '<td> <input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
+            html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove" class="btn btn-warning btn-sm remove">X</button></td>';
             html += '<td><select class="form-control sub_oplist" name="sub_oplist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
             html += '<td><select class="form-control sub_fieldlist" name="sub_fieldlist[]"  data-live-search="true">' + html_table_fields + '</select></td>';
             html += '<td><select class="form-control sub_condition_opv" name="sub_condition_opv[]" ><option value="=">เท่ากับ</option><option value=">">มากกว่า</option><option value="<">น้อยกว่า</option><option value=">=">มากกว่าหรือเท่ากับ</option><option value="<=">น้อยกว่าหรือเท่ากับ</option></select></td>';
