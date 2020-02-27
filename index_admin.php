@@ -38,6 +38,7 @@ a{font-size:16px;}
   <a href="displayatline.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp;ข้อมูลการส่งไลน์</a>
   <a href="addtoken.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-plus-square fa-fw" aria-hidden="true"></i>&nbsp;เพิ่มข้อมูลโทเคน</a>
   <a href="addtask.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-plus-square fa-fw" aria-hidden="true"></i>&nbsp;เพิ่มข้อมูลงาน</a>
+  <a href="addcolumtask.php" onclick="w3_close()" class="w3-bar-item w3-button"><i class="animate fa  fa-plus-square fa-fw" aria-hidden="true"></i>&nbsp;เพิ่มคอลัมน์งาน</a>
   </div>
    </ul>
 </dropdown>
