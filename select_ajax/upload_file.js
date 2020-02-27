@@ -186,22 +186,23 @@ $(document).ready(function() {
             $.ajax({
                 url: "select_ajax/get_upload_data.php",
                 method: "POST",
+                async: false,
                 data: {
                     data: JSON.stringify(dadadsadad),
                     task_id: task_id
                 },
-                dataType: 'JSON',
-                async: false,
-                success: function(data) {
-                    Swal.fire({
+                dataType: 'JSON'   
+            })
+            .done(function(data){
+                Swal.fire({
                             position: 'top-end',
                             icon: 'success',
                             title: 'อัพโหลดไฟล์เสร็จสิ้น',
                             showConfirmButton: false,
                             timer: 1500
                         })
+                    
                         // console.log(data)
-                }
             });
 
         }

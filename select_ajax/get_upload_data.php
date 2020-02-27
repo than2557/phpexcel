@@ -26,7 +26,7 @@
               }
               $price = $dollar.'.'.$cents;
           } else {
-              $cents = '00';
+              $cents = '';
               $price = $price.'.'.$cents;
           }
       }
