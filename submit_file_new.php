@@ -583,7 +583,7 @@
         <div class="row">
           <div class="col-md-12">
           <center><input style="display:none;" type="button" value="บันทึกข้อมูล" class="btn btn-success" name="btn_submit_alert" id="btn_submit_alert">
-    <input style="display:none;" type="button" value="ย้อนกลับ" class="btn btn-warning" name="btn_back" id="btn_back"></center> 
+    <input style="display:none  ;" type="button" value="ย้อนกลับ" class="btn btn-warning" name="btn_back" id="btn_back"></center> 
        </div>
 
         </div>

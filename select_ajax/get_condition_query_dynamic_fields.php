@@ -17,9 +17,23 @@
           
          $field_header = $array_key[0]+1;
 
+         if($conditions['value_type'] == 'con_value'){
+
+            if(is_numeric($conditions['valuelist'])){
+               $sql.= ' ( h'.$field_header.'_1';
+            }
+            else{
+               $sql.= ' ( h'.$field_header.'_2';
+            }
+           
+         }
+         else{
+            $sql.= ' ( h'.$field_header.'_1';
+         }
+
          //$sql.= ' ( h'.$field_header.'_1';
            
-         $sql.= ' ( h'.$field_header.'_1';
+        
       }
       else{
          $array_key = array_keys($fields_json, $conditions['fieldlist']);
@@ -52,7 +66,7 @@
              
             $field_header = $array_key[0]+1;
    
-              $sql.= ' h'.$field_header.'_1';
+            $sql.= ' h'.$field_header.'_1';
          }
          else{
             $array_key = array_keys($fields_json, $conditions['valuelist']);
@@ -70,7 +84,20 @@
           
          $field_header = $array_key[0]+1;
  
-         $sql.= ' AND h'.$field_header.'_1 != "" )';
+         if($conditions['value_type'] == 'con_value'){
+
+            if(is_numeric($conditions['valuelist'])){
+               $sql.= ' AND h'.$field_header.'_1 != "" )';
+            }
+            else{
+               $sql.= ' )';
+            }
+           
+         }
+         else{
+            $sql.= ' AND h'.$field_header.'_1 != "" )';
+         }
+
       }
       else{
          $sql.= ' )';
@@ -103,7 +130,21 @@
              
                $field_header = $array_key[0]+1;
    
-              $sql.= ' ( h'.$field_header.'_1';
+               if($sub_con['sub_condition_value_type'] == 'con_value'){
+
+                  if(is_numeric($sub_con['sub_value_list'])){
+                     $sql.= ' ( h'.$field_header.'_1';
+                  }
+                  else{
+                     $sql.= ' ( h'.$field_header.'_2';
+                  }
+                 
+               }
+               else{
+                  $sql.= ' ( h'.$field_header.'_1';
+               }
+   
+              //$sql.= ' ( h'.$field_header.'_1';
           }
           else{
              $array_key = array_keys($fields_json, $sub_con['sub_field_list']);
@@ -148,7 +189,22 @@
              
             $field_header = $array_key[0]+1;
     
-            $sql.= ' AND h'.$field_header.'_1 != "" )';
+            if($sub_con['sub_condition_value_type'] == 'con_value'){
+
+               if(is_numeric($sub_con['sub_value_list'])){
+
+                  $sql.= ' AND h'.$field_header.'_1 != "" )';
+               }
+               else{
+                  $sql.= ' )';
+               }
+              
+            }
+            else{
+               $sql.= ' AND h'.$field_header.'_1 != "" )';
+            }
+
+            //$sql.= ' AND h'.$field_header.'_1 != "" )';
          }
          else{
             $sql.= ' )';
