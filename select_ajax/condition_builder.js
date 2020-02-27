@@ -520,6 +520,9 @@ function populate_fields2(field2) {
 // generate table result
 function generate_table_result(data) {
 
+    // ERROR ไม่สามารถแสดงข้อมูลแบบ Dynamic ได้เนื่องจากกำหนด คอลัมน์แบบตายตัว (Fix) fix ชื่อคอลัมน์ไว้เลยแสดงงานอื่นไม่ได้ 
+
+
     // row count
     let row = 1;
 
