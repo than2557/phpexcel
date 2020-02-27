@@ -6,23 +6,60 @@ $conn=$DBconnect;
 
 $user_id = $_POST['id_user'];
 $task_user_id= $_POST['select_task'];
-echo $task_user_id;
+
+
+
+$sql2 = "SELECT * FROM task_user WHERE  task_user_id= '$task_user_id'";
+$resultask = $conn->query($sql2);
+$task = $resultask->fetch_assoc();
+$taskarr =array_values($task );
+echo "<br>";
+echo $sql2;
+echo "<br>";
+
+$taskname = $taskarr[2];
 
 $sql = "SELECT * FROM template_tb WHERE task_user_id='$task_user_id'";
 $resulttb = $conn->query($sql);
 $tb = $resulttb->fetch_assoc();
+echo "<br>";
 echo $sql;
+
+
 $count_sql = count($tb);
-echo $count_sql;
+$rowsql = $count_sql;
+echo "<br>";
+echo "rowsql".$rowsql.'<br>';
+$h =$count_sql-1;
+
+$head_before = 'h'.$h;
+echo "<br>";
+echo $head_before;
 
 
 $numrow = count($_POST['colum']);
-echo $numrow;
-for($i=$count_sql-1;$i<=$numrow;$i++){
+echo "<br>";
+echo "numrow".$numrow.'<br>';
+
+for($i=$rowsql;$i<=$numrow+3;$i++){
 
     $head = "h".$i;
-    echo $head;     
+    $data = $_POST['datatype'][$i-4];
+    print_r($head).'\n';  
+    print_r($data).'\n';  
+    $colum =$_POST['colum'][$i-4];
+   
+    $sql3 ="ALTER TABLE `$taskname` ADD `$head` $data CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER $head_before;";
+    echo $sql3;
+    $Query = mysqli_query($conn,$sql3);
+
+
+
+    $inserttem = "INSERT INTO `template_tb`(`task_user_id`, `colum_name`, `datatype`) VALUES ('$task_user_id','$colum','$data')";
+    $Query = mysqli_query($conn,$inserttem);
 }
+
+
 // $count_sql = count($_POST['$Query']);
 // $sql ="INSERT INTO `task_user`(`user_id`,`task_name`) VALUES ('$user_id','$task_name')";
 //     $Query = mysqli_query($conn,$sql);

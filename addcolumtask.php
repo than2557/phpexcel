@@ -145,6 +145,7 @@ else{
                         $result = mysqli_query($conn,$sql);
                         while($row = mysqli_fetch_row($result)){
                            echo '<option value="'.$row[0].'">'.$row[2].'</option>';
+                           
                         }
                      ?>
                   </select>
