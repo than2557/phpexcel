@@ -1,7 +1,12 @@
 <?php
 
+   // same result
    // SELECT DISTINCT(SUBSTR(h3,8,3)) as WBS FROM `tb_test2`
+   // SELECT substr(h3,8,3) as WBS FROM `งบเร่งด่วนมกรา` GROUP BY substr(h3,8,3)
 
+
+   // SELECT count(*) as count,substr(h3,8,3) as WBS FROM `งบเร่งด่วนมกรา` WHERE h3 != "" GROUP BY substr(h3,8,3) ORDER BY `count` DESC
+   
    // return main sql condition
    function generate_main_sql_condition($conditions,$fields_json){
       $sql = '';
