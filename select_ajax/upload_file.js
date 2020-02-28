@@ -74,6 +74,7 @@ $(document).ready(function() {
     // Raw data
     var raw_data;
 
+
     // Input file change
     $("#file_input").change(function() {
 
@@ -140,8 +141,39 @@ $(document).ready(function() {
             // set uncheck
             $('input[value="' + $(this).val() + '"]').prop("checked", false);
         }
+    });
 
-    })
+
+
+    $(document).on("click", "#checkall", function() {
+        var check = document.getElementsByClassName("cb-element");
+
+        console.log(check)
+
+        $(check).prop("checked", $(this).prop("checked"));
+        if ($(this).is(':checked')) {
+            $(this).parent().css("background-color", "lightgreen");
+            $('td[class="' + $(this).val() + '"]').css("background-color", "lightgreen");
+
+            // set check each field table (Task)
+            $('input[value="' + $(this).val() + '"]').prop("checked", true);
+
+        } else {
+            $(this).parent().css("background-color", "");
+            $('td[class="' + $(this).val() + '"]').css("background-color", "#ffffff");
+
+            // set uncheck
+            $('input[value="' + $(this).val() + '"]').prop("checked", false);
+
+        }
+
+
+    });
+
+
+
+
+
 
     // submit file (Confirm upload file)
     $("#btn_submit").click(function() {
@@ -184,30 +216,31 @@ $(document).ready(function() {
             })
 
             $.ajax({
-                url: "select_ajax/get_upload_data.php",
-                method: "POST",
-                async: false,
-                data: {
-                    data: JSON.stringify(dadadsadad),
-                    task_id: task_id
-                },
-                dataType: 'JSON'   
-            })
-            .done(function(data){
-                Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'อัพโหลดไฟล์เสร็จสิ้น',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    
-                        // console.log(data)
-            });
+                    url: "select_ajax/get_upload_data.php",
+                    method: "POST",
+                    async: false,
+                    data: {
+                        data: JSON.stringify(dadadsadad),
+                        task_id: task_id
+                    },
+                    dataType: 'JSON'
+                })
+                .done(function(data) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'อัพโหลดไฟล์เสร็จสิ้น',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+
+                    // console.log(data)
+                });
 
         }
 
     })
+
 
     // on Task(ตารางงาน) selectbox change
     $("#select_task").change(function() {

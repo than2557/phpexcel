@@ -102,7 +102,7 @@
 
       // Populate Header
       foreach($key_obj as $header){
-         $html.='<th><input class="checkcol" type="checkbox" id="checkcol" name="checkcol[]" value="'.$header.'">   '.$header.'</th>';
+         $html.='<th><input class="checkcol cb-element" type="checkbox" id="checkcol" name="checkcol[]" value="'.$header.'">   '.$header.'</th>';
       }
 
       $html.='</tr></thead><tbody>';
