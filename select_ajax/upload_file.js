@@ -145,30 +145,30 @@ $(document).ready(function() {
 
 
 
-    $(document).on("click", "#checkall", function() {
-        var check = document.getElementsByClassName("cb-element");
+    // $(document).on("click", "#checkall", function() {
+    //     var check = document.getElementsByClassName("cb-element");
 
-        console.log(check)
+    //     console.log(check)
 
-        $(check).prop("checked", $(this).prop("checked"));
-        if ($(this).is(':checked')) {
-            $(this).parent().css("background-color", "lightgreen");
-            $('td[class="' + $(this).val() + '"]').css("background-color", "lightgreen");
+    //     $(check).prop("checked", $(this).prop("checked"));
+    //     if ($(this).is(':checked')) {
+    //         $(this).parent().css("background-color", "lightgreen");
+    //         $('td[class="' + $(this).val() + '"]').css("background-color", "lightgreen");
 
-            // set check each field table (Task)
-            $('input[value="' + $(this).val() + '"]').prop("checked", true);
+    //         // set check each field table (Task)
+    //         $('input[value="' + $(this).val() + '"]').prop("checked", true);
 
-        } else {
-            $(this).parent().css("background-color", "");
-            $('td[class="' + $(this).val() + '"]').css("background-color", "#ffffff");
+    //     } else {
+    //         $(this).parent().css("background-color", "");
+    //         $('td[class="' + $(this).val() + '"]').css("background-color", "#ffffff");
 
-            // set uncheck
-            $('input[value="' + $(this).val() + '"]').prop("checked", false);
+    //         // set uncheck
+    //         $('input[value="' + $(this).val() + '"]').prop("checked", false);
 
-        }
+    //     }
 
 
-    });
+    // });
 
 
 
