@@ -106,6 +106,91 @@
       return $sql;
    }
 
+   //check select fields
+   function check_select_fields($fields_json){
+      $sql = ' table_name_id ,';
+      
+      $count_fields = count($fields_json);
+
+      $i = 0;
+
+      foreach($fields_json as $field){
+
+         $field_header = '';
+
+         if($count_fields-1 == $i){ // last field
+
+            if($field == "WBS"){
+
+               $array_key = array_keys($fields_json,"WBS");
+         
+               $field_header = $array_key[0]+1;
+
+               $if_sql = 'count(*) as count,substr(h'.$field_header.',8,3) as WBS, h'.$field_header;
+            }
+            else if($field == "รายการ"){
+
+               $array_key = array_keys($fields_json,"รายการ");
+         
+               $field_header = $array_key[0]+1;
+
+               $if_sql = ' h'.$field_header.'_1 ,';
+
+               $if_sql .= 'h'.$field_header.'_2';
+            }
+            else{
+                $array_key = array_keys($fields_json,$field);
+         
+               $field_header = $array_key[0]+1;
+
+               $if_sql = ' h'.$field_header;
+            }
+   
+            
+   
+            $sql .= $if_sql;
+         }
+         else{
+
+            if($field == "WBS"){
+
+               $array_key = array_keys($fields_json,"WBS");
+         
+               $field_header = $array_key[0]+1;
+
+               $if_sql = ' count(*) as count , substr(h3,8,3) as WBS, h'.$field_header;
+            }
+            else if($field == "รายการ"){
+
+               $array_key = array_keys($fields_json,"รายการ");
+         
+               $field_header = $array_key[0]+1;
+
+               $if_sql = ' h'.$field_header.'_1 ,';
+
+               $if_sql .= ' h'.$field_header.'_2';
+            }
+            else{
+                $array_key = array_keys($fields_json,$field);
+         
+               $field_header = $array_key[0]+1;
+
+               $if_sql = ' h'.$field_header;
+            }
+   
+            
+   
+            $sql .= $if_sql.' ,';
+         }
+
+      
+         $i++;
+      }
+      
+
+      return $sql;
+   }
+
    // return sub sql condition
    function generate_sub_sql_condition($conditions,$fields_json){
 
@@ -316,102 +401,100 @@
    $table = $_POST['table_nameeeeeeeee']; // ตัวแปรชื่อตาราง
 
    $response = array(); // ตัวแปร response ชนิด array
-   
-   $sql = ''; // ตัวแปร sql ว่าง
 
    $fields_json = json_decode($_POST['fields_count']);
 
-   if(!empty($_POST['condition_type_row'])){
+   if(in_array("WBS",$fields_json)){
+
+      $sql = 'SELECT * FROM '.'`'.$table.'`'; // ตัวแปร sql ว่าง
+
+      if(!empty($_POST['condition_type_row'])){
      
-      // รับข้อมูล JSON ข้อมูลจำนวนเงื่อนไขของเงื่อนไขย่อย
-      $sub_row_data_count = json_decode($_POST['sub_row_data_count']);
- 
-      $loop_count_main_con = 0; // ตัวแปรลูปของเงื่อนไขหลัก
-      $loop_count_sub_con = 0; // ตัวแปรลูปของเงื่อนไขย่อย
-      $loop_count_all_con = 0; // ตัวแปรลูปของเงื่อนไขทั้งหมด main/sub
-      $loop_conjection_condition_count = 0 ; // ตัวแปรลูปของตัวเชื่อมเงื่อนไขย่อย
- 
-      $sql .= 'SELECT * FROM '.'`'.$table.'`'.' WHERE'; 
- 
-      $array_main_con = array(); // ประกาศตัวแปร array
-      $array_sub_con = array(); // ประกาศตัวแปร array
- 
-     
-      
-      // ลูปเงื่อนไขทั้งหมด
-      foreach($_POST['condition_type_row'] as $condition_type){
-         
-         // ถ้าเป็นเงื่อนไขหลัก
-         if($condition_type == "main_con"){
-
-            // เก็บค่าเงื่อนไข ชนิด array
-            $loop_array_main = array(
-               'oplist' =>$_POST['main_oplist'][$loop_count_main_con], 
-               'fieldlist' =>$_POST['main_fieldlist'][$loop_count_main_con],
-               'condition_opv' =>$_POST['main_condition_opv'][$loop_count_main_con],
-               'valuelist' => $_POST['main_condition_value_input'][$loop_count_main_con],
-               'value_type' => $_POST['main_condition_value_type'][$loop_count_main_con]
-            );
-         
-            $loop_count_main_con++;
-            $loop_count_all_con++;
-
-            // ต่อข้อความด้วยเรียกใช้ฟังก์ชั่น
-            $sql .= generate_main_sql_condition($loop_array_main,$fields_json);
-
-         }
-         else if($condition_type == "main_row_sub_con"){
-          
-            $loop_array_sub = array();
-            $loop_array_sub2 = array();
-     
-            $loop_count_all_con++;
-
-            $number_of_sub_condition = $sub_row_data_count->{"sub_con".$loop_count_all_con};
-
-            $loop_array_sub['conjection_condition'] = $_POST['sub_con_optlist'][$loop_conjection_condition_count];
-
-            for( $i =1 ; $i <= $number_of_sub_condition ; $i++){
-
-               $sub_con = array(
-                  'sub_op_list' =>$_POST['sub_oplist'][$loop_count_sub_con], 
-                  'sub_field_list' =>$_POST['sub_fieldlist'][$loop_count_sub_con],
-                  'sub_condition_opv' =>$_POST['sub_condition_opv'][$loop_count_sub_con],
-                  'sub_value_list' => $_POST['sub_condition_value_input'][$loop_count_sub_con],
-                  'sub_condition_value_type' => $_POST['sub_condition_value_type'][$loop_count_sub_con]
+         // รับข้อมูล JSON ข้อมูลจำนวนเงื่อนไขของเงื่อนไขย่อย
+         $sub_row_data_count = json_decode($_POST['sub_row_data_count']);
+    
+         $loop_count_main_con = 0; // ตัวแปรลูปของเงื่อนไขหลัก
+         $loop_count_sub_con = 0; // ตัวแปรลูปของเงื่อนไขย่อย
+         $loop_count_all_con = 0; // ตัวแปรลูปของเงื่อนไขทั้งหมด main/sub
+         $loop_conjection_condition_count = 0 ; // ตัวแปรลูปของตัวเชื่อมเงื่อนไขย่อย
+    
+         $sql .= ' WHERE'; 
+    
+         $array_main_con = array(); // ประกาศตัวแปร array
+         $array_sub_con = array(); // ประกาศตัวแปร array
+    
+         // ลูปเงื่อนไขทั้งหมด
+         foreach($_POST['condition_type_row'] as $condition_type){
+            
+            // ถ้าเป็นเงื่อนไขหลัก
+            if($condition_type == "main_con"){
+   
+               // เก็บค่าเงื่อนไข ชนิด array
+               $loop_array_main = array(
+                  'oplist' =>$_POST['main_oplist'][$loop_count_main_con], 
+                  'fieldlist' =>$_POST['main_fieldlist'][$loop_count_main_con],
+                  'condition_opv' =>$_POST['main_condition_opv'][$loop_count_main_con],
+                  'valuelist' => $_POST['main_condition_value_input'][$loop_count_main_con],
+                  'value_type' => $_POST['main_condition_value_type'][$loop_count_main_con]
                );
-
-               $loop_count_sub_con++;
-
-               array_push($loop_array_sub2,$sub_con);
+            
+               $loop_count_main_con++;
+               $loop_count_all_con++;
+   
+               // ต่อข้อความด้วยเรียกใช้ฟังก์ชั่น
+               $sql .= generate_main_sql_condition($loop_array_main,$fields_json);
+   
             }
-
-            $loop_conjection_condition_count++;
-
-            $loop_array_sub['sub_con'] = $loop_array_sub2;
-          
-            $sql.= generate_sub_sql_condition($loop_array_sub,$fields_json);
+            else if($condition_type == "main_row_sub_con"){
+             
+               $loop_array_sub = array();
+               $loop_array_sub2 = array();
+        
+               $loop_count_all_con++;
+   
+               $number_of_sub_condition = $sub_row_data_count->{"sub_con".$loop_count_all_con};
+   
+               $loop_array_sub['conjection_condition'] = $_POST['sub_con_optlist'][$loop_conjection_condition_count];
+   
+               for( $i =1 ; $i <= $number_of_sub_condition ; $i++){
+   
+                  $sub_con = array(
+                     'sub_op_list' =>$_POST['sub_oplist'][$loop_count_sub_con], 
+                     'sub_field_list' =>$_POST['sub_fieldlist'][$loop_count_sub_con],
+                     'sub_condition_opv' =>$_POST['sub_condition_opv'][$loop_count_sub_con],
+                     'sub_value_list' => $_POST['sub_condition_value_input'][$loop_count_sub_con],
+                     'sub_condition_value_type' => $_POST['sub_condition_value_type'][$loop_count_sub_con]
+                  );
+   
+                  $loop_count_sub_con++;
+   
+                  array_push($loop_array_sub2,$sub_con);
+               }
+   
+               $loop_conjection_condition_count++;
+   
+               $loop_array_sub['sub_con'] = $loop_array_sub2;
+             
+               $sql.= generate_sub_sql_condition($loop_array_sub,$fields_json);
+            }
          }
+         
+        
       }
       
-	   $response['query_data'] = query_data($sql,$conn,$fields_json);
-	   $response['json_count'] = $fields_json;
+      $response['query_data'] = query_data($sql,$conn,$fields_json);
+      $response['json_count'] = $fields_json;
       $response['HTTP_post_data'] = $_POST;
       $response['result_sql'] = $sql;
       $response['message'] = "success";
       $response['error'] = false;
+      $response['select_sql'] = check_select_fields($fields_json);
+   
    }
    else{
-    
-      $sql = 'SELECT * FROM '.'`'.$table.'`';
-
-      $response['query_data'] = query_data($sql,$conn,$fields_json);
-      $response['HTTP_post_data'] = $_POST;
-      $response['result_sql'] = $sql;
-      $response['message'] = "success";
-      $response['error'] = false;
 
    }
- 
+
+  
    echo json_encode($response);
 ?>

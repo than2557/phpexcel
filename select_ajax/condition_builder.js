@@ -456,8 +456,9 @@ $(document).ready(function() {
         else {
             // send HTTP post
             $.ajax({
-                url: "select_ajax/get_condition_query_dynamic_fields.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
-                //url: "select_ajax/select_json_encode.php", // select dynamic field
+                //url: "select_ajax/get_condition_query_dynamic_fields.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+                //url: "select_ajax/get_condition_query.php", // select dynamic field
+                url : "select_ajax/get_condition_query_dynamic_field_dynamic_task.php",
                 method: "POST",
                 async: false,
                 dataType: "JSON", // response variable type
@@ -472,39 +473,41 @@ $(document).ready(function() {
             })
             .done(function(data) { // response
 
-                //console.log(data)
+                console.log(data)
 
                 //alert(data.result_sql)
                     
                 // check response is error
-                if (!data.error) {
 
-                    // check error query
-                    if (data.query_data == false) {
 
-                        //alert("ไม่พบข้อมูล")
-                        Swal.fire({
-                            title: 'ไม่พบข้อมูล!',
-                            icon: 'error'
-                        })
-                    } 
-                    else {
+                // if (!data.error) {
 
-                        query_result_object = data;
+                //     // check error query
+                //     if (data.query_data == false) {
 
-                        // clear table result 
-                        $(".result_table").empty();
+                //         //alert("ไม่พบข้อมูล")
+                //         Swal.fire({
+                //             title: 'ไม่พบข้อมูล!',
+                //             icon: 'error'
+                //         })
+                //     } 
+                //     else {
+
+                //         query_result_object = data;
+
+                //         // clear table result 
+                //         $(".result_table").empty();
                         
-                        console.log(data.query_data.raw_data)
-                        // show HTML table
-                        $(".result_table").html(generate_table_result(data.query_data.raw_data));
-                    }
-                } 
-                else {
+                //         console.log(data.query_data.raw_data)
+                //         // show HTML table
+                //         $(".result_table").html(generate_table_result(data.query_data.raw_data));
+                //     }
+                // } 
+                // else {
 
-                    // alert error mssage
-                    alert(data.message)
-                }
+                //     // alert error mssage
+                //     alert(data.message)
+                // }
 
             });
                 
