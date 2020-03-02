@@ -113,7 +113,7 @@
          $html.='<tr>';
 
          for($j = 0 ; $j <= count($key_obj)-1 ; $j++){
-            $html.='<td class="'.$key_obj[$j].'">'.$data->{$key_obj[$j]}[$i].'</td>';
+            $html.='<td class="'.$key_obj[$j].'" id="dataexcelpop">'.$data->{$key_obj[$j]}[$i].'</td>';
          }
 
          $html.='</tr>';
