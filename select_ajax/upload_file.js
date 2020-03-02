@@ -134,7 +134,8 @@ $(document).ready(function() {
 
             // set check each field table (Task)
             $('input[value="' + $(this).val() + '"]').prop("checked", true);
-        } else {
+        } 
+        else {
             $(this).parent().css("background-color", "");
             $('td[class="' + $(this).val() + '"]').css("background-color", "");
 
