@@ -44,7 +44,7 @@ $(document).ready(function() {
     // ประกาศ object ว่าง
     var sub_con_count = new Object();
 
-   // html_table_fields = populate_fields2(field);
+    // html_table_fields = populate_fields2(field);
 
     // query result object
     var query_result_object;
@@ -65,6 +65,7 @@ $(document).ready(function() {
     //     $('#table_nameeeeeeeee').val($("#task_user_id").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     // }
 
+<<<<<<< Updated upstream
     $('.checkall').click(function(){
 
         if($(this).is(':checked')){
@@ -91,6 +92,9 @@ $(document).ready(function() {
     
 
     $("#btn_back").click(function(){
+=======
+    $("#btn_back").click(function() {
+>>>>>>> Stashed changes
 
         $("#btn_submit_alert").css("display", "none");
 
@@ -114,56 +118,55 @@ $(document).ready(function() {
                 title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
                 icon: 'warning'
             })
-        } 
-        else{
+        } else {
             $.ajax({
-                url: "select_ajax/get_condition_query2.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
-                //url: "select_ajax/select_json_encode.php", // select dynamic field
-                method: "POST",
-                async: false,
-                dataType: "JSON", // response variable type
-                data: $('#get_query').serialize(), // get form data
-                error: function(jqXHR, text, error) {
-    
-                    Swal.fire({
-                        title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
-                        icon: 'warning'
-                    })
-                }
-            })
-            .done(function(data) { // response
+                    url: "select_ajax/get_condition_query2.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+                    //url: "select_ajax/select_json_encode.php", // select dynamic field
+                    method: "POST",
+                    async: false,
+                    dataType: "JSON", // response variable type
+                    data: $('#get_query').serialize(), // get form data
+                    error: function(jqXHR, text, error) {
 
-                // submit button alert form
-                $("#btn_submit_alert").css("display", "");
-                $("#btn_back").css("display", "");
-    
-                // condition table fade out animation 
-                $("#get_query").hide(500);
-
-                query_result_object = data;
-    
-                // pivot table
-                pivot = new WebDataRocks({
-                    container: "#webdatarocks",
-                    beforetoolbarcreated: customizeToolbar,
-                    toolbar: true,
-                    height: "100vh",
-                    width: "100vw",
-    
-                    report: {
-                        dataSource: {
-                            dataSourceType: "json",
-                            data: getJSONData(data.result_sql,data.json_count)
-                        },
-                        options: {
-                            drillThrough: false
-                        }
-                    },
-                    global: { // แสดงเมนูภาษาไทยจากไฟล์ lang_th.json
-                        localization: "lib/lang_th.json"
+                        Swal.fire({
+                            title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
+                            icon: 'warning'
+                        })
                     }
+                })
+                .done(function(data) { // response
+
+                    // submit button alert form
+                    $("#btn_submit_alert").css("display", "");
+                    $("#btn_back").css("display", "");
+
+                    // condition table fade out animation 
+                    $("#get_query").hide(500);
+
+                    query_result_object = data;
+
+                    // pivot table
+                    pivot = new WebDataRocks({
+                        container: "#webdatarocks",
+                        beforetoolbarcreated: customizeToolbar,
+                        toolbar: true,
+                        height: "100vh",
+                        width: "100vw",
+
+                        report: {
+                            dataSource: {
+                                dataSourceType: "json",
+                                data: getJSONData(data.result_sql, data.json_count)
+                            },
+                            options: {
+                                drillThrough: false
+                            }
+                        },
+                        global: { // แสดงเมนูภาษาไทยจากไฟล์ lang_th.json
+                            localization: "lib/lang_th.json"
+                        }
+                    });
                 });
-            });
         }
     });
 
@@ -171,35 +174,35 @@ $(document).ready(function() {
     $('#task_user_id').change(function() { // เมื่อเลือก select box 
 
         $.ajax({
-            url: "select_ajax/select_fields_task.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
-            //url: "select_ajax/select_json_encode.php", // select dynamic field
-            method: "POST",
-            async: false,
-            dataType: "JSON", // response variable type
-            data: {task_id:$("#task_user_id").val()}, // get form data
-            error: function(jqXHR, text, error) {
+                url: "select_ajax/select_fields_task.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+                //url: "select_ajax/select_json_encode.php", // select dynamic field
+                method: "POST",
+                async: false,
+                dataType: "JSON", // response variable type
+                data: { task_id: $("#task_user_id").val() }, // get form data
+                error: function(jqXHR, text, error) {
 
-                Swal.fire({
-                    title: 'ไม่พบข้อมูล!',
-                    icon: 'warning'
-                })
-            }
-        })
-        .done(function(data) { // response
+                    Swal.fire({
+                        title: 'ไม่พบข้อมูล!',
+                        icon: 'warning'
+                    })
+                }
+            })
+            .done(function(data) { // response
 
-            //console.log(data)
-            
-            i = 1;
-            // clear condition row
-            $("#append_condition").empty();
+                //console.log(data)
 
-            // clear result table
-            $(".result_table").empty();
+                i = 1;
+                // clear condition row
+                $("#append_condition").empty();
 
-            html_table_fields = populate_fields2(data);
+                // clear result table
+                $(".result_table").empty();
 
-            $('#fields_count').val(JSON.stringify(data));
-        });
+                html_table_fields = populate_fields2(data);
+
+                $('#fields_count').val(JSON.stringify(data));
+            });
 
         $('#table_nameeeeeeeee').val($("#task_user_id option:selected").text()) // กำหนดค่าให้ element id = table_nameeeeeeeee
 
@@ -217,7 +220,7 @@ $(document).ready(function() {
         let btn_obj = $(this);
 
         let sub_row_id = btn_obj.attr("data_sub_condition");
-       
+
         sub_con_count["sub_con" + sub_row_id]--;
 
         $("#sub_row_data_count").val(JSON.stringify(sub_con_count));
@@ -315,7 +318,7 @@ $(document).ready(function() {
         // check sub condition first row
         if (sub_con_count["sub_con" + btn_obj] == 1) {
             html += '<tr name="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '" id="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '">';
-            html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove_sub_condition" data_sub_condition="'+btn_obj+'" class="btn btn-warning btn-sm remove_sub_condition">X</button></td>';
+            html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove_sub_condition" data_sub_condition="' + btn_obj + '" class="btn btn-warning btn-sm remove_sub_condition">X</button></td>';
             html += '<td><input class="form-control sub_oplist" type="text" name="sub_oplist[]" readonly value=""></td>';
             html += '<td><select class="form-control sub_fieldlist" name="sub_fieldlist[]" data-live-search="true">' + html_table_fields + '</select></td>';
             html += '<td><select class="form-control sub_condition_opv" name="sub_condition_opv[]" ><option value="=">เท่ากับ</option><option value=">">มากกว่า</option><option value="<">น้อยกว่า</option><option value=">=">มากกว่าหรือเท่ากับ</option><option value="<=">น้อยกว่าหรือเท่ากับ</option></select></td>';
@@ -323,7 +326,7 @@ $(document).ready(function() {
             html += '</tr>';
         } else {
             html += '<tr name="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '" id="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '">';
-            html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove_sub_condition" data_sub_condition="'+btn_obj+'" class="btn btn-warning btn-sm remove_sub_condition">X</button></td>';
+            html += '<td><input type="hidden" name="condition_type_row[]" class="condition_type_row" value="sub_con"><button data_row_id ="sub_con_row' + i + '_' + sub_con_count["sub_con" + btn_obj] + '"  type="button" name="remove_sub_condition" data_sub_condition="' + btn_obj + '" class="btn btn-warning btn-sm remove_sub_condition">X</button></td>';
             html += '<td><select class="form-control sub_oplist" name="sub_oplist[]" > <option value="AND">AND</option> <option value="OR">OR</option></select></td>';
             html += '<td><select class="form-control sub_fieldlist" name="sub_fieldlist[]"  data-live-search="true">' + html_table_fields + '</select></td>';
             html += '<td><select class="form-control sub_condition_opv" name="sub_condition_opv[]" ><option value="=">เท่ากับ</option><option value=">">มากกว่า</option><option value="<">น้อยกว่า</option><option value=">=">มากกว่าหรือเท่ากับ</option><option value="<=">น้อยกว่าหรือเท่ากับ</option></select></td>';
@@ -477,27 +480,29 @@ $(document).ready(function() {
                 title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
                 icon: 'warning'
             })
-        } 
-        else {
+        } else {
             // send HTTP post
             $.ajax({
-                //url: "select_ajax/get_condition_query_dynamic_fields.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
-                //url: "select_ajax/get_condition_query.php", // select dynamic field
-                url : "select_ajax/get_condition_query_dynamic_field_dynamic_task.php",
-                method: "POST",
-                async: false,
-                dataType: "JSON", // response variable type
-                data: $('#get_query').serialize(), // get form data
-                error: function(jqXHR, text, error) {
+                    //url: "select_ajax/get_condition_query_dynamic_fields.php", // test_json_encode.php เรียกข้อมูลจากฐานข้อมูลมาแสดงในรูปแบบ json
+                    //url: "select_ajax/get_condition_query.php", // select dynamic field
+                    url: "select_ajax/get_condition_query_dynamic_field_dynamic_task.php",
+                    method: "POST",
+                    async: false,
+                    dataType: "JSON", // response variable type
+                    data: $('#get_query').serialize(), // get form data
+                    error: function(jqXHR, text, error) {
 
-                    Swal.fire({
-                        title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
-                        icon: 'warning'
-                    })
-                }
-            })
-            .done(function(data) { // response
+                        Swal.fire({
+                            title: 'กรุณากรอกข้อมูลให้ครบถ้วน!',
+                            icon: 'warning'
+                        })
+                    }
+                })
+                .done(function(data) { // response
 
+                    console.log(data)
+
+<<<<<<< Updated upstream
                 //console.log(data)
 
                 if(!data.query_data){
@@ -560,39 +565,44 @@ $(document).ready(function() {
                 //alert(data.result_sql)
                     
                 // check response is error
+=======
+                    //alert(data.result_sql)
+
+                    // check response is error
+>>>>>>> Stashed changes
 
 
-                // if (!data.error) {
+                    // if (!data.error) {
 
-                //     // check error query
-                //     if (data.query_data == false) {
+                    //     // check error query
+                    //     if (data.query_data == false) {
 
-                //         //alert("ไม่พบข้อมูล")
-                //         Swal.fire({
-                //             title: 'ไม่พบข้อมูล!',
-                //             icon: 'error'
-                //         })
-                //     } 
-                //     else {
+                    //         //alert("ไม่พบข้อมูล")
+                    //         Swal.fire({
+                    //             title: 'ไม่พบข้อมูล!',
+                    //             icon: 'error'
+                    //         })
+                    //     } 
+                    //     else {
 
-                //         query_result_object = data;
+                    //         query_result_object = data;
 
-                //         // clear table result 
-                //         $(".result_table").empty();
-                        
-                //         console.log(data.query_data.raw_data)
-                //         // show HTML table
-                //         $(".result_table").html(generate_table_result(data.query_data.raw_data));
-                //     }
-                // } 
-                // else {
+                    //         // clear table result 
+                    //         $(".result_table").empty();
 
-                //     // alert error mssage
-                //     alert(data.message)
-                // }
+                    //         console.log(data.query_data.raw_data)
+                    //         // show HTML table
+                    //         $(".result_table").html(generate_table_result(data.query_data.raw_data));
+                    //     }
+                    // } 
+                    // else {
 
-            });
-                
+                    //     // alert error mssage
+                    //     alert(data.message)
+                    // }
+
+                });
+
         }
     });
 })
@@ -603,7 +613,7 @@ function populate_fields2(field2) {
     // HTML code
     let options = '';
 
-    let i = 1 ;
+    let i = 1;
 
     // loop JSON 
     Object.keys(field2).forEach(function(key) {
@@ -764,32 +774,32 @@ function generate_table_WBS_task(data){
 }
 
 // get JSON data format from database
-function getJSONData(sql,fields) { // เรียกข้อมูลจากฐานข้อมูล
+function getJSONData(sql, fields) { // เรียกข้อมูลจากฐานข้อมูล
 
     var response;
 
     $.ajax({
-        //url: "select_ajax/select_json_fx_field2.php", // select fix field
-        //url: "select_ajax/select_json_encode.php", // select dynamic field
-        url: "select_ajax/select_data_json_webdatarocks.php",
-        method: "POST",
-        async: false,
-        dataType: "JSON",
-        data: { 
-            sql: sql,
-            fields :fields
-        },
-        error: function(jqXHR, text, error) {
-            alert("error:"+error);
-        }
-    })
-    .done(function(data) {
+            //url: "select_ajax/select_json_fx_field2.php", // select fix field
+            //url: "select_ajax/select_json_encode.php", // select dynamic field
+            url: "select_ajax/select_data_json_webdatarocks.php",
+            method: "POST",
+            async: false,
+            dataType: "JSON",
+            data: {
+                sql: sql,
+                fields: fields
+            },
+            error: function(jqXHR, text, error) {
+                alert("error:" + error);
+            }
+        })
+        .done(function(data) {
 
-        response = data.data;
-        raw_data = data.raw_data;
+            response = data.data;
+            raw_data = data.raw_data;
 
-        //console.log(data)
-    });
+            //console.log(data)
+        });
     return response
 }
 
@@ -804,34 +814,34 @@ function customizeToolbar(toolbar) { // แก้ไข toolbar ของไล�
         delete tabs[3];
 
         tabs.unshift({
-            id: "wdr-tab-default2",
-            title: "ขยายเซลล์",
-            handler: expand_cell,
-            icon: this.icons.options
-        }, {
-            id: "wdr-tab-default2",
-            title: "ยุบเซลล์",
-            handler: collapse_cell,
-            icon: this.icons.options
-        },
-        //    {
-        //     id: "wdr-tab-lightblue",
-        //     title: "คำนวณ",
-        //     handler: calculate,
-        //     icon: this.icons.fields
+                id: "wdr-tab-default2",
+                title: "ขยายเซลล์",
+                handler: expand_cell,
+                icon: this.icons.options
+            }, {
+                id: "wdr-tab-default2",
+                title: "ยุบเซลล์",
+                handler: collapse_cell,
+                icon: this.icons.options
+            },
+            //    {
+            //     id: "wdr-tab-lightblue",
+            //     title: "คำนวณ",
+            //     handler: calculate,
+            //     icon: this.icons.fields
 
-        //  }, 
-        {
-            id: "wdr-tab-default",
-            title: "เปิด",
-            handler: open_file,
-            icon: this.icons.open_local
-        }, {
-            id: "wdr-tab-default2",
-            title: "บันทึก",
-            handler: save_file,
-            icon: this.icons.save
-        }
+            //  }, 
+            {
+                id: "wdr-tab-default",
+                title: "เปิด",
+                handler: open_file,
+                icon: this.icons.open_local
+            }, {
+                id: "wdr-tab-default2",
+                title: "บันทึก",
+                handler: save_file,
+                icon: this.icons.save
+            }
 
         );
         return tabs;

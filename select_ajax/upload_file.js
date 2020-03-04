@@ -158,18 +158,6 @@ $(document).ready(function() {
 
 
         $(check).prop("checked", $(this).prop("checked"));
-<<<<<<< Updated upstream
-
-=======
-        
-        if ($(this).is(':checked')) {
-
-            $(this).parent().css("background-color", "lightgreen");
-          
-            
-            // set check each field table (Task)
-            $('input[value="' + $(this).val() + '"]').prop("checked", true);
->>>>>>> Stashed changes
 
         // console.log(check_row_template[i])
         if ($(check).is(':checked')) {
@@ -181,25 +169,16 @@ $(document).ready(function() {
                 $('input[value="' + $(check_row_template[i]).val() + '"]').prop("checked", true);
             }
         } else {
-<<<<<<< Updated upstream
             $(check).parent().css("background-color", "");
             $('td[class="' + $(check).val() + '"]').css("background-color", "");
-=======
-            $(this).parent().css("background-color", "");
-            
->>>>>>> Stashed changes
 
+            $(this).parent().css("background-color", "");
             // set uncheck
             check_row_template.checked = false;
             for (var i = 0; i <= check_row_template.length; i++) {
                 $('input[value="' + $(check_row_template[i]).val() + '"]').prop("checked", false);
             }
         }
-
-
-
-
-
     });
 
 
@@ -268,9 +247,7 @@ $(document).ready(function() {
 
                     // console.log(data)
                 });
-
         }
-
     })
 
 
@@ -302,9 +279,6 @@ $(document).ready(function() {
                 }
             });
         }
-
-
         $(".result_template").html(html);
-
     });
 });

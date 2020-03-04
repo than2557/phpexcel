@@ -3,6 +3,7 @@
 <head>
 
   <?php  
+  // date_default_timezone_set("Asia/Bangkok");
 		include_once("configDB.php");
 		$conn = $DBconnect;
   ?>
@@ -484,7 +485,7 @@
       <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
     </card>
     <card class="neumorphic" style="width:1000px;margin-left:10%;height:200px;margin-top:-70px;" >
-      <form autocomplete="off" class="form-horizontal">
+      <form autocomplete="off" id="sent"  method="post" class="form-horizontal">
         <div class="col-md-12">
           <div class="row">
             <?php 
@@ -510,7 +511,7 @@
    
         <label style="margin-left:10%;" for="dtp_input1" class="col-md-5 control-label">วันเวลาในการแจ้งเตือน:</label>
         
-        <div class="input-group date form_datetime col-sm-2"  data-date-format="yyyy-mm-dd HH:ii " data-link-field="dtp_input1">
+        <div class="input-group date form_datetime col-sm-2"  data-link-field="dtp_input1">
           <input class="form-control" type="text" value="" style="width:150px;margin-left:5px;" id="dateaert" name="dateaert" require>
           <span class="input-group-addon col-sm-2" style="width:30px;"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon col-sm-3" style="width:30px;"><span class="glyphicon glyphicon-th"></span></span> 
@@ -531,7 +532,7 @@
   </div>
   <br>
   <div class="form-group" >
-    <center>
+    <!-- <center> -->
 
       <style>
         .dropbtn {
@@ -582,7 +583,7 @@
         
         <div class="row">
           <div class="col-md-12">
-          <center><input style="display:none;" type="button" value="บันทึกข้อมูล" class="btn btn-success" name="btn_submit_alert" id="btn_submit_alert">
+          <center><input style="display:none;" type="button" value="บันทึกข้อมูล" class="btn btn-success" name="btn_submit_alert"   onclick="testajax()"  id="btn_submit_alert">
     <input style="display:none  ;" type="button" value="ย้อนกลับ" class="btn btn-warning" name="btn_back" id="btn_back"></center> 
        </div>
 
@@ -668,7 +669,7 @@
   <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
 
   
-  <style >
+  <style>
   
     .loading_page{
       position: absolute;  
@@ -705,7 +706,7 @@
       showMeridian: 1
     });
 	  $('.form_date').datetimepicker({
-      language:  'fr',
+      language:  'th',
       weekStart: 1,
       todayBtn:  1,
       autoclose: 1,
@@ -715,7 +716,7 @@
       forceParse: 0
     });
     $('.form_time').datetimepicker({
-      language:  'fr',
+      language:  'th',
       weekStart: 1,
       todayBtn:  1,
       autoclose: 1,
@@ -725,6 +726,7 @@
       maxView: 1,
       forceParse: 0
     });
+
     $(document).ready(function() {
 
 var select = $('select[multiple]');
@@ -901,6 +903,7 @@ $(function() {
   });
 
 
+
   function check_line(){
     var group_line = document.getElementById("line_group_name");
     if(group_line == ''){
@@ -916,6 +919,63 @@ $(function() {
 
 
   }
+  
+  function testajax(){ 
+    
+
+    var task_user_id = document.getElementById("task_user_id").value; 
+    var line_group_name = document.getElementById("line_group_name").value;
+    var dateaert = document.getElementById("dateaert").value; 
+    var para={'task_user_id':task_user_id,'line_group_name':line_group_name,'dateaert':dateaert};
+  //  console.log(task_user_id)
+  //  console.log(line_group_name)
+   console.log(para)
+
+   var mapForm = document.createElement("form");
+    mapForm.target = "Map";
+    mapForm.method = "POST"; // or "post" if appropriate
+    mapForm.action = "getdatasentline.php";
+
+    var mapInput = document.createElement("input");
+    mapInput.type = "text";
+    mapInput.name = "line_group_name";
+    mapInput.value = data;
+    mapForm.appendChild(mapInput);
+
+    document.body.appendChild(mapForm);
+
+    map = window.open("", "Map", "status=0,title=0,height=600,width=800,scrollbars=1");
+
+if (map) {
+    mapForm.submit();
+} else {
+    alert('You must allow popups for this map to work.');
+}
+  
+
+
+//   $.ajax({
+//     url: "getdatasentline.php", 
+//     method: "POST",
+//     async: false,
+//     datatype:'json',
+//     data:{task_user_id:task_user_id,line_group_name:line_group_name,dateaert:dateaert},
+//     error: function(jqXHR, text, error) {
+//         alert(error)
+//     }
+//   })
+//   .done(function(data) {
+//     Swal.fire({
+//   position: 'top-end',
+//   icon: 'success',
+//   title: 'ส่งข้อมูลได้',
+//   showConfirmButton: false,
+//   timer: 1500
+// })
+
+//   });
+  }
+
   </script>
 
 
