@@ -65,36 +65,31 @@ $(document).ready(function() {
     //     $('#table_nameeeeeeeee').val($("#task_user_id").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     // }
 
-<<<<<<< Updated upstream
-    $('.checkall').click(function(){
+    $('.checkall').click(function() {
 
-        if($(this).is(':checked')){
+        if ($(this).is(':checked')) {
 
-           $('.checkcol').each(function(){
+            $('.checkcol').each(function() {
 
-              $(this).attr( 'checked', true )
-              
-           });
+                $(this).attr('checked', true)
 
+            });
+
+        } else {
+
+            $('.checkcol').each(function() {
+
+                $(this).attr('checked', false)
+
+            });
         }
-        else{
 
-           $('.checkcol').each(function(){
+    });
 
-              $(this).attr( 'checked', false )
 
-           });
-        }
-      
-     });
 
-   
-    
 
-    $("#btn_back").click(function(){
-=======
     $("#btn_back").click(function() {
->>>>>>> Stashed changes
 
         $("#btn_submit_alert").css("display", "none");
 
@@ -502,74 +497,72 @@ $(document).ready(function() {
 
                     console.log(data)
 
-<<<<<<< Updated upstream
-                //console.log(data)
 
-                if(!data.query_data){
 
-                    Swal.fire({
-                        title: 'ไม่พบข้อมูล!',
-                        icon: 'error'
-                    })
-                
-                }
-                else{
+                    //console.log(data)
 
-                    $(".result_table").empty();
-                    
-                    console.log(data.query_data)
-                    //console.log(data.query_data.raw_data)
+                    if (!data.query_data) {
 
-                    if(data.task_type == "WBS_task"){
+                        Swal.fire({
+                            title: 'ไม่พบข้อมูล!',
+                            icon: 'error'
+                        })
 
-                        $(".result_table").html(generate_table_WBS_task(data.query_data));
-                         //tr.header td span
-                        $('tr.header td span').click(function(){
+                    } else {
 
-                            
-                            $(this).parent().find('span').text(function(_, value){return value=='-'?'+':'-'});
-                            
-                            $(this).parent().parent().nextUntil('tr.header').slideToggle(50);
-                        });
+                        $(".result_table").empty();
 
-                        $('.checkall').click(function(){
+                        console.log(data.query_data)
+                            //console.log(data.query_data.raw_data)
 
-                            if($(this).is(':checked')){
-                
-                               $('.check_wbs_row').each(function(){
-                
-                                  $(this).attr( 'checked', true )
-                                  
-                               });
-                
-                            }
-                            else{
-                
-                               $('.check_wbs_row').each(function(){
-                
-                                  $(this).attr( 'checked', false )
-                
-                               });
-                            }
-                          
-                         });
+                        if (data.task_type == "WBS_task") {
+
+                            $(".result_table").html(generate_table_WBS_task(data.query_data));
+                            //tr.header td span
+                            $('tr.header td span').click(function() {
+
+
+                                $(this).parent().find('span').text(function(_, value) { return value == '-' ? '+' : '-' });
+
+                                $(this).parent().parent().nextUntil('tr.header').slideToggle(50);
+                            });
+
+                            $('.checkall').click(function() {
+
+                                if ($(this).is(':checked')) {
+
+                                    $('.check_wbs_row').each(function() {
+
+                                        $(this).attr('checked', true)
+
+                                    });
+
+                                } else {
+
+                                    $('.check_wbs_row').each(function() {
+
+                                        $(this).attr('checked', false)
+
+                                    });
+                                }
+
+                            });
+
+                        } else {
+                            $(".result_table").html(generate_table_result(data.query_data));
+                        }
+                        // show HTML table
+
 
                     }
-                    else{
-                        $(".result_table").html(generate_table_result(data.query_data));
-                    }
-                    // show HTML table
-                    
-
-                }
-                //alert(data.result_sql)
-                    
-                // check response is error
-=======
                     //alert(data.result_sql)
 
                     // check response is error
->>>>>>> Stashed changes
+
+                    //alert(data.result_sql)
+
+                    // check response is error
+
 
 
                     // if (!data.error) {
@@ -667,7 +660,7 @@ function generate_table_result(data) {
     return html;
 }
 
-function generate_table_WBS_task(data){
+function generate_table_WBS_task(data) {
     // row count
     let row = 1;
 
@@ -682,21 +675,21 @@ function generate_table_WBS_task(data){
 
     Object.keys(data).forEach(function(k) {
 
-        if(k == ""){
+        if (k == "") {
 
-            html += '<tr style="background-color:lightblue;" class="header" data_wbs="null_value"><td><span class="btn btn-primary btn-sm">+</span></td><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="'+k+'"></td><td>'+data[k].length+'</td><td>'+k+'</td></tr>';
-            
+            html += '<tr style="background-color:lightblue;" class="header" data_wbs="null_value"><td><span class="btn btn-primary btn-sm">+</span></td><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="' + k + '"></td><td>' + data[k].length + '</td><td>' + k + '</td></tr>';
+
             let i = 1;
 
-            Object.keys(data[k]).forEach(function(sub_loop){
+            Object.keys(data[k]).forEach(function(sub_loop) {
 
                 html += '<tr style="display:none;">';
 
-                html += '<td><b>'+i+'</b></td>';
+                html += '<td><b>' + i + '</b></td>';
 
-                html += '<td>'+data[k][sub_loop]["ลำดับที่"]+'</td>';
-                html += '<td class="text-left">'+data[k][sub_loop]["รายการ"]+'</td>';
-                html += '<td>'+data[k][sub_loop]["WBS"]+'</td>';
+                html += '<td>' + data[k][sub_loop]["ลำดับที่"] + '</td>';
+                html += '<td class="text-left">' + data[k][sub_loop]["รายการ"] + '</td>';
+                html += '<td>' + data[k][sub_loop]["WBS"] + '</td>';
 
                 // Object.keys(data[k][sub_loop]).forEach(function(sub_loop_2){
 
@@ -710,8 +703,8 @@ function generate_table_WBS_task(data){
                 //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
                 //     }
 
-                  
-                   
+
+
                 // });
 
                 html += '</tr>';
@@ -719,18 +712,17 @@ function generate_table_WBS_task(data){
                 i++;
             });
             //html += '<tr>';
-        }
-        else{
+        } else {
 
-            html += '<tr style="background-color:lightblue;" class="header" data_wbs="'+k+'"><td><span class="btn btn-primary btn-sm">+</span></td><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="'+k+'"></td><td>'+data[k].length+'</td><td>'+k+'</td></tr>';
-            
+            html += '<tr style="background-color:lightblue;" class="header" data_wbs="' + k + '"><td><span class="btn btn-primary btn-sm">+</span></td><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="' + k + '"></td><td>' + data[k].length + '</td><td>' + k + '</td></tr>';
+
             let i = 1;
 
-            Object.keys(data[k]).forEach(function(sub_loop){
+            Object.keys(data[k]).forEach(function(sub_loop) {
 
                 html += '<tr style="display:none;">';
 
-                html += '<td><b>'+i+'</b></td>';
+                html += '<td><b>' + i + '</b></td>';
 
                 // Object.keys(data[k][sub_loop]).forEach(function(sub_loop_2){
                 //     console.log(sub_loop_2)
@@ -744,11 +736,11 @@ function generate_table_WBS_task(data){
                 //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
                 //     }
 
-                html += '<td>'+data[k][sub_loop]["ลำดับที่"]+'</td>';
-                html += '<td class="text-left">'+data[k][sub_loop]["รายการ"]+'</td>';
-                html += '<td>'+data[k][sub_loop]["WBS"]+'</td>';
-                   
-                  
+                html += '<td>' + data[k][sub_loop]["ลำดับที่"] + '</td>';
+                html += '<td class="text-left">' + data[k][sub_loop]["รายการ"] + '</td>';
+                html += '<td>' + data[k][sub_loop]["WBS"] + '</td>';
+
+
                 // });
 
                 html += '</tr>';
