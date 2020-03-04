@@ -927,53 +927,28 @@ $(function() {
     var line_group_name = document.getElementById("line_group_name").value;
     var dateaert = document.getElementById("dateaert").value; 
     var para={'task_user_id':task_user_id,'line_group_name':line_group_name,'dateaert':dateaert};
-  //  console.log(task_user_id)
-  //  console.log(line_group_name)
+ 
    console.log(para)
+  $.ajax({
+    url: "getdatasentline.php", 
+    method: "POST",
+    async: false,
+    datatype:'json',
+    data:{task_user_id:task_user_id,line_group_name:line_group_name,dateaert:dateaert},
+    error: function(jqXHR, text, error) {
+        alert(error)
+    }
+  })
+  .done(function(data) {
+    Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'ส่งข้อมูลได้',
+  showConfirmButton: false,
+  timer: 1500
+})
 
-   var mapForm = document.createElement("form");
-    mapForm.target = "Map";
-    mapForm.method = "POST"; // or "post" if appropriate
-    mapForm.action = "getdatasentline.php";
-
-    var mapInput = document.createElement("input");
-    mapInput.type = "text";
-    mapInput.name = "line_group_name";
-    mapInput.value = data;
-    mapForm.appendChild(mapInput);
-
-    document.body.appendChild(mapForm);
-
-    map = window.open("", "Map", "status=0,title=0,height=600,width=800,scrollbars=1");
-
-if (map) {
-    mapForm.submit();
-} else {
-    alert('You must allow popups for this map to work.');
-}
-  
-
-
-//   $.ajax({
-//     url: "getdatasentline.php", 
-//     method: "POST",
-//     async: false,
-//     datatype:'json',
-//     data:{task_user_id:task_user_id,line_group_name:line_group_name,dateaert:dateaert},
-//     error: function(jqXHR, text, error) {
-//         alert(error)
-//     }
-//   })
-//   .done(function(data) {
-//     Swal.fire({
-//   position: 'top-end',
-//   icon: 'success',
-//   title: 'ส่งข้อมูลได้',
-//   showConfirmButton: false,
-//   timer: 1500
-// })
-
-//   });
+  });
   }
 
   </script>
