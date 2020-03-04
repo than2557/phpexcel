@@ -65,6 +65,31 @@ $(document).ready(function() {
     //     $('#table_nameeeeeeeee').val($("#task_user_id").val()) // กำหนดค่าให้ element id = table_nameeeeeeeee
     // }
 
+    $('.checkall').click(function(){
+
+        if($(this).is(':checked')){
+
+           $('.checkcol').each(function(){
+
+              $(this).attr( 'checked', true )
+              
+           });
+
+        }
+        else{
+
+           $('.checkcol').each(function(){
+
+              $(this).attr( 'checked', false )
+
+           });
+        }
+      
+     });
+
+   
+    
+
     $("#btn_back").click(function(){
 
         $("#btn_submit_alert").css("display", "none");
@@ -473,8 +498,65 @@ $(document).ready(function() {
             })
             .done(function(data) { // response
 
-                console.log(data)
+                //console.log(data)
 
+                if(!data.query_data){
+
+                    Swal.fire({
+                        title: 'ไม่พบข้อมูล!',
+                        icon: 'error'
+                    })
+                
+                }
+                else{
+
+                    $(".result_table").empty();
+                    
+                    console.log(data.query_data)
+                    //console.log(data.query_data.raw_data)
+
+                    if(data.task_type == "WBS_task"){
+
+                        $(".result_table").html(generate_table_WBS_task(data.query_data));
+                         //tr.header td span
+                        $('tr.header td span').click(function(){
+
+                            
+                            $(this).parent().find('span').text(function(_, value){return value=='-'?'+':'-'});
+                            
+                            $(this).parent().parent().nextUntil('tr.header').slideToggle(50);
+                        });
+
+                        $('.checkall').click(function(){
+
+                            if($(this).is(':checked')){
+                
+                               $('.check_wbs_row').each(function(){
+                
+                                  $(this).attr( 'checked', true )
+                                  
+                               });
+                
+                            }
+                            else{
+                
+                               $('.check_wbs_row').each(function(){
+                
+                                  $(this).attr( 'checked', false )
+                
+                               });
+                            }
+                          
+                         });
+
+                    }
+                    else{
+                        $(".result_table").html(generate_table_result(data.query_data));
+                    }
+                    // show HTML table
+                    
+
+                }
                 //alert(data.result_sql)
                     
                 // check response is error
@@ -540,7 +622,6 @@ function generate_table_result(data) {
 
     // ERROR ไม่สามารถแสดงข้อมูลแบบ Dynamic ได้เนื่องจากกำหนด คอลัมน์แบบตายตัว (Fix) fix ชื่อคอลัมน์ไว้เลยแสดงงานอื่นไม่ได้ 
 
-
     // row count
     let row = 1;
 
@@ -573,6 +654,112 @@ function generate_table_result(data) {
     html += '</table>';
 
     // return HTML code
+    return html;
+}
+
+function generate_table_WBS_task(data){
+    // row count
+    let row = 1;
+
+    // HTML code
+    let html = '';
+
+    // table thead
+    html += '<table class="table table-sm table-bordered table_wbs"><thead class="text-center bg-primary"><tr><th width="15%">#</th><th width="15%"><input class="checkall" type="checkbox" name="checkall" value="checkall"></th><th width="50%">จำนวนรายการ</th><th width="20%">WBS</th></tr></thead>';
+
+    // tbody
+    html += '<tbody class="text-center wbs_table_body">';
+
+    Object.keys(data).forEach(function(k) {
+
+        if(k == ""){
+
+            html += '<tr style="background-color:lightblue;" class="header" data_wbs="null_value"><td><span class="btn btn-primary btn-sm">+</span></td><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="'+k+'"></td><td>'+data[k].length+'</td><td>'+k+'</td></tr>';
+            
+            let i = 1;
+
+            Object.keys(data[k]).forEach(function(sub_loop){
+
+                html += '<tr style="display:none;">';
+
+                html += '<td><b>'+i+'</b></td>';
+
+                html += '<td>'+data[k][sub_loop]["ลำดับที่"]+'</td>';
+                html += '<td class="text-left">'+data[k][sub_loop]["รายการ"]+'</td>';
+                html += '<td>'+data[k][sub_loop]["WBS"]+'</td>';
+
+                // Object.keys(data[k][sub_loop]).forEach(function(sub_loop_2){
+
+                //     if(sub_loop_2 == "ลำดับที่"){
+                //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
+                //     }
+                //     else if(sub_loop_2 == "รายการ"){
+                //         html += '<td class="text-left">'+data[k][sub_loop][sub_loop_2]+'</td>';
+                //     }
+                //     else if(sub_loop_2 == "WBS"){
+                //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
+                //     }
+
+                  
+                   
+                // });
+
+                html += '</tr>';
+
+                i++;
+            });
+            //html += '<tr>';
+        }
+        else{
+
+            html += '<tr style="background-color:lightblue;" class="header" data_wbs="'+k+'"><td><span class="btn btn-primary btn-sm">+</span></td><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="'+k+'"></td><td>'+data[k].length+'</td><td>'+k+'</td></tr>';
+            
+            let i = 1;
+
+            Object.keys(data[k]).forEach(function(sub_loop){
+
+                html += '<tr style="display:none;">';
+
+                html += '<td><b>'+i+'</b></td>';
+
+                // Object.keys(data[k][sub_loop]).forEach(function(sub_loop_2){
+                //     console.log(sub_loop_2)
+                //     if(sub_loop_2 == "ลำดับที่"){
+                //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
+                //     }
+                //     else if(sub_loop_2 == "รายการ"){
+                //         html += '<td class="text-left">'+data[k][sub_loop][sub_loop_2]+'</td>';
+                //     }
+                //     else if(sub_loop_2 == "WBS"){
+                //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
+                //     }
+
+                html += '<td>'+data[k][sub_loop]["ลำดับที่"]+'</td>';
+                html += '<td class="text-left">'+data[k][sub_loop]["รายการ"]+'</td>';
+                html += '<td>'+data[k][sub_loop]["WBS"]+'</td>';
+                   
+                  
+                // });
+
+                html += '</tr>';
+
+                i++;
+            });
+        }
+        // html += '<tr>';
+        // html += '<td class="text-center"><input type="checkbox" name="row_id[]" class="result_row_checkbox" value="' + data[k]['primary_key'] + '" /></td>';
+        // html += '<td class="text-center"><b>' + row + '</b></td>';
+        // html += '<td class="text-left">' + k + '</td>';
+        // html += '</tr>';
+
+        row++;
+
+    });
+
+    // close tag
+    html += '</tbody>';
+    html += '</table>';
+
     return html;
 }
 
