@@ -1,3 +1,20 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-874" />
+<title>Untitled Document</title>
+<script type="text/JavaScript">
+
+function timedRefresh(timeoutPeriod) {
+	setTimeout("location.reload(true);",timeoutPeriod);
+}
+//   -->
+</script>
+</head>
+
+<body onLoad="JavaScript:timedRefresh(3000);">
+
+</body>
+</html>
 <?php
 $page = $_SERVER['PHP_SELF'];
 $sec = "10";
@@ -8,7 +25,7 @@ echo $date_stamp.'<br>';
 $timeline = $_POST['dateaert'];
 $tokenline = $_POST['line_group_name'];
 echo $timeline.'<br>';
-while($timeline == $date_stamp){
+
     ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
@@ -38,13 +55,7 @@ while($timeline == $date_stamp){
 		$result_ = json_decode($result, true); 
 		echo "status : ".$result_['status']; echo "message : ". $result_['message'];
 	} 
-	curl_close( $chOne );   
+    curl_close( $chOne );   
 
-}
-echo "END";
+
 ?>
-<html>
-    <head>
-<meta http-equiv="refresh" content="<?php echo $sec?>;URL='<?php echo $page?>'">
-    </head>
-    </html>

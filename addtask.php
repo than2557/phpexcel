@@ -125,7 +125,7 @@ else{
 
 <div class="container">
 
-<card class="neumorphic" style="margin-top:-15%;width:300px;height:100px;"><h2 style="margin-left:15%;">เพิ่มขอมูลงาน</h2></card>
+<card class="neumorphic" style="margin-top:-15%;width:300px;height:100px;"><h2 style="margin-left:10%;">เพิ่มข้อมูลหัวข้องาน</h2></card>
 <center><card class="neumorphic" style="width:700px;height:100px;margin-top:-5%;"> 
 
 
@@ -133,13 +133,13 @@ else{
 <div class="row">
 
 <input type="text" id="id_user"  name="id_user" value="<?php echo $_SESSION['id_user'];?>" hidden>
-<label for="task" class="col-sm-1">งาน:</label>
+<label for="task" class="col-sm-2">หัวข้องาน:</label>
     <input type="text" id="task_name" name="task_name" class="form-control col-sm-2">
 
-<label for="colum">คอลัมน์ :</label>
+<label for="colum">หัวตาราง :</label>
 <input type="button" onclick="gencolum()"  class="btn btn-success" id="addcolum" value="+">
-<input type="button" onclick="test()" class="btn btn-danger" value="reset" style="height:40px;width:100px;margin-left:10px;">
-<input  style="margin-left:6%;margin-top:1%;" type="button"  class="btn btn-success" onclick="insert()" value="Submit">
+<input type="button" onclick="test()" class="btn btn-danger" value="เคลียร์ " style="height:40px;width:100px;margin-left:10px;">
+<input  style="margin-left:6%;margin-top:1%;" type="button"  class="btn btn-success" onclick="insert()" value="ยืนยัน">
 
 </div>
 <div style="width:700px;background: #aee0ee;">
@@ -148,7 +148,7 @@ else{
   
   <thead class="thead-dark">
     <tr>
-      <th scope="col">ฟิลด์</th>
+      <th scope="col">หัวตาราง</th>
       <th scope="col">ชนิดข้อมูล</th>
     
     </tr>

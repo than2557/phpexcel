@@ -5,7 +5,9 @@
   <?php  
   // date_default_timezone_set("Asia/Bangkok");
 		include_once("configDB.php");
-		$conn = $DBconnect;
+    $conn = $DBconnect;
+    date_default_timezone_set("Asia/Bangkok");
+    $date_stamp =  date("Y-m-d G:i");
   ?>
 
   <meta charset="UTF-8">
@@ -480,6 +482,8 @@
       </div>
    </div>
    </div>
+
+   <input id="timestamp" name="timestamp" value="<?php echo $date_stamp; ?>" hidden>
   <div class="container" >
     <card class="neumorphic" style="margin-top:-250px;height:100px;margin-left:10%;">
       <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
@@ -492,7 +496,7 @@
                        $sql = "SELECT * FROM task_user WHERE user_id = '".$_SESSION["id_user"]."'";
                        $result = mysqli_query($conn,$sql);
                    ?>  
-            <label for="tokename" style="margin-left:20px">ชื่องาน :</label>
+            <label for="tokename" style="margin-left:20px">หัวข้องาน :</label>
             <select class="form-control col-md-2" data-live-search="true" data-placeholder="task_user_id" name="task_user_id" id="task_user_id" style="width:300px;margin-left:30px;">
                       <option value="--เลือกงาน--">--เลือกงาน--</option>
                        <?php while($row = mysqli_fetch_array($result)){ 
@@ -583,7 +587,7 @@
         
         <div class="row">
           <div class="col-md-12">
-          <center><input style="display:none;" type="button" value="บันทึกข้อมูล" class="btn btn-success" name="btn_submit_alert"   onclick="testajax()"  id="btn_submit_alert">
+          <center><input style="display:none;" type="button" value="ยืนยันการส่งข้อมูลไลน์" class="btn btn-success" name="btn_submit_alert"   onclick="testajax()"  id="btn_submit_alert">
     <input style="display:none  ;" type="button" value="ย้อนกลับ" class="btn btn-warning" name="btn_back" id="btn_back"></center> 
        </div>
 
@@ -597,7 +601,7 @@
                
                   <div class="col-md-12 text-left">
                     <center>
-                      <input type="button" value="ส่ง" class="btn btn-success"  onclick="check_line()"  id="queryyyyy" name="queryyyyy">
+                      <input type="button" value="ยืนยัน" class="btn btn-success"  onclick="check_line()"  id="queryyyyy" name="queryyyyy">
                       <input type="button" value="เคลียร์เงื่อนไข" class="btn btn-danger" id="reset_condition" name="reset_condition">
                       <input type="button" value="เคลียร์ทั้งหมด" class="btn btn-danger" id="reset_all" name="reset_all">
                     </center>
@@ -620,9 +624,9 @@
                                 </div>
                               </th>
                               <th width="5%">ประเภท</th>
-                              <th width="15%">ฟีลด์</th>
+                              <th width="15%">หัวตาราง</th>
                               <th width="10%">เงื่อนไข</th>
-                              <th width="15%">ค่า/ฟีลด์</th>
+                              <th width="15%">ค่า/หัวตาราง</th>
                            </tr>
                         </thead>
                         <tbody id="append_condition">
@@ -635,7 +639,7 @@
                       </div>
                     </div>
                     <div class="col-md-12">
-                      <center><input id="checkvoxclick" class="btn btn-success" type="button" value="click"></center>
+                      <center><input id="checkvoxclick" class="btn btn-success" type="button" value="ส่งข้อมูลไลน์"></center>
                     </div>     
                </div>
              
@@ -926,11 +930,20 @@ $(function() {
     var task_user_id = document.getElementById("task_user_id").value; 
     var line_group_name = document.getElementById("line_group_name").value;
     var dateaert = document.getElementById("dateaert").value; 
-    var para={'task_user_id':task_user_id,'line_group_name':line_group_name,'dateaert':dateaert};
+    var timestamp = document.getElementById("timestamp").value; 
+    var para={'task_user_id':task_user_id,'line_group_name':line_group_name,'dateaert':dateaert,'timestamp':timestamp};
  
    console.log(para)
-  $.ajax({
-    url: "getdatasentline.php", 
+   while(dateaert == timestamp ){ 
+    Swal.fire({
+  position: 'top-end',
+  icon: 'info',
+  title: 'test',
+  showConfirmButton: false,
+  timer: 1500
+})
+    $.ajax({
+    url: "testtime.php", 
     method: "POST",
     async: false,
     datatype:'json',
@@ -948,7 +961,8 @@ $(function() {
   timer: 1500
 })
 
-  });
+  });}
+
   }
 
   </script>

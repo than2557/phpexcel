@@ -482,7 +482,7 @@ view.onResize = function paperOnResize() {
     
     <div class="right">
       <div class="content">
-        <h2>Login</h2>
+        <h2>เข้าสู่ระบบ</h2>
         <form id="form-login" method="post" action="login.php">
           <div class="form-element form-stack">
             <label for="username-login" class="form-label">Username</label>
@@ -493,7 +493,7 @@ view.onResize = function paperOnResize() {
             <input id="password-login" type="password" name="password">
           </div>
           <div class="form-element form-submit">
-            <button id="logIn" class="login" type="submit" name="login">Log In</button>
+            <button id="logIn" class="login" type="submit" name="login">เข้าสู่ระบบ</button>
             
           </div>
         </form>

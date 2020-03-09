@@ -744,7 +744,7 @@ html.modal-active, body.modal-active {
                      ?>
                   </select>
                   <input type="file" id="file_input" name="file_input" class="form-control mx-sm-3 col-md-6">
-                  <input value="ส่ง" type="button" name="btn_submit" class="btn btn-success" id="btn_submit">
+                  <input value="อัพโหลดไฟล์" type="button" name="btn_submit" class="btn btn-success" id="btn_submit">
                 <div>
                  
                      </div>          

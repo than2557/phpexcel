@@ -218,8 +218,12 @@ $(document).ready(function() {
 
             })
         } else {
+            Swal.fire({
+                    icon: 'success',
+                    title: 'อัพโหลดเสร็จสิ้น...'
 
-            // Loop user fields selected
+                })
+                // Loop user fields selected
             id.forEach(function(key) {
 
                 // populate data each field (From user selected)
@@ -237,16 +241,10 @@ $(document).ready(function() {
                     dataType: 'JSON'
                 })
                 .done(function(data) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'อัพโหลดไฟล์เสร็จสิ้น',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
 
-                    // console.log(data)
+
                 });
+
         }
     })
 
@@ -275,6 +273,7 @@ $(document).ready(function() {
                         html = data.result;
                     } else {
                         alert(data.message)
+
                     }
                 }
             });
