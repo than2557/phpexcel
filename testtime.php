@@ -20,13 +20,13 @@ $page = $_SERVER['PHP_SELF'];
 $sec = "10";
 date_default_timezone_set("Asia/Bangkok");
 $date_stamp =  date("Y-m-d G:i");
-echo $date_stamp.'<br>';
+echo "date_stamp".$date_stamp.'<br>';
 
 $timeline = $_POST['dateaert'];
 $tokenline = $_POST['line_group_name'];
-echo $timeline.'<br>';
-
-    ini_set('display_errors', 1);
+echo "timeline".$timeline.'<br>';
+if($timeline == $date_stamp ){	
+	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 	date_default_timezone_set("Asia/Bangkok");
@@ -55,7 +55,33 @@ echo $timeline.'<br>';
 		$result_ = json_decode($result, true); 
 		echo "status : ".$result_['status']; echo "message : ". $result_['message'];
 	} 
-    curl_close( $chOne );   
+	curl_close( $chOne );   
+}
+	elseif($date_stamp != $timeline){
+
+		// echo "datastamp !=".":".$date_stamp;
+		// echo "timeline !=".":".$timeline;
+if($date_stamp > $timeline){
+	while($date_stamp != $timeline){
+		$i=0;
+		$i++;
+		$newtimeline = date('Y-m-d H:i',strtotime('+0 hour +$i minutes',strtotime($timeline)));
+		echo 'newtimeline'.$newtimeline;
+	
+	}
+	
+}
+elseif($date_stamp < $timeline){
+	while($date_stamp != $timeline){
+		$j=0;
+		$newdate_stamp = date('Y-m-d H:i',strtotime('+0 hour +$j minutes',strtotime($date_stamp)));
+		echo 'newdate_stamp'.$newdate_stamp;
+		$j++;
+	}
+}	
+
+	}
+	
 
 
 ?>

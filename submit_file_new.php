@@ -925,23 +925,16 @@ $(function() {
   }
   
   function testajax(){ 
-    
 
     var task_user_id = document.getElementById("task_user_id").value; 
     var line_group_name = document.getElementById("line_group_name").value;
     var dateaert = document.getElementById("dateaert").value; 
     var timestamp = document.getElementById("timestamp").value; 
     var para={'task_user_id':task_user_id,'line_group_name':line_group_name,'dateaert':dateaert,'timestamp':timestamp};
- 
+     
+
    console.log(para)
-   while(dateaert == timestamp ){ 
-    Swal.fire({
-  position: 'top-end',
-  icon: 'info',
-  title: 'test',
-  showConfirmButton: false,
-  timer: 1500
-})
+if(dateaert == timestamp){
     $.ajax({
     url: "testtime.php", 
     method: "POST",
@@ -961,10 +954,56 @@ $(function() {
   timer: 1500
 })
 
-  });}
-
+  });
   }
 
+  else if(dateaert != timestamp){
+  
+    $.ajax({
+    url: "testtime.php", 
+    method: "POST",
+    async: false,
+    datatype:'json',
+    data:{task_user_id:task_user_id,line_group_name:line_group_name,dateaert:dateaert},
+    error: function(jqXHR, text, error) {
+        alert(error)
+    }
+  })
+  .done(function(data) {
+    let timerInterval
+Swal.fire({
+  title: 'กำลังส่งข้อมูล!',
+  html: 'หน้าต่างนี้จะปิดอัตโนมัติ <b></b>.',
+  timer: 5000,
+  timerProgressBar: true,
+  onBeforeOpen: () => {
+    Swal.showLoading()
+    timerInterval = setInterval(() => {
+      const content = Swal.getContent()
+      if (content) {
+        const b = content.querySelector('b')
+        if (b) {
+          b.textContent = Swal.getTimerLeft()
+        }
+      }
+    }, 100)
+  },
+  onClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
+
+  });
+
+}
+
+
+}
   </script>
 
 
