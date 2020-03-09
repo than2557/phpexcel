@@ -62,24 +62,39 @@ if($timeline == $date_stamp ){
 		// echo "datastamp !=".":".$date_stamp;
 		// echo "timeline !=".":".$timeline;
 if($date_stamp > $timeline){
-	while($date_stamp != $timeline){
-		$i=0;
-		$i++;
-		$newtimeline = date('Y-m-d H:i',strtotime('+0 hour +$i minutes',strtotime($timeline)));
-		echo 'newtimeline'.$newtimeline;
+	echo "date_stamp > timeline";
+ //mistake
+ $minutes_to_add = 5;
+
+$time = new DateTime($timeline);
+$time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+
+$stamp = $time->format('Y-m-d H:i');
+	echo $stamp;
 	
-	}
-	
+
+
 }
 elseif($date_stamp < $timeline){
-	while($date_stamp != $timeline){
-		$j=0;
-		$newdate_stamp = date('Y-m-d H:i',strtotime('+0 hour +$j minutes',strtotime($date_stamp)));
-		echo 'newdate_stamp'.$newdate_stamp;
-		$j++;
-	}
+
+		echo "date_stamp < timeline";
+		//mistake
+		$minutes_to_add= 4;
+			$timestamp = new DateTime($date_stamp);
+			$timestamp->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+			
+			$stampnew = $timestamp->format('Y-m-d H:i');
+				echo $stampnew;
+				
+			
 }	
 
+	}
+
+	
+	else{
+
+		echo "succes";
 	}
 	
 
