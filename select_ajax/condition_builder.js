@@ -632,7 +632,7 @@ function generate_table_result(data) {
     let html = '';
 
     // table thead
-    html += '<table class="table table-sm table-primary table-bordered table-striped "><thead class="text-center"><tr><th>#</th><th>#</th><th>ลำดับที่</th><th>รายการ</th><th>WBS</th></tr></thead>';
+    html += '<table style="overflow: scroll;width:70vw;heigh:80vh;" class="table table-sm table-bordered"><thead class="text-center bg-primary"><tr><th>#</th><th>#</th><th>ลำดับที่</th><th>รายการ</th><th>WBS</th></tr></thead>';
 
     // tbody
     html += '<tbody>';
@@ -640,12 +640,15 @@ function generate_table_result(data) {
     // loop query data
     Object.keys(data).forEach(function(k) {
 
-        html += '<tr>';
-        html += '<td class="text-center"><input type="checkbox" name="row_id[]" class="result_row_checkbox" value="' + data[k]['primary_key'] + '" /></td>';
+        html += '<tr style="background-color:lightblue;">';
+
+        html += '<td class="text-center"><input type="checkbox" name="check_row[]" class="check_row" value="' + data[k]['primary_key'] + '" /></td>';
         html += '<td class="text-center"><b>' + row + '</b></td>';
-        html += '<td class="text-left">' + data[k]['ลำดับที่'] + '</td>';
-        html += '<td class="text-left">' + data[k]['รายการ'] + '</td>';
-        html += '<td class="text-left">' + data[k]['WBS'] + '</td>';
+        
+        Object.keys(data[k]).forEach(function(sub_loop){
+            html += '<td class="text-left">' + data[k][sub_loop] + '</td>';
+        });
+
         html += '</tr>';
 
         row++;
@@ -668,7 +671,7 @@ function generate_table_WBS_task(data) {
     let html = '';
 
     // table thead
-    html += '<table class="table table-sm table-bordered table_wbs"><thead class="text-center bg-primary"><tr><th width="15%">#</th><th width="15%"><input class="checkall" type="checkbox" name="checkall" value="checkall"></th><th width="50%">จำนวนรายการ</th><th width="20%">WBS</th></tr></thead>';
+    html += '<table class="table table-sm table-bordered table_wbs"><thead class="text-center bg-primary"><tr><th width="15%">#</th><th width="15%">ลำดับที่</th><th width="50%">จำนวนรายการ</th><th width="20%">WBS</th></tr></thead>';
 
     // tbody
     html += '<tbody class="text-center wbs_table_body">';
@@ -709,7 +712,7 @@ function generate_table_WBS_task(data) {
 
                 html += '</tr>';
 
-                i++;
+              
             });
             //html += '<tr>';
         } else {
@@ -745,7 +748,7 @@ function generate_table_WBS_task(data) {
 
                 html += '</tr>';
 
-                i++;
+               
             });
         }
         // html += '<tr>';

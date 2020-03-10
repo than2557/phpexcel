@@ -607,6 +607,7 @@
                     </center>
                               <input type="hidden" id="table_nameeeeeeeee" name="table_nameeeeeeeee">
                               <input type="hidden" id="fields_count" name="fields_count">
+                              <input type="hidden" id="sql_hidden" name="sql_hidden">
                               <br>
 
                         <!-- ตาราง กำหนดเงื่อนไข -->

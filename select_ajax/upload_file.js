@@ -128,9 +128,9 @@ $(document).ready(function() {
 
     // on checkbox click (Table header)
     $(document).on("click", ".checkcol", function() {
+
         var check = document.getElementsByClassName("cb-element");
         // check header is checked
-
 
         if ($(this).is(':checked')) {
 
@@ -152,10 +152,10 @@ $(document).ready(function() {
 
 
     $(document).on("click", "#checkall", function() {
+        
         var check = document.getElementsByClassName("checkcol");
+        
         var check_row_template = document.getElementsByName("check_row_template[]");
-
-
 
         $(check).prop("checked", $(this).prop("checked"));
 
