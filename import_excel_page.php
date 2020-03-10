@@ -25,8 +25,16 @@
 
 
 
+
+
 <!-- script Upload file -->
 <script src="select_ajax/upload_file.js"></script>
+<!-- script Upload file -->
+
+
+
+
+
 
    <title>Import excel page</title>
 
@@ -799,8 +807,8 @@ html.modal-active, body.modal-active {
             </style><br>
       <div class="row" id="result_div">
          <div style="background-color:#F2F9FF;" class="col-md-9 result_div text-center">
-               <label><b>ผลลัพธ์</b></label> 
-               <input type="checkbox" name="all" id="checkall" />Check All</br>
+               <label><b>ผลลัพธ์</b></label> 	&nbsp;	&nbsp;
+               <input type="checkbox" id="checkall" />เลือกหัวข้อทั้งหมด</br>
                
                <div class="result text-left"></div>
                
