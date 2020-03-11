@@ -144,7 +144,7 @@ else{
 </div>
 <div style="width:700px;background: #aee0ee;">
 <div id="divtable">
-<table class="table table-striped">
+<table class="table table-striped table-sm">
   
   <thead class="thead-dark">
     <tr>

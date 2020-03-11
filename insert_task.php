@@ -24,6 +24,8 @@ $sql2 = "INSERT INTO `template_tb`(`task_user_id`, `colum_name`,`datatype`) VALU
 $Query = mysqli_query($conn,$sql2);
 //echo $sql2;
 }
+
+
 $a = 1;
 
 $sql_create_table = "CREATE TABLE `test_import_excel`.`$task_name` ( 

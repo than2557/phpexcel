@@ -40,13 +40,13 @@ function onClick(element) {
 
 function link_page(level){
 
-//var level = document.getElementById('level');
-if(level == 1){
-  window.open("index_admin.php",'_self')
-}
-else{
-  window.open("index_test.php",'_self')
-}
+  //var level = document.getElementById('level');
+  if(level == 1){
+    window.open("index_admin.php",'_self')
+  }
+  else{
+    window.open("index_test.php",'_self')
+  }
 }
 
 </script>
@@ -179,8 +179,6 @@ else{
     </form>
     </card>
     </center>
-      
-    <card><
     </div>
 </body>
 
