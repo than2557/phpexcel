@@ -632,7 +632,7 @@ function generate_table_result(data) {
     let html = '';
 
     // table thead
-    html += '<table style="overflow: scroll;width:70vw;heigh:80vh;" class="table table-sm table-bordered"><thead class="text-center bg-primary"><tr><th>#</th><th>#</th><th>ลำดับที่</th><th>รายการ</th><th>WBS</th></tr></thead>';
+    html += '<div style="overflow: auto;width:66vw;height:70vh;"><table class="table table-sm table-bordered tb-result"><thead class="text-center"><tr><th>#</th><th>#</th><th>ลำดับที่</th><th>รายการ</th><th>WBS</th></tr></thead>';
 
     // tbody
     html += '<tbody>';
@@ -657,7 +657,7 @@ function generate_table_result(data) {
 
     // close tag
     html += '</tbody>';
-    html += '</table>';
+    html += '</table></div>';
 
     // return HTML code
     return html;

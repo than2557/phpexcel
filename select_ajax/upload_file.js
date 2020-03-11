@@ -329,8 +329,7 @@ $(document).ready(function() {
 
         if(missing_fields != ''){
             $("#checkall").prop("checked", false);
-            // alert("ไม่พบหัวข้อ\n"+missing_fields)
-
+           
             Swal.fire({
                 icon: 'error',
                 title: 'ไม่พบหัวข้อ',

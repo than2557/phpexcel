@@ -639,13 +639,22 @@
                           <!-- div ตาราง ผลลัพธ์ query -->
                       </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12"><br>
                       <center><input id="checkvoxclick" class="btn btn-success" type="button" value="ส่งข้อมูลไลน์"></center>
                     </div>     
                </div>
              
             </form>
          </div>    
+         <style>
+           .tb-result thead th { 
+             position: sticky; 
+             top: 0; 
+             background-color:#007BFF;
+             margin-top:2px;
+          }
+
+         </style>
          <div class="result_condition" style="background-color:#E4F5FF;padding-bottom:5px;">
           <div class="row" style="margin-left:1%;margin-right:1%;">
             <!-- <div id="webdatarocks_command">
