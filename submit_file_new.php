@@ -503,7 +503,7 @@
                            echo '<option value="'.$row['task_user_id'].'">'.$row['task_name'].'</option>'; 
                        } ?> 
                    </select> 
-            
+ 
             <label class="control-label col-sm-2"> กลุ่มไลน์:</label>
             <select type="text" id="line_group_name" name="line_group_name" class=" form-control control-label col-md-2" style="width: 200px;margin-left:-80px"></select>
 
@@ -528,7 +528,10 @@
     <div>
     <br>
       </div>
-     
+      <div class="row">
+      <label class="control-label col-sm-2">แจ้งอัตโนมัติ</label>
+            <input class="form-control col-sm-1"  style="margin-left:-6%" type="checkbox">
+            </div>
       
     </form>
   </card>
@@ -583,7 +586,7 @@
       <div class="col-sm-12" style="width:1000px;height:100%;background-color:#A6BBFF;margin-top:15%;padding-bottom:5px;" align="center">
         <br> 
         <div class="condition_builder" style="background-color:#E4F5FF;padding-bottom:5px;">
-        <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;padding-top:1%;">จัดการข้อมูล</h4></center>
+        <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;padding-top:1%;">กรองข้อมูล</h4></center>
         
         <div class="row">
           <div class="col-md-12">
