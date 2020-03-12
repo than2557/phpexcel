@@ -152,12 +152,6 @@ function inserttoken(){
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 
-
-
-
-
-
-
   <div class="container" >
     <card class="neumorphic" style="margin-top:-250px;height:100px;margin-left:10%;">
       <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลไลน์โทเคน</h2></center>
@@ -184,9 +178,6 @@ function inserttoken(){
             
             </select>
 
-
-          
-                             
     </div>
     </div>
 

@@ -598,6 +598,83 @@ $(document).ready(function() {
 
         }
     });
+
+    $("#alert_time_type").change(function(){
+        
+        let html = '';
+
+        $('.alert_time_type_input').empty();
+
+        if($(this).val() == "period"){
+            html+= '<div class="row"><label>เลือกหน่วยเวลา</label> &nbsp;&nbsp;<select class="form-control col-md-3" name="alert_time_type_time_type" id="alert_time_type_time_type"><option value="null">เลือกหน่วยเวลา</option><option value="s">วินาที</option><option value="m">นาที</option><option value="h">ชั่วโมง</option><!-- <option value="d">วัน</option> --></select> &nbsp; &nbsp;<label>กรอกจำนวน</label> &nbsp;&nbsp;<input type="number" name="alert_time_type_value" id="alert_time_type_value" class="form-control col-md-2"></div>';
+        }
+        else{
+            html += '<div class="row"><label>กรอกเวลา</label> &nbsp;&nbsp;<input type="datetime-local" class="form-control col-md-5" name="alert_time_type_value" id="alert_time_type_value"></div>';
+            
+        }
+
+        $('.alert_time_type_input').append(html);
+    })
+
+    $("#btn_submit_alert").click(function(){
+
+        var getttt = getDataWebdatarock();
+
+        webdatarocks.exportTo("html", {
+            header: "รายงาน " + $("#query").val() + "<br>",
+            filename: "export_" + $("#query").val(),
+            destinationType: "server",
+            url: "#"
+        },
+        function(fileData) {
+            console.clear();
+ 
+            Swal.fire(
+                'บันทึกสำเร็จ!',
+                'กด OK!',
+                'success'
+            )
+
+            $.ajax({
+    
+                url: "select_ajax/get_data_export2.php",
+                method: "POST",
+                async: false,
+                dataType: "JSON",
+                data: {
+                    sql: query_result_object.result_sql,
+                    fields:query_result_object.json_count,
+                    data: fileData.data,
+                    file_name: Date.now() + "_export_userid" + $("#task_user_id").val(),
+                    count_data: getttt,
+                    token_name: $("#tokenname").val(),
+                    group_name: $("#groublinename").val(),
+                    task_id: $("#task_user_id").val(),
+                    alert_time_type: $("#alert_time_type").val(),
+                    alert_time_type_time_type:$("#alert_time_type_time_type").val(),
+                    alert_time_type_value:$("#alert_time_type_value").val()
+                }
+            })
+            .done(function(response) {
+                console.log(response);
+                
+                // if (!response.error) {
+                //     window.open(response.javascript_file_path, '_blank');
+                //     window.open('insertline.php?alert_id=' + response.alert_id, '_self');
+                // } 
+                // else {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         title: 'ผิดพลาด!!!',
+                //         text: response.message,
+                //         footer: '<a href>กรุณาตรวจสอบข้อมูล</a>'
+                //     })
+                // }
+            });
+        });
+    })
+
+    
 })
 
 // generate fields options in select box
@@ -671,7 +748,7 @@ function generate_table_WBS_task(data) {
     let html = '';
 
     // table thead
-    html += '<table class="table table-sm table-bordered table_wbs"><thead class="text-center bg-primary"><tr><th width="15%">#</th><th width="15%">ลำดับที่</th><th width="50%">จำนวนรายการ</th><th width="20%">WBS</th></tr></thead>';
+    html += '<table class="table table-sm table-bordered table_wbs"><thead class="text-center bg-primary"><tr><th width="5%">#</th><th width="10%">#</th><th width="13%">ลำดับที่</th><th width="45%">รายการ</th><th width="27%">WBS(จำนวนรายการ)</th></tr></thead>';
 
     // tbody
     html += '<tbody class="text-center wbs_table_body">';
@@ -680,82 +757,47 @@ function generate_table_WBS_task(data) {
 
         if (k == "") {
 
-            html += '<tr style="background-color:lightblue;" class="header" data_wbs="null_value"><td><span class="btn btn-primary btn-sm">+</span></td><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="' + k + '"></td><td>' + data[k].length + '</td><td>' + k + '</td></tr>';
+            html += '<tr style="background-color:lightblue;" class="header" data_wbs="null_value"><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="' + k + '"></td><td><span class="btn btn-primary btn-sm">-</span></td><td></td><td></td><td>' + k + '('+ data[k].length+')</td></tr>';
 
             let i = 1;
 
             Object.keys(data[k]).forEach(function(sub_loop) {
 
-                html += '<tr style="display:none;">';
+                html += '<tr>';
 
+                html += '<td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="' + data[k][sub_loop]["primary_key"]+ '"></td>';
                 html += '<td><b>' + i + '</b></td>';
 
                 html += '<td>' + data[k][sub_loop]["ลำดับที่"] + '</td>';
                 html += '<td class="text-left">' + data[k][sub_loop]["รายการ"] + '</td>';
                 html += '<td>' + data[k][sub_loop]["WBS"] + '</td>';
 
-                // Object.keys(data[k][sub_loop]).forEach(function(sub_loop_2){
-
-                //     if(sub_loop_2 == "ลำดับที่"){
-                //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
-                //     }
-                //     else if(sub_loop_2 == "รายการ"){
-                //         html += '<td class="text-left">'+data[k][sub_loop][sub_loop_2]+'</td>';
-                //     }
-                //     else if(sub_loop_2 == "WBS"){
-                //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
-                //     }
-
-
-
-                // });
-
                 html += '</tr>';
 
-              
+                i++;
             });
-            //html += '<tr>';
+ 
         } else {
-
-            html += '<tr style="background-color:lightblue;" class="header" data_wbs="' + k + '"><td><span class="btn btn-primary btn-sm">+</span></td><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="' + k + '"></td><td>' + data[k].length + '</td><td>' + k + '</td></tr>';
+            html += '<tr style="background-color:lightblue;" class="header" data_wbs="' + k + '"><td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="' + k + '"></td><td><span class="btn btn-primary btn-sm">-</span></td><td></td><td></td><td>' + k + '('+ data[k].length+')</td></tr>';
 
             let i = 1;
 
             Object.keys(data[k]).forEach(function(sub_loop) {
 
-                html += '<tr style="display:none;">';
-
+                html += '<tr>';
+                html += '<td><input class="check_wbs_row" type="checkbox" name="check_wbs_row[]" value="' + data[k][sub_loop]["primary_key"] + '"></td>';
                 html += '<td><b>' + i + '</b></td>';
-
-                // Object.keys(data[k][sub_loop]).forEach(function(sub_loop_2){
-                //     console.log(sub_loop_2)
-                //     if(sub_loop_2 == "ลำดับที่"){
-                //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
-                //     }
-                //     else if(sub_loop_2 == "รายการ"){
-                //         html += '<td class="text-left">'+data[k][sub_loop][sub_loop_2]+'</td>';
-                //     }
-                //     else if(sub_loop_2 == "WBS"){
-                //         html += '<td>'+data[k][sub_loop][sub_loop_2]+'</td>';
-                //     }
-
                 html += '<td>' + data[k][sub_loop]["ลำดับที่"] + '</td>';
                 html += '<td class="text-left">' + data[k][sub_loop]["รายการ"] + '</td>';
                 html += '<td>' + data[k][sub_loop]["WBS"] + '</td>';
 
 
-                // });
-
                 html += '</tr>';
 
-               
+                i++;
             });
         }
-        // html += '<tr>';
-        // html += '<td class="text-center"><input type="checkbox" name="row_id[]" class="result_row_checkbox" value="' + data[k]['primary_key'] + '" /></td>';
-        // html += '<td class="text-center"><b>' + row + '</b></td>';
-        // html += '<td class="text-left">' + k + '</td>';
-        // html += '</tr>';
+ 
 
         row++;
 
@@ -901,4 +943,23 @@ function foo1() {
 
 function foo2() {
     alert("foo2");
+}
+
+function getDataWebdatarock() {
+
+    var result;
+
+    webdatarocks.getData({},
+
+        function(data) {
+
+            var web_data = data.data;
+
+            var obj_cel = web_data[0];
+            var json_obg = JSON.stringify(obj_cel);
+            var json_aray = JSON.parse(json_obg);
+
+            result = json_aray.v0;
+        });
+    return result;
 }

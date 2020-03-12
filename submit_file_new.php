@@ -488,8 +488,9 @@
     <card class="neumorphic" style="margin-top:-250px;height:100px;margin-left:10%;">
       <center><h2 style="font-family: 'Sriracha', cursive;">เพิ่มข้อมูลการแจ้งเตือน</h2></center>
     </card>
-    <card class="neumorphic" style="width:1000px;margin-left:10%;height:200px;margin-top:-70px;" >
+    <card class="neumorphic" style="width:1000px;margin-left:10%;height:160px;margin-top:-70px;" >
       <form autocomplete="off" id="sent"  method="post" class="form-horizontal">
+<<<<<<< refs/remotes/origin/master
         <div class="col-md-12">
           <div class="row">
             <?php 
@@ -511,28 +512,69 @@
 
          
                    <div>
+=======
+>>>>>>> edit submit form
         <div class="row">
-   
-        <label style="margin-left:10%;" for="dtp_input1" class="col-md-5 control-label">วันเวลาในการแจ้งเตือน:</label>
-        
-        <div class="input-group date form_datetime col-sm-2"  data-link-field="dtp_input1">
-          <input class="form-control" type="text" value="" style="width:150px;margin-left:5px;" id="dateaert" name="dateaert" require>
-          <span class="input-group-addon col-sm-2" style="width:30px;"><span class="glyphicon glyphicon-remove"></span></span>
-					<span class="input-group-addon col-sm-3" style="width:30px;"><span class="glyphicon glyphicon-th"></span></span> 
+          <div class="col-md-12">
+
+            <div class="row">
+
+              <div class="col-md-2">
+                <label for="tokename" >หัวข้องาน :</label>
+              </div>
+              <div class="col-md-3">
+                <?php 
+                        $sql = "SELECT * FROM task_user WHERE user_id = '".$_SESSION["id_user"]."'";
+                        $result = mysqli_query($conn,$sql);
+                    ?>  
+                <select class="form-control" name="task_user_id" id="task_user_id">
+                  <option value="--เลือกงาน--">--เลือกงาน--</option>
+                  <?php while($row = mysqli_fetch_array($result)){ 
+                      echo '<option value="'.$row['task_user_id'].'">'.$row['task_name'].'</option>'; 
+                    } ?> 
+                </select> 
+              </div>
+              <div class="col-md-2"><label> กลุ่มไลน์:</label></div>
+
+              <div class="col-md-2">
+                <select type="text" id="line_group_name" name="line_group_name" class=" form-control"></select>
+                <input type="file" id="open_file" style="display:none;">
+              </div>
+
+            </div><br>
+            <div class="row">
+
+              <div class="col-md-2"><label>ประเภทเวลาแจ้งแตือน</label></div>
+              <div class="col-md-3">
+                <select class="form-control" name="alert_time_type" id="alert_time_type">
+                  <option value="null">เลือกประเภทแจ้งเตือน</option>
+                  <option value="period">รอบ</option>
+                  <option value="fix">ระบุวันที่และเวลา</option>
+                </select>
+              </div>
+              <div class="col-md-7 alert_time_type_input">
+
+              
+                
+               
+                  
+              </div>
+             
+               
+
+            </div>             
+
         </div>
-
-
-         </div>             
-    </div>
-    </div>
-    <div>
-    <br>
       </div>
+<<<<<<< refs/remotes/origin/master
       <div class="row">
       <label class="control-label col-sm-2">แจ้งอัตโนมัติ</label>
             <input class="form-control col-sm-1"  style="margin-left:-6%" type="checkbox">
             </div>
       
+=======
+        
+>>>>>>> edit submit form
     </form>
   </card>
   <div id="test"></div>
@@ -583,14 +625,14 @@
           background-color: #3e8e41;
         }
 </style>
-      <div class="col-sm-12" style="width:1000px;height:100%;background-color:#A6BBFF;margin-top:15%;padding-bottom:5px;" align="center">
+      <div class="col-sm-12" style="width:1000px;height:100%;background-color:#A6BBFF;margin-top:27%;margin-left:10%;padding-bottom:5px;" align="center">
         <br> 
         <div class="condition_builder" style="background-color:#E4F5FF;padding-bottom:5px;">
         <center><h4 class="control-label" style="color:#000000;font-family: 'Sriracha', cursive;padding-top:1%;">กรองข้อมูล</h4></center>
         
         <div class="row">
           <div class="col-md-12">
-          <center><input style="display:none;" type="button" value="ยืนยันการส่งข้อมูลไลน์" class="btn btn-success" name="btn_submit_alert"   onclick="testajax()"  id="btn_submit_alert">
+          <center><input style="display:none;" type="button" value="ยืนยันการส่งข้อมูลไลน์" class="btn btn-success" name="btn_submit_alert"      id="btn_submit_alert">
     <input style="display:none  ;" type="button" value="ย้อนกลับ" class="btn btn-warning" name="btn_back" id="btn_back"></center> 
        </div>
 
@@ -677,7 +719,7 @@
     </center> 
   </div>
 
-  <script type="text/javascript" src="select_ajax/condition_builder.js"></script>  
+    
 
   <script type="text/javascript" src="/phpexcel/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
   <script type="text/javascript" src="/phpexcel/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
@@ -937,88 +979,88 @@ $(function() {
 
   }
   
-  function testajax(){ 
+//   function testajax(){ 
 
-    var task_user_id = document.getElementById("task_user_id").value; 
-    var line_group_name = document.getElementById("line_group_name").value;
-    var dateaert = document.getElementById("dateaert").value; 
-    var timestamp = document.getElementById("timestamp").value; 
-    var para={'task_user_id':task_user_id,'line_group_name':line_group_name,'dateaert':dateaert,'timestamp':timestamp};
+//     var task_user_id = document.getElementById("task_user_id").value; 
+//     var line_group_name = document.getElementById("line_group_name").value;
+//     var dateaert = document.getElementById("dateaert").value; 
+//     var timestamp = document.getElementById("timestamp").value; 
+//     var para={'task_user_id':task_user_id,'line_group_name':line_group_name,'dateaert':dateaert,'timestamp':timestamp};
      
 
-   console.log(para)
-if(dateaert == timestamp){
-    $.ajax({
-    url: "testtime.php", 
-    method: "POST",
-    async: false,
-    datatype:'json',
-    data:{task_user_id:task_user_id,line_group_name:line_group_name,dateaert:dateaert},
-    error: function(jqXHR, text, error) {
-        alert(error)
-    }
-  })
-  .done(function(data) {
-    Swal.fire({
-  position: 'top-end',
-  icon: 'success',
-  title: 'ส่งข้อมูลได้',
-  showConfirmButton: false,
-  timer: 1500
-})
+//    console.log(para)
+// if(dateaert == timestamp){
+//     $.ajax({
+//     url: "testtime.php", 
+//     method: "POST",
+//     async: false,
+//     datatype:'json',
+//     data:{task_user_id:task_user_id,line_group_name:line_group_name,dateaert:dateaert},
+//     error: function(jqXHR, text, error) {
+//         alert(error)
+//     }
+//   })
+//   .done(function(data) {
+//     Swal.fire({
+//   position: 'top-end',
+//   icon: 'success',
+//   title: 'ส่งข้อมูลได้',
+//   showConfirmButton: false,
+//   timer: 1500
+// })
 
-  });
-  }
+//   });
+//   }
 
-  else if(dateaert != timestamp){
+//   else if(dateaert != timestamp){
   
-    $.ajax({
-    url: "testtime.php", 
-    method: "POST",
-    async: false,
-    datatype:'json',
-    data:{task_user_id:task_user_id,line_group_name:line_group_name,dateaert:dateaert},
-    error: function(jqXHR, text, error) {
-        alert(error)
-    }
-  })
-  .done(function(data) {
-    let timerInterval
-Swal.fire({
-  title: 'กำลังส่งข้อมูล!',
-  html: 'หน้าต่างนี้จะปิดอัตโนมัติ <b></b>.',
-  timer: 5000,
-  timerProgressBar: true,
-  onBeforeOpen: () => {
-    Swal.showLoading()
-    timerInterval = setInterval(() => {
-      const content = Swal.getContent()
-      if (content) {
-        const b = content.querySelector('b')
-        if (b) {
-          b.textContent = Swal.getTimerLeft()
-        }
-      }
-    }, 100)
-  },
-  onClose: () => {
-    clearInterval(timerInterval)
-  }
-}).then((result) => {
-  /* Read more about handling dismissals below */
-  if (result.dismiss === Swal.DismissReason.timer) {
-    console.log('I was closed by the timer')
-  }
-})
+//     $.ajax({
+//     url: "testtime.php", 
+//     method: "POST",
+//     async: false,
+//     datatype:'json',
+//     data:{task_user_id:task_user_id,line_group_name:line_group_name,dateaert:dateaert},
+//     error: function(jqXHR, text, error) {
+//         alert(error)
+//     }
+//   })
+//   .done(function(data) {
+//     let timerInterval
+// Swal.fire({
+//   title: 'กำลังส่งข้อมูล!',
+//   html: 'หน้าต่างนี้จะปิดอัตโนมัติ <b></b>.',
+//   timer: 5000,
+//   timerProgressBar: true,
+//   onBeforeOpen: () => {
+//     Swal.showLoading()
+//     timerInterval = setInterval(() => {
+//       const content = Swal.getContent()
+//       if (content) {
+//         const b = content.querySelector('b')
+//         if (b) {
+//           b.textContent = Swal.getTimerLeft()
+//         }
+//       }
+//     }, 100)
+//   },
+//   onClose: () => {
+//     clearInterval(timerInterval)
+//   }
+// }).then((result) => {
+//   /* Read more about handling dismissals below */
+//   if (result.dismiss === Swal.DismissReason.timer) {
+//     console.log('I was closed by the timer')
+//   }
+// })
 
-  });
+//   });
 
-}
+// }
 
 
-}
+// }
   </script>
 
-
+<script type="text/javascript" src="select_ajax/condition_builder.js"></script>
 </body>
 </html>
