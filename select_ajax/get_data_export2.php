@@ -65,10 +65,6 @@
                   $token_name = $row[1];
                }
 
-                
-                  // $tbz = "INSERT INTO `ref_tb_user`(`id_user`,`tb_ref_name`)VALUES('$user_id','$nametb')";
-                  
-                  // mysqli_query($conn,$tbz);
             
                   notify_message($_POST['task_name']."\n รายการทั้งหมด : ".$_POST['count_data']." รายการ",$token_name);
 
