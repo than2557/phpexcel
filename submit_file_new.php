@@ -490,30 +490,7 @@
     </card>
     <card class="neumorphic" style="width:1000px;margin-left:10%;height:160px;margin-top:-70px;" >
       <form autocomplete="off" id="sent"  method="post" class="form-horizontal">
-<<<<<<< refs/remotes/origin/master
-        <div class="col-md-12">
-          <div class="row">
-            <?php 
-                       $sql = "SELECT * FROM task_user WHERE user_id = '".$_SESSION["id_user"]."'";
-                       $result = mysqli_query($conn,$sql);
-                   ?>  
-            <label for="tokename" style="margin-left:20px">หัวข้องาน :</label>
-            <select class="form-control col-md-2" data-live-search="true" data-placeholder="task_user_id" name="task_user_id" id="task_user_id" style="width:300px;margin-left:30px;">
-                      <option value="--เลือกงาน--">--เลือกงาน--</option>
-                       <?php while($row = mysqli_fetch_array($result)){ 
-                           echo '<option value="'.$row['task_user_id'].'">'.$row['task_name'].'</option>'; 
-                       } ?> 
-                   </select> 
- 
-            <label class="control-label col-sm-2"> กลุ่มไลน์:</label>
-            <select type="text" id="line_group_name" name="line_group_name" class=" form-control control-label col-md-2" style="width: 200px;margin-left:-80px"></select>
 
-              <input type="file" id="open_file" style="display:none;">
-
-         
-                   <div>
-=======
->>>>>>> edit submit form
         <div class="row">
           <div class="col-md-12">
 
@@ -566,15 +543,7 @@
 
         </div>
       </div>
-<<<<<<< refs/remotes/origin/master
-      <div class="row">
-      <label class="control-label col-sm-2">แจ้งอัตโนมัติ</label>
-            <input class="form-control col-sm-1"  style="margin-left:-6%" type="checkbox">
-            </div>
-      
-=======
-        
->>>>>>> edit submit form
+
     </form>
   </card>
   <div id="test"></div>

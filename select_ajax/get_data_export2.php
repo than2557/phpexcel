@@ -24,28 +24,42 @@
 
       $javascript_file_path = 'export/'.$file_name.'.html'; // path ไฟล์สำหรับแสดงใน javascript
 
-      if(file_put_contents($newFileName, $data) !== false){
+      if(file_put_contents($newFileName, $HTMLdata) !== false){
 
          chmod($newFileName,0755); // แก้ไข permission
 
          $database_file_path = $file_name.'.html';
          $tokenname = $_POST['token_name'];
-         $task_id;
+         $task_id = $_POST['task_id'];;
 
-         $alert_date;
-         $alert_time;
-         
+         $datetime = $_POST['alert_time_type_value'];
+         $datetime2 = new DateTime($datetime); // create obj datetime
+         $alert_date = $datetime2->format('Y-m-d'); // split date and time;
+         $alert_time = $datetime2->format('H:i:s'); // split date and time; 
+        
+   
          $alert_type = $_POST['alert_time_type'];
-         $line_group_name;
-         $file_alert_path;
 
+         $line_group_name = $_POST['group_name'];
+
+          
          if($alert_type == 'period'){ // รอบ
             
          }
          else{ // ระบุวันที่
+            $sql = 'INSERT INTO `alert`( `user_id`, `token_name`, `task_id`, `alert_date`, `alert_time`, `alert_type`, `line_group_name`, `file_alert_path`) VALUES ("'.$user_id.'","'.$tokenname.'","'.$task_id.'","'.$alert_date.'","'.$alert_time.'","'.$alert_type.'","'.$line_group_name.'","'.$database_file_path.'")';
+            
+            $query = mysqli_query($conn,$sql);
 
+             
+            // if($query){
+
+            // }
+            // else{
+
+            // }
          }
-         $sql = 'INSERT INTO `alert`(`user_id`, `token_name`, `task_id`, `alert_date`, `alert_time`, `alert_type`, `line_group_name`, `file_alert_path`, `status`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10])';
+        
       }
       else{
          $response['error'] = true;
