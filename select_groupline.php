@@ -14,7 +14,7 @@ $sql = "SELECT * FROM token_line  WHERE  task_id ='$p_id' ";
 $result = $conn->query($sql);
 if($result){
   while($row = $result->fetch_assoc()){
-    echo '<option value="'.$row['token'].'">'.$row['namegroup_line'].'</option>';
+    echo '<option value="'.$row['id'].'">'.$row['namegroup_line'].'</option>';
   }
 }
 else{

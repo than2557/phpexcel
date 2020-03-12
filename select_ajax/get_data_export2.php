@@ -43,21 +43,45 @@
          $line_group_name = $_POST['group_name'];
 
           
-         if($alert_type == 'period'){ // รอบ
+         if($alert_type == 'period'){ // รอบ 1
             
          }
-         else{ // ระบุวันที่
-            $sql = 'INSERT INTO `alert`( `user_id`, `token_name`, `task_id`, `alert_date`, `alert_time`, `alert_type`, `line_group_name`, `file_alert_path`) VALUES ("'.$user_id.'","'.$tokenname.'","'.$task_id.'","'.$alert_date.'","'.$alert_time.'","'.$alert_type.'","'.$line_group_name.'","'.$database_file_path.'")';
+         else{ // ระบุวันที่ 0
+            $sql = 'INSERT INTO `alert`(`user_id`, `token_id`, `task_id`, `alert_date`, `alert_time`, `alert_type`, `file_alert_path`) VALUES ("'.$user_id.'","'.$tokenname.'","'.$task_id.'","'.$alert_date.'","'.$alert_time.'","0","'.$database_file_path.'")';
             
             $query = mysqli_query($conn,$sql);
+         
+            if($query){
+               
+               $alert_id =mysqli_insert_id($conn);
+               
+               $sql_line = 'SELECT * FROM `token_line` WHERE `id` = '.$tokenname;
 
-             
-            // if($query){
+               $query = mysqli_query($conn,$sql_line);
 
-            // }
-            // else{
+               $token_name;
+ 
+               while($row = mysqli_fetch_row($query)){
+                  $token_name = $row[1];
+               }
 
-            // }
+                
+                  // $tbz = "INSERT INTO `ref_tb_user`(`id_user`,`tb_ref_name`)VALUES('$user_id','$nametb')";
+                  
+                  // mysqli_query($conn,$tbz);
+            
+                  notify_message($_POST['task_name']."\n รายการทั้งหมด : ".$_POST['count_data']." รายการ",$token_name);
+
+                  $response['error'] = false;
+                  $response['message'] = "สร้างไฟล์ " . basename($newFileName) . " แล้ว";
+                  $response['javascript_file_path'] = $javascript_file_path;
+                  $response['count'] = $_POST['count_data'];
+                  $response['alert_id'] = $alert_id;
+            }
+            else{
+               $response['error'] = true;
+               $response['message'] = "ไม่สามารถบันทึกข้อมูลได้";
+            }
          }
         
       }
@@ -153,7 +177,7 @@
 
   function notify_message($message,$token){
 
-   $line_api = "https://notify-api.line.me/api/notify0";
+   $line_api = "https://notify-api.line.me/api/notify";
 
    $queryData = array('message' => $message);
    $queryData = http_build_query($queryData,'','&');

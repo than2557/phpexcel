@@ -62,11 +62,11 @@ for ($a;$a<=$row+1;$a++) {
 }
 
 $sql_create_table.= " ,PRIMARY KEY (`table_name_id`)
-) ENGINE = InnoDB;";
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;";
 
 //$Query = mysqli_query($conn,$sql_create_table);
- //echo $sql_create_table;
+ echo $sql_create_table;
 
-mysqli_query($conn,$sql_create_table);
+//mysqli_query($conn,$sql_create_table);
 
 ?>

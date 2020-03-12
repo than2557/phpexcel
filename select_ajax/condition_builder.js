@@ -621,8 +621,8 @@ $(document).ready(function() {
         var getttt = getDataWebdatarock();
 
         webdatarocks.exportTo("html", {
-            header: "รายงาน " + $("#query").val() + "<br>",
-            filename: "export_" + $("#query").val(),
+            header: "รายงาน " + $("#task_user_id option:selected").text() + "<br>",
+            filename: "export_" + $("#task_user_id option:selected").text(),
             destinationType: "server",
             url: "#"
         },
@@ -645,31 +645,32 @@ $(document).ready(function() {
                     sql: query_result_object.result_sql,
                     fields:query_result_object.json_count,
                     data: fileData.data,
-                    file_name: Date.now() + "_export_userid" + $("#task_user_id").val(),
+                    file_name: Date.now() + "_export_userid" + $("#task_user_id ").val(),
                     count_data: getttt,
                     token_name: $("#line_group_name").val(),
-                    group_name: $("#line_group_name").val(),
+                    group_name: $("#line_group_name option:selected").text(),
                     task_id: $("#task_user_id").val(),
+                    task_name: $("#task_user_id option:selected").text(),
                     alert_time_type: $("#alert_time_type").val(),
                     alert_time_type_time_type:$("#alert_time_type_time_type").val(),
                     alert_time_type_value:$("#alert_time_type_value").val()
                 }
             })
             .done(function(response) {
-                console.log(response);
+                //console.log(response);
                 
-                // if (!response.error) {
-                //     window.open(response.javascript_file_path, '_blank');
-                //     window.open('insertline.php?alert_id=' + response.alert_id, '_self');
-                // } 
-                // else {
-                //     Swal.fire({
-                //         icon: 'error',
-                //         title: 'ผิดพลาด!!!',
-                //         text: response.message,
-                //         footer: '<a href>กรุณาตรวจสอบข้อมูล</a>'
-                //     })
-                // }
+                if (!response.error) {
+                    window.open(response.javascript_file_path, '_blank');
+                    // window.open('insertline.php?alert_id=' + response.alert_id, '_self');
+                } 
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ผิดพลาด!!!',
+                        text: response.message,
+                        footer: '<a href>กรุณาตรวจสอบข้อมูล</a>'
+                    })
+                }
             });
         });
     })
