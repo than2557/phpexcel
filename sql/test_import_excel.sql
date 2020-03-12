@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 12 มี.ค. 2020 เมื่อ 03:01 PM
--- เวอร์ชันของเซิร์ฟเวอร์: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Mar 12, 2020 at 04:34 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `adadtask2`
+-- Table structure for table `adadtask2`
 --
 
 CREATE TABLE `adadtask2` (
@@ -36,7 +36,7 @@ CREATE TABLE `adadtask2` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `addtasj`
+-- Table structure for table `addtasj`
 --
 
 CREATE TABLE `addtasj` (
@@ -48,26 +48,52 @@ CREATE TABLE `addtasj` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `alert`
+-- Table structure for table `alert`
 --
 
 CREATE TABLE `alert` (
   `alert_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `token_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `table_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `token_id` int(11) NOT NULL,
+  `task_id` int(100) NOT NULL,
   `alert_date` date NOT NULL,
   `alert_time` time NOT NULL,
-  `line_group_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `alert_type` int(11) NOT NULL,
   `file_alert_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `record_count` int(11) NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `alert`
+--
+
+INSERT INTO `alert` (`alert_id`, `user_id`, `token_id`, `task_id`, `alert_date`, `alert_time`, `alert_type`, `file_alert_path`, `status`) VALUES
+(1, 3, 0, 4, '2020-03-11', '22:22:00', 0, '1584024489394_export_userid4.html', 0),
+(2, 3, 0, 4, '2020-03-25', '22:22:00', 0, '1584024517810_export_userid4.html', 0),
+(3, 3, 0, 1, '2020-03-26', '11:11:00', 0, '1584024732830_export_userid1.html', 1),
+(4, 3, 0, 4, '2020-03-11', '22:22:00', 0, '1584025013532_export_userid4.html', 1),
+(5, 3, 10, 4, '2020-02-26', '22:22:00', 0, '1584025287320_export_userid4.html', 1),
+(6, 3, 10, 4, '2020-02-26', '22:22:00', 0, '1584025287320_export_userid4.html', 1),
+(7, 3, 4, 4, '2020-03-19', '22:22:00', 0, '1584025652934_export_userid4.html', 1),
+(8, 3, 10, 4, '2020-03-27', '22:22:00', 0, '1584025822471_export_userid4.html', 1),
+(9, 3, 10, 4, '2020-03-11', '22:22:00', 0, '1584025888489_export_userid4.html', 1),
+(10, 3, 10, 4, '2020-02-26', '22:22:00', 0, '1584025914656_export_userid4.html', 1),
+(11, 3, 10, 4, '2020-03-26', '22:22:00', 0, '1584026001526_export_userid4.html', 1),
+(12, 3, 11, 4, '2020-03-26', '22:22:00', 0, '1584026429380_export_userid4.html', 1),
+(13, 3, 11, 4, '2020-03-26', '22:22:00', 0, '1584026435537_export_userid4.html', 1),
+(14, 3, 11, 4, '2020-03-19', '22:22:00', 0, '1584026513490_export_userid4.html', 1),
+(15, 3, 11, 4, '2020-03-18', '22:22:00', 0, '1584026571164_export_userid4.html', 1),
+(16, 3, 11, 4, '2020-03-19', '22:22:00', 0, '1584026618731_export_userid4.html', 1),
+(17, 3, 11, 4, '2020-03-20', '22:22:00', 0, '1584026637764_export_userid4.html', 1),
+(18, 3, 11, 4, '2020-03-19', '22:22:00', 0, '1584026720334_export_userid4.html', 1),
+(19, 3, 11, 4, '2020-03-19', '21:22:00', 0, '1584026777077_export_userid4.html', 1),
+(20, 3, 11, 4, '2020-03-18', '22:22:00', 0, '1584026917542_export_userid4.html', 1),
+(21, 3, 11, 4, '2020-03-26', '22:22:00', 0, '1584027125144_export_userid4.html', 1);
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `data_dic_ref`
+-- Table structure for table `data_dic_ref`
 --
 
 CREATE TABLE `data_dic_ref` (
@@ -78,7 +104,7 @@ CREATE TABLE `data_dic_ref` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `data_dic_ref`
+-- Dumping data for table `data_dic_ref`
 --
 
 INSERT INTO `data_dic_ref` (`data_dic_ref_id`, `field_name`, `column_order`, `tb_ref_name`) VALUES
@@ -93,7 +119,7 @@ INSERT INTO `data_dic_ref` (`data_dic_ref_id`, `field_name`, `column_order`, `tb
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `empolyee`
+-- Table structure for table `empolyee`
 --
 
 CREATE TABLE `empolyee` (
@@ -106,7 +132,7 @@ CREATE TABLE `empolyee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `empolyee`
+-- Dumping data for table `empolyee`
 --
 
 INSERT INTO `empolyee` (`id_user`, `username`, `password`, `name`, `leveltest`, `img_em`) VALUES
@@ -120,7 +146,7 @@ INSERT INTO `empolyee` (`id_user`, `username`, `password`, `name`, `leveltest`, 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `sample_sale_data`
+-- Table structure for table `sample_sale_data`
 --
 
 CREATE TABLE `sample_sale_data` (
@@ -134,7 +160,7 @@ CREATE TABLE `sample_sale_data` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `sample_sale_data`
+-- Dumping data for table `sample_sale_data`
 --
 
 INSERT INTO `sample_sale_data` (`table_name_id`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`) VALUES
@@ -532,7 +558,7 @@ INSERT INTO `sample_sale_data` (`table_name_id`, `h1`, `h2`, `h3`, `h4`, `h5`, `
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `sample_sale_data_2`
+-- Table structure for table `sample_sale_data_2`
 --
 
 CREATE TABLE `sample_sale_data_2` (
@@ -546,7 +572,7 @@ CREATE TABLE `sample_sale_data_2` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `sample_sale_data_2`
+-- Dumping data for table `sample_sale_data_2`
 --
 
 INSERT INTO `sample_sale_data_2` (`table_name_id`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`) VALUES
@@ -944,7 +970,7 @@ INSERT INTO `sample_sale_data_2` (`table_name_id`, `h1`, `h2`, `h3`, `h4`, `h5`,
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `task_user`
+-- Table structure for table `task_user`
 --
 
 CREATE TABLE `task_user` (
@@ -954,7 +980,7 @@ CREATE TABLE `task_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ตารางเก็บความสัมพันระหว่างงานกับผู้ใช้';
 
 --
--- dump ตาราง `task_user`
+-- Dumping data for table `task_user`
 --
 
 INSERT INTO `task_user` (`task_user_id`, `user_id`, `task_name`) VALUES
@@ -976,7 +1002,7 @@ INSERT INTO `task_user` (`task_user_id`, `user_id`, `task_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `tb_092563`
+-- Table structure for table `tb_092563`
 --
 
 CREATE TABLE `tb_092563` (
@@ -990,7 +1016,7 @@ CREATE TABLE `tb_092563` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `tb_092563`
+-- Dumping data for table `tb_092563`
 --
 
 INSERT INTO `tb_092563` (`table_name_id`, `h1`, `h2_1`, `h2_2`, `h3`, `h4`, `h5`) VALUES
@@ -1284,7 +1310,7 @@ INSERT INTO `tb_092563` (`table_name_id`, `h1`, `h2_1`, `h2_2`, `h3`, `h4`, `h5`
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `tb_dasdasdsd`
+-- Table structure for table `tb_dasdasdsd`
 --
 
 CREATE TABLE `tb_dasdasdsd` (
@@ -1299,7 +1325,7 @@ CREATE TABLE `tb_dasdasdsd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `tb_dasdasdsd`
+-- Dumping data for table `tb_dasdasdsd`
 --
 
 INSERT INTO `tb_dasdasdsd` (`table_id`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `h7`) VALUES
@@ -1628,7 +1654,7 @@ INSERT INTO `tb_dasdasdsd` (`table_id`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `h7`
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `teagh2343rer`
+-- Table structure for table `teagh2343rer`
 --
 
 CREATE TABLE `teagh2343rer` (
@@ -1640,7 +1666,7 @@ CREATE TABLE `teagh2343rer` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `template_tb`
+-- Table structure for table `template_tb`
 --
 
 CREATE TABLE `template_tb` (
@@ -1651,7 +1677,7 @@ CREATE TABLE `template_tb` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `template_tb`
+-- Dumping data for table `template_tb`
 --
 
 INSERT INTO `template_tb` (`template_id`, `task_user_id`, `colum_name`, `datatype`) VALUES
@@ -1713,7 +1739,7 @@ INSERT INTO `template_tb` (`template_id`, `task_user_id`, `colum_name`, `datatyp
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `testaddtask`
+-- Table structure for table `testaddtask`
 --
 
 CREATE TABLE `testaddtask` (
@@ -1726,7 +1752,7 @@ CREATE TABLE `testaddtask` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `testfield_count`
+-- Table structure for table `testfield_count`
 --
 
 CREATE TABLE `testfield_count` (
@@ -1741,7 +1767,7 @@ CREATE TABLE `testfield_count` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `testfrgdhgdhgh`
+-- Table structure for table `testfrgdhgdhgh`
 --
 
 CREATE TABLE `testfrgdhgdhgh` (
@@ -1755,7 +1781,7 @@ CREATE TABLE `testfrgdhgdhgh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `testfrgdhgdhgh`
+-- Dumping data for table `testfrgdhgdhgh`
 --
 
 INSERT INTO `testfrgdhgdhgh` (`table_name_id`, `h1`, `h2`, `h3`, `h4`, `h5_1`, `h5_2`) VALUES
@@ -2049,7 +2075,7 @@ INSERT INTO `testfrgdhgdhgh` (`table_name_id`, `h1`, `h2`, `h3`, `h4`, `h5_1`, `
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `testtask#1`
+-- Table structure for table `testtask#1`
 --
 
 CREATE TABLE `testtask#1` (
@@ -2063,7 +2089,7 @@ CREATE TABLE `testtask#1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `testtask#1`
+-- Dumping data for table `testtask#1`
 --
 
 INSERT INTO `testtask#1` (`table_name_id`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`) VALUES
@@ -4023,7 +4049,7 @@ INSERT INTO `testtask#1` (`table_name_id`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`) V
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `testtask1`
+-- Table structure for table `testtask1`
 --
 
 CREATE TABLE `testtask1` (
@@ -4035,7 +4061,7 @@ CREATE TABLE `testtask1` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `testtask1234565`
+-- Table structure for table `testtask1234565`
 --
 
 CREATE TABLE `testtask1234565` (
@@ -4046,7 +4072,7 @@ CREATE TABLE `testtask1234565` (
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `test_json`
+-- Table structure for table `test_json`
 --
 
 CREATE TABLE `test_json` (
@@ -4061,7 +4087,7 @@ CREATE TABLE `test_json` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `test_json`
+-- Dumping data for table `test_json`
 --
 
 INSERT INTO `test_json` (`id`, `transaction_number`, `date`, `item_number`, `descc`, `variant_code`, `quantity`, `cost`) VALUES
@@ -4079,7 +4105,7 @@ INSERT INTO `test_json` (`id`, `transaction_number`, `date`, `item_number`, `des
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `token_line`
+-- Table structure for table `token_line`
 --
 
 CREATE TABLE `token_line` (
@@ -4091,7 +4117,7 @@ CREATE TABLE `token_line` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `token_line`
+-- Dumping data for table `token_line`
 --
 
 INSERT INTO `token_line` (`id`, `token`, `task_id`, `id_user`, `namegroup_line`) VALUES
@@ -4103,12 +4129,14 @@ INSERT INTO `token_line` (`id`, `token`, `task_id`, `id_user`, `namegroup_line`)
 (6, 'DTHFFDDF6453terhafadDgsg', 6, 3, 'groupline'),
 (7, 'ssdgsdDSD434tgfge4t', 7, 3, 'groupline_#2'),
 (8, 'dfjgfogj5o4okfgdj', 8, 3, 'groupline01'),
-(9, 'oJmiWUqsVyRwl3oezOE7amMGF0nuviLjUgHNNl6rWhQ', 9, 2, 'peaฝึกงาน');
+(9, 'oJmiWUqsVyRwl3oezOE7amMGF0nuviLjUgHNNl6rWhQ', 9, 2, 'peaฝึกงาน'),
+(10, 'mZ61TjdTGL', 4, 3, 'grouplinetask011'),
+(11, 'g93WrY4khqRLYdJ8E9AAG9JrRmkVH84sjeluFANNA27', 4, 3, 'test line​ notify');
 
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `userpea`
+-- Table structure for table `userpea`
 --
 
 CREATE TABLE `userpea` (
@@ -4122,7 +4150,7 @@ CREATE TABLE `userpea` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- dump ตาราง `userpea`
+-- Dumping data for table `userpea`
 --
 
 INSERT INTO `userpea` (`id_pea`, `username`, `name`, `lastname`, `Department`, `Position`, `levelpea`) VALUES
@@ -4136,7 +4164,7 @@ INSERT INTO `userpea` (`id_pea`, `username`, `name`, `lastname`, `Department`, `
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `งบเร่งด่วนมกรา`
+-- Table structure for table `งบเร่งด่วนมกรา`
 --
 
 CREATE TABLE `งบเร่งด่วนมกรา` (
@@ -4149,7 +4177,7 @@ CREATE TABLE `งบเร่งด่วนมกรา` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `งบเร่งด่วนมกรา`
+-- Dumping data for table `งบเร่งด่วนมกรา`
 --
 
 INSERT INTO `งบเร่งด่วนมกรา` (`table_name_id`, `h1`, `h2_1`, `h2_2`, `h3`, `h4`) VALUES
@@ -4266,7 +4294,7 @@ INSERT INTO `งบเร่งด่วนมกรา` (`table_name_id`, `h1`,
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `งาน092563`
+-- Table structure for table `งาน092563`
 --
 
 CREATE TABLE `งาน092563` (
@@ -4280,7 +4308,7 @@ CREATE TABLE `งาน092563` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `งาน092563`
+-- Dumping data for table `งาน092563`
 --
 
 INSERT INTO `งาน092563` (`table_name_id`, `h1`, `h2_1`, `h2_2`, `h3`, `h4`, `h5`) VALUES
@@ -4397,7 +4425,7 @@ INSERT INTO `งาน092563` (`table_name_id`, `h1`, `h2_1`, `h2_2`, `h3`, `h4`
 -- --------------------------------------------------------
 
 --
--- โครงสร้างตาราง `หัวข้องาน`
+-- Table structure for table `หัวข้องาน`
 --
 
 CREATE TABLE `หัวข้องาน` (
@@ -4410,7 +4438,7 @@ CREATE TABLE `หัวข้องาน` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- dump ตาราง `หัวข้องาน`
+-- Dumping data for table `หัวข้องาน`
 --
 
 INSERT INTO `หัวข้องาน` (`table_name_id`, `h1`, `h2_1`, `h2_2`, `h3`, `h4`) VALUES
@@ -4692,7 +4720,7 @@ ALTER TABLE `addtasj`
 -- AUTO_INCREMENT for table `alert`
 --
 ALTER TABLE `alert`
-  MODIFY `alert_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `alert_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `data_dic_ref`
@@ -4794,7 +4822,7 @@ ALTER TABLE `test_json`
 -- AUTO_INCREMENT for table `token_line`
 --
 ALTER TABLE `token_line`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `userpea`
